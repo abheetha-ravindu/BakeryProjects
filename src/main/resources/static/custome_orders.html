@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Review and manage custom cake bookings for Cake Studio.">
+  <title>Custom Orders | Cake Studio Admin</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #fffdf9;
+      --heading: #2c1e16;
+      --muted: #715f55;
+      --line: #eadbce;
+      --pink: #c92c3d;
+      --soft-pink: #fff0f3;
+      --shadow: 0 4px 20px rgba(78, 48, 25, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      background: var(--bg);
+      color: var(--heading);
+      font-family: "Plus Jakarta Sans", Arial, sans-serif;
+    }
+
+    .admin-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      min-width: 220px;
+      padding: 18px 16px 24px;
+      background: linear-gradient(180deg, #fffaf4 0%, #fff0f3 100%);
+      border-right: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 8px 18px;
+      color: var(--heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #c88d44, #fa7c8a);
+    }
+
+    .nav-title {
+      margin: 12px 10px 10px;
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 2px 0;
+      padding: 10px 12px;
+      border-radius: 10px;
+      color: #3c3c3c;
+      font-size: 0.96rem;
+      text-decoration: none;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      background: rgba(250, 124, 138, 0.12);
+      color: #fd344a;
+    }
+
+    .nav-item.active {
+      font-weight: 700;
+    }
+
+    .nav-item .icon {
+      width: 16px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .main {
+      flex: 1;
+      min-width: 0;
+      padding: 32px;
+    }
+
+    .page-header {
+      padding: 28px 32px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(250, 124, 138, 0.16), rgba(200, 141, 68, 0.14));
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+    }
+
+    .page-header p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .summary-card,
+    .orders-panel {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .summary-card {
+      padding: 18px 20px;
+    }
+
+    .summary-label {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .summary-value {
+      display: block;
+      margin-top: 5px;
+      font-size: 1.7rem;
+      font-weight: 800;
+    }
+
+    .orders-panel {
+      padding: 22px;
+    }
+
+    .panel-heading,
+    .filters {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .panel-heading {
+      margin-bottom: 18px;
+    }
+
+    .panel-heading h2 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .filters {
+      flex-wrap: wrap;
+    }
+
+    .filters input,
+    .filters select,
+    .status-select {
+      min-height: 40px;
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      color: var(--heading);
+      font: inherit;
+    }
+
+    .filters input {
+      width: min(260px, 100%);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
+    }
+
+    .filters input:focus,
+    .filters select:focus,
+    .status-select:focus,
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(201, 44, 61, 0.25);
+      outline-offset: 2px;
+    }
+
+    .refresh-button,
+    .delete-button {
+      min-height: 40px;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      color: var(--heading);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .refresh-button:hover {
+      background: var(--soft-pink);
+    }
+
+    .delete-button {
+      border-color: #efc8ca;
+      color: #a51f2d;
+    }
+
+    .delete-button:hover {
+      background: #fff0f0;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 850px;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th,
+    td {
+      padding: 13px 14px;
+      border-bottom: 1px solid #f1e8df;
+      vertical-align: top;
+    }
+
+    th {
+      background: #fffaf5;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .customer-name,
+    .cake-name {
+      font-weight: 700;
+    }
+
+    .secondary {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      overflow-wrap: anywhere;
+    }
+
+    .status-pill {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #f3eee9;
+      color: #594b42;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: capitalize;
+    }
+
+    .status-pill[data-status="PENDING"] {
+      background: #fff4d8;
+      color: #805a00;
+    }
+
+    .status-pill[data-status="CONFIRMED"] {
+      background: #e8f3ff;
+      color: #17528a;
+    }
+
+    .status-pill[data-status="PREPARING"] {
+      background: #f1eaff;
+      color: #563a8a;
+    }
+
+    .status-pill[data-status="READY"] {
+      background: #e5f6e8;
+      color: #216333;
+    }
+
+    .status-pill[data-status="COMPLETED"] {
+      background: #e9eee9;
+      color: #36513a;
+    }
+
+    .status-pill[data-status="CANCELLED"] {
+      background: #ffebeb;
+      color: #9c2c32;
+    }
+
+    .details {
+      margin-top: 8px;
+    }
+
+    .details summary {
+      color: var(--pink);
+      cursor: pointer;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .details-content {
+      display: grid;
+      gap: 6px;
+      min-width: 190px;
+      padding-top: 9px;
+      font-size: 0.84rem;
+    }
+
+    .details-content a {
+      color: var(--pink);
+      overflow-wrap: anywhere;
+    }
+
+    .status-select {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.86rem;
+    }
+
+    .empty-state,
+    .message {
+      padding: 24px;
+      border-radius: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .message {
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      text-align: left;
+    }
+
+    .message.error {
+      border-color: #efc8ca;
+      background: #fff4f4;
+      color: #8c1d28;
+    }
+
+    .message[hidden],
+    .empty-state[hidden],
+    .table-wrap[hidden] {
+      display: none;
+    }
+
+    @media (max-width: 760px) {
+      .admin-layout {
+        display: block;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-width: 0;
+        min-height: auto;
+        padding: 10px 14px;
+      }
+
+      .brand {
+        padding-bottom: 10px;
+      }
+
+      .nav-section {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        overflow-x: auto;
+      }
+
+      .nav-title {
+        display: none;
+      }
+
+      .nav-item {
+        flex: 0 0 auto;
+      }
+
+      .main {
+        padding: 18px;
+      }
+
+      .page-header {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .summary-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .summary-card {
+        padding: 14px 16px;
+      }
+
+      .orders-panel {
+        padding: 15px;
+      }
+
+      .panel-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .filters {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .filters input,
+      .filters select,
+      .refresh-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="sidebar" aria-label="Admin navigation">
+      <a class="brand" href="/adminitem">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Cake Studio</span>
+      </a>
+      <nav class="nav-section" aria-label="Admin pages">
+        <div class="nav-title">Menu</div>
+        <a class="nav-item" href="/dashboard"><span class="icon" aria-hidden="true">▣</span>Dashboard</a>
+        <a class="nav-item active" href="/custome_order" aria-current="page"><span class="icon" aria-hidden="true">◇</span>Custom Orders</a>
+        <a class="nav-item" href="/normal_orders"><span class="icon" aria-hidden="true">▣</span>Normal Orders</a>
+        <a class="nav-item" href="/adminitem"><span class="icon" aria-hidden="true">▤</span>Items</a>
+        <a class="nav-item" href="/user_details"><span class="icon" aria-hidden="true">◔</span>Users</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="page-header">
+        <h1>Custom Cake Orders</h1>
+        <p>Review customer cake designs, required dates, and booking status.</p>
+      </header>
+
+      <section class="summary-grid" aria-label="Booking totals">
+        <article class="summary-card">
+          <span class="summary-label">Total bookings</span>
+          <strong class="summary-value" id="totalCount">—</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Pending</span>
+          <strong class="summary-value" id="pendingCount">—</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Upcoming cakes</span>
+          <strong class="summary-value" id="upcomingCount">—</strong>
+        </article>
+      </section>
+
+      <section class="orders-panel" aria-labelledby="ordersHeading">
+        <div class="panel-heading">
+          <h2 id="ordersHeading">Bookings</h2>
+          <div class="filters">
+            <label>
+              <span class="sr-only">Search bookings</span>
+              <input id="searchInput" type="search" placeholder="Search customer or cake…" autocomplete="off">
+            </label>
+            <label>
+              <span class="sr-only">Filter by status</span>
+              <select id="statusFilter">
+                <option value="">All statuses</option>
+                <option value="PENDING">Pending</option>
+                <option value="CONFIRMED">Confirmed</option>
+                <option value="PREPARING">Preparing</option>
+                <option value="READY">Ready</option>
+                <option value="COMPLETED">Completed</option>
+                <option value="CANCELLED">Cancelled</option>
+              </select>
+            </label>
+            <button class="refresh-button" id="refreshButton" type="button">Refresh</button>
+          </div>
+        </div>
+
+        <div class="message" id="pageMessage" role="status" aria-live="polite" hidden></div>
+        <p class="empty-state" id="loadingState" role="status">Loading custom cake bookings…</p>
+        <p class="empty-state" id="emptyState" hidden>No custom cake bookings have been placed yet.</p>
+        <p class="empty-state" id="noResultsState" hidden>No bookings match your search.</p>
+
+        <div class="table-wrap" id="tableWrap" hidden>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Customer</th>
+                <th scope="col">Cake design</th>
+                <th scope="col">Required date</th>
+                <th scope="col">Estimate</th>
+                <th scope="col">Status &amp; actions</th>
+              </tr>
+            </thead>
+            <tbody id="bookingsBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const statuses = ['PENDING', 'CONFIRMED', 'PREPARING', 'READY', 'COMPLETED', 'CANCELLED'];
+    const bookingsBody = document.getElementById('bookingsBody');
+    const pageMessage = document.getElementById('pageMessage');
+    const searchInput = document.getElementById('searchInput');
+    const statusFilter = document.getElementById('statusFilter');
+    const tableWrap = document.getElementById('tableWrap');
+    const loadingState = document.getElementById('loadingState');
+    const emptyState = document.getElementById('emptyState');
+    const noResultsState = document.getElementById('noResultsState');
+    let bookings = [];
+
+    function addText(parent, tagName, className, value) {
+      const element = document.createElement(tagName);
+      if (className) element.className = className;
+      element.textContent = value || '—';
+      parent.appendChild(element);
+      return element;
+    }
+
+    function addDetail(parent, label, value) {
+      const line = document.createElement('div');
+      const title = document.createElement('strong');
+      title.textContent = label + ': ';
+      line.append(title, document.createTextNode(value || '—'));
+      parent.appendChild(line);
+    }
+
+    function setMessage(message, isError) {
+      pageMessage.textContent = message;
+      pageMessage.classList.toggle('error', Boolean(isError));
+      pageMessage.hidden = !message;
+    }
+
+    function getDateValue(value) {
+      if (!value) return null;
+      const date = new Date(value + (value.length === 10 ? 'T00:00:00' : ''));
+      return Number.isNaN(date.getTime()) ? null : date;
+    }
+
+    function updateSummary() {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const pending = bookings.filter((booking) => booking.status === 'PENDING').length;
+      const upcoming = bookings.filter((booking) => {
+        const date = getDateValue(booking.requiredDate);
+        return date && date >= today && booking.status !== 'CANCELLED' && booking.status !== 'COMPLETED';
+      }).length;
+      document.getElementById('totalCount').textContent = String(bookings.length);
+      document.getElementById('pendingCount').textContent = String(pending);
+      document.getElementById('upcomingCount').textContent = String(upcoming);
+    }
+
+    function addReferenceLink(parent, imageUrl) {
+      if (!imageUrl) return;
+      try {
+        const url = new URL(imageUrl, window.location.origin);
+        if (url.origin !== window.location.origin || !url.pathname.startsWith('/api/cake-designs/uploads/')) return;
+        const link = document.createElement('a');
+        link.href = url.href;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = 'View reference image';
+        parent.appendChild(link);
+      } catch (error) {
+        console.error('Unable to display the booking reference image URL.', error);
+      }
+    }
+
+    function renderBookings() {
+      const query = searchInput.value.trim().toLocaleLowerCase();
+      const selectedStatus = statusFilter.value;
+      const filtered = bookings.filter((booking) => {
+        const matchesStatus = !selectedStatus || booking.status === selectedStatus;
+        const searchable = [
+          booking.customerName,
+          booking.customerEmail,
+          booking.contactNumber,
+          booking.occasion,
+          booking.flavor,
+          booking.shape,
+          booking.cakeSize
+        ].filter(Boolean).join(' ').toLocaleLowerCase();
+        return matchesStatus && searchable.includes(query);
+      });
+
+      bookingsBody.replaceChildren();
+      for (const booking of filtered) {
+        const row = document.createElement('tr');
+
+        const customerCell = document.createElement('td');
+        addText(customerCell, 'span', 'customer-name', booking.customerName);
+        addText(customerCell, 'span', 'secondary', booking.customerEmail);
+        addText(customerCell, 'span', 'secondary', booking.contactNumber);
+
+        const designCell = document.createElement('td');
+        addText(designCell, 'span', 'cake-name', [booking.flavor, booking.shape].filter(Boolean).join(' · ') || 'Custom cake');
+        addText(designCell, 'span', 'secondary', [booking.cakeSize, booking.occasion].filter(Boolean).join(' · '));
+        const details = document.createElement('details');
+        details.className = 'details';
+        const summary = document.createElement('summary');
+        summary.textContent = 'Order details';
+        const detailContent = document.createElement('div');
+        detailContent.className = 'details-content';
+        [
+          ['Filling', booking.filling],
+          ['Decoration', booking.decoration],
+          ['Cake message', booking.cakeMessage],
+          ['Pickup or delivery', booking.pickupOrDelivery],
+          ['Preferred time', booking.preferredTime],
+          ['Address', booking.deliveryAddress],
+          ['Notes', booking.notes],
+          ['Promo code', booking.promoCode]
+        ].forEach(([label, value]) => {
+          if (value) addDetail(detailContent, label, value);
+        });
+        addReferenceLink(detailContent, booking.referenceImageUrl);
+        details.append(summary, detailContent);
+        designCell.appendChild(details);
+
+        const dateCell = document.createElement('td');
+        addText(dateCell, 'span', '', booking.requiredDate);
+
+        const priceCell = document.createElement('td');
+        const price = Number(booking.estimatedPrice);
+        addText(priceCell, 'span', '', Number.isFinite(price)
+          ? 'Rs. ' + price.toLocaleString()
+          : 'To be confirmed');
+
+        const actionCell = document.createElement('td');
+        const statusSelect = document.createElement('select');
+        statusSelect.className = 'status-select';
+        statusSelect.setAttribute('aria-label', 'Update status for booking ' + booking.bookingId);
+        statuses.forEach((status) => {
+          const option = document.createElement('option');
+          option.value = status;
+          option.textContent = status.charAt(0) + status.slice(1).toLowerCase();
+          option.selected = status === booking.status;
+          statusSelect.appendChild(option);
+        });
+        const badge = addText(actionCell, 'span', 'status-pill', booking.status);
+        badge.dataset.status = booking.status || 'PENDING';
+        statusSelect.addEventListener('change', () => changeBookingStatus(booking, statusSelect, badge));
+        actionCell.prepend(statusSelect);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.type = 'button';
+        deleteButton.className = 'delete-button';
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', () => deleteBooking(booking));
+        actionCell.appendChild(deleteButton);
+
+        row.append(customerCell, designCell, dateCell, priceCell, actionCell);
+        bookingsBody.appendChild(row);
+      }
+
+      tableWrap.hidden = filtered.length === 0;
+      emptyState.hidden = bookings.length !== 0;
+      noResultsState.hidden = bookings.length === 0 || filtered.length !== 0;
+      updateSummary();
+    }
+
+    async function loadBookings() {
+      loadingState.hidden = false;
+      emptyState.hidden = true;
+      noResultsState.hidden = true;
+      tableWrap.hidden = true;
+      setMessage('', false);
+      try {
+        const response = await fetch('/api/cakeBookings', {
+          headers: { Accept: 'application/json' },
+          cache: 'no-store'
+        });
+        if (!response.ok) throw new Error('Booking request failed (' + response.status + ').');
+        const result = await response.json();
+        if (!Array.isArray(result)) throw new Error('The bookings response was not a list.');
+        bookings = result;
+        loadingState.hidden = true;
+        renderBookings();
+      } catch (error) {
+        loadingState.hidden = true;
+        setMessage(error.message || 'Unable to load custom cake bookings.', true);
+      }
+    }
+
+    async function changeBookingStatus(booking, select, badge) {
+      const previousStatus = booking.status;
+      select.disabled = true;
+      setMessage('', false);
+      try {
+        const response = await fetch('/api/admin/updateBookingStatus', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ bookingId: booking.bookingId, status: select.value })
+        });
+        if (!response.ok) throw new Error('Status update failed (' + response.status + ').');
+        const updated = await response.json();
+        if (!updated || !updated.status) throw new Error('The server did not confirm the status update.');
+        booking.status = updated.status;
+        badge.textContent = updated.status;
+        badge.dataset.status = updated.status;
+        setMessage('Booking #' + booking.bookingId + ' updated to ' + updated.status.toLowerCase() + '.', false);
+        updateSummary();
+      } catch (error) {
+        select.value = previousStatus;
+        setMessage(error.message || 'Unable to update this booking.', true);
+      } finally {
+        select.disabled = false;
+      }
+    }
+
+    async function deleteBooking(booking) {
+      if (!window.confirm('Delete custom booking #' + booking.bookingId + '? This cannot be undone.')) return;
+      setMessage('', false);
+      try {
+        const response = await fetch('/api/cakeBookings/' + encodeURIComponent(booking.bookingId), {
+          method: 'DELETE'
+        });
+        if (!response.ok) throw new Error('Delete failed (' + response.status + ').');
+        bookings = bookings.filter((item) => item.bookingId !== booking.bookingId);
+        renderBookings();
+        setMessage('Booking #' + booking.bookingId + ' was deleted.', false);
+      } catch (error) {
+        setMessage(error.message || 'Unable to delete this booking.', true);
+      }
+    }
+
+    document.getElementById('refreshButton').addEventListener('click', loadBookings);
+    searchInput.addEventListener('input', renderBookings);
+    statusFilter.addEventListener('change', renderBookings);
+    loadBookings();
+  </script>
+</body>
+</html>

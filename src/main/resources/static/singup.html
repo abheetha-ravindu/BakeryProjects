@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | kamuda.com</title>
+    <meta name="description" content="Create a kamuda.com account to order bakery items and book custom celebration cakes.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧁</text></svg>">
+    <style>
+        :root {
+            --auth-cream: #FFFDF9;
+            --auth-roast: #2C1E16;
+            --auth-muted: #5E4D43;
+            --auth-border: #EADBCE;
+            --auth-strawberry: #C92C3D;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--auth-cream);
+            color: var(--auth-roast);
+            font-family: var(--font-body, 'Plus Jakarta Sans', Arial, sans-serif);
+        }
+
+        .auth-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .auth-visual-col {
+            flex: 0 0 42%;
+            display: flex;
+            align-items: flex-end;
+            padding: 3.5rem;
+            color: #fff;
+            background: linear-gradient(145deg, #6E302A, #C92C3D 55%, #E8A076);
+        }
+
+        .auth-visual-content {
+            max-width: 480px;
+        }
+
+        .auth-brand-badge {
+            display: inline-block;
+            margin-bottom: 1rem;
+            padding: 0.4rem 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .auth-visual-title {
+            margin: 0 0 0.85rem;
+            font-family: var(--font-heading, Georgia, serif);
+            font-size: clamp(2rem, 3.2vw, 2.85rem);
+            line-height: 1.18;
+        }
+
+        .auth-visual-tagline {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.92);
+            line-height: 1.6;
+        }
+
+        .auth-form-col {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            padding: 2.25rem 3.5rem;
+        }
+
+        .auth-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .auth-header-logo,
+        .auth-back-link {
+            color: var(--auth-roast);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .auth-header-logo {
+            font-family: var(--font-heading, Georgia, serif);
+            font-size: 1.3rem;
+        }
+
+        .auth-back-link {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--auth-border);
+            border-radius: 9999px;
+            font-size: 0.88rem;
+        }
+
+        .auth-center-container {
+            display: flex;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .auth-title {
+            margin: 0 0 0.4rem;
+            font-family: var(--font-heading, Georgia, serif);
+            font-size: 2.2rem;
+        }
+
+        .auth-subtitle {
+            margin: 0 0 1.5rem;
+            color: var(--auth-muted);
+            line-height: 1.5;
+        }
+
+        .auth-alert {
+            display: none;
+            gap: 0.55rem;
+            margin-bottom: 1.35rem;
+            padding: 0.85rem 1.1rem;
+            border-radius: 12px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .auth-alert.is-error {
+            display: flex;
+            border: 1px solid #F8B4B4;
+            background: #FDE8E8;
+            color: #C81E1E;
+        }
+
+        .auth-alert.is-success {
+            display: flex;
+            border: 1px solid #BCF0DA;
+            background: #DEF7EC;
+            color: #03543F;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.45rem;
+            font-size: 0.86rem;
+            font-weight: 600;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-input {
+            width: 100%;
+            height: 48px;
+            padding: 0 1rem;
+            border: 1.5px solid var(--auth-border);
+            border-radius: 12px;
+            background: #fff;
+            color: var(--auth-roast);
+            font: inherit;
+        }
+
+        .form-input:focus {
+            border-color: var(--auth-strawberry);
+            outline: 3px solid rgba(201, 44, 61, 0.12);
+        }
+
+        .form-input.is-invalid {
+            border-color: #E53935;
+            background: #FFF8F8;
+        }
+
+        .form-input.has-password-toggle {
+            padding-right: 3rem;
+        }
+
+        .password-toggle-btn {
+            position: absolute;
+            right: 0.8rem;
+            border: 0;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .field-error-msg {
+            display: block;
+            min-height: 1.05rem;
+            margin-top: 0.35rem;
+            color: #D32F2F;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .btn-auth-primary {
+            display: flex;
+            width: 100%;
+            height: 50px;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: 0;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, #DF384A, var(--auth-strawberry));
+            box-shadow: 0 8px 24px rgba(201, 44, 61, 0.28);
+            color: #fff;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 700;
+        }
+
+        .btn-auth-primary:disabled {
+            cursor: wait;
+            opacity: 0.7;
+        }
+
+        .auth-switch-prompt {
+            margin-top: 1.4rem;
+            color: var(--auth-muted);
+            font-size: 0.92rem;
+            text-align: center;
+        }
+
+        .auth-switch-prompt a {
+            color: var(--auth-strawberry);
+            font-weight: 700;
+        }
+
+        .auth-footer {
+            margin-top: 1rem;
+            color: #9A8374;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        @media (max-width: 760px) {
+            .auth-wrapper {
+                flex-direction: column;
+            }
+
+            .auth-visual-col {
+                flex: none;
+                min-height: 190px;
+                padding: 1.5rem;
+            }
+
+            .auth-visual-tagline {
+                display: none;
+            }
+
+            .auth-form-col {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-wrapper">
+        <aside class="auth-visual-col">
+            <div class="auth-visual-content">
+                <div class="auth-brand-badge">🧁 kamuda.com</div>
+                <h1 class="auth-visual-title">Freshly Baked.<br>Beautifully Made.</h1>
+                <p class="auth-visual-tagline">Create an account to order fresh bakery favorites and book custom cakes for your celebrations.</p>
+            </div>
+        </aside>
+
+        <main class="auth-form-col">
+            <header class="auth-header-bar">
+                <a href="index.html" class="auth-header-logo">🧁 kamuda.com</a>
+                <a href="index.html" class="auth-back-link">&larr; Back to Home</a>
+            </header>
+
+            <div class="auth-center-container">
+                <section class="auth-card" aria-labelledby="signupTitle">
+                    <div class="auth-alert" id="authAlertBanner" role="alert">
+                        <span id="alertIcon">⚠️</span>
+                        <span id="alertMessage"></span>
+                    </div>
+
+                    <h2 class="auth-title" id="signupTitle">Create Your Account</h2>
+                    <p class="auth-subtitle">Join kamuda.com and make ordering easier.</p>
+
+                    <form id="signupForm" method="POST" action="signup" novalidate>
+                        <input type="hidden" name="action" value="signup">
+                        <input type="hidden" name="returnUrl" id="signupReturnUrl" value="">
+
+                        <div class="form-group">
+                            <label for="signupFullName" class="form-label">Full Name</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="signupFullName" name="fullName" class="form-input" placeholder="e.g. Claire Delacroix" required autocomplete="name">
+                            </div>
+                            <span class="field-error-msg" id="signupNameError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signupEmail" class="form-label">Email Address</label>
+                            <div class="input-wrapper">
+                                <input type="email" id="signupEmail" name="email" class="form-input" placeholder="you@example.com" required autocomplete="email">
+                            </div>
+                            <span class="field-error-msg" id="signupEmailError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signupPhone" class="form-label">Phone Number</label>
+                            <div class="input-wrapper">
+                                <input type="tel" id="signupPhone" name="phone" class="form-input" placeholder="+94 77 123 4567" required autocomplete="tel">
+                            </div>
+                            <span class="field-error-msg" id="signupPhoneError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signupPassword" class="form-label">Password</label>
+                            <div class="input-wrapper">
+                                <input type="password" id="signupPassword" name="password" class="form-input has-password-toggle" placeholder="Minimum 6 characters" required autocomplete="new-password">
+                                <button type="button" class="password-toggle-btn" id="toggleSignupPasswordBtn" aria-label="Show or hide password">👁️</button>
+                            </div>
+                            <span class="field-error-msg" id="signupPasswordError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
+                            <div class="input-wrapper">
+                                <input type="password" id="signupConfirmPassword" name="confirmPassword" class="form-input has-password-toggle" placeholder="Re-enter your password" required autocomplete="new-password">
+                                <button type="button" class="password-toggle-btn" id="toggleConfirmPasswordBtn" aria-label="Show or hide confirm password">👁️</button>
+                            </div>
+                            <span class="field-error-msg" id="signupConfirmError"></span>
+                        </div>
+
+                        <button type="submit" class="btn-auth-primary" id="signupSubmitBtn">
+                            <span>Create Account</span>
+                            <span>&rarr;</span>
+                        </button>
+                    </form>
+
+                    <div class="auth-switch-prompt">
+                        Already have an account? <a href="loging.html">Login</a>
+                    </div>
+                </section>
+            </div>
+
+            <footer class="auth-footer">&copy; kamuda.com. All rights reserved.</footer>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const signupForm = document.getElementById('signupForm');
+            const authAlertBanner = document.getElementById('authAlertBanner');
+            const alertMessage = document.getElementById('alertMessage');
+            const alertIcon = document.getElementById('alertIcon');
+            const urlParams = new URLSearchParams(window.location.search);
+            const rawReturnUrl = urlParams.get('returnUrl') || '';
+            const returnUrl = rawReturnUrl && !rawReturnUrl.toLowerCase().includes('login')
+                ? rawReturnUrl
+                : '';
+
+            if (returnUrl) {
+                document.getElementById('signupReturnUrl').value = returnUrl;
+            }
+
+            function showAlert(message, type = 'error') {
+                alertMessage.textContent = message;
+                alertIcon.textContent = type === 'error' ? '⚠️' : '✅';
+                authAlertBanner.className = `auth-alert is-${type}`;
+            }
+
+            function setError(input, errorElement, message) {
+                input.classList.add('is-invalid');
+                errorElement.textContent = message;
+            }
+
+            function clearErrors() {
+                document.querySelectorAll('.form-input').forEach(input => input.classList.remove('is-invalid'));
+                document.querySelectorAll('.field-error-msg').forEach(message => message.textContent = '');
+            }
+
+            function setupPasswordToggle(buttonId, inputId) {
+                const button = document.getElementById(buttonId);
+                const input = document.getElementById(inputId);
+                button.addEventListener('click', () => {
+                    const showingPassword = input.type === 'password';
+                    input.type = showingPassword ? 'text' : 'password';
+                    button.textContent = showingPassword ? '🙈' : '👁️';
+                });
+            }
+
+            setupPasswordToggle('toggleSignupPasswordBtn', 'signupPassword');
+            setupPasswordToggle('toggleConfirmPasswordBtn', 'signupConfirmPassword');
+
+            if (urlParams.get('error') === 'registration_failed') {
+                showAlert('Registration failed. Please check your details and try again.');
+            } else if (urlParams.get('registered') === 'true') {
+                showAlert('Account created successfully. You can now sign in.', 'success');
+            }
+
+            signupForm.addEventListener('submit', async event => {
+                event.preventDefault();
+                clearErrors();
+                authAlertBanner.className = 'auth-alert';
+
+                const nameInput = document.getElementById('signupFullName');
+                const emailInput = document.getElementById('signupEmail');
+                const phoneInput = document.getElementById('signupPhone');
+                const passwordInput = document.getElementById('signupPassword');
+                const confirmInput = document.getElementById('signupConfirmPassword');
+                const email = emailInput.value.trim();
+                let isValid = true;
+
+                if (!nameInput.value.trim()) {
+                    setError(nameInput, document.getElementById('signupNameError'), 'Full name is required.');
+                    isValid = false;
+                }
+
+                if (!email) {
+                    setError(emailInput, document.getElementById('signupEmailError'), 'Email is required.');
+                    isValid = false;
+                } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    setError(emailInput, document.getElementById('signupEmailError'), 'Please enter a valid email address.');
+                    isValid = false;
+                }
+
+                if (!phoneInput.value.trim()) {
+                    setError(phoneInput, document.getElementById('signupPhoneError'), 'Phone number is required.');
+                    isValid = false;
+                }
+
+                if (passwordInput.value.length < 6) {
+                    setError(passwordInput, document.getElementById('signupPasswordError'), 'Password must be at least 6 characters.');
+                    isValid = false;
+                }
+
+                if (passwordInput.value !== confirmInput.value) {
+                    setError(confirmInput, document.getElementById('signupConfirmError'), 'Passwords do not match.');
+                    isValid = false;
+                }
+
+                if (!isValid) return;
+
+                const submitButton = document.getElementById('signupSubmitBtn');
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<span>Creating Account...</span>';
+
+                try {
+                    const response = await fetch('/api/auth/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            fullName: nameInput.value.trim(),
+                            email,
+                            phone: phoneInput.value.trim(),
+                            password: passwordInput.value,
+                            returnUrl
+                        })
+                    });
+                    const data = await response.json();
+
+                    if (!response.ok || !data.success) {
+                        showAlert(data.message || 'Registration failed. Please check your details and try again.');
+                        return;
+                    }
+
+                    localStorage.setItem('sweetbloom_user', JSON.stringify(data.user));
+                    showAlert('Account created successfully! Welcome to kamuda.com.', 'success');
+                    setTimeout(() => {
+                        window.location.href = returnUrl || data.redirectUrl || 'index.html';
+                    }, 600);
+                } catch (error) {
+                    signupForm.submit();
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = '<span>Create Account</span> <span>&rarr;</span>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -35,7 +35,7 @@ public class ItemControler {
         this.itemPopularityService = itemPopularityService;
     }
 
-    @GetMapping("/adminitem")
+    @GetMapping({"/adminitem", "/adminitem.html"})
     public String getAdminItems(Model model) {
         model.addAttribute("items", itemService.getAllItems());
         return "adminitem";
