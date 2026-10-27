@@ -1,0 +1,12 @@
+[ {
+  "id" : "95b0d237-4bbd-4166-9d22-b394f6001667",
+  "name" : "i dont know",
+  "description" : "werty",
+  "flavor" : "Chocolat",
+  "size" : "1 kg",
+  "price" : 12342.0,
+  "shape" : 0,
+  "category" : "cake",
+  "availability" : "Available",
+  "imageUrl" : "/item-images/ddf95e6b-6f85-4b30-84a8-e91561733d81.jpg"
+} ]
