@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Profile | Sweet Bloom Patisserie</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #fdfbf7; color: #333; }
+
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: #fff; border-bottom: 1px solid #f0e6dc; }
+        .logo { font-size: 22px; font-weight: bold; color: #2c1e16; font-family: serif; }
+        .logo span { color: #d4a373; font-style: italic; }
+        .nav-right { display: flex; align-items: center; gap: 16px; font-size: 14px; font-weight: 500; }
+        .admin-pill { background: #2c1e16; color: #fff; padding: 6px 16px; border-radius: 30px; font-weight: 600; }
+        .signout { color: #d9534f; text-decoration: none; font-weight: 600; }
+
+        .page { max-width: 1100px; margin: 0 auto; padding: 40px 20px 60px; }
+        .page h1 { font-size: 32px; font-family: serif; color: #2c1e16; margin-bottom: 6px; }
+        .page .sub { color: #777; font-size: 14px; margin-bottom: 28px; }
+
+        .admin-card { display: flex; gap: 40px; flex-wrap: wrap; background: #fff; border: 1px solid #f5ede4; border-radius: 16px; padding: 20px 26px; margin-bottom: 28px; }
+        .admin-card div small { display: block; font-size: 12px; color: #888; margin-bottom: 2px; }
+        .admin-card div strong { font-size: 15px; color: #2c1e16; }
+
+        .tabs { display: flex; gap: 6px; border-bottom: 2px solid #f0e6dc; }
+        .tab-btn { background: none; border: none; padding: 12px 22px; font-size: 14px; font-weight: 600; color: #777; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+        .tab-btn:hover { color: #2c1e16; }
+        .tab-btn.active { color: #d9534f; border-bottom-color: #d9534f; }
+        .tab-btn:focus-visible { outline: 2px solid #d9534f; outline-offset: 2px; }
+        .count { background: #fae1dd; color: #d9534f; border-radius: 10px; padding: 1px 8px; font-size: 12px; margin-left: 6px; }
+
+        .tab-panel { display: none; background: #fff; border: 1px solid #f5ede4; border-top: none; border-radius: 0 0 16px 16px; padding: 24px; overflow-x: auto; }
+        .tab-panel.active { display: block; }
+
+        table { width: 100%; border-collapse: collapse; min-width: 640px; }
+        th, td { padding: 12px 10px; text-align: left; font-size: 14px; border-bottom: 1px solid #f3ece4; vertical-align: middle; }
+        th { color: #2c1e16; font-size: 13px; background: #faf5f0; }
+
+        .btn-del { color: #d9534f; text-decoration: none; font-size: 13px; font-weight: 600; }
+        .btn-del:hover { text-decoration: underline; }
+        .status-form { display: flex; gap: 6px; }
+        .status-form select { padding: 6px 8px; border: 1px solid #e5dcd3; border-radius: 8px; font-size: 13px; background: #fff; }
+        .status-form button { background: #d9534f; color: #fff; border: none; border-radius: 8px; padding: 6px 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
+        .status-form button:hover { background: #c9302c; }
+
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+        .badge.pending { background: #fff3cd; color: #856404; }
+        .badge.out { background: #dbeafe; color: #1e40af; }
+        .badge.done { background: #e6f4ea; color: #137333; }
+
+        .empty { text-align: center; color: #888; padding: 30px 10px; font-size: 14px; }
+
+        @media (max-width: 700px) { .navbar { padding: 16px 20px; } }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">🧁 Sweet Bloom <span>Patisserie</span></div>
+    <div class="nav-right">
+        <span class="admin-pill">Admin: <span th:text="${admin.username}">admin</span></span>
+        <a th:href="@{/logout}" class="signout">Sign out</a>
+    </div>
+</div>
+
+<div class="page">
+    <h1>Admin profile</h1>
+    <p class="sub">Manage registered customers and their deliveries.</p>
+
+    <div class="admin-card">
+        <div><small>Username</small><strong th:text="${admin.username}">admin</strong></div>
+        <div><small>Email</small><strong th:text="${admin.email}">admin@sweetbloom.com</strong></div>
+        <div><small>Role</small><strong>Administrator</strong></div>
+    </div>
+
+    <div class="tabs" role="tablist">
+        <button type="button" class="tab-btn" id="btn-users" role="tab" data-tab="users"
+                th:classappend="${activeTab == 'users'} ? 'active'">
+            User Details <span class="count" th:text="${#lists.size(users)}">0</span>
+        </button>
+        <button type="button" class="tab-btn" id="btn-deliveries" role="tab" data-tab="deliveries"
+                th:classappend="${activeTab == 'deliveries'} ? 'active'">
+            Delivery Details <span class="count" th:text="${#lists.size(deliveries)}">0</span>
+        </button>
+    </div>
+
+    <!-- USER DETAILS TAB -->
+    <div class="tab-panel" id="panel-users" role="tabpanel" th:classappend="${activeTab == 'users'} ? 'active'">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="u : ${users}">
+                <td th:text="${u.id}">1</td>
+                <td th:text="${u.username}">John</td>
+                <td th:text="${u.email}">john@gmail.com</td>
+                <td th:text="${u.phoneNumber}">0771234567</td>
+                <td th:text="${u.address != null and !#strings.isEmpty(u.address)} ? ${u.address} : '—'">Address</td>
+                <td>
+                    <a class="btn-del" th:href="@{/admin/user/delete/{id}(id=${u.id})}"
+                       onclick="return confirm('Delete this user and their deliveries?');">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="empty" th:if="${#lists.isEmpty(users)}">No customers have registered yet.</div>
+    </div>
+
+    <!-- DELIVERY DETAILS TAB -->
+    <div class="tab-panel" id="panel-deliveries" role="tabpanel" th:classappend="${activeTab == 'deliveries'} ? 'active'">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Recipient</th>
+                <th>Delivery address</th>
+                <th>Status</th>
+                <th>Update status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="d : ${deliveries}">
+                <td th:text="${d.id}">1</td>
+                <td th:text="${d.customer != null} ? ${d.customer.username} : '—'">John</td>
+                <td th:text="${d.recipientName}">Recipient</td>
+                <td th:text="${d.address}">Address</td>
+                <td>
+                    <span class="badge"
+                          th:classappend="${d.status == 'Delivered'} ? 'done' : (${d.status == 'Out for Delivery'} ? 'out' : 'pending')"
+                          th:text="${d.status}">Pending</span>
+                </td>
+                <td>
+                    <form class="status-form" th:action="@{/admin/delivery/update/{id}(id=${d.id})}" method="post">
+                        <select name="status" aria-label="Delivery status">
+                            <option value="Pending" th:selected="${d.status == 'Pending'}">Pending</option>
+                            <option value="Out for Delivery" th:selected="${d.status == 'Out for Delivery'}">Out for Delivery</option>
+                            <option value="Delivered" th:selected="${d.status == 'Delivered'}">Delivered</option>
+                        </select>
+                        <button type="submit">Save</button>
+                    </form>
+                </td>
+                <td>
+                    <a class="btn-del" th:href="@{/admin/delivery/delete/{id}(id=${d.id})}"
+                       onclick="return confirm('Delete this delivery?');">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="empty" th:if="${#lists.isEmpty(deliveries)}">No deliveries yet.</div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.tab-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var tab = btn.getAttribute('data-tab');
+            document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+            document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
+            btn.classList.add('active');
+            document.getElementById('panel-' + tab).classList.add('active');
+        });
+    });
+</script>
+</body>
+</html>

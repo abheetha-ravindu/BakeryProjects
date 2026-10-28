@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request a Refund | kamuda.com</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdf9f5;
+            margin: 0;
+            padding: 0;
+            color: #2f221d;
+        }
+        .form-container {
+            max-width: 550px;
+            margin: 3rem auto;
+            background: #ffffff;
+            padding: 30px;
+            border: 1px solid #f0e5dc;
+            border-radius: 20px;
+            box-shadow: 0 12px 32px rgba(68, 42, 26, 0.05);
+        }
+        h2 {
+            color: #2f221d;
+            margin-top: 0;
+            border-bottom: 1px solid #f1d4d7;
+            padding-bottom: 10px;
+            font-family: Georgia, serif;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #493a32;
+        }
+        input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #eadbce;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+        textarea {
+            resize: vertical;
+            height: 120px;
+        }
+        input:focus, textarea:focus {
+            border-color: #c73749;
+            outline: 3px solid rgba(199, 55, 73, 0.12);
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: #c73749;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-submit:hover {
+            background-color: #ad293a;
+        }
+        @media (max-width: 600px) {
+            .form-container {
+                margin: 1.5rem 1rem;
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="customer-navbar">
+    <nav class="customer-navbar-container" aria-label="Main navigation">
+        <a class="customer-brand" href="/main">
+            <span class="customer-brand-icon" aria-hidden="true">🧁</span>
+            <span>kamuda.com</span>
+        </a>
+        <ul class="customer-nav-links">
+            <li><a class="customer-nav-link" href="/">Home</a></li>
+            <li><a class="customer-nav-link" href="/items">Shop Cakes</a></li>
+            <li><a class="customer-nav-link" href="/profileupdate">Profile</a></li>
+            <li><a class="customer-nav-link" href="/billing/my-invoices.html">My invoices</a></li>
+            <li><a class="customer-nav-link" href="/billing/refund-request-form.html" aria-current="page">Request refund</a></li>
+            <li><a class="customer-nav-link" href="/payments">My Payment</a></li>
+            <li><a class="customer-nav-link" href="/orders">My Orders</a></li>
+        </ul>
+        <div class="customer-nav-actions">
+            <a class="customer-cart-link" href="/items" aria-label="View cakes" title="View cakes">🛒</a>
+            <a class="customer-book-link" href="/custom-cake">✨ Book Custom Cake</a>
+        </div>
+    </nav>
+</header>
+
+<div class="form-container">
+    <h2>Apply for a Refund</h2>
+    <p style="color: #76665d; font-size: 14px;">Please fill out the form below to submit your refund request.</p>
+
+
+    <form id="refundForm" onsubmit="submitForm(event)">
+
+
+        <div class="form-group">
+            <label for="orderId">Order ID:</label>
+            <input type="number" id="orderId" min="1" placeholder="Enter the order number from My Orders" required>
+        </div>
+
+
+        <div class="form-group">
+            <label for="reason">Reason for Refund:</label>
+            <textarea id="reason" placeholder="Please describe the reason for your refund request (e.g., Damaged item, Order cancelled)..." required></textarea>
+        </div>
+
+
+        <p id="refundStatus" role="status" aria-live="polite" style="margin:0 0 16px; color:#76665d;"></p>
+        <button type="submit" class="btn-submit" id="submitButton">Submit Refund Request</button>
+    </form>
+</div>
+
+
+<script>
+    const orderIdFromUrl = new URLSearchParams(window.location.search).get('orderId');
+    if (orderIdFromUrl && /^\d+$/.test(orderIdFromUrl)) {
+        document.getElementById('orderId').value = orderIdFromUrl;
+    }
+
+    async function submitForm(event) {
+        event.preventDefault();
+
+        const status = document.getElementById('refundStatus');
+        const submitButton = document.getElementById('submitButton');
+        const orderIdInput = document.getElementById('orderId');
+        const reasonInput = document.getElementById('reason');
+        if (!event.currentTarget.reportValidity()) return;
+
+        status.textContent = '';
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+
+        try {
+            const orderId = Number(orderIdInput.value);
+            if (!Number.isSafeInteger(orderId) || orderId < 1) {
+                throw new Error('Enter a valid order ID from My Orders.');
+            }
+
+            const response = await fetch('/api/refund', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify({
+                    orderId,
+                    reason: reasonInput.value.trim()
+                })
+            });
+
+            if (response.status === 401) {
+                const returnUrl = window.location.pathname + window.location.search;
+                window.location.assign(`/loging.html?returnUrl=${encodeURIComponent(returnUrl)}`);
+                return;
+            }
+            if (!response.ok) {
+                let message = `Unable to submit the refund request (${response.status}).`;
+                const responseText = await response.text();
+                if (responseText) {
+                    try {
+                        const body = JSON.parse(responseText);
+                        message = body.detail || body.error || body.message || message;
+                    } catch (error) {
+                        message = responseText;
+                    }
+                }
+                throw new Error(message);
+            }
+
+            const refundRequest = await response.json();
+            document.getElementById('refundForm').reset();
+            status.style.color = '#137333';
+            status.textContent = `Refund request #${refundRequest.id} was submitted and is pending review.`;
+        } catch (error) {
+            status.style.color = '#b91c1c';
+            status.textContent = error.message || 'Unable to submit the refund request. Please try again.';
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Submit Refund Request';
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account | kamuda.com</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { display: flex; height: 100vh; overflow: hidden; }
+
+
+        .left-side { flex: 1; position: relative; background: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=80') no-repeat center center/cover; display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; color: white; }
+        .left-side::after { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.35); }
+        .left-content { position: relative; z-index: 2; max-width: 400px; }
+        .badge { background: rgba(255,255,255,0.2); backdrop-filter: blur(5px); padding: 6px 14px; border-radius: 20px; font-size: 12px; display: inline-block; margin-bottom: 15px; font-weight: 600; }
+        .left-content h1 { font-size: 38px; margin-bottom: 15px; font-weight: 700; line-height: 1.2; }
+        .left-content p { font-size: 14px; margin-bottom: 20px; opacity: 0.9; line-height: 1.5; }
+        .features { display: flex; gap: 10px; flex-wrap: wrap; }
+        .feature-tag { background: rgba(255,255,255,0.15); padding: 6px 12px; border-radius: 6px; font-size: 12px; backdrop-filter: blur(4px); }
+
+
+        .right-side { flex: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 20px 50px; background: #fff; overflow-y: auto; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { display: flex; align-items: center; gap: 8px; font-weight: bold; font-size: 16px; color: #333; }
+        .back-home { color: #666; text-decoration: none; font-size: 14px; border: 1px solid #ddd; padding: 6px 14px; border-radius: 20px; transition: 0.2s; }
+        .back-home:hover { background: #f5f5f5; }
+
+        .form-container { max-width: 380px; width: 100%; margin: auto; }
+        .form-container h2 { font-size: 24px; margin-bottom: 6px; color: #111; }
+        .form-container p { color: #666; font-size: 13px; margin-bottom: 20px; }
+
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; font-size: 12px; color: #333; margin-bottom: 5px; font-weight: 600; }
+        .input-group input { width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 13px; outline: none; transition: 0.2s; }
+        .input-group input:focus { border-color: #e53935; box-shadow: 0 0 0 3px rgba(229,57,53,0.1); }
+
+        .login-btn { width: 100%; padding: 11px; background: #e53935; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; margin-top: 10px; }
+        .login-btn:hover { background: #d32f2f; }
+
+        .login-text { text-align: center; font-size: 13px; color: #666; margin-top: 15px; }
+        .login-text a { color: #e53935; text-decoration: none; font-weight: 600; }
+        .footer { text-align: center; font-size: 12px; color: #888; padding-top: 5px; }
+    </style>
+</head>
+<body>
+
+
+<div class="left-side">
+    <div class="left-content">
+        <span class="badge">🍰 KAMUDA.COM BAKERY</span>
+        <h1>Freshly Baked.<br>Beautifully Made.</h1>
+        <p>Experience handcrafted artisanal pastries, daily fresh oven bakes and bespoke celebration cakes created for your unforgettable moments.</p>
+        <div class="features">
+            <span class="feature-tag">✓ Same-day Fresh Bakes</span>
+            <span class="feature-tag">✓ Custom Celebration Cakes</span>
+            <span class="feature-tag">✓ Instant Order Tracking</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="right-side">
+    <div class="header-top">
+        <div class="logo">🧁 kamuda.com</div>
+        <a href="/main" class="back-home">- Back to Home</a>
+    </div>
+
+    <div class="form-container">
+        <h2>Create Your Account</h2>
+        <p>Join kamuda.com and make ordering easier.</p>
+
+
+        <form action="/register" method="post">
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" name="fullName" required placeholder="e.g. Claire Delacroix" />
+            </div>
+
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" name="email" required placeholder="you@example.com" />
+            </div>
+
+            <div class="input-group">
+                <label>Phone Number</label>
+                <input type="text" name="phone" required placeholder="+94 77 123 4567" />
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" required minlength="6" placeholder="Minimum 6 characters" />
+            </div>
+
+            <button type="submit" class="login-btn">Create Account →</button>
+        </form>
+
+        <div class="login-text">
+            Already have an account? <a href="/login">Sign In</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        © kamuda.com. All rights reserved.
+    </div>
+</div>
+</body>
+</html>
