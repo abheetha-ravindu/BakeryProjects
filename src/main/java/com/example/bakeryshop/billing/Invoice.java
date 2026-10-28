@@ -1,6 +1,7 @@
 package com.example.bakeryshop.billing;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -18,6 +19,21 @@ public abstract class Invoice{
 
     @Column(name = "invoice_date")
     private LocalDate invoiceDate;
+
+    @Column(name = "payment_id", unique = true)
+    private Long paymentId;
+
+    @Column(name = "order_id")
+    private Long orderId;
+
+    @Column(name = "user_id")
+    private Long userId;
+
+    @Column(name = "payment_type")
+    private String paymentType;
+
+    @Column(name = "amount", precision = 12, scale = 2)
+    private BigDecimal amount;
 
     public Long getId(){
         return id;
@@ -40,5 +56,46 @@ public abstract class Invoice{
     public void setInvoiceDate(LocalDate invoiceDate){
         this.invoiceDate = invoiceDate;
     }
+
+    public Long getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(Long paymentId) {
+        this.paymentId = paymentId;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
     public abstract double calculateTotal();
 }

@@ -27,7 +27,7 @@
       margin: 0;
       background: var(--bg);
       color: var(--heading);
-      font-family: "Plus Jakarta Sans", Arial, sans-serif;
+      font-family: Inter, Arial, sans-serif;
     }
 
     .admin-layout {
@@ -36,8 +36,8 @@
     }
 
     .sidebar {
-      width: 220px;
-      min-width: 220px;
+      width: 250px;
+      min-width: 250px;
       padding: 18px 16px 24px;
       background: linear-gradient(180deg, #fffaf4 0%, #fff0f3 100%);
       border-right: 1px solid var(--line);
@@ -59,7 +59,7 @@
       width: 24px;
       height: 24px;
       border-radius: 8px;
-      background: linear-gradient(135deg, #c88d44, #fa7c8a);
+      background: linear-gradient(135deg, #c92c3d, #a92132);
     }
 
     .nav-title {
@@ -75,15 +75,15 @@
       margin: 2px 0;
       padding: 10px 12px;
       border-radius: 10px;
-      color: #3c3c3c;
+      color: #3e342f;
       font-size: 0.96rem;
       text-decoration: none;
     }
 
     .nav-item:hover,
     .nav-item.active {
-      background: rgba(250, 124, 138, 0.12);
-      color: #fd344a;
+      background: rgba(201, 44, 61, 0.1);
+      color: #c92c3d;
     }
 
     .nav-item.active {
@@ -464,13 +464,14 @@
       <nav class="nav-section" aria-label="Admin pages">
         <div class="nav-title">Admin</div>
         
-        <a class="nav-item" href="/adminDashboard"><span class="icon" aria-hidden="true">⌂</span>Dashboard</a>
-        <a class="nav-item active" href="/customOrders" aria-current="page"><span class="icon" aria-hidden="true">◇</span>Custom Orders</a>
-        <a class="nav-item" href="/bakeryOrders"><span class="icon" aria-hidden="true">▣</span>Bakery Orders</a>
-        <a class="nav-item" href="/adminPayments"><span class="icon" aria-hidden="true">▣</span>Payments</a>
-        <a class="nav-item" href="/adminRefunds"><span class="icon" aria-hidden="true">↩</span>Refunds</a>
-        <a class="nav-item" href="/adminItems"><span class="icon" aria-hidden="true">▤</span>Items</a>
-        <a class="nav-item" href="/userManagement"><span class="icon" aria-hidden="true">♙</span>User Management</a>
+        <a class="nav-item" href="/adminDashboard"><span class="icon">⌂</span>Dashboard</a>
+        <a class="nav-item active" href="/customOrders" aria-current="page"><span class="icon">◇</span>Custom Orders</a>
+        <a class="nav-item" href="/bakeryOrders"><span class="icon">▣</span>Bakery Orders</a>
+        <a class="nav-item" href="/adminPayments"><span class="icon">▣</span>Payments</a>
+        <a class="nav-item" href="/adminInvoices"><span class="icon">▤</span>Invoices</a>
+        <a class="nav-item" href="/adminRefunds"><span class="icon">↩</span>Refunds</a>
+        <a class="nav-item" href="/adminItems"><span class="icon">▤</span>Items</a>
+        <a class="nav-item" href="/userManagement"><span class="icon">♙</span>User Management</a>
       </nav>
     </aside>
 

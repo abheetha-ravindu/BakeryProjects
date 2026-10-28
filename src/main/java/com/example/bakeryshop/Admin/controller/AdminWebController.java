@@ -46,6 +46,11 @@ public class AdminWebController {
         return "redirect:/adminpages/admin-payments.html";
     }
 
+    @GetMapping("/adminInvoices")
+    public String getAdminInvoices() {
+        return "redirect:/adminpages/allinvoicess.html";
+    }
+
     @GetMapping("/adminRefunds")
     public String getAdminRefunds() {
         return "redirect:/adminpages/admin-refund-management.html";

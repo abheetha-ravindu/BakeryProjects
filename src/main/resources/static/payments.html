@@ -10,18 +10,27 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <header class="nav">
-    <div class="wrap">
-      <a class="brand" href="/main">kamuda.com</a>
-      <nav class="nav-links" aria-label="Main">
-        <a class="nav-link" href="/main">Home</a>
-        <a class="nav-link" href="/items">Shop cakes</a>
-        <a class="nav-link" href="/orders">My orders</a>
-        <a class="nav-link" href="/payments" aria-current="page">My payments</a>
-        <a class="nav-link" href="/profile">Profile</a>
-        <a class="nav-link" href="/main#cart">Cart</a>
-      </nav>
-    </div>
+  <header class="customer-navbar">
+    <nav class="customer-navbar-container" aria-label="Main navigation">
+      <a class="customer-brand" href="/main">
+        <span class="customer-brand-icon" aria-hidden="true">🧁</span>
+        <span>kamuda.com</span>
+      </a>
+
+      <ul class="customer-nav-links">
+        <li><a class="customer-nav-link" href="/">Home</a></li>
+        <li><a class="customer-nav-link" href="/items">Shop Cakes</a></li>
+        <li><a class="customer-nav-link" href="/profileupdate">Profile</a></li>
+        <li><a class="customer-nav-link" href="/billing/my-invoices.html">My invoices</a></li>
+        <li><a class="customer-nav-link" href="/payments" aria-current="page">My Payment</a></li>
+        <li><a class="customer-nav-link" href="/orders">My Orders</a></li>
+      </ul>
+
+      <div class="customer-nav-actions">
+        <a class="customer-cart-link" href="/items" aria-label="View cakes" title="View cakes">🛒</a>
+        <a class="customer-book-link" href="/custom-cake">✨ Book Custom Cake</a>
+      </div>
+    </nav>
   </header>
 
   <div class="banner" id="demoBanner" hidden>

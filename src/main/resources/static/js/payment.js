@@ -44,6 +44,12 @@
       updateSummary();
       return;
     }
+    const preferredId = unpaid.some((order) => String(order.id) === String(selectedId))
+      ? selectedId
+      : selectedOrderId;
+    const orderToSelectId = unpaid.some((order) => String(order.id) === String(preferredId))
+      ? preferredId
+      : String(unpaid[0].id);
     unpaid.forEach((order) => {
       const label = document.createElement('label');
       label.className = 'choice';
@@ -51,7 +57,7 @@
       input.type = 'radio';
       input.name = 'selectedOrder';
       input.value = order.id;
-      input.checked = String(order.id) === String(selectedId || selectedOrderId || unpaid[0].id);
+      input.checked = String(order.id) === String(orderToSelectId);
       input.addEventListener('change', () => {
         selectedOrderId = input.value;
         updateSummary();
@@ -117,9 +123,12 @@
         body: JSON.stringify(payload)
       });
       receipt.hidden = false;
-      receiptText.textContent = `Payment #${payment.id} recorded for order #${payment.orderId}. ${payment.receiptNote || ''}`;
+      receiptText.textContent = `Payment #${payment.id} recorded for order #${payment.orderId}. ${payment.receiptNote || ''} Your invoice is available in My invoices.`;
+      orders = orders.filter((item) => String(item.id) !== String(payment.orderId));
+      selectedOrderId = null;
+      renderOrderChoices();
+      app.clearError();
       app.showToast('Payment recorded.');
-      await loadOrders();
     } catch (error) {
       app.showError(error.message);
     } finally {

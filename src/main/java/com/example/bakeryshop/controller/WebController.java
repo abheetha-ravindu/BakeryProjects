@@ -19,10 +19,6 @@ public class WebController {
         return "redirect:/item.html";
     }
 
-    @GetMapping("/main")
-    public String main() {
-        return "redirect:/index.html";
-    }
 
     @GetMapping("/login")
     public String login() {

@@ -1,5 +1,6 @@
 package com.bakery.bakeryplatform.service.payment;
 
+import com.example.bakeryshop.billing.InvoiceService;
 import com.bakery.bakeryplatform.dto.payment.PaymentRequest;
 import com.bakery.bakeryplatform.exception.BusinessRuleException;
 import com.bakery.bakeryplatform.exception.ResourceNotFoundException;
@@ -13,19 +14,26 @@ import com.bakery.bakeryplatform.repository.payment.PaymentRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PaymentService {
 
     private final PaymentRepository paymentRepository;
     private final OrderRepository orderRepository;
+    private final InvoiceService invoiceService;
 
-    public PaymentService(PaymentRepository paymentRepository, OrderRepository orderRepository) {
+    public PaymentService(
+            PaymentRepository paymentRepository,
+            OrderRepository orderRepository,
+            InvoiceService invoiceService) {
         this.paymentRepository = paymentRepository;
         this.orderRepository = orderRepository;
+        this.invoiceService = invoiceService;
     }
 
     // Create record  payment for an order
+    @Transactional
     public Payment create(PaymentRequest request) {
         Order order = orderRepository.findById(request.orderId()).orElse(null);
         if (order == null) {
@@ -44,7 +52,11 @@ public class PaymentService {
 
         payment.setFee(payment.calculateFee());              // polymo: each type has its own fee
         payment.setReceiptNote(payment.processPayment());    // polymo: each type has its own message
-        return paymentRepository.save(payment);
+        Payment savedPayment = paymentRepository.save(payment);
+        if (savedPayment.getStatus() == PaymentStatus.PAID) {
+            invoiceService.generateInvoice(savedPayment, order.getUserId());
+        }
+        return savedPayment;
     }
 
     // Read

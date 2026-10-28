@@ -78,8 +78,201 @@
         }
 
         .cart-icon-btn {
+            position: relative;
+            display: inline-flex;
+            min-width: 42px;
+            min-height: 42px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e8dacf;
+            border-radius: 999px;
             color: var(--home-ink);
             text-decoration: none;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            min-width: 20px;
+            height: 20px;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+            border-radius: 10px;
+            background: var(--home-berry);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .cart-drawer-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            visibility: hidden;
+            background: rgba(30, 18, 12, 0.55);
+            opacity: 0;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+
+        .cart-drawer-overlay.open {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .cart-drawer-panel {
+            display: flex;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: min(100%, 440px);
+            height: 100%;
+            flex-direction: column;
+            background: #fff;
+            box-shadow: -8px 0 32px rgba(0, 0, 0, 0.2);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .cart-drawer-overlay.open .cart-drawer-panel {
+            transform: translateX(0);
+        }
+
+        .cart-drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.1rem 1.25rem;
+            border-bottom: 1px solid #eee4da;
+            background: #fffaf3;
+        }
+
+        .cart-drawer-title {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .cart-close-btn {
+            width: 38px;
+            height: 38px;
+            border: 0;
+            border-radius: 50%;
+            background: transparent;
+            color: var(--home-ink);
+            cursor: pointer;
+            font-size: 1.3rem;
+        }
+
+        .cart-drawer-body {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            gap: 0.75rem;
+            overflow-y: auto;
+            padding: 1.25rem;
+        }
+
+        .cart-empty-message {
+            margin: auto;
+            color: var(--home-muted);
+            text-align: center;
+        }
+
+        .cart-item-card {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.85rem;
+            border: 1px solid #eee4da;
+            border-radius: 12px;
+            background: #fffaf6;
+        }
+
+        .cart-item-details {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .cart-item-title {
+            overflow: hidden;
+            font-weight: 700;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .cart-item-unit-price {
+            margin: 0.2rem 0 0.45rem;
+            color: var(--home-muted);
+            font-size: 0.85rem;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .cart-item-controls button,
+        .cart-clear-btn {
+            border: 0;
+            background: transparent;
+            color: var(--home-berry);
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .cart-item-controls button {
+            min-width: 28px;
+            min-height: 28px;
+            border: 1px solid #e8dacf;
+            border-radius: 6px;
+        }
+
+        .cart-item-total {
+            color: var(--home-berry);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .cart-drawer-footer {
+            padding: 1.1rem 1.25rem;
+            border-top: 1px solid #eee4da;
+            background: #fffaf3;
+        }
+
+        .cart-total-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.7rem;
+            font-weight: 700;
+        }
+
+        .cart-clear-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 0.8rem;
+        }
+
+        .cart-checkout-btn {
+            display: flex;
+            min-height: 48px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            background: var(--home-berry);
+            color: #fff;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .cart-checkout-btn[aria-disabled="true"] {
+            opacity: 0.55;
+            pointer-events: none;
         }
 
         .btn-profile-nav,
@@ -254,7 +447,7 @@
             </ul>
 
             <div class="nav-actions">
-                <a href="/items" class="cart-icon-btn" id="navCartBtn" title="View Cakes">
+                <a href="/items" class="cart-icon-btn" id="navCartBtn" title="View cart" aria-label="View cart" onclick="toggleHomeCartDrawer(event)">
                     🛒
                     <span class="cart-badge" style="display:none;">0</span>
                 </a>
@@ -289,6 +482,26 @@
         </div>
         <div class="home-hero-art" aria-hidden="true">🧁</div>
     </section>
+
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="handleHomeCartOverlayClick(event)" aria-hidden="true">
+        <section class="cart-drawer-panel" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle">
+            <header class="cart-drawer-header">
+                <div class="cart-drawer-title" id="cartDrawerTitle"><span aria-hidden="true">🛒</span><span>Your Order Basket</span></div>
+                <button type="button" class="cart-close-btn" onclick="toggleHomeCartDrawer()" aria-label="Close cart">✕</button>
+            </header>
+            <div class="cart-drawer-body" id="cartDrawerBody"></div>
+            <footer class="cart-drawer-footer" id="cartDrawerFooter">
+                <div class="cart-total-row">
+                    <span>Subtotal</span>
+                    <span id="cartDrawerTotal">Rs. 0</span>
+                </div>
+                <div class="cart-clear-row">
+                    <button type="button" class="cart-clear-btn" onclick="clearHomeCart()">🗑️ Clear Basket</button>
+                </div>
+                <a class="cart-checkout-btn" id="cartCheckoutLink" href="/item.html?openCart=true" aria-disabled="true">Continue to checkout</a>
+            </footer>
+        </section>
+    </div>
 
     <!-- ====================================================================
          SECTION 2 — HORIZONTAL BAKERY IMAGE GALLERY
@@ -881,5 +1094,6 @@
 
     <!-- Scripts -->
     <script src="js/main.js"></script>
+    <script src="js/home-cart.js"></script>
 </body>
 </html>

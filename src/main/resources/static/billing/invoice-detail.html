@@ -3,73 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice Details</title>
+    <meta name="description" content="View and print your kamuda.com invoice.">
+    <title>Invoice Details | kamuda.com</title>
+    <link rel="stylesheet" href="/css/style.css">
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f8f9fa; padding: 30px; }
-        .page-nav { max-width: 600px; margin: 0 auto 20px; display: flex; justify-content: flex-end; gap: 18px; }
-        .page-nav a { color: #8f2736; font-size: 14px; font-weight: 600; text-decoration: none; }
-        .page-nav a:hover { text-decoration: underline; }
-        .invoice-box { max-width: 600px; margin: auto; padding: 30px; background: white; border: 1px solid #eee; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
-        .title { font-size: 24px; font-weight: bold; color: #2c3e50; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .info-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 16px; }
-        .label { font-weight: bold; color: #555; }
-        .btn-container { display: flex; justify-content: space-between; margin-top: 30px; }
-        .btn { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 14px; }
-        .btn-print { background-color: #2ecc71; color: white; }
-        .btn-back { background-color: #95a5a6; color: white; }
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background: #fdf9f5;
+            color: #2f221d;
+        }
+        main {
+            padding: 1px 0 2rem;
+        }
+        .invoice-box {
+            width: min(680px, calc(100% - 2rem));
+            margin: 3rem auto;
+            padding: clamp(1.25rem, 4vw, 2rem);
+            border: 1px solid #f0e5dc;
+            border-radius: 20px;
+            background: #fff;
+            box-shadow: 0 12px 32px rgba(68, 42, 26, 0.05);
+        }
+        .title {
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.85rem;
+            border-bottom: 1px solid #f1d4d7;
+            color: #2f221d;
+            font-family: Georgia, serif;
+            font-size: clamp(1.4rem, 4vw, 1.75rem);
+            font-weight: 700;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        .info-row > :last-child {
+            overflow-wrap: anywhere;
+            text-align: right;
+        }
+        .label { color: #76665d; font-weight: 700; }
+        .total-row {
+            margin-top: 1.15rem;
+            padding-top: 0.9rem;
+            border-top: 1px dashed #eadbce;
+        }
+        .total-row .label,
+        .total-row .value {
+            font-size: 1.05rem;
+            font-weight: 800;
+        }
+        .total-row .label { color: #2f221d; }
+        .total-row .value { color: #c73749; }
+        .invoice-status {
+            min-height: 1.25rem;
+            color: #76665d;
+        }
+        .invoice-status.is-error { color: #a32132; }
+        .btn-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+        .btn {
+            display: inline-flex;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
+            padding: 0.7rem 1rem;
+            border: 0;
+            border-radius: 10px;
+            font: inherit;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn-print { background: #c73749; color: white; }
+        .btn-print:hover { background: #ad293a; }
+        .btn-print:disabled {
+            background: #b7aaa3;
+            cursor: not-allowed;
+        }
+        .btn-back { border: 1px solid #eadbce; background: #fff; color: #2f221d; }
+
+        @media (max-width: 520px) {
+            .invoice-box { margin: 1.5rem auto; }
+            .info-row { align-items: flex-start; font-size: 0.9rem; }
+            .info-row .label { flex: 0 0 40%; }
+        }
 
         @media print {
             .btn-container { display: none; }
-            body { background: white; padding: 0; }
-            .invoice-box { border: none; box-shadow: none; }
+            .customer-navbar { display: none; }
+            body, main { background: white; padding: 0; }
+            .invoice-box {
+                width: 100%;
+                margin: 0;
+                padding: 1rem;
+                border: none;
+                box-shadow: none;
+            }
         }
     </style>
 </head>
 <body>
 
-<nav class="page-nav" aria-label="Account navigation">
-    <a href="/profile">My Profile</a>
-    <a href="/billing/my-invoices.html">My Invoices</a>
-</nav>
+<header class="customer-navbar">
+    <nav class="customer-navbar-container" aria-label="Main navigation">
+        <a class="customer-brand" href="/">
+            <span class="customer-brand-icon" aria-hidden="true">🧁</span>
+            <span>kamuda.com</span>
+        </a>
+        <ul class="customer-nav-links">
+            <li><a class="customer-nav-link" href="/">Home</a></li>
+            <li><a class="customer-nav-link" href="/items">Shop Cakes</a></li>
+            <li><a class="customer-nav-link" href="/profileupdate">Profile</a></li>
+            <li><a class="customer-nav-link" href="/billing/my-invoices.html" aria-current="page">My invoices</a></li>
+            <li><a class="customer-nav-link" href="/billing/refund-request-form.html">Request refund</a></li>
+            <li><a class="customer-nav-link" href="/payments">My Payment</a></li>
+            <li><a class="customer-nav-link" href="/orders">My Orders</a></li>
+        </ul>
+        <div class="customer-nav-actions">
+            <a class="customer-cart-link" href="/items" aria-label="View cakes" title="View cakes">🛒</a>
+            <a class="customer-book-link" href="/custom-cake">✨ Book Custom Cake</a>
+        </div>
+    </nav>
+</header>
 
-<div class="invoice-box">
-    <div class="title">📄 INVOICE RECEIPT</div>
+<main>
+    <section class="invoice-box" aria-labelledby="invoiceTitle" aria-busy="true">
+        <h1 class="title" id="invoiceTitle">📄 INVOICE RECEIPT</h1>
 
-    <div class="info-row"><span class="label">Invoice ID:</span> <span id="detId">-</span></div>
-    <div class="info-row"><span class="label">Invoice Number:</span> <span id="detNo">-</span></div>
-    <div class="info-row"><span class="label">Issued Date:</span> <span id="detDate">-</span></div>
-    <div class="info-row" style="border-top: 1px dashed #eee; padding-top: 10px; margin-top: 15px;">
-        <span class="label" style="font-size: 18px; color: #2c3e50;">Total Amount Paid:</span>
-        <span id="detTotal" style="font-size: 18px; font-weight: bold; color: #2ecc71;">$0.00</span>
-    </div>
+        <div class="info-row"><span class="label">Invoice ID:</span> <span id="detId">—</span></div>
+        <div class="info-row"><span class="label">Invoice Number:</span> <span id="detNo">—</span></div>
+        <div class="info-row"><span class="label">Issued Date:</span> <span id="detDate">—</span></div>
+        <div class="info-row"><span class="label">Payment ID:</span> <span id="detPayment">—</span></div>
+        <div class="info-row"><span class="label">Order ID:</span> <span id="detOrder">—</span></div>
+        <div class="info-row"><span class="label">Payment method:</span> <span id="detMethod">—</span></div>
+        <div class="info-row total-row">
+            <span class="label">Total Charged:</span>
+            <span class="value" id="detTotal">—</span>
+        </div>
+        <p id="invoiceStatus" class="invoice-status" role="status" aria-live="polite">Loading invoice details…</p>
 
-    <div class="btn-container">
-        <a href="my-invoices.html" class="btn btn-back">⬅ Back to List</a>
-        <button class="btn btn-print" onclick="window.print()">🖨 Print Invoice</button>
-    </div>
-</div>
+        <div class="btn-container">
+            <a href="/billing/my-invoices.html" class="btn btn-back">⬅ Back to List</a>
+            <button type="button" class="btn btn-print" id="printInvoiceBtn" disabled>🖨 Print Invoice</button>
+        </div>
+    </section>
+</main>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const invoiceId = urlParams.get('id');
+    document.addEventListener('DOMContentLoaded', loadInvoice);
 
-        if (invoiceId) {
-
-            fetch('/api/invoices/' + invoiceId)
-                .then(response => response.json())
-                .then(invoice => {
-
-                    document.getElementById('detId').innerText = invoice.id;
-                    document.getElementById('detNo').innerText = invoice.invoiceNumber;
-                    document.getElementById('detDate').innerText = invoice.invoiceDate;
-
-
-                    document.getElementById('detTotal').innerText = "$" + invoice.amount.toFixed(2);
-                })
-                .catch(error => console.error('Error fetching invoice details:', error));
+    async function loadInvoice() {
+        const status = document.getElementById('invoiceStatus');
+        const invoiceBox = document.querySelector('.invoice-box');
+        const printButton = document.getElementById('printInvoiceBtn');
+        const invoiceId = new URLSearchParams(window.location.search).get('id');
+        if (!invoiceId || !/^[1-9]\d*$/.test(invoiceId)) {
+            showError('A valid invoice ID is required.');
+            return;
         }
-    });
+
+        try {
+            const response = await fetch(`/api/invoices/${encodeURIComponent(invoiceId)}`, {
+                headers: { Accept: 'application/json' },
+                credentials: 'same-origin'
+            });
+            if (response.status === 401) {
+                const returnUrl = window.location.pathname + window.location.search;
+                window.location.assign(`/loging.html?returnUrl=${encodeURIComponent(returnUrl)}`);
+                return;
+            }
+            if (response.status === 404) {
+                showError('This invoice was not found or is not available to your account.');
+                return;
+            }
+            if (!response.ok) {
+                showError(`Unable to load invoice details (error ${response.status}).`);
+                return;
+            }
+
+            const invoice = await response.json();
+            if (!invoice || typeof invoice !== 'object' || String(invoice.id) !== invoiceId) {
+                showError('The invoice response was invalid. Please return to your invoice list and try again.');
+                return;
+            }
+
+            document.getElementById('detId').textContent = invoice.id;
+            document.getElementById('detNo').textContent = invoice.invoiceNumber || '—';
+            document.getElementById('detDate').textContent = formatInvoiceDate(invoice.invoiceDate);
+            document.getElementById('detPayment').textContent = invoice.paymentId ?? '—';
+            document.getElementById('detOrder').textContent = invoice.orderId ?? '—';
+            document.getElementById('detMethod').textContent = formatPaymentMethod(invoice.paymentType);
+            document.getElementById('detTotal').textContent = formatMoney(invoice.amount);
+            status.textContent = '';
+            invoiceBox.setAttribute('aria-busy', 'false');
+            printButton.disabled = false;
+        } catch (error) {
+            showError(error instanceof TypeError
+                ? 'Unable to connect to the server. Check your connection and try again.'
+                : 'Unable to read invoice details. Please return to your invoice list and try again.');
+        }
+
+        function showError(message) {
+            status.textContent = message;
+            status.classList.add('is-error');
+            invoiceBox.setAttribute('aria-busy', 'false');
+        }
+
+        function formatMoney(value) {
+            if (value === null || value === undefined || value === '') return '—';
+            const amount = Number(value);
+            return Number.isFinite(amount) ? `Rs. ${amount.toFixed(2)}` : '—';
+        }
+
+        function formatInvoiceDate(value) {
+            if (typeof value !== 'string' || !value) return '—';
+            const dateOnly = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+            const date = dateOnly
+                ? new Date(Number(dateOnly[1]), Number(dateOnly[2]) - 1, Number(dateOnly[3]))
+                : new Date(value);
+            return Number.isNaN(date.getTime())
+                ? '—'
+                : new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' }).format(date);
+        }
+
+        function formatPaymentMethod(value) {
+            if (typeof value !== 'string' || !value.trim()) return '—';
+            return value.replace(/[_-]+/g, ' ')
+                .toLowerCase()
+                .replace(/\b\w/g, character => character.toUpperCase());
+        }
+    }
+
+    document.getElementById('printInvoiceBtn').addEventListener('click', () => window.print());
 </script>
 
 </body>

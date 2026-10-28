@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="View all bakery invoices and their payment details.">
+  <title>All invoices | Cake Studio Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin-panel.css">
+  <style>
+    .invoice-summary {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .invoice-summary-card {
+      padding: 1.1rem 1.25rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+    .invoice-summary-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .invoice-summary-card strong {
+      display: block;
+      margin-top: 0.4rem;
+      font-size: 1.5rem;
+    }
+    .invoice-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+    .invoice-toolbar .field {
+      display: grid;
+      gap: 0.35rem;
+    }
+    .invoice-toolbar input,
+    .invoice-toolbar select {
+      min-height: 42px;
+      min-width: 180px;
+      padding: 0.55rem 0.7rem;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      color: inherit;
+      font: inherit;
+    }
+    .invoice-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+    }
+    .invoice-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 940px;
+    }
+    .invoice-table th,
+    .invoice-table td {
+      padding: 0.85rem 0.9rem;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    .invoice-table th {
+      background: #fff6f1;
+      color: var(--ink);
+      font-size: 0.84rem;
+      white-space: nowrap;
+    }
+    .invoice-table tbody tr:last-child td { border-bottom: 0; }
+    .invoice-table tbody tr:hover { background: #fffaf7; }
+    .invoice-primary { font-weight: 700; }
+    .invoice-subtext {
+      display: block;
+      margin-top: 0.25rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+      overflow-wrap: anywhere;
+    }
+    .invoice-amount { white-space: nowrap; font-weight: 700; }
+    .invoice-status {
+      display: inline-block;
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      background: #f1eee9;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+    .invoice-status[data-status="PAID"] { background: #e8f5e9; color: #226b35; }
+    .invoice-status[data-status="REFUNDED"] { background: #fff0ef; color: #a32132; }
+    .invoice-message {
+      margin: 1rem 0;
+      color: var(--muted);
+    }
+    .invoice-message.error { color: #a32132; }
+    @media (max-width: 760px) {
+      .invoice-summary { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <a class="brand" href="/adminDashboard">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Cake Studio</span>
+      </a>
+      <nav class="nav-section" aria-label="Admin pages">
+        <div class="nav-title">Admin</div>
+        <a class="nav-item" href="/adminDashboard"><span class="icon">⌂</span>Dashboard</a>
+        <a class="nav-item" href="/customOrders"><span class="icon">◇</span>Custom Orders</a>
+        <a class="nav-item" href="/bakeryOrders"><span class="icon">▣</span>Bakery Orders</a>
+        <a class="nav-item" href="/adminPayments"><span class="icon">▣</span>Payments</a>
+        <a class="nav-item active" href="/adminInvoices" aria-current="page"><span class="icon">▤</span>Invoices</a>
+        <a class="nav-item" href="/adminRefunds"><span class="icon">↩</span>Refunds</a>
+        <a class="nav-item" href="/adminItems"><span class="icon">▤</span>Items</a>
+        <a class="nav-item" href="/userManagement"><span class="icon">♙</span>User Management</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="intro compact">
+      <h1>All invoices</h1>
+      <p>Invoices generated from customer payments, including their order, customer, and payment status.</p>
+    </section>
+
+    <div class="invoice-summary" aria-label="Invoice totals">
+      <section class="invoice-summary-card">
+        <span>Invoices shown</span>
+        <strong id="invoiceCount">—</strong>
+      </section>
+      <section class="invoice-summary-card">
+        <span>Total charged</span>
+        <strong id="invoiceTotal">—</strong>
+      </section>
+    </div>
+
+    <div class="invoice-toolbar">
+      <label class="field" for="invoiceSearch">
+        <span class="field-label">Search invoices</span>
+        <input id="invoiceSearch" type="search" placeholder="Invoice, customer, order or payment">
+      </label>
+      <label class="field" for="paymentStatusFilter">
+        <span class="field-label">Payment status</span>
+        <select id="paymentStatusFilter">
+          <option value="">All statuses</option>
+          <option value="PAID">Paid</option>
+          <option value="REFUNDED">Refunded</option>
+        </select>
+      </label>
+      <button class="btn" id="refreshInvoices" type="button">Refresh</button>
+    </div>
+
+    <p id="invoiceMessage" class="invoice-message" role="status" aria-live="polite">Loading invoices…</p>
+    <div class="invoice-table-wrap">
+      <table class="invoice-table">
+        <thead>
+          <tr>
+            <th>Invoice</th>
+            <th>Customer</th>
+            <th>Payment</th>
+            <th>Order</th>
+            <th>Method</th>
+            <th>Total charged</th>
+            <th>Issued</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="invoiceRows"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="wrap">Cake Studio Admin</div></footer>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="/js/common.js"></script>
+  <script src="/js/admin-invoices.js"></script>
+</body>
+</html>

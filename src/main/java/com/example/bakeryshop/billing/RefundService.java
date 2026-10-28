@@ -15,11 +15,11 @@ public class RefundService {
         this.refundRepository = refundRepository;
     }
 
-    public void submitRefundRequest(RefundRequest request) {
+    public RefundRequest submitRefundRequest(RefundRequest request) {
         request.setId(null);
         request.setRequestDate(LocalDate.now());
         request.setStatus("PENDING");
-        refundRepository.save(request);
+        return refundRepository.save(request);
     }
 
     public RefundRequest updateRefundStatus(Long id, String newStatus) {

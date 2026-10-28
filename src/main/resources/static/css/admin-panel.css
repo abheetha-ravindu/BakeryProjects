@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0 auto 0 0;
   z-index: 5;
-  width: 220px;
+  width: 250px;
   overflow-y: auto;
   border-right: 1px solid var(--line);
   border-bottom: 0;
@@ -24,8 +24,17 @@
 
 .nav .brand {
   padding: 6px 8px 18px;
-  font-family: "Plus Jakarta Sans", Inter, Arial, sans-serif;
+  font-family: Inter, Arial, sans-serif;
   letter-spacing: 0;
+}
+
+.brand-mark {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #c92c3d, #a92132);
 }
 
 .nav-section {
@@ -49,15 +58,15 @@
   margin: 2px 0;
   padding: 10px 12px;
   border-radius: 10px;
-  color: #3c3c3c;
+  color: #3e342f;
   font-size: 0.96rem;
   text-decoration: none;
 }
 
 .nav-item:hover,
 .nav-item.active {
-  background: rgba(250, 124, 138, 0.12);
-  color: #fd344a;
+  background: rgba(201, 44, 61, 0.1);
+  color: #c92c3d;
 }
 
 .nav-item.active {
@@ -71,19 +80,19 @@
 }
 
 main.wrap {
-  width: calc(100% - 220px);
+  width: calc(100% - 250px);
   max-width: 1120px;
-  margin: 0 auto 0 220px;
+  margin: 0 auto 0 250px;
   padding-inline: 32px;
 }
 
 .banner {
-  width: calc(100% - 252px);
-  margin-left: 236px;
+  width: calc(100% - 282px);
+  margin-left: 266px;
 }
 
 .footer {
-  margin-left: 220px;
+  margin-left: 250px;
 }
 
 @media (max-width: 760px) {

@@ -37,8 +37,8 @@ public class RefundController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You can only request a refund for your own orders.");
         }
 
-        refundService.submitRefundRequest(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(request);
+        RefundRequest savedRequest = refundService.submitRefundRequest(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedRequest);
     }
 
     @PutMapping("/{id}")

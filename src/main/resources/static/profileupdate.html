@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="View and update your kamuda.com customer profile.">
     <title>My Profile | kamuda.com</title>
+    <link rel="stylesheet" href="/css/style.css">
     <style>
         :root {
             color-scheme: light;
@@ -32,118 +33,6 @@
 
         a {
             color: inherit;
-        }
-
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background: rgba(255, 255, 255, 0.98);
-            border-bottom: 1px solid #eee4da;
-        }
-
-        .navbar-container {
-            display: flex;
-            max-width: 1500px;
-            min-height: 108px;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1.5rem;
-            margin: 0 auto;
-            padding: 0 clamp(1rem, 4vw, 5rem);
-        }
-
-        .brand-logo,
-        .nav-link,
-        .cart-link,
-        .profile-link,
-        .book-link {
-            text-decoration: none;
-        }
-
-        .brand-logo {
-            display: inline-flex;
-            flex-shrink: 0;
-            align-items: center;
-            gap: 0.7rem;
-            color: var(--ink);
-            font-size: clamp(1.35rem, 2vw, 1.8rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-        }
-
-        .brand-icon {
-            font-size: 1.5rem;
-        }
-
-        .nav-links,
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: clamp(0.75rem, 2vw, 1.8rem);
-        }
-
-        .nav-links {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        .nav-link {
-            color: #382d28;
-            font-size: 1.05rem;
-            transition: color 0.2s ease;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--berry);
-        }
-
-        .nav-actions {
-            flex-shrink: 0;
-        }
-
-        .cart-link {
-            font-size: 1.3rem;
-        }
-
-        .profile-link {
-            display: inline-flex;
-            min-height: 54px;
-            align-items: center;
-            gap: 0.55rem;
-            padding: 0.65rem 1.25rem;
-            border: 1px solid var(--line);
-            border-radius: 999px;
-            background: #fff;
-            font-weight: 700;
-        }
-
-        .profile-link.active {
-            color: var(--berry);
-            border-color: #efc7cc;
-            background: var(--soft-pink);
-        }
-
-        .book-link {
-            display: inline-flex;
-            min-height: 60px;
-            align-items: center;
-            justify-content: center;
-            padding: 0.8rem 1.5rem;
-            border-radius: 999px;
-            background: var(--berry);
-            color: #fff;
-            font-size: 1.05rem;
-            font-weight: 700;
-            white-space: nowrap;
-            transition: background 0.2s ease, transform 0.2s ease;
-        }
-
-        .book-link:hover {
-            transform: translateY(-1px);
-            background: var(--berry-dark);
         }
 
         main {
@@ -191,6 +80,59 @@
             margin-bottom: 0;
             color: var(--muted);
             line-height: 1.6;
+        }
+
+        .account-links {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin: 0 0 1.5rem;
+        }
+
+        .account-link-card {
+            display: flex;
+            min-height: 90px;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.15rem 1.25rem;
+            border: 1px solid #f0e5dc;
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: 0 8px 24px rgba(68, 42, 26, 0.04);
+            text-decoration: none;
+            transition: border-color 160ms ease, transform 160ms ease;
+        }
+
+        .account-link-card:hover {
+            transform: translateY(-2px);
+            border-color: #e7b9bf;
+        }
+
+        .account-link-icon {
+            display: grid;
+            width: 44px;
+            height: 44px;
+            flex: 0 0 auto;
+            place-items: center;
+            border-radius: 12px;
+            background: var(--soft-pink);
+            color: var(--berry);
+            font-size: 1.25rem;
+        }
+
+        .account-link-card strong,
+        .account-link-card span {
+            display: block;
+        }
+
+        .account-link-card strong {
+            margin-bottom: 0.3rem;
+        }
+
+        .account-link-card span {
+            color: var(--muted);
+            font-size: 0.83rem;
+            line-height: 1.45;
         }
 
         .profile-layout {
@@ -363,56 +305,21 @@
         }
 
         @media (max-width: 900px) {
-            .navbar-container {
-                min-height: 82px;
-                flex-wrap: wrap;
-                justify-content: center;
-                padding-top: 0.9rem;
-                padding-bottom: 0.9rem;
-            }
-
             .profile-layout {
                 grid-template-columns: 220px minmax(0, 1fr);
             }
         }
 
         @media (max-width: 650px) {
-            .navbar-container {
-                gap: 0.9rem;
-            }
-
-            .nav-links {
-                order: 3;
-                width: 100%;
-                justify-content: center;
-                gap: 0.75rem;
-                flex-wrap: wrap;
-            }
-
-            .nav-link {
-                font-size: 0.9rem;
-            }
-
-            .nav-actions {
-                gap: 0.55rem;
-            }
-
-            .profile-link {
-                min-height: 42px;
-                padding: 0.45rem 0.8rem;
-            }
-
-            .book-link {
-                min-height: 44px;
-                padding: 0.55rem 0.85rem;
-                font-size: 0.85rem;
-            }
-
             main {
                 padding-top: 2.25rem;
             }
 
             .profile-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .account-links {
                 grid-template-columns: 1fr;
             }
 
@@ -436,27 +343,26 @@
     </style>
 </head>
 <body>
-    <header class="navbar">
-        <nav class="navbar-container" aria-label="Main navigation">
-            <a class="brand-logo" href="/main">
-                <span class="brand-icon" aria-hidden="true">🧁</span>
+    <header class="customer-navbar">
+        <nav class="customer-navbar-container" aria-label="Main navigation">
+            <a class="customer-brand" href="/main">
+                <span class="customer-brand-icon" aria-hidden="true">🧁</span>
                 <span>kamuda.com</span>
             </a>
 
-            <ul class="nav-links">
-                <li><a class="nav-link" href="/main">Home</a></li>
-                <li><a class="nav-link" href="/items">Shop Cakes</a></li>
-                <li><a class="nav-link" href="/custom-cake">Book Cake</a></li>
-                <li><a class="nav-link" href="/billing/my-invoices.html">My invoices</a></li>
+            <ul class="customer-nav-links">
+                <li><a class="customer-nav-link" href="/">Home</a></li>
+                <li><a class="customer-nav-link" href="/items">Shop Cakes</a></li>
+                <li><a class="customer-nav-link" href="/profileupdate" aria-current="page">Profile</a></li>
+                <li><a class="customer-nav-link" href="/billing/my-invoices.html">My invoices</a></li>
+                <li><a class="customer-nav-link" href="/billing/refund-request-form.html">Request refund</a></li>
+                <li><a class="customer-nav-link" href="/payments">My Payment</a></li>
+                <li><a class="customer-nav-link" href="/orders">My Orders</a></li>
             </ul>
 
-            <div class="nav-actions">
-                <a class="cart-link" href="/items" aria-label="View cakes" title="View cakes">🛒</a>
-                <a class="profile-link active" href="/profile" aria-current="page">
-                    <span aria-hidden="true">👤</span>
-                    <span>Profile</span>
-                </a>
-                <a class="book-link" href="/custom-cake">✨ Book Custom Cake</a>
+            <div class="customer-nav-actions">
+                <a class="customer-cart-link" href="/items" aria-label="View cakes" title="View cakes">🛒</a>
+                <a class="customer-book-link" href="/custom-cake">✨ Book Custom Cake</a>
             </div>
         </nav>
     </header>
@@ -468,13 +374,23 @@
             <p>View your account details and keep your delivery information up to date.</p>
         </section>
 
+        <section class="account-links" aria-label="Billing and refund actions">
+            <a class="account-link-card" href="/billing/my-invoices.html">
+                <span class="account-link-icon" aria-hidden="true">📄</span>
+                <span><strong>My invoices</strong><span>View receipts, open invoice details, or request a refund for an order.</span></span>
+            </a>
+            <a class="account-link-card" href="/billing/refund-request-form.html">
+                <span class="account-link-icon" aria-hidden="true">↩</span>
+                <span><strong>Request a refund</strong><span>Submit a refund request using your order ID.</span></span>
+            </a>
+        </section>
+
         <div class="profile-layout">
             <aside class="summary-card" aria-label="Account summary">
                 <div class="avatar" id="profileAvatar" aria-hidden="true">C</div>
                 <h2 class="summary-name" id="summaryName">Customer</h2>
                 <p class="summary-email" id="summaryEmail">Sign in to view your account</p>
                 <span class="account-badge">CUSTOMER ACCOUNT</span>
-                <p><a class="nav-link" href="/billing/my-invoices.html">View my invoices</a></p>
                 <div class="summary-divider"></div>
                 <p class="summary-note">Your email is linked to your account. Contact the bakery if you need help changing it.</p>
             </aside>

@@ -3,39 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Invoices</title>
+    <title>kamuda.com | My invoices</title>
+    <link rel="stylesheet" href="/css/style.css">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            background-color: #fdf9f5;
             margin: 0;
-            padding: 20px;
-            color: #333;
+            padding: 0;
+            color: #2f221d;
         }
-        .page-nav {
-            max-width: 900px;
-            margin: 0 auto 20px;
-            display: flex;
-            justify-content: flex-end;
-            gap: 18px;
-        }
-        .page-nav a {
-            color: #8f2736;
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .page-nav a:hover { text-decoration: underline; }
         .container {
             max-width: 900px;
-            margin: 0 auto;
+            margin: 40px auto;
             background: #ffffff;
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f0e5dc;
+            border-radius: 20px;
+            box-shadow: 0 12px 32px rgba(68, 42, 26, 0.05);
+        }
+        @media (max-width: 940px) {
+            .container {
+                margin: 24px 20px;
+            }
         }
         h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #eef2f3;
+            color: #2f221d;
+            border-bottom: 1px solid #f1d4d7;
             padding-bottom: 10px;
         }
         table {
@@ -46,20 +40,25 @@
         th, td {
             padding: 12px;
             text-align: left;
-            border-bottom: 1px solid #eef2f3;
+            border-bottom: 1px solid #f0e8e2;
+        }
+        td:last-child {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
         }
         th {
-            background-color: #f4f7f6;
-            color: #2c3e50;
+            background-color: #fff1f3;
+            color: #2f221d;
             font-weight: 600;
         }
         tr:hover {
-            background-color: #f9fbfb;
+            background-color: #fdf9f5;
         }
         .btn {
             display: inline-block;
             padding: 6px 12px;
-            background-color: #3498db;
+            background-color: #c73749;
             color: #fff;
             text-decoration: none;
             border-radius: 4px;
@@ -68,91 +67,130 @@
             cursor: pointer;
         }
         .btn:hover {
-            background-color: #2980b9;
+            background-color: #ad293a;
         }
         .btn-danger {
-            background-color: #e74c3c;
+            background-color: #c73749;
         }
         .btn-danger:hover {
-            background-color: #c0392b;
+            background-color: #ad293a;
         }
     </style>
 </head>
 <body>
+<header class="customer-navbar">
+    <nav class="customer-navbar-container" aria-label="Main navigation">
+        <a class="customer-brand" href="/main">
+            <span class="customer-brand-icon" aria-hidden="true">🧁</span>
+            <span>kamuda.com</span>
+        </a>
 
-<nav class="page-nav" aria-label="Account navigation">
-    <a href="/profile">My Profile</a>
-    <a href="/orders">My Orders</a>
-    <a href="/payments">My Payments</a>
-</nav>
+        <ul class="customer-nav-links">
+            <li><a class="customer-nav-link" href="/">Home</a></li>
+            <li><a class="customer-nav-link" href="/items">Shop Cakes</a></li>
+            <li><a class="customer-nav-link" href="/profileupdate">Profile</a></li>
+            <li><a class="customer-nav-link" href="/billing/my-invoices.html" aria-current="page">My invoices</a></li>
+            <li><a class="customer-nav-link" href="/billing/refund-request-form.html">Request refund</a></li>
+            <li><a class="customer-nav-link" href="/payments">My Payment</a></li>
+            <li><a class="customer-nav-link" href="/orders">My Orders</a></li>
+        </ul>
 
+        <div class="customer-nav-actions">
+            <a class="customer-cart-link" href="/items" aria-label="View cakes" title="View cakes">🛒</a>
+            <a class="customer-book-link" href="/custom-cake">✨ Book Custom Cake</a>
+        </div>
+    </nav>
+</header>
 <div class="container">
     <h2>📄 My Invoices List</h2>
-    <p style="color: #64748b;">View and manage your bakery orders and custom cake booking invoices below.</p>
+    <p style="color: #76665d;">View and manage your bakery orders and custom cake booking invoices below.</p>
 
     <table>
         <thead>
         <tr>
-            <th>Invoice ID</th>
-            <th>Invoice Number</th>
+            <th>Invoice</th>
+            <th>Payment</th>
+            <th>Order</th>
+            <th>Total Charged</th>
             <th>Issued Date</th>
             <th>Actions</th>
         </tr>
         </thead>
-        <tbody id="invoiceTableBody">
-
-        <tr>
-            <td>1</td>
-            <td>INV-2026-001</td>
-            <td>2026-10-24</td>
-            <td>
-                <button class="btn" onclick="viewDetails(1)">View Detail / Print</button>
-                <button class="btn btn-danger" onclick="requestRefund(1)">Request Refund</button>
-            </td>
-        </tr>
-        </tbody>
+        <tbody id="invoiceTableBody"></tbody>
     </table>
+    <p id="invoiceStatus" role="status" aria-live="polite" style="color:#76665d;"></p>
 </div>
 
 
 <script>
+    document.addEventListener('DOMContentLoaded', loadInvoices);
 
+    async function loadInvoices() {
+        const tableBody = document.getElementById('invoiceTableBody');
+        const status = document.getElementById('invoiceStatus');
+        status.textContent = 'Loading invoices...';
+        try {
+            const response = await fetch('/api/invoices', {
+                headers: { Accept: 'application/json' },
+                credentials: 'same-origin'
+            });
+            if (response.status === 401) {
+                const returnUrl = window.location.pathname + window.location.search;
+                window.location.assign(`/loging.html?returnUrl=${encodeURIComponent(returnUrl)}`);
+                return;
+            }
+            if (!response.ok) throw new Error(`Could not load invoices (${response.status}).`);
 
-    document.addEventListener("DOMContentLoaded", function() {
+            const invoices = await response.json();
+            if (!Array.isArray(invoices)) throw new Error('The invoices response was invalid.');
+            tableBody.replaceChildren();
+            if (invoices.length === 0) {
+                status.textContent = 'No invoices yet. An invoice is created when a payment is recorded.';
+                return;
+            }
 
-        fetch('/api/invoices')
-            .then(response => response.json())
-            .then(invoices => {
-                const tableBody = document.getElementById('invoiceTableBody');
-                tableBody.innerHTML = '';
-
-                invoices.forEach(invoice => {
-                    const row = `
-                        <tr>
-                            <td>${invoice.id}</td>
-                            <td>${invoice.invoiceNumber}</td>
-                            <td>${invoice.invoiceDate}</td>
-                            <td>
-
-                                <button class="btn" onclick="viewDetails(${invoice.id})">View Detail / Print</button>
-                                <button class="btn btn-danger" onclick="requestRefund(${invoice.id})">Request Refund</button>
-                            </td>
-                        </tr>
-                    `;
-                    tableBody.innerHTML += row;
+            invoices.forEach(invoice => {
+                const row = document.createElement('tr');
+                [
+                    invoice.invoiceNumber || `Invoice #${invoice.id}`,
+                    `${invoice.paymentType || 'Payment'} #${invoice.paymentId ?? '—'}`,
+                    invoice.orderId ? `#${invoice.orderId}` : '—',
+                    formatMoney(invoice.amount),
+                    invoice.invoiceDate || '—'
+                ].forEach(value => {
+                    const cell = document.createElement('td');
+                    cell.textContent = value;
+                    row.appendChild(cell);
                 });
-            })
-            .catch(error => console.error('Error fetching invoices:', error));
-    });
 
-    function viewDetails(id) {
-        window.location.href = 'invoice-detail.html?id=' + id;
+                const actions = document.createElement('td');
+                const detailsButton = document.createElement('a');
+                detailsButton.className = 'btn';
+                detailsButton.href = `invoice-detail.html?id=${encodeURIComponent(invoice.id)}`;
+                detailsButton.textContent = 'View / Print';
+                actions.appendChild(detailsButton);
+
+                if (invoice.orderId) {
+                    const refundButton = document.createElement('a');
+                    refundButton.className = 'btn btn-danger';
+                    refundButton.href = `/billing/refund-request-form.html?orderId=${encodeURIComponent(invoice.orderId)}`;
+                    refundButton.textContent = 'Request Refund';
+                    actions.appendChild(refundButton);
+                }
+                row.appendChild(actions);
+                tableBody.appendChild(row);
+            });
+            status.textContent = '';
+        } catch (error) {
+            status.textContent = error.message || 'Unable to load invoices.';
+            status.style.color = '#a32132';
+        }
     }
 
-    function requestRefund() {
-        window.location.href = '/billing/refund-request-form.html';
+    function formatMoney(value) {
+        const amount = Number(value);
+        return `Rs. ${Number.isFinite(amount) ? amount.toFixed(2) : '0.00'}`;
     }
-
 </script>
 
 </body>

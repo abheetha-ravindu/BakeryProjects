@@ -811,6 +811,16 @@
             flex-direction: column;
         }
 
+        .cart-drawer-scroll-wrap {
+            min-height: 0;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .cart-drawer-scroll-wrap .cart-drawer-body {
+            overflow-y: visible;
+        }
+
         .cart-drawer-overlay.open .cart-drawer-panel {
             transform: translateX(0);
         }
@@ -1120,7 +1130,7 @@
             </ul>
 
             <div class="nav-actions">
-                <a href="/items" class="cart-icon-btn" id="navCartBtn" title="View Cakes">
+                <a href="/items" class="cart-icon-btn" id="navCartBtn" title="View cart" aria-label="View cart" onclick="toggleCartDrawer(true); return false;">
                     🛒
                     <span class="cart-badge" style="display:none;">0</span>
                 </a>
@@ -1276,54 +1286,59 @@
     <!-- ======================================================================
          SHARED CART SLIDE-OVER DRAWER
          ====================================================================== -->
-    <div class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="handleOverlayClick(event)">
-        <div class="cart-drawer-panel" id="cartDrawerPanel">
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="handleOverlayClick(event)" aria-hidden="true">
+        <div class="cart-drawer-panel" id="cartDrawerPanel" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle">
             <div class="cart-drawer-header">
-                <div class="cart-drawer-title">
+                <div class="cart-drawer-title" id="cartDrawerTitle">
                     <span>🛒</span>
                     <span>Your Order Basket</span>
                 </div>
                 <button type="button" class="cart-close-btn" onclick="toggleCartDrawer(false)" aria-label="Close cart">✕</button>
             </div>
 
-            <div class="cart-drawer-body" id="cartDrawerBody">
-                <!-- Cart items or empty state injected by JS -->
-            </div>
-
-            <div class="cart-drawer-footer" id="cartDrawerFooter">
-                <div class="cart-total-row">
-                    <span class="cart-total-label">Subtotal</span>
-                    <span class="cart-total-value" id="cartDrawerTotal">Rs. 0</span>
+            <div class="cart-drawer-scroll-wrap" id="cartDrawerScrollWrap">
+                <div class="cart-drawer-body" id="cartDrawerBody">
+                    <!-- Cart items or empty state injected by JS -->
                 </div>
 
-                <button type="button" class="btn-checkout-proceed" id="checkoutToggleBtn" onclick="toggleCheckoutForm()">
-                    <span>Proceed to Checkout</span>
-                    <span>→</span>
-                </button>
-
-                <form id="checkoutOrderForm" class="checkout-drawer-form">
-
-                    <h4 style="font-family:var(--font-heading); margin-bottom:0.75rem; color:var(--color-dark-roast);">Customer Details</h4>
-
-                    <div class="drawer-form-group">
-                        <label class="drawer-form-label" for="custName">Your Full Name *</label>
-                        <input type="text" id="custName" name="customerName" class="drawer-form-input" maxlength="60" required placeholder="e.g. Priyantha Silva">
+                <div class="cart-drawer-footer" id="cartDrawerFooter">
+                    <div class="cart-total-row">
+                        <span class="cart-total-label">Subtotal</span>
+                        <span class="cart-total-value" id="cartDrawerTotal">Rs. 0</span>
+                    </div>
+                    <div style="display:flex; justify-content:flex-end; margin:-0.2rem 0 0.8rem 0;">
+                        <button type="button" onclick="clearCart()" style="background:none; border:none; color:var(--color-strawberry, #C92C3D); font-size:0.8rem; font-weight:600; cursor:pointer; text-decoration:underline; font-family:inherit;">🗑️ Clear Basket</button>
                     </div>
 
-                    <div class="drawer-form-group">
-                        <label class="drawer-form-label" for="custPhone">Phone Number *</label>
-                        <input type="tel" id="custPhone" name="customerPhone" class="drawer-form-input" maxlength="30" required placeholder="e.g. 077 456 7890">
-                    </div>
-
-                    <div class="drawer-form-group">
-                        <label class="drawer-form-label" for="custAddress">Delivery Address / Pickup Note</label>
-                        <input type="text" id="custAddress" name="deliveryAddress" class="drawer-form-input" maxlength="80" placeholder="e.g. Colombo 07 or Pickup at Flagship Store">
-                    </div>
-
-                    <button type="submit" class="btn-checkout-proceed" style="margin-top:1rem;" id="submitOrderBtn">
-                        <span>Place Bakery &amp; Cake Order Now</span>
+                    <button type="button" class="btn-checkout-proceed" id="checkoutToggleBtn" onclick="toggleCheckoutForm()">
+                        <span>Proceed to Checkout</span>
+                        <span>→</span>
                     </button>
-                </form>
+
+                    <form id="checkoutOrderForm" class="checkout-drawer-form">
+
+                        <h4 style="font-family:var(--font-heading); margin-bottom:0.75rem; color:var(--color-dark-roast);">Customer Details</h4>
+
+                        <div class="drawer-form-group">
+                            <label class="drawer-form-label" for="custName">Your Full Name *</label>
+                            <input type="text" id="custName" name="customerName" class="drawer-form-input" maxlength="60" required placeholder="e.g. Priyantha Silva">
+                        </div>
+
+                        <div class="drawer-form-group">
+                            <label class="drawer-form-label" for="custPhone">Phone Number *</label>
+                            <input type="tel" id="custPhone" name="customerPhone" class="drawer-form-input" maxlength="30" required placeholder="e.g. 077 456 7890">
+                        </div>
+
+                        <div class="drawer-form-group">
+                            <label class="drawer-form-label" for="custAddress">Delivery Address / Pickup Note</label>
+                            <input type="text" id="custAddress" name="deliveryAddress" class="drawer-form-input" maxlength="80" placeholder="e.g. Colombo 07 or Pickup at Flagship Store">
+                        </div>
+
+                        <button type="submit" class="btn-checkout-proceed" style="margin-top:1rem;" id="submitOrderBtn">
+                            <span>Place Bakery &amp; Cake Order Now</span>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -1545,8 +1560,11 @@
 
         function updateCartBadges() {
             const totalCount = cartItems.reduce((acc, it) => acc + (it.qty || 1), 0);
-            const badge = document.getElementById('navCartCount');
-            if (badge) badge.textContent = totalCount;
+            const badge = document.querySelector('#navCartBtn .cart-badge');
+            if (badge) {
+                badge.textContent = totalCount;
+                badge.style.display = totalCount > 0 ? 'flex' : 'none';
+            }
         }
 
         // Current active shape filter for ready-made cakes
@@ -1888,10 +1906,14 @@
             if (open) {
                 renderCartDrawer();
                 overlay.classList.add('open');
+                overlay.setAttribute('aria-hidden', 'false');
                 document.body.style.overflow = 'hidden';
+                document.querySelector('.cart-close-btn')?.focus();
             } else {
                 overlay.classList.remove('open');
+                overlay.setAttribute('aria-hidden', 'true');
                 document.body.style.overflow = '';
+                document.getElementById('navCartBtn')?.focus();
             }
         }
 
@@ -1991,6 +2013,13 @@
             renderCartDrawer();
         }
 
+        function clearCart() {
+            cartItems = [];
+            saveCart();
+            updateCartBadges();
+            renderCartDrawer();
+        }
+
         function toggleCheckoutForm() {
             const form = document.getElementById('checkoutOrderForm');
             const btn = document.getElementById('checkoutToggleBtn');
@@ -2024,6 +2053,11 @@
         // --------------------------------------------------------------------------
         document.addEventListener('DOMContentLoaded', () => {
             loadCart();
+            document.addEventListener('keydown', event => {
+                if (event.key === 'Escape' && document.getElementById('cartDrawerOverlay')?.classList.contains('open')) {
+                    toggleCartDrawer(false);
+                }
+            });
             document.getElementById('checkoutOrderForm')
                 ?.addEventListener('submit', submitBakeryOrder);
             bindStorefrontFilters();
@@ -2032,6 +2066,9 @@
             loadStorefrontItems();
 
             const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('openCart') === 'true') {
+                toggleCartDrawer(true);
+            }
             const orderId = urlParams.get('orderId');
             const orderError = urlParams.get('orderError');
             if (orderId) {

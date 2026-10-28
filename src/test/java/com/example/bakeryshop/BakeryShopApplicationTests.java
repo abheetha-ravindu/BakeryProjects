@@ -13,6 +13,9 @@ import com.example.bakeryshop.Admin.model.item;
 import com.example.bakeryshop.Admin.services.ItemPopularityService;
 import com.example.bakeryshop.billing.RefundRequest;
 import com.bakery.bakeryplatform.model.order.Order;
+import com.bakery.bakeryplatform.model.payment.CardPayment;
+import com.bakery.bakeryplatform.model.payment.PaymentStatus;
+import com.bakery.bakeryplatform.repository.payment.PaymentRepository;
 import com.bakery.bakeryplatform.repository.order.OrderRepository;
 import com.example.bakeryprojects.model.Customer;
 import com.example.bakeryprojects.model.AdminUser;
@@ -62,6 +65,12 @@ class BakeryShopApplicationTests {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private PaymentRepository paymentRepository;
+
+    @Autowired
+    private com.example.bakeryshop.billing.InvoiceRepository invoiceRepository;
 
     @Autowired
     private com.example.bakeryshop.billing.RefundRepository refundRepository;
@@ -166,6 +175,140 @@ class BakeryShopApplicationTests {
     }
 
     @Test
+    void successfulPaymentGeneratesCustomerOwnedInvoiceWithChargedTotal() throws Exception {
+        Customer customer = new Customer();
+        customer.setUsername("invoice-customer");
+        customer.setEmail("invoice-" + System.nanoTime() + "@example.com");
+        customer.setPassword("test-password");
+        customer = userRepository.save(customer);
+
+        Order order = orderRepository.save(
+                new Order(customer.getId(), null, "1 x Celebration Cake", new BigDecimal("45.00")));
+        MockHttpSession customerSession = new MockHttpSession();
+        customerSession.setAttribute("loggedInUserId", customer.getId());
+
+        mockMvc.perform(get("/api/invoices"))
+                .andExpect(status().isUnauthorized());
+
+        MvcResult paymentResult = mockMvc.perform(post("/api/payments")
+                        .session(customerSession)
+                        .contentType("application/json")
+                        .content("""
+                                {"orderId":%d,"paymentType":"CARD","cardHolderName":"Invoice Customer","cardNumber":"4111111111111111"}
+                                """.formatted(order.getId())))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.status").value("PAID"))
+                .andReturn();
+
+        List<com.example.bakeryshop.billing.Invoice> generatedInvoices =
+                invoiceRepository.findByUserIdOrderByInvoiceDateDesc(customer.getId());
+        assertEquals(1, generatedInvoices.size(),
+                "A successful payment must persist its invoice immediately, before the invoice list is opened.");
+        Matcher paymentIdMatcher = Pattern.compile("\"id\":(\\d+)")
+                .matcher(paymentResult.getResponse().getContentAsString());
+        assertTrue(paymentIdMatcher.find(), "The successful payment response should include its ID.");
+        assertEquals(Long.valueOf(paymentIdMatcher.group(1)), generatedInvoices.get(0).getPaymentId());
+        assertEquals(order.getId(), generatedInvoices.get(0).getOrderId());
+        mockMvc.perform(get("/api/orders/user/{userId}", customer.getId()).session(customerSession))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value(order.getId()));
+        mockMvc.perform(get("/api/payments/user/{userId}", customer.getId()).session(customerSession))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].status").value("PAID"))
+                .andExpect(jsonPath("$[0].paymentType").value("CARD"));
+
+        mockMvc.perform(get("/api/invoices").session(customerSession))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].invoiceNumber").value(org.hamcrest.Matchers.startsWith("INV-PAY-")))
+                .andExpect(jsonPath("$[0].paymentType").value("CARD"))
+                .andExpect(jsonPath("$[0].orderId").value(order.getId()))
+                .andExpect(jsonPath("$[0].amount").value(45.9));
+
+        Long invoiceId = invoiceRepository.findByUserIdOrderByInvoiceDateDesc(customer.getId())
+                .get(0).getId();
+
+        mockMvc.perform(get("/api/invoices/" + invoiceId).session(customerSession))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.amount").value(45.9))
+                .andExpect(jsonPath("$.paymentType").value("CARD"));
+
+        Order cashOrder = orderRepository.save(
+                new Order(customer.getId(), null, "1 x Cinnamon Roll", new BigDecimal("25.00")));
+        MvcResult cashPaymentResult = mockMvc.perform(post("/api/payments")
+                        .session(customerSession)
+                        .contentType("application/json")
+                        .content("""
+                                {"orderId":%d,"paymentType":"CASH_ON_DELIVERY"}
+                                """.formatted(cashOrder.getId())))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.status").value("PAID"))
+                .andExpect(jsonPath("$.paymentType").value("CASH_ON_DELIVERY"))
+                .andReturn();
+        Matcher cashPaymentIdMatcher = Pattern.compile("\"id\":(\\d+)")
+                .matcher(cashPaymentResult.getResponse().getContentAsString());
+        assertTrue(cashPaymentIdMatcher.find(), "The cash-on-delivery payment should include its ID.");
+        Long cashPaymentId = Long.valueOf(cashPaymentIdMatcher.group(1));
+        com.example.bakeryshop.billing.Invoice cashInvoice =
+                invoiceRepository.findByPaymentId(cashPaymentId).orElseThrow();
+        assertEquals(cashOrder.getId(), cashInvoice.getOrderId());
+        assertEquals(customer.getId(), cashInvoice.getUserId());
+        assertEquals(new BigDecimal("125.00"), cashInvoice.getAmount());
+
+        Order historicalOrder = orderRepository.save(
+                new Order(customer.getId(), null, "1 x Bread Basket", new BigDecimal("30.00")));
+        CardPayment historicalPayment = new CardPayment(
+                historicalOrder.getId(), new BigDecimal("30.00"), "Invoice Customer", "1111");
+        historicalPayment.setFee(new BigDecimal("0.60"));
+        paymentRepository.save(historicalPayment);
+
+        Order refundedOrder = orderRepository.save(
+                new Order(customer.getId(), null, "1 x Chocolate Cake", new BigDecimal("80.00")));
+        CardPayment refundedPayment = new CardPayment(
+                refundedOrder.getId(), new BigDecimal("80.00"), "Invoice Customer", "2222");
+        refundedPayment.setFee(new BigDecimal("1.60"));
+        refundedPayment.setStatus(PaymentStatus.REFUNDED);
+        paymentRepository.save(refundedPayment);
+
+        mockMvc.perform(get("/api/invoices").session(customerSession))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(4));
+        assertTrue(invoiceRepository.findByPaymentId(refundedPayment.getId()).isPresent(),
+                "A refunded historical payment must keep its invoice record.");
+        assertEquals(new BigDecimal("81.60"),
+                invoiceRepository.findByPaymentId(refundedPayment.getId()).orElseThrow().getAmount());
+
+        mockMvc.perform(get("/api/admin/invoices"))
+                .andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/api/admin/invoices").session(customerSession))
+                .andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/api/admin/invoices").session(adminSession()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(org.hamcrest.Matchers.greaterThanOrEqualTo(4)))
+                .andExpect(content().string(containsString(customer.getEmail())));
+        mockMvc.perform(get("/adminpages/allinvoicess.html").session(adminSession()))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("/js/admin-invoices.js")));
+        mockMvc.perform(get("/adminInvoices").session(adminSession()))
+                .andExpect(status().isFound())
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers
+                        .header().string("Location", "/adminpages/allinvoicess.html"));
+
+        Customer otherCustomer = new Customer();
+        otherCustomer.setUsername("other-invoice-customer");
+        otherCustomer.setEmail("other-invoice-" + System.nanoTime() + "@example.com");
+        otherCustomer.setPassword("test-password");
+        otherCustomer = userRepository.save(otherCustomer);
+        MockHttpSession otherSession = new MockHttpSession();
+        otherSession.setAttribute("loggedInUserId", otherCustomer.getId());
+
+        mockMvc.perform(get("/api/invoices").session(otherSession))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
+        mockMvc.perform(get("/api/invoices/" + invoiceId).session(otherSession))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     void refundRequestsAreCustomerOwnedAndAdminProcessed() throws Exception {
         Customer customer = new Customer();
         customer.setUsername("refund-customer");
@@ -201,6 +344,7 @@ class BakeryShopApplicationTests {
                                 {"orderId":%d,"reason":"Damaged during delivery"}
                                 """.formatted(order.getId())))
                 .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").isNumber())
                 .andExpect(jsonPath("$.status").value("PENDING"))
                 .andExpect(jsonPath("$.orderId").value(order.getId()));
 

@@ -3,109 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Manage bakery items, orders, payments, and custom cake bookings.">
+  <meta name="description" content="Overview of bakery orders, custom bookings, payments, refunds, and customers.">
   <title>Admin Dashboard | Cake Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin-panel.css">
   <style>
     :root {
-      --bg: #fffdf9;
-      --heading: #2c1e16;
-      --muted: #715f55;
-      --line: #eadbce;
-      --pink: #c92c3d;
-      --shadow: 0 4px 20px rgba(78, 48, 25, 0.08);
+      --dashboard-rose: #c92c3d;
+      --dashboard-gold: #c88d44;
+      --dashboard-green: #23845b;
+      --dashboard-blue: #5478bd;
     }
-
-    * { box-sizing: border-box; }
 
     body {
-      min-width: 320px;
       min-height: 100vh;
-      margin: 0;
-      background: var(--bg);
-      color: var(--heading);
-      font-family: "Plus Jakarta Sans", Arial, sans-serif;
+      background: #fffdf9;
     }
 
-    .admin-layout { display: flex; min-height: 100vh; }
+    .admin-layout {
+      display: grid;
+      min-height: 100vh;
+      grid-template-columns: 250px minmax(0, 1fr);
+      align-items: start;
+    }
 
     .sidebar {
-      width: 220px;
-      min-width: 220px;
-      padding: 18px 16px 24px;
-      background: linear-gradient(180deg, #fffaf4 0%, #fff0f3 100%);
-      border-right: 1px solid var(--line);
-      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      width: 250px;
+      min-width: 0;
+      height: 100vh;
+      overflow-y: auto;
+      box-sizing: border-box;
     }
 
-    .brand {
+    .dashboard-main {
+      width: 100%;
+      min-width: 0;
+      padding: 30px clamp(18px, 3vw, 40px) 48px;
+    }
+
+    .welcome-header {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 8px 18px;
-      color: var(--heading);
-      font-size: 1.1rem;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .brand-mark {
-      width: 24px;
-      height: 24px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #c88d44, #fa7c8a);
-    }
-
-    .nav-title {
-      margin: 12px 10px 10px;
-      color: var(--muted);
-      font-size: 0.76rem;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 2px 0;
-      padding: 10px 12px;
-      border-radius: 10px;
-      color: #3c3c3c;
-      font-size: 0.96rem;
-      text-decoration: none;
-    }
-
-    .nav-item:hover,
-    .nav-item.active {
-      background: rgba(250, 124, 138, 0.12);
-      color: var(--pink);
-    }
-
-    .nav-item.active { font-weight: 700; }
-    .nav-item .icon { width: 16px; color: var(--muted); text-align: center; }
-
-    .main { flex: 1; min-width: 0; padding: 32px; }
-
-    .page-header {
-      padding: 28px 32px;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      padding: clamp(24px, 4vw, 38px);
       border: 1px solid var(--line);
       border-radius: 20px;
-      background: linear-gradient(135deg, rgba(250, 124, 138, 0.16), rgba(200, 141, 68, 0.14));
+      background: linear-gradient(120deg, #fff1f2, #fffaf1 75%);
       box-shadow: var(--shadow);
     }
 
-    h1 { margin: 0 0 8px; font-size: clamp(1.8rem, 4vw, 2.6rem); }
-    .page-header p { margin: 0; color: var(--muted); }
-
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-      margin-top: 22px;
+    .welcome-header h1 {
+      margin: 0 0 8px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(1.9rem, 3vw, 2.6rem);
     }
 
-    .dashboard-card {
-      display: block;
-      min-height: 170px;
-      padding: 22px;
+    .welcome-header p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .today-label {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: 0.88rem;
+      white-space: nowrap;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .summary-card {
+      display: flex;
+      min-height: 132px;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px;
       border: 1px solid var(--line);
       border-radius: 16px;
       background: #fff;
@@ -115,31 +99,312 @@
       transition: transform 160ms ease, box-shadow 160ms ease;
     }
 
-    .dashboard-card:hover {
-      transform: translateY(-3px);
+    a.summary-card:hover {
+      transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(78, 48, 25, 0.12);
     }
 
-    .card-icon {
-      display: inline-grid;
-      width: 40px;
-      height: 40px;
+    .summary-icon {
+      display: grid;
+      width: 46px;
+      height: 46px;
+      flex: 0 0 auto;
       place-items: center;
-      border-radius: 12px;
+      border-radius: 14px;
       background: #fff0f3;
-      color: var(--pink);
-      font-size: 1.2rem;
+      color: var(--dashboard-rose);
+      font-size: 1.25rem;
     }
 
-    .dashboard-card h2 { margin: 18px 0 6px; font-size: 1.12rem; }
-    .dashboard-card p { margin: 0; color: var(--muted); line-height: 1.5; }
+    .summary-card:nth-child(2) .summary-icon { background: #edf7f1; color: var(--dashboard-green); }
+    .summary-card:nth-child(3) .summary-icon { background: #f2f4fb; color: var(--dashboard-blue); }
+    .summary-card:nth-child(4) .summary-icon { background: #fff5e7; color: #a76e21; }
+    .summary-card:nth-child(5) .summary-icon { background: #f7effa; color: #8751a0; }
+    .summary-card:nth-child(6) .summary-icon { background: #edf5f8; color: #397b91; }
 
-    @media (max-width: 700px) {
-      .admin-layout { flex-direction: column; }
+    .summary-label {
+      margin: 1px 0 8px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    .summary-value {
+      display: block;
+      margin-bottom: 5px;
+      font-size: clamp(1.55rem, 2.2vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .summary-note {
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 30px 0 14px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.4rem;
+    }
+
+    .section-heading a,
+    .panel-link {
+      color: var(--dashboard-rose);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .section-heading a:hover,
+    .panel-link:hover {
+      text-decoration: underline;
+    }
+
+    .chart-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.85fr);
+      gap: 18px;
+    }
+
+    .dashboard-panel {
+      min-width: 0;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .panel-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 15px;
+    }
+
+    .panel-heading h3 {
+      margin: 0 0 5px;
+      font-size: 1rem;
+    }
+
+    .panel-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .chart-wrap {
+      width: 100%;
+      min-height: 250px;
+    }
+
+    #ordersChart {
+      display: block;
+      width: 100%;
+      height: 250px;
+      overflow: visible;
+    }
+
+    .chart-grid-line {
+      stroke: #f0e8e2;
+      stroke-width: 1;
+    }
+
+    .chart-axis-label {
+      fill: #8a7b72;
+      font: 11px Inter, Arial, sans-serif;
+    }
+
+    .chart-area {
+      fill: url("#ordersAreaFill");
+    }
+
+    .chart-line {
+      fill: none;
+      stroke: var(--dashboard-rose);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .chart-dot {
+      fill: #fff;
+      stroke: var(--dashboard-rose);
+      stroke-width: 3;
+    }
+
+    .chart-tooltip {
+      fill: var(--heading);
+      font: 700 11px Inter, Arial, sans-serif;
+    }
+
+    .pie-content {
+      display: grid;
+      min-height: 250px;
+      grid-template-columns: minmax(150px, 1fr) minmax(110px, 0.85fr);
+      align-items: center;
+      gap: 18px;
+    }
+
+    .pie-chart {
+      width: min(100%, 210px);
+      aspect-ratio: 1;
+      justify-self: center;
+      border-radius: 50%;
+      background: conic-gradient(#eadbce 0deg 360deg);
+      position: relative;
+    }
+
+    .pie-chart::after {
+      position: absolute;
+      inset: 25%;
+      border-radius: 50%;
+      background: #fff;
+      content: "";
+    }
+
+    .pie-center {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      pointer-events: none;
+    }
+
+    .pie-total {
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .pie-caption {
+      color: var(--muted);
+      font-size: 0.72rem;
+    }
+
+    .chart-legend {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .legend-item {
+      display: grid;
+      grid-template-columns: 10px 1fr auto;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .legend-swatch {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+
+    .legend-count {
+      color: var(--heading);
+      font-weight: 700;
+    }
+
+    .recent-panel {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .recent-panel .panel-heading {
+      margin: 0;
+      padding: 20px 22px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    .recent-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .recent-table th,
+    .recent-table td {
+      padding: 13px 22px;
+      border-top: 1px solid #f1e8df;
+      font-size: 0.84rem;
+      white-space: nowrap;
+    }
+
+    .recent-table th {
+      background: #fffaf5;
+      color: var(--muted);
+      font-size: 0.73rem;
+      text-transform: uppercase;
+    }
+
+    .recent-empty {
+      padding: 24px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .status-tag {
+      display: inline-flex;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: #f3eee9;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: capitalize;
+    }
+
+    .status-tag[data-status="PENDING"] { background: #fff4d8; color: #805a00; }
+    .status-tag[data-status="PREPARING"] { background: #f1eaff; color: #563a8a; }
+    .status-tag[data-status="READY"] { background: #e5f6e8; color: #216333; }
+    .status-tag[data-status="DELIVERED"] { background: #e7f2f8; color: #27657b; }
+
+    .load-error {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border: 1px solid #f0c2c7;
+      border-radius: 12px;
+      background: #fff1f2;
+      color: #8e2634;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 950px) {
+      .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .chart-grid { grid-template-columns: 1fr; }
+      .pie-content { grid-template-columns: minmax(150px, 0.8fr) minmax(130px, 1fr); }
+    }
+
+    @media (max-width: 760px) {
+      .admin-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
       .sidebar {
+        position: static;
         width: 100%;
         min-width: 0;
         min-height: 0;
+        height: auto;
         padding: 12px 14px;
         border-right: 0;
         border-bottom: 1px solid var(--line);
@@ -147,8 +412,23 @@
       .nav-section { display: flex; flex-wrap: wrap; gap: 4px; }
       .nav-title { display: none; }
       .nav-item { padding: 9px; }
-      .main { padding: 20px 14px; }
-      .page-header { padding: 24px 20px; }
+      .dashboard-main { padding: 18px 14px 36px; }
+      .welcome-header { align-items: flex-start; flex-direction: column; }
+      .summary-grid { gap: 10px; }
+      .summary-card { min-height: 118px; gap: 10px; padding: 14px; }
+      .summary-icon { width: 38px; height: 38px; }
+      .dashboard-panel { padding: 16px; }
+      .pie-content { grid-template-columns: minmax(120px, 1fr) minmax(115px, 1fr); gap: 10px; }
+      .recent-panel { padding: 0; }
+      .recent-panel .panel-heading { padding: 16px; }
+    }
+
+    @media (max-width: 420px) {
+      .summary-grid { grid-template-columns: 1fr; }
+      .summary-card { min-height: 100px; }
+      .pie-content { grid-template-columns: 1fr; }
+      .pie-chart { width: 180px; }
+      .chart-legend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>
 </head>
@@ -165,51 +445,118 @@
         <a class="nav-item" href="/customOrders"><span class="icon">◇</span>Custom Orders</a>
         <a class="nav-item" href="/bakeryOrders"><span class="icon">▣</span>Bakery Orders</a>
         <a class="nav-item" href="/adminPayments"><span class="icon">▣</span>Payments</a>
+        <a class="nav-item" href="/adminInvoices"><span class="icon">▤</span>Invoices</a>
         <a class="nav-item" href="/adminRefunds"><span class="icon">↩</span>Refunds</a>
         <a class="nav-item" href="/adminItems"><span class="icon">▤</span>Items</a>
         <a class="nav-item" href="/userManagement"><span class="icon">♙</span>User Management</a>
       </nav>
     </aside>
 
-    <main class="main">
-      <header class="page-header">
-        <h1>Bakery dashboard</h1>
-        <p>Manage your bakery catalog, orders, payments, and custom cake bookings.</p>
+    <main class="main dashboard-main">
+      <header class="welcome-header">
+        <div>
+          <h1>Bakery overview</h1>
+          <p>Here’s what’s happening across your bakery today.</p>
+        </div>
+        <time class="today-label" id="todayLabel"></time>
       </header>
 
-      <section class="dashboard-grid" aria-label="Admin tools">
-        <a class="dashboard-card" href="/customOrders">
-          <span class="card-icon" aria-hidden="true">◇</span>
-          <h2>Custom cake orders</h2>
-          <p>Review cake designs, requested dates, and booking status.</p>
+      <div class="load-error" id="loadError" role="alert" hidden></div>
+
+      <section class="summary-grid" aria-label="Bakery summary">
+        <a class="summary-card" href="/bakeryOrders">
+          <span class="summary-icon" aria-hidden="true">▣</span>
+          <span><span class="summary-label">Bakery orders</span><strong class="summary-value" id="orderTotal">—</strong><span class="summary-note" id="pendingOrders">Loading order status...</span></span>
         </a>
-        <a class="dashboard-card" href="/bakeryOrders">
-          <span class="card-icon" aria-hidden="true">▣</span>
-          <h2>Bakery orders</h2>
-          <p>Track customer orders and update their preparation status.</p>
+        <a class="summary-card" href="/adminPayments">
+          <span class="summary-icon" aria-hidden="true">₨</span>
+          <span><span class="summary-label">Paid revenue</span><strong class="summary-value" id="paidRevenue">—</strong><span class="summary-note">Total from successful payments</span></span>
         </a>
-        <a class="dashboard-card" href="/adminPayments">
-          <span class="card-icon" aria-hidden="true">₨</span>
-          <h2>Payments</h2>
-          <p>Review payments, process refunds, and view payment status.</p>
+        <a class="summary-card" href="/customOrders">
+          <span class="summary-icon" aria-hidden="true">◇</span>
+          <span><span class="summary-label">Custom cake bookings</span><strong class="summary-value" id="bookingTotal">—</strong><span class="summary-note" id="pendingBookings">Loading booking status...</span></span>
         </a>
-        <a class="dashboard-card" href="/adminRefunds">
-          <span class="card-icon" aria-hidden="true">↩</span>
-          <h2>Refund requests</h2>
-          <p>Review customer requests and approve or reject pending refunds.</p>
+        <a class="summary-card" href="/adminRefunds">
+          <span class="summary-icon" aria-hidden="true">↩</span>
+          <span><span class="summary-label">Refund requests</span><strong class="summary-value" id="refundTotal">—</strong><span class="summary-note" id="pendingRefunds">Loading refund status...</span></span>
         </a>
-        <a class="dashboard-card" href="/adminItems">
-          <span class="card-icon" aria-hidden="true">▤</span>
-          <h2>Items</h2>
-          <p>Add, update, and manage the bakery items in your catalog.</p>
+        <a class="summary-card" href="/adminItems">
+          <span class="summary-icon" aria-hidden="true">▤</span>
+          <span><span class="summary-label">Catalog items</span><strong class="summary-value" id="itemTotal">—</strong><span class="summary-note">Bakery products in the catalog</span></span>
         </a>
-        <a class="dashboard-card" href="/userManagement">
-          <span class="card-icon" aria-hidden="true">♙</span>
-          <h2>User management</h2>
-          <p>Review registered customer accounts and contact details.</p>
+        <a class="summary-card" href="/userManagement">
+          <span class="summary-icon" aria-hidden="true">♙</span>
+          <span><span class="summary-label">Customers</span><strong class="summary-value" id="customerTotal">—</strong><span class="summary-note">Registered customer accounts</span></span>
         </a>
+      </section>
+
+      <section aria-labelledby="insightsTitle">
+        <div class="section-heading">
+          <h2 id="insightsTitle">Business insights</h2>
+        </div>
+        <div class="chart-grid">
+          <article class="dashboard-panel">
+            <div class="panel-heading">
+              <div>
+                <h3>Order activity</h3>
+                <p>Bakery orders placed over the last 7 days</p>
+              </div>
+              <a class="panel-link" href="/bakeryOrders">View orders</a>
+            </div>
+            <div class="chart-wrap">
+              <svg id="ordersChart" viewBox="0 0 640 250" role="img" aria-label="Order activity line chart">
+                <text x="50%" y="50%" class="chart-axis-label" text-anchor="middle">Loading order activity...</text>
+              </svg>
+            </div>
+          </article>
+
+          <article class="dashboard-panel">
+            <div class="panel-heading">
+              <div>
+                <h3>Order status</h3>
+                <p>Current breakdown of bakery orders</p>
+              </div>
+              <a class="panel-link" href="/bakeryOrders">Manage</a>
+            </div>
+            <div class="pie-content">
+              <div class="pie-chart" id="orderStatusPie" role="img" aria-label="Order status pie chart">
+                <div class="pie-center">
+                  <strong class="pie-total" id="pieTotal">—</strong>
+                  <span class="pie-caption">total orders</span>
+                </div>
+              </div>
+              <ul class="chart-legend" id="orderStatusLegend"></ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="recentOrdersTitle">
+        <div class="section-heading">
+          <h2 id="recentOrdersTitle">Recent bakery orders</h2>
+          <a href="/bakeryOrders">View all orders</a>
+        </div>
+        <article class="dashboard-panel recent-panel">
+          <div class="panel-heading">
+            <div>
+              <h3>Latest activity</h3>
+              <p>Most recently created bakery orders</p>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="recent-table">
+              <thead>
+                <tr><th>Order</th><th>Date</th><th>Customer</th><th>Total</th><th>Status</th></tr>
+              </thead>
+              <tbody id="recentOrderRows"></tbody>
+            </table>
+            <div class="recent-empty" id="recentOrdersEmpty" hidden>No bakery orders to show yet.</div>
+          </div>
+        </article>
       </section>
     </main>
   </div>
+
+  <script src="/js/admin-dashboard.js"></script>
 </body>
 </html>

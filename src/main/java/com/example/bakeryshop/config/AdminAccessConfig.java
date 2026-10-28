@@ -61,7 +61,7 @@ public class AdminAccessConfig implements WebMvcConfigurer {
                 return true;
             }
             if (path.equals("/adminDashboard") || path.equals("/adminItems") || path.equals("/addItem")
-                    || path.equals("/customOrders") || path.equals("/bakeryOrders")
+                    || path.equals("/customOrders") || path.equals("/bakeryOrders") || path.equals("/adminInvoices")
                     || path.equals("/adminPayments") || path.equals("/adminRefunds")
                     || path.equals("/admin-refund-management")
                     || path.equals("/users") || path.equals("/userManagement")
