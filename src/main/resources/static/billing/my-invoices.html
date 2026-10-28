@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Invoices</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .page-nav {
+            max-width: 900px;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 18px;
+        }
+        .page-nav a {
+            color: #8f2736;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .page-nav a:hover { text-decoration: underline; }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eef2f3;
+            padding-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eef2f3;
+        }
+        th {
+            background-color: #f4f7f6;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: #f9fbfb;
+        }
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .btn-danger {
+            background-color: #e74c3c;
+        }
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="page-nav" aria-label="Account navigation">
+    <a href="/profile">My Profile</a>
+    <a href="/orders">My Orders</a>
+    <a href="/payments">My Payments</a>
+</nav>
+
+<div class="container">
+    <h2>📄 My Invoices List</h2>
+    <p style="color: #64748b;">View and manage your bakery orders and custom cake booking invoices below.</p>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Invoice ID</th>
+            <th>Invoice Number</th>
+            <th>Issued Date</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="invoiceTableBody">
+
+        <tr>
+            <td>1</td>
+            <td>INV-2026-001</td>
+            <td>2026-10-24</td>
+            <td>
+                <button class="btn" onclick="viewDetails(1)">View Detail / Print</button>
+                <button class="btn btn-danger" onclick="requestRefund(1)">Request Refund</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+
+        fetch('/api/invoices')
+            .then(response => response.json())
+            .then(invoices => {
+                const tableBody = document.getElementById('invoiceTableBody');
+                tableBody.innerHTML = '';
+
+                invoices.forEach(invoice => {
+                    const row = `
+                        <tr>
+                            <td>${invoice.id}</td>
+                            <td>${invoice.invoiceNumber}</td>
+                            <td>${invoice.invoiceDate}</td>
+                            <td>
+
+                                <button class="btn" onclick="viewDetails(${invoice.id})">View Detail / Print</button>
+                                <button class="btn btn-danger" onclick="requestRefund(${invoice.id})">Request Refund</button>
+                            </td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            })
+            .catch(error => console.error('Error fetching invoices:', error));
+    });
+
+    function viewDetails(id) {
+        window.location.href = 'invoice-detail.html?id=' + id;
+    }
+
+    function requestRefund() {
+        window.location.href = '/billing/refund-request-form.html';
+    }
+
+</script>
+
+</body>
+</html>

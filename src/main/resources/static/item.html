@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Your Perfect Cake | Sweet Bloom Patisserie</title>
-    <meta name="description" content="Browse available cakes and items from Sweet Bloom Patisserie, or build your own custom cake for your celebration.">
+    <title>Find Your Perfect Cake | kamuda.com</title>
+    <meta name="description" content="Browse available cakes and items from kamuda.com, or build your own custom cake for your celebration.">
     <!-- Google Fonts & Main Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
     <style>
         /* ==========================================================================
@@ -20,12 +20,172 @@
             --cake-pink-border: #F8D3DC;
         }
 
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid #eee4da;
+            box-shadow: 0 1px 0 rgba(60, 31, 15, 0.02);
+        }
+
+        .navbar-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1220px;
+            min-height: 76px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            gap: 1.5rem;
+        }
+
+        .brand-logo,
+        .nav-link,
+        .cart-icon-btn,
+        .btn-profile-nav,
+        .btn-pill {
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2f221d;
+            font-size: clamp(1.5rem, 2vw, 2rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            white-space: nowrap;
+        }
+
+        .brand-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background: #fff3e8;
+            font-size: 1.2rem;
+        }
+
+        .nav-links,
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links {
+            gap: 1.75rem;
+        }
+
+        .nav-link {
+            color: #4a382f;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #c92c3d;
+        }
+
+        .nav-actions {
+            gap: 0.9rem;
+        }
+
+        .cart-icon-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background: #fff;
+            border: 1px solid #eadbce;
+            color: #2f221d;
+            font-size: 1.4rem;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: 0.15rem;
+            right: 0.1rem;
+            min-width: 1.1rem;
+            height: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #c92c3d;
+            color: #fff;
+            font-size: 0.62rem;
+            font-weight: 700;
+        }
+
+        .btn-profile-nav {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            min-height: 3rem;
+            padding: 0.55rem 1.1rem;
+            border: 1px solid #e9d9cf;
+            border-radius: 999px;
+            background: #fff;
+            color: #2f221d;
+            font-weight: 700;
+        }
+
+        .profile-nav-icon {
+            font-size: 1.1rem;
+        }
+
+        .btn-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-height: 3.35rem;
+            padding: 0.8rem 1.45rem;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: 1px solid transparent;
+        }
+
+        .btn-strawberry {
+            background: #c92c3d;
+            color: #fff;
+            box-shadow: 0 8px 18px rgba(201, 44, 61, 0.18);
+        }
+
         body {
             background-color: var(--color-cream-subtle, #FDF8F2);
             color: var(--color-dark-roast, #2C1E16);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+        }
+
+        @media (max-width: 760px) {
+            .navbar-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.75rem 1.25rem;
+                padding: 1rem;
+            }
+
+            .nav-links,
+            .nav-actions {
+                gap: 0.8rem;
+            }
         }
 
         /* --------------------------------------------------------------------------
@@ -947,24 +1107,35 @@
          ====================================================================== -->
     <nav class="navbar" id="mainNavbar">
         <div class="navbar-container">
-            <a href="index.html" class="brand-logo" id="navBrandLogo">
+            <a href="/main" class="brand-logo" id="navBrand">
                 <span class="brand-icon">🧁</span>
-                <span>Sweet Bloom <em>Patisserie</em></span>
+                <span>kamuda.com</span>
             </a>
 
             <ul class="nav-links">
-                <li><a href="index.html" class="nav-link" id="navHome">Home</a></li>
-                <!--<li><a href="bakery.html" class="nav-link" id="navBakery">Daily Bakery</a></li>-->
-                <li><a href="custom-cake.html" class="nav-link active" id="navCustomCake">Cake Booking</a></li>
-                <!--<li><a href="orders.html" class="nav-link" id="navOrders">Order Management</a></li>-->
+                <li><a href="/main" class="nav-link active" id="navHome">Home</a></li>
+                <li><a href="/items" class="nav-link" id="navBakery">Shop Cakes</a></li>
+                <li><a href="/custom-cake" class="nav-link" id="navCustomCake">Book Cake</a></li>
+                
             </ul>
 
             <div class="nav-actions">
-                <button type="button" class="nav-cart-btn" onclick="toggleCartDrawer(true)" id="navCartBtn" aria-label="Open Shopping Basket">
-                    <span>🛒</span>
-                    <span>Basket</span>
-                    <span class="nav-cart-badge" id="navCartCount">0</span>
-                </button>
+                <a href="/items" class="cart-icon-btn" id="navCartBtn" title="View Cakes">
+                    🛒
+                    <span class="cart-badge" style="display:none;">0</span>
+                </a>
+                
+                <!-- Profile Button / Dropdown -->
+                <div class="nav-profile-wrapper" id="navProfileWrapper">
+                    <a href="/profile" class="btn-profile-nav" id="navProfileBtn" title="Account">
+                        <span class="profile-nav-icon">👤</span>
+                        <span class="profile-nav-name">Profile</span>
+                    </a>
+                </div>
+
+                <a href="custom-cake.html#custom-cake-builder" class="btn-pill btn-strawberry" id="navBookBtn">
+                    ✨ Book Custom Cake
+                </a>
             </div>
         </div>
     </nav>
@@ -1130,26 +1301,23 @@
                     <span>→</span>
                 </button>
 
-                <!-- Order Checkout Form (Submits to /order servlet / server.js) -->
-                <form action="order" method="POST" id="checkoutOrderForm" class="checkout-drawer-form">
-                    <input type="hidden" name="action" value="create">
-                    <input type="hidden" name="cartPayload" id="hiddenCartPayload">
+                <form id="checkoutOrderForm" class="checkout-drawer-form">
 
                     <h4 style="font-family:var(--font-heading); margin-bottom:0.75rem; color:var(--color-dark-roast);">Customer Details</h4>
 
                     <div class="drawer-form-group">
                         <label class="drawer-form-label" for="custName">Your Full Name *</label>
-                        <input type="text" id="custName" name="customerName" class="drawer-form-input" required placeholder="e.g. Priyantha Silva">
+                        <input type="text" id="custName" name="customerName" class="drawer-form-input" maxlength="60" required placeholder="e.g. Priyantha Silva">
                     </div>
 
                     <div class="drawer-form-group">
                         <label class="drawer-form-label" for="custPhone">Phone Number *</label>
-                        <input type="tel" id="custPhone" name="customerPhone" class="drawer-form-input" required placeholder="e.g. 077 456 7890">
+                        <input type="tel" id="custPhone" name="customerPhone" class="drawer-form-input" maxlength="30" required placeholder="e.g. 077 456 7890">
                     </div>
 
                     <div class="drawer-form-group">
                         <label class="drawer-form-label" for="custAddress">Delivery Address / Pickup Note</label>
-                        <input type="text" id="custAddress" name="deliveryAddress" class="drawer-form-input" placeholder="e.g. Colombo 07 or Pickup at Flagship Store">
+                        <input type="text" id="custAddress" name="deliveryAddress" class="drawer-form-input" maxlength="80" placeholder="e.g. Colombo 07 or Pickup at Flagship Store">
                     </div>
 
                     <button type="submit" class="btn-checkout-proceed" style="margin-top:1rem;" id="submitOrderBtn">
@@ -1172,7 +1340,7 @@
     <footer class="site-footer">
         <div class="footer-container">
             <div class="footer-brand">
-                <h3> Sweet Bloom Patisserie</h3>
+                <h3> kamuda.com</h3>
                 <p>Artisanal bakery and bespoke custom cake atelier in Colombo. Handcrafted daily with pure Ceylon dairy and Belgian chocolates.</p>
                 <div style="font-size:0.8rem; color:#DACBC2; margin-top:0.75rem;">University Assignment: Bakery Order &amp; Custom Cake Booking Platform (MVC / Java)</div>
             </div>
@@ -1180,7 +1348,7 @@
             <div>
                 <h4 class="footer-title">Explore</h4>
                 <ul class="footer-links">
-                    <li><a href="index.html">Home Page</a></li>
+                    <li><a href="/main">Home Page</a></li>
                     <li><a href="#ready-made-cakes">Ready-Made Cakes</a></li>
                     <li><a href="custom-cake.html#custom-cake-builder">Custom Cake Booking</a></li>
                     <li><a href="#birthday-cakes">Birthday Cakes</a></li>
@@ -1193,7 +1361,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Sweet Bloom Patisserie. All rights reserved.</p>
+            <p>&copy; 2026 kamuda.com. All rights reserved.</p>
         </div>
     </footer>
 
@@ -1692,6 +1860,7 @@
             } else {
                 cartItems.push({
                     id: item.id,
+                    productId: item.sourceId || item.id.replace(/^ADMIN-/, ''),
                     name: item.name,
                     price: item.price,
                     image: item.image,
@@ -1855,6 +2024,8 @@
         // --------------------------------------------------------------------------
         document.addEventListener('DOMContentLoaded', () => {
             loadCart();
+            document.getElementById('checkoutOrderForm')
+                ?.addEventListener('submit', submitBakeryOrder);
             bindStorefrontFilters();
             READY_MADE_CAKES.length = 0;
             BIRTHDAY_CAKES.length = 0;
@@ -1890,6 +2061,58 @@
                 }, 300);
             }
         });
+
+        async function submitBakeryOrder(event) {
+            event.preventDefault();
+            const form = event.currentTarget;
+            if (!form.reportValidity() || cartItems.length === 0) return;
+
+            const submitButton = document.getElementById('submitOrderBtn');
+            if (submitButton) submitButton.disabled = true;
+            try {
+                const userId = Number(window.BakeryApp.getUserId());
+                await window.BakeryApp.request(`/api/cart/user/${encodeURIComponent(userId)}`, {
+                    method: 'DELETE'
+                });
+
+                for (const item of cartItems) {
+                    const productId = item.productId || String(item.id).replace(/^ADMIN-/, '');
+                    if (!productId) throw new Error(`Missing product ID for ${item.name}.`);
+                    await window.BakeryApp.request('/api/cart', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            userId,
+                            productId,
+                            productName: item.name,
+                            quantity: item.qty,
+                            unitPrice: item.price
+                        })
+                    });
+                }
+
+                const name = document.getElementById('custName').value.trim();
+                const phone = document.getElementById('custPhone').value.trim();
+                const address = document.getElementById('custAddress').value.trim();
+                const note = [`Name: ${name}`, `Phone: ${phone}`, address ? `Address: ${address}` : 'Pickup'].join(' | ');
+                if (note.length > 200) {
+                    throw new Error('Please shorten your customer details so they fit in the order note.');
+                }
+
+                const order = await window.BakeryApp.request('/api/orders', {
+                    method: 'POST',
+                    body: JSON.stringify({ userId, note })
+                });
+                cartItems = [];
+                saveCart();
+                updateCartBadges();
+                window.location.assign(`orders.html?orderId=${encodeURIComponent(order.id)}`);
+            } catch (error) {
+                showToast(error.message || 'Unable to place your order.');
+            } finally {
+                if (submitButton) submitButton.disabled = false;
+            }
+        }
     </script>
+    <script src="js/common.js"></script>
 </body>
 </html>

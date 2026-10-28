@@ -35,10 +35,10 @@ public class ItemControler {
         this.itemPopularityService = itemPopularityService;
     }
 
-    @GetMapping({"/adminitem", "/adminitem.html"})
+    @GetMapping({"/adminitem", "/adminitem.html", "/adminpages/adminitem.html"})
     public String getAdminItems(Model model) {
         model.addAttribute("items", itemService.getAllItems());
-        return "adminitem";
+        return "adminpages/adminitem";
     }
 
     @GetMapping(value = "/api/items", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -90,7 +90,7 @@ public class ItemControler {
             redirectAttributes.addFlashAttribute("itemMessage", e.getMessage());
             redirectAttributes.addFlashAttribute("itemMessageType", "error");
         }
-        return "redirect:/adminitem";
+        return "redirect:/adminpages/adminitem.html";
     }
 
     // Handle POST requests for updating an existing item
@@ -116,7 +116,7 @@ public class ItemControler {
             redirectAttributes.addFlashAttribute("itemMessage", e.getMessage());
             redirectAttributes.addFlashAttribute("itemMessageType", "error");
         }
-        return "redirect:/adminitem";
+        return "redirect:/adminpages/adminitem.html";
     }
 
     // Handle POST requests for deleting an item
@@ -130,7 +130,7 @@ public class ItemControler {
             redirectAttributes.addFlashAttribute("itemMessage", e.getMessage());
             redirectAttributes.addFlashAttribute("itemMessageType", "error");
         }
-        return "redirect:/adminitem";
+        return "redirect:/adminpages/adminitem.html";
     }
 
     // Handle GET requests for retrieving item images

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View and update your kamuda.com customer profile.">
+    <title>My Profile | kamuda.com</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #2f221d;
+            --muted: #76665d;
+            --line: #eadbce;
+            --berry: #c73749;
+            --berry-dark: #ad293a;
+            --soft-pink: #fff1f3;
+            --cream: #fdf9f5;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-width: 320px;
+            min-height: 100vh;
+            margin: 0;
+            background: var(--cream);
+            color: var(--ink);
+            font-family: Arial, sans-serif;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid #eee4da;
+        }
+
+        .navbar-container {
+            display: flex;
+            max-width: 1500px;
+            min-height: 108px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin: 0 auto;
+            padding: 0 clamp(1rem, 4vw, 5rem);
+        }
+
+        .brand-logo,
+        .nav-link,
+        .cart-link,
+        .profile-link,
+        .book-link {
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            flex-shrink: 0;
+            align-items: center;
+            gap: 0.7rem;
+            color: var(--ink);
+            font-size: clamp(1.35rem, 2vw, 1.8rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+
+        .brand-icon {
+            font-size: 1.5rem;
+        }
+
+        .nav-links,
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: clamp(0.75rem, 2vw, 1.8rem);
+        }
+
+        .nav-links {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: #382d28;
+            font-size: 1.05rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--berry);
+        }
+
+        .nav-actions {
+            flex-shrink: 0;
+        }
+
+        .cart-link {
+            font-size: 1.3rem;
+        }
+
+        .profile-link {
+            display: inline-flex;
+            min-height: 54px;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.65rem 1.25rem;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: #fff;
+            font-weight: 700;
+        }
+
+        .profile-link.active {
+            color: var(--berry);
+            border-color: #efc7cc;
+            background: var(--soft-pink);
+        }
+
+        .book-link {
+            display: inline-flex;
+            min-height: 60px;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: 999px;
+            background: var(--berry);
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .book-link:hover {
+            transform: translateY(-1px);
+            background: var(--berry-dark);
+        }
+
+        main {
+            width: min(1050px, calc(100% - 2rem));
+            margin: 0 auto;
+            padding: 3.5rem 0 5rem;
+        }
+
+        .page-heading {
+            margin-bottom: 2rem;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            margin-bottom: 0.75rem;
+            padding: 0.4rem 0.85rem;
+            border: 1px solid #f1d4d7;
+            border-radius: 999px;
+            background: var(--soft-pink);
+            color: var(--berry);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2,
+        p {
+            margin-top: 0;
+        }
+
+        h1,
+        h2 {
+            font-family: Georgia, serif;
+        }
+
+        h1 {
+            margin-bottom: 0.55rem;
+            font-size: clamp(2rem, 4vw, 2.7rem);
+        }
+
+        .page-heading p,
+        .card-description {
+            margin-bottom: 0;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .profile-layout {
+            display: grid;
+            grid-template-columns: 280px minmax(0, 1fr);
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .summary-card,
+        .details-card {
+            border: 1px solid #f0e5dc;
+            border-radius: 20px;
+            background: #fff;
+            box-shadow: 0 12px 32px rgba(68, 42, 26, 0.05);
+        }
+
+        .summary-card {
+            padding: 1.75rem;
+            text-align: center;
+        }
+
+        .avatar {
+            display: grid;
+            width: 76px;
+            height: 76px;
+            margin: 0 auto 1rem;
+            place-items: center;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #f8dfe1, #fff1e5);
+            color: var(--berry);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .summary-name {
+            margin-bottom: 0.35rem;
+            font-size: 1.15rem;
+            overflow-wrap: anywhere;
+        }
+
+        .summary-email {
+            margin-bottom: 1rem;
+            color: var(--muted);
+            font-size: 0.88rem;
+            overflow-wrap: anywhere;
+        }
+
+        .account-badge {
+            display: inline-flex;
+            padding: 0.35rem 0.7rem;
+            border-radius: 999px;
+            background: #edf7ee;
+            color: #28643a;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .summary-divider {
+            height: 1px;
+            margin: 1.4rem 0;
+            background: #f0e8e2;
+        }
+
+        .summary-note {
+            margin-bottom: 0;
+            color: var(--muted);
+            font-size: 0.85rem;
+            line-height: 1.55;
+            text-align: left;
+        }
+
+        .details-card {
+            padding: clamp(1.25rem, 4vw, 2.25rem);
+        }
+
+        .details-card h2 {
+            margin-bottom: 0.45rem;
+            font-size: 1.55rem;
+        }
+
+        .card-description {
+            margin-bottom: 1.75rem;
+            font-size: 0.9rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.15rem;
+        }
+
+        .form-group {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            color: #493a32;
+            font-size: 0.83rem;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            min-height: 46px;
+            padding: 0.7rem 0.85rem;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: #fff;
+            color: var(--ink);
+            font: inherit;
+        }
+
+        input:focus {
+            border-color: var(--berry);
+            outline: 3px solid rgba(199, 55, 73, 0.12);
+        }
+
+        input[readonly] {
+            background: #f8f5f2;
+            color: #76665d;
+        }
+
+        .field-help {
+            color: var(--muted);
+            font-size: 0.77rem;
+            line-height: 1.45;
+        }
+
+        .form-footer {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .save-button {
+            min-height: 46px;
+            padding: 0.7rem 1.2rem;
+            border: 0;
+            border-radius: 10px;
+            background: var(--berry);
+            color: #fff;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .save-button:hover {
+            background: var(--berry-dark);
+        }
+
+        .form-status {
+            margin: 0;
+            color: #28643a;
+            font-size: 0.88rem;
+        }
+
+        .form-status.error {
+            color: #a32132;
+        }
+
+        @media (max-width: 900px) {
+            .navbar-container {
+                min-height: 82px;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding-top: 0.9rem;
+                padding-bottom: 0.9rem;
+            }
+
+            .profile-layout {
+                grid-template-columns: 220px minmax(0, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .navbar-container {
+                gap: 0.9rem;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                gap: 0.75rem;
+                flex-wrap: wrap;
+            }
+
+            .nav-link {
+                font-size: 0.9rem;
+            }
+
+            .nav-actions {
+                gap: 0.55rem;
+            }
+
+            .profile-link {
+                min-height: 42px;
+                padding: 0.45rem 0.8rem;
+            }
+
+            .book-link {
+                min-height: 44px;
+                padding: 0.55rem 0.85rem;
+                font-size: 0.85rem;
+            }
+
+            main {
+                padding-top: 2.25rem;
+            }
+
+            .profile-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-card {
+                padding: 1.25rem;
+            }
+
+            .summary-divider,
+            .summary-note {
+                display: none;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <nav class="navbar-container" aria-label="Main navigation">
+            <a class="brand-logo" href="/main">
+                <span class="brand-icon" aria-hidden="true">🧁</span>
+                <span>kamuda.com</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a class="nav-link" href="/main">Home</a></li>
+                <li><a class="nav-link" href="/items">Shop Cakes</a></li>
+                <li><a class="nav-link" href="/custom-cake">Book Cake</a></li>
+                <li><a class="nav-link" href="/billing/my-invoices.html">My invoices</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a class="cart-link" href="/items" aria-label="View cakes" title="View cakes">🛒</a>
+                <a class="profile-link active" href="/profile" aria-current="page">
+                    <span aria-hidden="true">👤</span>
+                    <span>Profile</span>
+                </a>
+                <a class="book-link" href="/custom-cake">✨ Book Custom Cake</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-heading" aria-labelledby="pageTitle">
+            <span class="eyebrow">Customer account</span>
+            <h1 id="pageTitle">My profile</h1>
+            <p>View your account details and keep your delivery information up to date.</p>
+        </section>
+
+        <div class="profile-layout">
+            <aside class="summary-card" aria-label="Account summary">
+                <div class="avatar" id="profileAvatar" aria-hidden="true">C</div>
+                <h2 class="summary-name" id="summaryName">Customer</h2>
+                <p class="summary-email" id="summaryEmail">Sign in to view your account</p>
+                <span class="account-badge">CUSTOMER ACCOUNT</span>
+                <p><a class="nav-link" href="/billing/my-invoices.html">View my invoices</a></p>
+                <div class="summary-divider"></div>
+                <p class="summary-note">Your email is linked to your account. Contact the bakery if you need help changing it.</p>
+            </aside>
+
+            <section class="details-card" aria-labelledby="detailsTitle">
+                <h2 id="detailsTitle">Profile details</h2>
+                <p class="card-description">Update the name, phone number, and address used for your cake orders.</p>
+
+                <form id="profileForm" action="/profile/update" method="post">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="profileName">Full name</label>
+                            <input id="profileName" type="text" name="username" autocomplete="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profileEmail">Email address</label>
+                            <input id="profileEmail" type="email" autocomplete="email" readonly>
+                            <span class="field-help">Your email address cannot be changed here.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profilePhone">Phone number</label>
+                            <input id="profilePhone" type="tel" name="phoneNumber" autocomplete="tel" placeholder="07XXXXXXXX" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profileRole">Account type</label>
+                            <input id="profileRole" type="text" value="Customer" readonly>
+                        </div>
+
+                        <div class="form-group full">
+                            <label for="profileAddress">Delivery address</label>
+                            <input id="profileAddress" type="text" name="address" autocomplete="street-address" placeholder="Street address, city, and nearest landmark">
+                            <span class="field-help">We use this address to help with delivery orders.</span>
+                        </div>
+
+                        <div class="form-group full">
+                            <label for="profilePassword">New password <span class="field-help">(optional)</span></label>
+                            <input id="profilePassword" type="password" name="password" autocomplete="new-password" placeholder="Leave blank to keep your current password">
+                        </div>
+                    </div>
+
+                    <div class="form-footer">
+                        <button class="save-button" id="saveButton" type="submit">Save changes</button>
+                        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        const profileForm = document.getElementById('profileForm');
+        const formStatus = document.getElementById('formStatus');
+        const saveButton = document.getElementById('saveButton');
+        function setStatus(message, isError = false) {
+            formStatus.textContent = message;
+            formStatus.classList.toggle('error', isError);
+        }
+
+        function renderProfile(profile) {
+            const fullName = profile.fullName || '';
+            const email = profile.email || '';
+            const phone = profile.phoneNumber || '';
+            const address = profile.address || '';
+            const displayName = fullName || 'Customer';
+
+            document.getElementById('profileName').value = fullName;
+            document.getElementById('profileEmail').value = email;
+            document.getElementById('profilePhone').value = phone;
+            document.getElementById('profileAddress').value = address;
+            document.getElementById('summaryName').textContent = displayName;
+            document.getElementById('summaryEmail').textContent = email || 'Email not provided';
+            document.getElementById('profileAvatar').textContent = displayName.trim().charAt(0).toUpperCase() || 'C';
+        }
+
+        async function loadProfile() {
+            try {
+                const response = await fetch('/api/profile', {
+                    headers: { 'Accept': 'application/json' },
+                    credentials: 'same-origin'
+                });
+                if (response.status === 401) {
+                    window.location.replace('/login?returnUrl=%2Fprofile');
+                    return;
+                }
+                if (!response.ok) {
+                    throw new Error(`Could not load profile (${response.status}).`);
+                }
+
+                renderProfile(await response.json());
+            } catch (error) {
+                setStatus(error.message || 'We could not load your profile. Please try again.', true);
+            }
+        }
+
+        profileForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            setStatus('');
+            saveButton.disabled = true;
+            saveButton.textContent = 'Saving...';
+
+            const values = {
+                fullName: document.getElementById('profileName').value.trim(),
+                phoneNumber: document.getElementById('profilePhone').value.trim(),
+                address: document.getElementById('profileAddress').value.trim(),
+                password: document.getElementById('profilePassword').value
+            };
+            try {
+                const response = await fetch('/api/profile', {
+                    method: 'PUT',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(values),
+                    credentials: 'same-origin'
+                });
+
+                if (response.status === 401) {
+                    window.location.replace('/login?returnUrl=%2Fprofile');
+                    return;
+                }
+                if (!response.ok) {
+                    throw new Error(`Profile update failed with status ${response.status}.`);
+                }
+
+                renderProfile(await response.json());
+
+                document.getElementById('profilePassword').value = '';
+                setStatus('Your profile has been updated.');
+            } catch (error) {
+                setStatus(error.message || 'We could not save your profile. Please try again.', true);
+            } finally {
+                saveButton.disabled = false;
+                saveButton.textContent = 'Save changes';
+            }
+        });
+
+        void loadProfile();
+    </script>
+</body>
+</html>

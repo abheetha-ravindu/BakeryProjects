@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Manage registered bakery customer accounts.">
+  <title>User Management | Cake Studio Admin</title>
+  <link rel="stylesheet" href="/css/admin-panel.css">
+  <style>
+    :root {
+      --bg: #fffdf9;
+      --heading: #2c1e16;
+      --muted: #715f55;
+      --line: #eadbce;
+      --pink: #c92c3d;
+      --shadow: 0 4px 20px rgba(78, 48, 25, 0.08);
+    }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      background: var(--bg);
+      color: var(--heading);
+      font-family: "Plus Jakarta Sans", Arial, sans-serif;
+    }
+
+    .admin-layout { display: flex; min-height: 100vh; }
+
+    .sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 5;
+      width: 220px;
+      min-width: 220px;
+      padding: 18px 16px 24px;
+      background: linear-gradient(180deg, #fffaf4 0%, #fff0f3 100%);
+      border-right: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 8px 18px;
+      color: var(--heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #c88d44, #fa7c8a);
+    }
+
+    .nav-section { display: flex; flex-direction: column; gap: 2px; }
+    .nav-title { margin: 12px 10px 10px; color: var(--muted); font-size: 0.76rem; }
+
+    .nav-item {
+      display: flex;
+      min-height: 40px;
+      align-items: center;
+      gap: 10px;
+      margin: 2px 0;
+      padding: 10px 12px;
+      border-radius: 10px;
+      color: #3c3c3c;
+      font-size: 0.96rem;
+      text-decoration: none;
+    }
+
+    .nav-item:hover,
+    .nav-item.active { background: rgba(250, 124, 138, 0.12); color: #fd344a; }
+    .nav-item.active { font-weight: 700; }
+    .nav-item .icon { width: 16px; color: var(--muted); text-align: center; }
+
+    .main {
+      flex: 1;
+      min-width: 0;
+      margin-left: 220px;
+      padding: 32px;
+    }
+
+    .page-header {
+      padding: 28px 32px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(250, 124, 138, 0.16), rgba(200, 141, 68, 0.14));
+      box-shadow: var(--shadow);
+    }
+
+    h1 { margin: 0 0 8px; font-size: clamp(1.8rem, 4vw, 2.6rem); }
+    .page-header p { margin: 0; color: var(--muted); }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .summary-card,
+    .users-panel {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .summary-card { padding: 18px 20px; }
+    .summary-label { color: var(--muted); font-size: 0.88rem; }
+    .summary-value { display: block; margin-top: 5px; font-size: 1.7rem; font-weight: 800; }
+    .users-panel { padding: 22px; }
+
+    .panel-heading,
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .panel-heading { margin-bottom: 16px; }
+    .panel-heading h2 { margin: 0; font-size: 1.2rem; }
+    .toolbar { flex-wrap: wrap; }
+    .toolbar label { color: var(--muted); font-size: 0.9rem; font-weight: 700; }
+
+    .toolbar input {
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--heading);
+      font: inherit;
+    }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 13px 12px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-size: 0.8rem; text-transform: uppercase; }
+    td { font-size: 0.94rem; }
+    .empty-state, .message { padding: 18px 10px; color: var(--muted); text-align: center; }
+    .message[hidden], .empty-state[hidden] { display: none; }
+    .message.error { color: #a3202b; }
+
+    .delete-button {
+      padding: 8px 12px;
+      border: 1px solid #efc8ca;
+      border-radius: 9px;
+      background: #fff4f4;
+      color: #a3202b;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .delete-button:hover { background: #ffe4e5; }
+    .delete-button:disabled { cursor: wait; opacity: 0.65; }
+
+    @media (max-width: 760px) {
+      .admin-layout { display: block; }
+      .sidebar {
+        position: static;
+        width: 100%;
+        min-width: 0;
+        padding: 12px 14px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .nav-section { flex-direction: row; flex-wrap: wrap; }
+      .nav-title { display: none; }
+      .nav-item { padding: 9px; }
+      .main { margin: 0; padding: 20px 14px; }
+      .page-header { padding: 24px 20px; }
+      .panel-heading { align-items: stretch; flex-direction: column; }
+      .toolbar, .toolbar label, .toolbar input { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="sidebar" aria-label="Admin navigation">
+      <a class="admin-brand" href="/adminDashboard">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Cake Studio</span>
+      </a>
+      <nav class="nav-section" aria-label="Admin pages">
+        <div class="nav-title">Admin</div>
+        <a class="nav-item" href="/adminDashboard"><span class="icon" aria-hidden="true">⌂</span>Dashboard</a>
+        <a class="nav-item" href="/customOrders"><span class="icon" aria-hidden="true">◇</span>Custom Orders</a>
+        <a class="nav-item" href="/bakeryOrders"><span class="icon" aria-hidden="true">▣</span>Bakery Orders</a>
+        <a class="nav-item" href="/adminPayments"><span class="icon" aria-hidden="true">▣</span>Payments</a>
+        <a class="nav-item" href="/adminRefunds"><span class="icon" aria-hidden="true">↩</span>Refunds</a>
+        <a class="nav-item" href="/adminItems"><span class="icon" aria-hidden="true">▤</span>Items</a>
+        <a class="nav-item active" href="/userManagement" aria-current="page"><span class="icon" aria-hidden="true">♙</span>User Management</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="page-header">
+        <h1>User management</h1>
+        <p>View and manage registered bakery customer accounts.</p>
+      </header>
+
+      <section class="summary-grid" aria-label="Customer totals">
+        <article class="summary-card">
+          <span class="summary-label">Registered customers</span>
+          <strong class="summary-value" id="customerCount">—</strong>
+        </article>
+      </section>
+
+      <section class="users-panel" aria-labelledby="customersHeading">
+        <div class="panel-heading">
+          <h2 id="customersHeading">Customer accounts</h2>
+          <div class="toolbar">
+            <label for="customerSearch">Search customers</label>
+            <input id="customerSearch" type="search" placeholder="Name, email, or phone" autocomplete="off">
+          </div>
+        </div>
+
+        <p class="message" id="pageMessage" role="status" aria-live="polite" hidden></p>
+        <p class="empty-state" id="loadingState" role="status">Loading customer accounts…</p>
+        <p class="empty-state" id="emptyState" hidden>No customer accounts have been registered yet.</p>
+        <p class="empty-state" id="noResultsState" hidden>No customers match your search.</p>
+
+        <div class="table-wrap" id="tableWrap" hidden>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody id="customerRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const customerRows = document.getElementById('customerRows');
+    const customerSearch = document.getElementById('customerSearch');
+    const pageMessage = document.getElementById('pageMessage');
+    const loadingState = document.getElementById('loadingState');
+    const emptyState = document.getElementById('emptyState');
+    const noResultsState = document.getElementById('noResultsState');
+    const tableWrap = document.getElementById('tableWrap');
+    let customers = [];
+
+    function showMessage(message, isError = false) {
+      pageMessage.textContent = message;
+      pageMessage.classList.toggle('error', isError);
+      pageMessage.hidden = !message;
+    }
+
+    function createCell(row, value) {
+      const cell = document.createElement('td');
+      cell.textContent = value || '—';
+      row.appendChild(cell);
+      return cell;
+    }
+
+    function renderCustomers() {
+      const query = customerSearch.value.trim().toLocaleLowerCase();
+      const visibleCustomers = customers.filter(customer =>
+        [customer.username, customer.email, customer.phoneNumber]
+          .some(value => (value || '').toLocaleLowerCase().includes(query)));
+
+      customerRows.replaceChildren();
+      tableWrap.hidden = visibleCustomers.length === 0;
+      emptyState.hidden = customers.length !== 0;
+      noResultsState.hidden = customers.length === 0 || visibleCustomers.length !== 0;
+
+      visibleCustomers.forEach(customer => {
+        const row = document.createElement('tr');
+        createCell(row, String(customer.id));
+        createCell(row, customer.username);
+        createCell(row, customer.email);
+        createCell(row, customer.phoneNumber);
+
+        const actionCell = document.createElement('td');
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'delete-button';
+        deleteButton.type = 'button';
+        deleteButton.textContent = 'Delete';
+        deleteButton.setAttribute('aria-label', `Delete customer ${customer.username || customer.id}`);
+        deleteButton.addEventListener('click', () => deleteCustomer(customer, deleteButton));
+        actionCell.appendChild(deleteButton);
+        row.appendChild(actionCell);
+        customerRows.appendChild(row);
+      });
+
+      document.getElementById('customerCount').textContent = String(customers.length);
+    }
+
+    async function readError(response) {
+      const body = await response.text();
+      if (!body) return `Request failed (${response.status}).`;
+      try {
+        const parsed = JSON.parse(body);
+        return parsed.message || parsed.error || `Request failed (${response.status}).`;
+      } catch {
+        return body;
+      }
+    }
+
+    async function loadCustomers() {
+      loadingState.hidden = false;
+      emptyState.hidden = true;
+      noResultsState.hidden = true;
+      tableWrap.hidden = true;
+      showMessage('');
+
+      try {
+        const response = await fetch('/api/admin/users', {
+          headers: { Accept: 'application/json' }
+        });
+        if (!response.ok) throw new Error(await readError(response));
+        customers = await response.json();
+        loadingState.hidden = true;
+        renderCustomers();
+      } catch (error) {
+        loadingState.hidden = true;
+        showMessage(`Could not load customer accounts: ${error.message}`, true);
+        console.error('Unable to load bakery customer accounts.', error);
+      }
+    }
+
+    async function deleteCustomer(customer, button) {
+      if (!window.confirm(`Delete the customer account for ${customer.username || customer.email}?`)) return;
+      button.disabled = true;
+      showMessage('');
+
+      try {
+        const response = await fetch(`/api/admin/users/${encodeURIComponent(customer.id)}`, {
+          method: 'DELETE',
+          headers: { Accept: 'application/json' }
+        });
+        if (!response.ok) throw new Error(await readError(response));
+        customers = customers.filter(candidate => candidate.id !== customer.id);
+        renderCustomers();
+        showMessage('Customer account deleted.');
+      } catch (error) {
+        button.disabled = false;
+        showMessage(`Could not delete the customer account: ${error.message}`, true);
+        console.error('Unable to delete bakery customer account.', error);
+      }
+    }
+
+    customerSearch.addEventListener('input', renderCustomers);
+    loadCustomers();
+  </script>
+</body>
+</html>

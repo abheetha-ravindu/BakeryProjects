@@ -9,4 +9,15 @@
   "category" : "cake",
   "availability" : "Available",
   "imageUrl" : "/item-images/ddf95e6b-6f85-4b30-84a8-e91561733d81.jpg"
+}, {
+  "id" : "c48033ae-4545-440e-b9b9-04c94ce316bf",
+  "name" : "Chokolat Cake",
+  "description" : "dfghjk",
+  "flavor" : "banana",
+  "size" : "2 kg",
+  "price" : 23451.86,
+  "shape" : 2,
+  "category" : "Cake",
+  "availability" : "Available",
+  "imageUrl" : "/item-images/a7a65b20-9e47-487f-8481-89c085fb7d68.jpg"
 } ]

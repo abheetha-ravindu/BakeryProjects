@@ -303,7 +303,7 @@
                     <h2 class="auth-title" id="signupTitle">Create Your Account</h2>
                     <p class="auth-subtitle">Join kamuda.com and make ordering easier.</p>
 
-                    <form id="signupForm" method="POST" action="signup" novalidate>
+                    <form id="signupForm" method="POST" action="/register" novalidate>
                         <input type="hidden" name="action" value="signup">
                         <input type="hidden" name="returnUrl" id="signupReturnUrl" value="">
 
@@ -485,7 +485,7 @@
                     localStorage.setItem('sweetbloom_user', JSON.stringify(data.user));
                     showAlert('Account created successfully! Welcome to kamuda.com.', 'success');
                     setTimeout(() => {
-                        window.location.href = returnUrl || data.redirectUrl || 'index.html';
+                        window.location.href = data.redirectUrl || 'index.html';
                     }, 600);
                 } catch (error) {
                     signupForm.submit();

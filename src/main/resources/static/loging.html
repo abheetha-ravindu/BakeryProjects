@@ -824,8 +824,7 @@
                                 if (data.user.role === 'ADMIN') {
                                     window.location.href = data.redirectUrl || 'admin.html';
                                 } else {
-                                    const safeRedirect = (returnUrl && !returnUrl.toLowerCase().includes('login')) ? returnUrl : (data.redirectUrl || 'index.html');
-                                    window.location.href = safeRedirect;
+                                    window.location.href = data.redirectUrl || 'index.html';
                                 }
                             }, 500);
                             return;

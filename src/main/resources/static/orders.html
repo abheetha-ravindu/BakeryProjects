@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>kamuda.com | My orders</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <a class="brand" href="/main">kamuda.com</a>
+      <nav class="nav-links" aria-label="Main">
+        <a class="nav-link" href="/main">Home</a>
+        <a class="nav-link" href="/items">Shop cakes</a>
+        <a class="nav-link" href="/orders" aria-current="page">My orders</a>
+        <a class="nav-link" href="/payments">My payments</a>
+        <a class="nav-link" href="/profile">Profile</a>
+        <a class="nav-link" href="/main#cart">Cart</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="banner" id="demoBanner" hidden>
+    Could not reach the bakery service. Please try again when the service is available.
+  </div>
+
+  <main class="wrap">
+    <div class="confirm" id="confirm" hidden>
+      <h2>Order placed.</h2>
+      <p id="confirmText"></p>
+    </div>
+
+    <section class="intro compact">
+      <h1>Your orders</h1>
+      <p>Follow each order from the oven to your door. You can change the note or cancel while an order is still pending.</p>
+    </section>
+
+    <section class="order-list" id="orderList" aria-live="polite"></section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">kamuda.com bakery.</div>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="js/common.js"></script>
+  <script src="js/payment-common.js"></script>
+  <script src="js/orders.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refund Request Form</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .page-nav {
+            max-width: 550px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-end;
+            gap: 18px;
+        }
+        .page-nav a {
+            color: #8f2736;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .page-nav a:hover { text-decoration: underline; }
+        .form-container {
+            max-width: 550px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 0;
+            border-bottom: 2px solid #eef2f3;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+        textarea {
+            resize: vertical;
+            height: 120px;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-submit:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="page-nav" aria-label="Account navigation">
+    <a href="/profile">My Profile</a>
+    <a href="/billing/my-invoices.html">My Invoices</a>
+    <a href="/orders">My Orders</a>
+</nav>
+
+<div class="form-container">
+    <h2>Apply for a Refund</h2>
+    <p style="color: #64748b; font-size: 14px;">Please fill out the form below to submit your refund request.</p>
+
+
+    <form id="refundForm" onsubmit="submitForm(event)">
+
+
+        <div class="form-group">
+            <label for="orderId">Order ID:</label>
+            <input type="number" id="orderId" min="1" placeholder="Enter the order number from My Orders" required>
+        </div>
+
+
+        <div class="form-group">
+            <label for="reason">Reason for Refund:</label>
+            <textarea id="reason" placeholder="Please describe the reason for your refund request (e.g., Damaged item, Order cancelled)..." required></textarea>
+        </div>
+
+
+        <p id="refundStatus" role="status" aria-live="polite" style="margin:0 0 16px; color:#64748b;"></p>
+        <button type="submit" class="btn-submit" id="submitButton">Submit Refund Request</button>
+    </form>
+</div>
+
+
+<script>
+    const orderIdFromUrl = new URLSearchParams(window.location.search).get('orderId');
+    if (orderIdFromUrl && /^\d+$/.test(orderIdFromUrl)) {
+        document.getElementById('orderId').value = orderIdFromUrl;
+    }
+
+    async function submitForm(event) {
+        event.preventDefault();
+
+        const status = document.getElementById('refundStatus');
+        const submitButton = document.getElementById('submitButton');
+        status.textContent = '';
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+
+        try {
+            const response = await fetch('/api/refund', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify({
+                    orderId: Number(document.getElementById('orderId').value),
+                    reason: document.getElementById('reason').value.trim()
+                })
+            });
+
+            if (response.status === 401) {
+                window.location.assign('/login?returnUrl=%2Fbilling%2Frefund-request-form.html');
+                return;
+            }
+            if (!response.ok) {
+                let message = `Unable to submit the refund request (${response.status}).`;
+                try {
+                    const body = await response.json();
+                    message = body.error || body.message || message;
+                } catch (error) {
+                    // Use the status-based message when the server does not return JSON.
+                }
+                throw new Error(message);
+            }
+
+            document.getElementById('refundForm').reset();
+            status.style.color = '#137333';
+            status.textContent = 'Your refund request was submitted and is pending review.';
+        } catch (error) {
+            status.style.color = '#b91c1c';
+            status.textContent = error.message || 'Unable to submit the refund request. Please try again.';
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Submit Refund Request';
+        }
+    }
+</script>
+
+</body>
+</html>

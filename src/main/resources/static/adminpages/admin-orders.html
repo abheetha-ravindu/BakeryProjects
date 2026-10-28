@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sweet Bloom | Admin orders</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin-panel.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <a class="brand" href="/adminDashboard">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Cake Studio</span>
+      </a>
+      <nav class="nav-section" aria-label="Admin pages">
+        <div class="nav-title">Admin</div>
+        <a class="nav-item" href="/adminDashboard"><span class="icon">⌂</span>Dashboard</a>
+        <a class="nav-item" href="/customOrders"><span class="icon">◇</span>Custom Orders</a>
+        <a class="nav-item active" href="/bakeryOrders" aria-current="page"><span class="icon">▣</span>Bakery Orders</a>
+        <a class="nav-item" href="/adminPayments"><span class="icon">▣</span>Payments</a>
+        <a class="nav-item" href="/adminRefunds"><span class="icon">↩</span>Refunds</a>
+        <a class="nav-item" href="/adminItems"><span class="icon">▤</span>Items</a>
+        <a class="nav-item" href="/userManagement"><span class="icon">♙</span>User Management</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="banner" id="demoBanner" hidden>
+    Could not reach the bakery service. Please try again when the service is available.
+  </div>
+
+  <main class="wrap">
+    <section class="intro compact">
+      <h1>All orders</h1>
+      <p>Move each order one step at a time: pending, preparing, ready, delivered.</p>
+    </section>
+
+    <div class="toolbar">
+      <label class="field-label" for="statusFilter">Show</label>
+      <select id="statusFilter" class="select">
+        <option value="">All orders</option>
+        <option value="PENDING">Pending</option>
+        <option value="PREPARING">Preparing</option>
+        <option value="READY">Ready</option>
+        <option value="DELIVERED">Delivered</option>
+      </select>
+    </div>
+
+    <div class="table-wrap">
+      <table class="orders-table">
+        <thead>
+          <tr><th>Order</th><th>Placed</th><th>Customer</th><th>Items</th><th class="num">Total</th><th>Status</th><th>Action</th></tr>
+        </thead>
+        <tbody id="orderRows"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">Sweet Bloom Bakery. SE1020 group project.</div>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/payment-common.js"></script>
+  <script src="/js/admin-orders.js"></script>
+</body>
+</html>

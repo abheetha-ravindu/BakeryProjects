@@ -1,0 +1,132 @@
+.nav {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 5;
+  width: 220px;
+  overflow-y: auto;
+  border-right: 1px solid var(--line);
+  border-bottom: 0;
+  background: linear-gradient(180deg, #fffaf4 0%, #fff0f3 100%);
+  box-shadow: 0 4px 20px rgba(78, 48, 25, 0.08);
+}
+
+.nav .wrap {
+  display: flex;
+  width: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 18px 16px 24px;
+  align-items: stretch;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 18px;
+}
+
+.nav .brand {
+  padding: 6px 8px 18px;
+  font-family: "Plus Jakarta Sans", Inter, Arial, sans-serif;
+  letter-spacing: 0;
+}
+
+.nav-section {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-title {
+  margin: 12px 10px 10px;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.nav-item {
+  display: flex;
+  min-height: 40px;
+  align-items: center;
+  gap: 10px;
+  margin: 2px 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: #3c3c3c;
+  font-size: 0.96rem;
+  text-decoration: none;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  background: rgba(250, 124, 138, 0.12);
+  color: #fd344a;
+}
+
+.nav-item.active {
+  font-weight: 700;
+}
+
+.nav-item .icon {
+  width: 16px;
+  color: var(--muted);
+  text-align: center;
+}
+
+main.wrap {
+  width: calc(100% - 220px);
+  max-width: 1120px;
+  margin: 0 auto 0 220px;
+  padding-inline: 32px;
+}
+
+.banner {
+  width: calc(100% - 252px);
+  margin-left: 236px;
+}
+
+.footer {
+  margin-left: 220px;
+}
+
+@media (max-width: 760px) {
+  .nav {
+    position: static;
+    width: 100%;
+    min-height: 0;
+    overflow: visible;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav .wrap {
+    padding: 12px 14px;
+    gap: 8px;
+  }
+
+  .nav-section {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .nav-title {
+    display: none;
+  }
+
+  .nav-item {
+    min-height: 38px;
+    padding: 9px;
+  }
+
+  main.wrap {
+    width: 100%;
+    margin: 0;
+    padding-inline: 16px;
+  }
+
+  .banner {
+    width: calc(100% - 32px);
+    margin-inline: auto;
+  }
+
+  .footer {
+    margin-left: 0;
+  }
+}
