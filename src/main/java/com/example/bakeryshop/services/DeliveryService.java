@@ -1,7 +1,7 @@
-package com.example.bakeryprojects.services;
+package com.example.bakeryshop.services;
 
-import com.example.bakeryprojects.model.Delivery;
-import com.example.bakeryprojects.repository.DeliveryRepository;
+import com.example.bakeryshop.model.Delivery;
+import com.example.bakeryshop.repisitory.DeliveryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

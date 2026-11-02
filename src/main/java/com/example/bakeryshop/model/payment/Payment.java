@@ -1,6 +1,6 @@
-package com.bakery.bakeryplatform.model.payment;
+package com.example.bakeryshop.model.payment;
 
-import com.bakery.bakeryplatform.model.BaseEntity;
+import com.example.bakeryshop.model.BaseEntity;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Entity;

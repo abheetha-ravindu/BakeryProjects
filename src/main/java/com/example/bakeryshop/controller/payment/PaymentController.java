@@ -1,10 +1,10 @@
-package com.bakery.bakeryplatform.controller.payment;
+package com.example.bakeryshop.controller.payment;
 
-import com.bakery.bakeryplatform.dto.payment.PaymentRequest;
-import com.bakery.bakeryplatform.dto.payment.PaymentStatusRequest;
-import com.bakery.bakeryplatform.model.payment.Payment;
-import com.bakery.bakeryplatform.model.payment.PaymentStatus;
-import com.bakery.bakeryplatform.service.payment.PaymentService;
+import com.example.bakeryshop.dto.payment.PaymentRequest;
+import com.example.bakeryshop.dto.payment.PaymentStatusRequest;
+import com.example.bakeryshop.model.payment.Payment;
+import com.example.bakeryshop.model.payment.PaymentStatus;
+import com.example.bakeryshop.services.payment.PaymentService;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.http.HttpStatus;

@@ -3,7 +3,6 @@ package com.example.bakeryshop.controller;
 import com.example.bakeryshop.model.BookingStatus;
 import com.example.bakeryshop.model.CustomCakeBooking;
 import com.example.bakeryshop.services.BookingService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +16,11 @@ import java.util.Map;
 @RequestMapping("/api")
 public class CustomCakeBookingController {
 
-    @Autowired
-    private BookingService bookingService;
+    private final BookingService bookingService;
+
+    public CustomCakeBookingController(BookingService bookingService) {
+        this.bookingService = bookingService;
+    }
 
     // Create a new booking
     @PostMapping("/bookings")

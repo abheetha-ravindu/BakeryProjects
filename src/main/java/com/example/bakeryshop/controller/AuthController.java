@@ -1,9 +1,9 @@
 package com.example.bakeryshop.controller;
 
-import com.example.bakeryprojects.model.AdminUser;
-import com.example.bakeryprojects.model.Customer;
-import com.example.bakeryprojects.model.User;
-import com.example.bakeryprojects.services.UserService;
+import com.example.bakeryshop.model.AdminUser;
+import com.example.bakeryshop.model.Customer;
+import com.example.bakeryshop.model.User;
+import com.example.bakeryshop.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;

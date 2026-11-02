@@ -1,4 +1,4 @@
-package com.example.bakeryprojects.model;
+package com.example.bakeryshop.model;
 
 
 

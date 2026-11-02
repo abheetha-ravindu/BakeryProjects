@@ -1,12 +1,12 @@
-package com.bakery.bakeryplatform.controller.order;
+package com.example.bakeryshop.controller.order;
 
 
-import com.bakery.bakeryplatform.dto.order.NoteRequest;
-import com.bakery.bakeryplatform.dto.order.PlaceOrderRequest;
-import com.bakery.bakeryplatform.dto.order.StatusRequest;
-import com.bakery.bakeryplatform.model.order.Order;
-import com.bakery.bakeryplatform.model.order.OrderStatus;
-import com.bakery.bakeryplatform.service.order.OrderService;
+import com.example.bakeryshop.dto.order.NoteRequest;
+import com.example.bakeryshop.dto.order.PlaceOrderRequest;
+import com.example.bakeryshop.dto.order.StatusRequest;
+import com.example.bakeryshop.model.order.Order;
+import com.example.bakeryshop.model.order.OrderStatus;
+import com.example.bakeryshop.services.order.OrderService;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.http.HttpStatus;

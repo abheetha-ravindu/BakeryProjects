@@ -1,12 +1,15 @@
-package com.bakery.bakeryplatform.service.order;
+package com.example.bakeryshop.services.order;
 
-import com.bakery.bakeryplatform.exception.BusinessRuleException;
-import com.bakery.bakeryplatform.exception.ResourceNotFoundException;
-import com.bakery.bakeryplatform.model.CartItem;
-import com.bakery.bakeryplatform.model.order.Order;
-import com.bakery.bakeryplatform.model.order.OrderStatus;
-import com.bakery.bakeryplatform.repository.CartItemRepository;
-import com.bakery.bakeryplatform.repository.order.OrderRepository;
+import com.example.bakeryshop.exception.BusinessRuleException;
+import com.example.bakeryshop.exception.ResourceNotFoundException;
+import com.example.bakeryshop.model.CartItem;
+import com.example.bakeryshop.model.User;
+import com.example.bakeryshop.model.order.Order;
+import com.example.bakeryshop.model.order.OrderStatus;
+import com.example.bakeryshop.repisitory.CartItemRepository;
+import com.example.bakeryshop.repisitory.UserRepository;
+import com.example.bakeryshop.repisitory.order.OrderRepository;
+import com.example.bakeryshop.services.EmailService;
 import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -17,10 +20,15 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final CartItemRepository cartItemRepository;
+    private final UserRepository userRepository;
+    private final EmailService emailService;
 
-    public OrderService(OrderRepository orderRepository, CartItemRepository cartItemRepository) {
+    public OrderService(OrderRepository orderRepository, CartItemRepository cartItemRepository,
+                        UserRepository userRepository, EmailService emailService) {
         this.orderRepository = orderRepository;
         this.cartItemRepository = cartItemRepository;
+        this.userRepository = userRepository;
+        this.emailService = emailService;
     }
 
     // Create: place an order from the cart, then empty the cart
@@ -48,6 +56,8 @@ public class OrderService {
         Order saved = orderRepository.save(order);
 
         cartItemRepository.deleteByUserId(userId);   // the cart is now empty
+        User user = userRepository.findById(userId).orElse(null);
+        emailService.sendOrderConfirmation(user == null ? null : user.getEmail(), saved);
         return saved;
     }
 

@@ -1,11 +1,11 @@
 package com.example.bakeryshop.billing;
 
-import com.bakery.bakeryplatform.model.payment.Payment;
-import com.bakery.bakeryplatform.model.payment.PaymentStatus;
-import com.bakery.bakeryplatform.repository.order.OrderRepository;
-import com.bakery.bakeryplatform.service.payment.PaymentService;
-import com.example.bakeryprojects.model.User;
-import com.example.bakeryprojects.repository.UserRepository;
+import com.example.bakeryshop.model.payment.Payment;
+import com.example.bakeryshop.model.payment.PaymentStatus;
+import com.example.bakeryshop.repisitory.order.OrderRepository;
+import com.example.bakeryshop.services.payment.PaymentService;
+import com.example.bakeryshop.model.User;
+import com.example.bakeryshop.repisitory.UserRepository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;

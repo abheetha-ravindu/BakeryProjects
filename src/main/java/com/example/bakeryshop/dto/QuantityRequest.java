@@ -1,4 +1,4 @@
-package com.bakery.bakeryplatform.dto;
+package com.example.bakeryshop.dto;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 

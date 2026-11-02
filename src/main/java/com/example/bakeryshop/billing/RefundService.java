@@ -1,7 +1,7 @@
 package com.example.bakeryshop.billing;
 
-import com.bakery.bakeryplatform.exception.BusinessRuleException;
-import com.bakery.bakeryplatform.exception.ResourceNotFoundException;
+import com.example.bakeryshop.exception.BusinessRuleException;
+import com.example.bakeryshop.exception.ResourceNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;

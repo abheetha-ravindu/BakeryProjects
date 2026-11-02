@@ -1,6 +1,6 @@
 package com.example.bakeryshop.billing;
 
-import com.bakery.bakeryplatform.model.payment.Payment;
+import com.example.bakeryshop.model.payment.Payment;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;

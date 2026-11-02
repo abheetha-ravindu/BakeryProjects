@@ -1,4 +1,4 @@
-package com.bakery.bakeryplatform.dto.order;
+package com.example.bakeryshop.dto.order;
 
 import jakarta.validation.constraints.Size;
 

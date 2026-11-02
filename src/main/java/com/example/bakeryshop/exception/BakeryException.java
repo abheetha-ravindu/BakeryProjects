@@ -1,4 +1,4 @@
-package com.bakery.bakeryplatform.exception;
+package com.example.bakeryshop.exception;
 
 public class BakeryException extends RuntimeException {
 

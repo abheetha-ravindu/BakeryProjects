@@ -1,4 +1,4 @@
-package com.bakery.bakeryplatform.model;
+package com.example.bakeryshop.model;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

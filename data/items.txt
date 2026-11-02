@@ -31,4 +31,15 @@
   "category" : "bb",
   "availability" : "Available",
   "imageUrl" : "/item-images/64d8220e-e6b4-497a-b945-cdd75a10712d.jpg"
+}, {
+  "id" : "3c0bec1a-8496-4736-9585-a057aaa73951",
+  "name" : "butterfly cake",
+  "description" : "rasayi",
+  "flavor" : "banana",
+  "size" : "1 kg",
+  "price" : 1234.0,
+  "shape" : 0,
+  "category" : "cake",
+  "availability" : "Available",
+  "imageUrl" : "/item-images/214db112-40e0-4989-b6cb-c5222bd2930c.jpg"
 } ]

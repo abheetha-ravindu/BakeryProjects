@@ -1,4 +1,4 @@
-package com.bakery.bakeryplatform.model.payment;
+package com.example.bakeryshop.model.payment;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;

@@ -1,5 +1,5 @@
-package com.bakery.bakeryplatform.dto;
-import com.bakery.bakeryplatform.model.CartItem;
+package com.example.bakeryshop.dto;
+import com.example.bakeryshop.model.CartItem;
 import java.math.BigDecimal;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.bakery.bakeryplatform.model.payment;
+package com.example.bakeryshop.model.payment;
 
 
 public enum PaymentStatus {

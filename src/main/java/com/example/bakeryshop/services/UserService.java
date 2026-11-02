@@ -1,11 +1,11 @@
-package com.example.bakeryprojects.services;
+package com.example.bakeryshop.services;
 
-import com.example.bakeryprojects.model.AdminUser;
-import com.example.bakeryprojects.model.Customer;
-import com.example.bakeryprojects.model.User;
-import com.example.bakeryprojects.repository.AdminUserRepository;
-import com.example.bakeryprojects.repository.DeliveryRepository;
-import com.example.bakeryprojects.repository.UserRepository;
+import com.example.bakeryshop.model.AdminUser;
+import com.example.bakeryshop.model.Customer;
+import com.example.bakeryshop.model.User;
+import com.example.bakeryshop.repisitory.AdminUserRepository;
+import com.example.bakeryshop.repisitory.DeliveryRepository;
+import com.example.bakeryshop.repisitory.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

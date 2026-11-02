@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class WebController {
 
-    @GetMapping("/")
+    @GetMapping({"/", "/main"})
     public String home() {
         return "redirect:/index.html";
     }
@@ -63,6 +63,11 @@ public class WebController {
     @GetMapping({"/custom-cake", "/custome_cake"})
     public String customCake() {
         return "redirect:/custom-cake.html";
+    }
+
+    @GetMapping("/delivery-count")
+    public String deliveryCount() {
+        return "redirect:/adminpages/delivery-count.html";
     }
 
     @GetMapping({"/invoice-detail", "/invoice-details"})

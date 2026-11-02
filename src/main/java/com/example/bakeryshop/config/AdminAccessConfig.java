@@ -1,6 +1,6 @@
 package com.example.bakeryshop.config;
 
-import com.example.bakeryprojects.repository.AdminUserRepository;
+import com.example.bakeryshop.repisitory.AdminUserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Configuration;
@@ -63,6 +63,7 @@ public class AdminAccessConfig implements WebMvcConfigurer {
             if (path.equals("/adminDashboard") || path.equals("/adminItems") || path.equals("/addItem")
                     || path.equals("/customOrders") || path.equals("/bakeryOrders") || path.equals("/adminInvoices")
                     || path.equals("/adminPayments") || path.equals("/adminRefunds")
+                    || path.equals("/delivery-count")
                     || path.equals("/admin-refund-management")
                     || path.equals("/users") || path.equals("/userManagement")
                     || path.equals("/adminindex.html")

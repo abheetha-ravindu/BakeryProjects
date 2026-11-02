@@ -2,7 +2,6 @@ package com.example.bakeryshop.services;
 
 import com.example.bakeryshop.model.CakeDesign;
 import com.example.bakeryshop.repisitory.CakeDesignRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,8 +9,11 @@ import java.util.List;
 @Service
 public class CakeDesignService {
 
-    @Autowired
-    private CakeDesignRepository repository;
+    private final CakeDesignRepository repository;
+
+    public CakeDesignService(CakeDesignRepository repository) {
+        this.repository = repository;
+    }
 
     public CakeDesign saveDesign(CakeDesign design) {
         return repository.save(design);
