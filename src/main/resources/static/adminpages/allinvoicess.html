@@ -73,6 +73,19 @@
       text-align: left;
       vertical-align: top;
     }
+    .invoice-table tbody {
+      display: table-row-group;
+      visibility: visible;
+    }
+    .invoice-table tbody tr {
+      display: table-row;
+      visibility: visible;
+    }
+    .invoice-table tbody td {
+      min-height: 3.5rem;
+      background: #fff;
+      color: var(--ink);
+    }
     .invoice-table th {
       background: #fff6f1;
       color: var(--ink);
@@ -109,6 +122,8 @@
       .invoice-summary { grid-template-columns: 1fr; }
     }
   </style>
+    <link rel="stylesheet" href="/css/site-theme.css">
+  <link rel="stylesheet" href="/css/admin-navigation.css">
 </head>
 <body>
   <header class="nav">
@@ -122,6 +137,7 @@
         <a class="nav-item" href="/adminDashboard"><span class="icon">⌂</span>Dashboard</a>
         <a class="nav-item" href="/customOrders"><span class="icon">◇</span>Custom Orders</a>
         <a class="nav-item" href="/bakeryOrders"><span class="icon">▣</span>Bakery Orders</a>
+        <a class="nav-item" href="/delivery-count"><span class="icon">↗</span>Delivery Count</a>
         <a class="nav-item" href="/adminPayments"><span class="icon">▣</span>Payments</a>
         <a class="nav-item active" href="/adminInvoices" aria-current="page"><span class="icon">▤</span>Invoices</a>
         <a class="nav-item" href="/adminRefunds"><span class="icon">↩</span>Refunds</a>

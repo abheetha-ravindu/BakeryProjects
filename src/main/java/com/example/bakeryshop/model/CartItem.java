@@ -1,4 +1,4 @@
-package com.bakery.bakeryplatform.model;
+package com.example.bakeryshop.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;

@@ -1,7 +1,7 @@
-package com.bakery.bakeryplatform.repository.order;
+package com.example.bakeryshop.repisitory.order;
 
-import com.bakery.bakeryplatform.model.order.Order;
-import com.bakery.bakeryplatform.model.order.OrderStatus;
+import com.example.bakeryshop.model.order.Order;
+import com.example.bakeryshop.model.order.OrderStatus;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

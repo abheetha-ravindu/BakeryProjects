@@ -1,6 +1,6 @@
-package com.bakery.bakeryplatform.dto.payment;
+package com.example.bakeryshop.dto.payment;
 
-import com.bakery.bakeryplatform.model.payment.PaymentStatus;
+import com.example.bakeryshop.model.payment.PaymentStatus;
 import jakarta.validation.constraints.NotNull;
 
 public record PaymentStatusRequest(

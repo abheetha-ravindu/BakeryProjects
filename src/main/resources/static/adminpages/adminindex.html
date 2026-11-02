@@ -431,6 +431,8 @@
       .chart-legend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>
+    <link rel="stylesheet" href="/css/site-theme.css">
+  <link rel="stylesheet" href="/css/admin-navigation.css">
 </head>
 <body>
   <div class="admin-layout">
@@ -444,6 +446,7 @@
         <a class="nav-item active" href="/adminDashboard" aria-current="page"><span class="icon">⌂</span>Dashboard</a>
         <a class="nav-item" href="/customOrders"><span class="icon">◇</span>Custom Orders</a>
         <a class="nav-item" href="/bakeryOrders"><span class="icon">▣</span>Bakery Orders</a>
+        <a class="nav-item" href="/delivery-count"><span class="icon">↗</span>Delivery Count</a>
         <a class="nav-item" href="/adminPayments"><span class="icon">▣</span>Payments</a>
         <a class="nav-item" href="/adminInvoices"><span class="icon">▤</span>Invoices</a>
         <a class="nav-item" href="/adminRefunds"><span class="icon">↩</span>Refunds</a>
@@ -455,7 +458,7 @@
     <main class="main dashboard-main">
       <header class="welcome-header">
         <div>
-          <h1>Bakery overview</h1>
+          <h1>Bakery dashboard</h1>
           <p>Here’s what’s happening across your bakery today.</p>
         </div>
         <time class="today-label" id="todayLabel"></time>
@@ -475,6 +478,10 @@
         <a class="summary-card" href="/customOrders">
           <span class="summary-icon" aria-hidden="true">◇</span>
           <span><span class="summary-label">Custom cake bookings</span><strong class="summary-value" id="bookingTotal">—</strong><span class="summary-note" id="pendingBookings">Loading booking status...</span></span>
+        </a>
+        <a class="summary-card" href="/delivery-count">
+          <span class="summary-icon" aria-hidden="true">↗</span>
+          <span><span class="summary-label">Deliveries</span><strong class="summary-value">View</strong><span class="summary-note">Delivery status breakdown</span></span>
         </a>
         <a class="summary-card" href="/adminRefunds">
           <span class="summary-icon" aria-hidden="true">↩</span>

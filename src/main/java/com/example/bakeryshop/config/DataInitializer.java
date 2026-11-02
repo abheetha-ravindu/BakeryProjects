@@ -1,6 +1,6 @@
-package com.example.bakeryprojects.config;
+package com.example.bakeryshop.config;
 
-import com.example.bakeryprojects.services.UserService;
+import com.example.bakeryshop.services.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

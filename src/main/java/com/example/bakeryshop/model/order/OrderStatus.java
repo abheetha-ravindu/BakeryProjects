@@ -1,4 +1,4 @@
-package com.bakery.bakeryplatform.model.order;
+package com.example.bakeryshop.model.order;
 
 public enum OrderStatus {
     PENDING,

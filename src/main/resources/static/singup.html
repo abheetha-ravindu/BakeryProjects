@@ -23,6 +23,7 @@
         body {
             margin: 0;
             min-height: 100vh;
+            min-height: 100svh;
             background: var(--auth-cream);
             color: var(--auth-roast);
             font-family: var(--font-body, 'Plus Jakarta Sans', Arial, sans-serif);
@@ -30,16 +31,24 @@
 
         .auth-wrapper {
             display: flex;
-            min-height: 100vh;
+            height: 100vh;
+            height: 100svh;
+            width: 100%;
+            min-height: 0;
+            overflow-x: hidden;
         }
 
         .auth-visual-col {
-            flex: 0 0 42%;
+            position: relative;
+            flex: 0 0 45%;
             display: flex;
             align-items: flex-end;
-            padding: 3.5rem;
+            overflow: hidden;
+            padding: 3.5rem 3rem;
             color: #fff;
-            background: linear-gradient(145deg, #6E302A, #C92C3D 55%, #E8A076);
+            background:
+                linear-gradient(rgba(5, 8, 6, 0.38), rgba(5, 8, 6, 0.62)),
+                url("/images/auth/bakery-workshop.jpg") center / cover no-repeat;
         }
 
         .auth-visual-content {
@@ -73,16 +82,21 @@
 
         .auth-form-col {
             display: flex;
-            flex: 1;
+            flex: 0 0 55%;
             flex-direction: column;
-            padding: 2.25rem 3.5rem;
+            min-height: 0;
+            justify-content: space-between;
+            padding: 1.25rem 3.5rem;
+            overflow-y: auto;
         }
 
         .auth-header-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            width: 100%;
             gap: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .auth-header-logo,
@@ -106,10 +120,12 @@
 
         .auth-center-container {
             display: flex;
-            flex: 1;
+            flex-grow: 1;
+            min-height: 0;
+            width: 100%;
             align-items: center;
             justify-content: center;
-            padding: 2rem 0;
+            padding: 0.5rem 0 1rem;
         }
 
         .auth-card {
@@ -120,11 +136,11 @@
         .auth-title {
             margin: 0 0 0.4rem;
             font-family: var(--font-heading, Georgia, serif);
-            font-size: 2.2rem;
+            font-size: 1.9rem;
         }
 
         .auth-subtitle {
-            margin: 0 0 1.5rem;
+            margin: 0 0 0.85rem;
             color: var(--auth-muted);
             line-height: 1.5;
         }
@@ -156,12 +172,12 @@
 
         .form-group {
             position: relative;
-            margin-bottom: 1rem;
+            margin-bottom: 0.55rem;
         }
 
         .form-label {
             display: block;
-            margin-bottom: 0.45rem;
+            margin-bottom: 0.3rem;
             font-size: 0.86rem;
             font-weight: 600;
         }
@@ -174,7 +190,7 @@
 
         .form-input {
             width: 100%;
-            height: 48px;
+            height: 42px;
             padding: 0 1rem;
             border: 1.5px solid var(--auth-border);
             border-radius: 12px;
@@ -208,17 +224,21 @@
 
         .field-error-msg {
             display: block;
-            min-height: 1.05rem;
-            margin-top: 0.35rem;
+            min-height: 0;
+            margin-top: 0;
             color: #D32F2F;
             font-size: 0.78rem;
             font-weight: 600;
         }
 
+        .field-error-msg:empty {
+            display: none;
+        }
+
         .btn-auth-primary {
             display: flex;
             width: 100%;
-            height: 50px;
+            height: 44px;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
@@ -238,7 +258,7 @@
         }
 
         .auth-switch-prompt {
-            margin-top: 1.4rem;
+            margin-top: 0.75rem;
             color: var(--auth-muted);
             font-size: 0.92rem;
             text-align: center;
@@ -250,21 +270,55 @@
         }
 
         .auth-footer {
-            margin-top: 1rem;
+            margin-top: 0.5rem;
             color: #9A8374;
             font-size: 0.8rem;
             text-align: center;
         }
 
-        @media (max-width: 760px) {
+        @media (max-width: 960px) {
             .auth-wrapper {
                 flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+                min-height: 100svh;
+                overflow: visible;
             }
 
             .auth-visual-col {
                 flex: none;
-                min-height: 190px;
-                padding: 1.5rem;
+                height: 240px;
+                padding: 1.75rem 1.5rem;
+            }
+
+            .auth-visual-tagline {
+                font-size: 0.92rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .auth-form-col {
+                flex: 1 1 auto;
+                padding: 2rem 1.5rem 3rem;
+                overflow-y: visible;
+            }
+
+            .auth-card {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .auth-visual-col {
+                height: 190px;
+                padding: 1.25rem 1rem;
+            }
+
+            .auth-brand-badge {
+                margin-bottom: 0.5rem;
+            }
+
+            .auth-visual-title {
+                font-size: 1.4rem;
             }
 
             .auth-visual-tagline {
@@ -272,12 +326,17 @@
             }
 
             .auth-form-col {
-                padding: 1.5rem;
+                padding: 1.5rem 1rem 2.5rem;
+            }
+
+            .auth-title {
+                font-size: 1.8rem;
             }
         }
     </style>
+    <link rel="stylesheet" href="/css/site-theme.css">
 </head>
-<body>
+<body class="auth-page">
     <div class="auth-wrapper">
         <aside class="auth-visual-col">
             <div class="auth-visual-content">

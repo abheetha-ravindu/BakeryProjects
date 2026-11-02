@@ -85,6 +85,8 @@
         badge.textContent = String(invoice.paymentStatus).replace(/[_-]+/g, ' ');
         statusCell.replaceChildren(badge);
       }
+
+      rows.appendChild(row);
     });
 
     invoiceCount.textContent = String(filtered.length);

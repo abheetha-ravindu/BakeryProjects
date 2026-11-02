@@ -1,4 +1,4 @@
-package com.bakery.bakeryplatform.dto.payment;
+package com.example.bakeryshop.dto.payment;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

@@ -8,8 +8,38 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/site-theme.css">
+  <style>
+    body.payment-page .choices .choice {
+      border-color: var(--line);
+      background: var(--surface-raised);
+      color: var(--ink);
+    }
+
+    body.payment-page .choices .choice .muted {
+      color: var(--muted);
+    }
+
+    body.payment-page .sum {
+      border: 1px solid var(--line);
+      background: var(--surface-raised);
+      color: var(--ink);
+    }
+
+    body.payment-page .confirm {
+      border-color: rgba(121, 185, 162, 0.35);
+      background: #13241b;
+      color: var(--ink);
+    }
+
+    body.payment-page .banner {
+      border-color: rgba(239, 112, 112, 0.35);
+      background: #2a1718;
+      color: #ffb7b7;
+    }
+  </style>
 </head>
-<body>
+<body class="payment-page">
   <header class="nav">
     <div class="wrap">
       <a class="brand" href="/main">kamuda.com</a>
@@ -97,5 +127,6 @@
   <script src="js/common.js"></script>
   <script src="js/payment-common.js"></script>
   <script src="js/payment.js"></script>
+  <script src="/js/page-search.js"></script>
 </body>
 </html>

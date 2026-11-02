@@ -1,9 +1,9 @@
-package com.bakery.bakeryplatform.controller;
+package com.example.bakeryshop.controller;
 
-import com.bakery.bakeryplatform.dto.CartResponse;
-import com.bakery.bakeryplatform.dto.QuantityRequest;
-import com.bakery.bakeryplatform.model.CartItem;
-import com.bakery.bakeryplatform.service.CartService;
+import com.example.bakeryshop.dto.CartResponse;
+import com.example.bakeryshop.dto.QuantityRequest;
+import com.example.bakeryshop.model.CartItem;
+import com.example.bakeryshop.services.CartService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

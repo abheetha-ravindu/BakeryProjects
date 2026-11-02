@@ -1,6 +1,6 @@
-package com.bakery.bakeryplatform.repository;
+package com.example.bakeryshop.repisitory;
 
-import com.bakery.bakeryplatform.model.CartItem;
+import com.example.bakeryshop.model.CartItem;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

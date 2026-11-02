@@ -1,0 +1,1008 @@
+body.verdant-storefront {
+  --page-bg: #050806;
+  --surface: #111914;
+  --ink: #f5f5f3;
+  --muted: #b5b9b5;
+  --line: rgba(255, 255, 255, 0.1);
+  --berry: #6cae99;
+  --berry-soft: rgba(38, 112, 90, 0.2);
+  --home-cream: #050806;
+  --home-ink: #f5f5f3;
+  --home-muted: #b5b9b5;
+  --home-berry: #79b9a2;
+  --home-surface: #111914;
+  --home-line: rgba(255, 255, 255, 0.1);
+  --color-cream-subtle: #0b110f;
+  --color-dark-roast: #f5f5f3;
+  --color-dark-muted: #b5b9b5;
+  --color-border: rgba(255, 255, 255, 0.12);
+  --color-strawberry: #79b9a2;
+  --color-strawberry-light: rgba(38, 112, 90, 0.2);
+  --cake-gold: #9cd9c1;
+  --cake-gold-light: rgba(38, 112, 90, 0.2);
+  --cake-pink-glow: rgba(38, 112, 90, 0.12);
+  --cake-pink-border: rgba(126, 196, 174, 0.24);
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;
+  color-scheme: dark;
+  background:
+    radial-gradient(ellipse at 12% 2%, rgba(31, 79, 67, 0.24), transparent 34rem),
+    radial-gradient(ellipse at 92% 38%, rgba(255, 255, 255, 0.045), transparent 27rem),
+    linear-gradient(180deg, #050806 0%, #0b110f 58%, #070a08 100%);
+  color: var(--ink);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+body.verdant-storefront::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 64px 64px;
+  content: "";
+  pointer-events: none;
+}
+
+body.verdant-storefront a {
+  color: inherit;
+}
+
+body.verdant-storefront .service-card a.btn-service-primary {
+  border-color: rgba(255, 255, 255, 0.82);
+  background: #f4efe7;
+  color: #1c1a18;
+}
+
+body.verdant-storefront .service-card a.btn-service-primary:hover {
+  border-color: #fff;
+  background: #fff;
+  color: #111914;
+}
+
+body.verdant-storefront .service-card a.btn-service-secondary {
+  border-color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+body.verdant-storefront .service-card a.btn-service-secondary:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+body.verdant-storefront :is(button, input, select, textarea) {
+  font-family: inherit;
+}
+
+body.verdant-storefront :is(button, a, .cake-card, .gallery-card, .service-card, .option-select-card) {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 220ms ease,
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.verdant-storefront :is(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid #9cd9c1;
+  outline-offset: 3px;
+}
+
+body.verdant-storefront .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  min-height: 72px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(9, 15, 12, 0.97);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(12px);
+}
+
+body.verdant-storefront .navbar-container {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr) minmax(180px, 220px) max-content;
+  column-gap: clamp(0.75rem, 1.2vw, 1.25rem);
+  row-gap: 0.65rem;
+  width: min(100%, 1360px);
+  height: 72px;
+  min-height: 72px;
+  align-items: center;
+  margin-inline: auto;
+}
+
+body.verdant-storefront .brand-logo {
+  grid-column: 1;
+  grid-row: 1;
+  gap: 0.65rem;
+  color: #f3f1e9;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+body.verdant-storefront .nav-links {
+  display: flex;
+  grid-column: 2;
+  grid-row: 1;
+  justify-content: center;
+  gap: clamp(1rem, 2vw, 2rem);
+  min-width: 0;
+}
+
+body.verdant-storefront .nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 72px;
+  padding: 0 0.1rem;
+  border-radius: 0;
+  background: transparent;
+  color: #c5ccc6;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.005em;
+}
+
+body.verdant-storefront .page-search--in-navbar {
+  grid-column: 3;
+  grid-row: 1;
+  width: 100%;
+  min-width: 0;
+}
+
+body.verdant-storefront .nav-actions {
+  grid-column: 4;
+  grid-row: 1;
+  justify-self: end;
+  flex-wrap: nowrap;
+  gap: 0.65rem;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+body.verdant-storefront .nav-actions .btn-profile-nav {
+  min-height: 40px;
+  padding: 0.4rem 0.55rem;
+  border: 0;
+  background: transparent;
+  color: #d7dcd7;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+body.verdant-storefront .nav-actions .btn-pill {
+  min-height: 40px;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid #477961;
+  border-radius: 7px;
+  background: #315d48;
+  color: #f6f5ef;
+  box-shadow: none;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+body.verdant-storefront .brand-icon {
+  width: 2.15rem;
+  height: 2.15rem;
+  border: 1px solid rgba(191, 157, 101, 0.35);
+  border-radius: 8px;
+  background: rgba(191, 157, 101, 0.12);
+  color: #d4b77e;
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+body.verdant-storefront .nav-links {
+  color: #c5ccc6;
+}
+
+body.verdant-storefront .nav-link:hover,
+body.verdant-storefront .nav-link:focus,
+body.verdant-storefront .nav-link.active,
+body.verdant-storefront .nav-link[aria-current="page"] {
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #f3f1e9;
+  transform: none;
+}
+
+body.verdant-storefront .nav-link::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: #bda36d;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 180ms ease;
+}
+
+body.verdant-storefront .nav-link:hover::after,
+body.verdant-storefront .nav-link.active::after {
+  transform: scaleX(1);
+}
+
+body.verdant-storefront .cart-icon-btn,
+body.verdant-storefront .btn-profile-nav {
+  border-color: transparent;
+  background: transparent;
+  color: #d7dcd7;
+}
+
+body.verdant-storefront .cart-icon-btn:hover,
+body.verdant-storefront .btn-profile-nav:hover {
+  border-color: transparent;
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  transform: none;
+}
+
+body.verdant-storefront .navbar .cart-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 7px;
+  font-size: 1.15rem;
+}
+
+body.verdant-storefront .profile-nav-icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+body.verdant-storefront .profile-nav-icon svg,
+body.verdant-storefront .cart-icon-btn svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+body.verdant-storefront .navbar .btn-strawberry:hover {
+  border-color: #628a70;
+  background: #3b6b53;
+  box-shadow: none;
+  transform: none;
+}
+
+body.verdant-storefront .btn-strawberry,
+body.verdant-storefront .btn-hero-ready,
+body.verdant-storefront .btn-book-submit,
+body.verdant-storefront .home-hero-button:not(.home-hero-button-secondary) {
+  border-color: #2d6b5d;
+  background: linear-gradient(135deg, #1f4f43, #2d6b5d);
+  color: #f5f5f3;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 12px 28px rgba(31, 79, 67, 0.22);
+}
+
+body.verdant-storefront .btn-strawberry:hover,
+body.verdant-storefront .btn-hero-ready:hover,
+body.verdant-storefront .btn-book-submit:hover,
+body.verdant-storefront .home-hero-button:hover {
+  border-color: #79b9a2;
+  background: linear-gradient(135deg, #286354, #347a69);
+  box-shadow: 0 16px 34px rgba(31, 79, 67, 0.32);
+  transform: translateY(-2px);
+}
+
+body.verdant-storefront .page-search form {
+  border-color: var(--line);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow: none;
+}
+
+body.verdant-storefront .page-search input {
+  background: transparent;
+  color: var(--ink);
+}
+
+body.verdant-storefront .page-search input::placeholder {
+  color: #89938d;
+}
+
+body.verdant-storefront .page-search button {
+  border-radius: 5px;
+  background: #315d48;
+}
+
+body.verdant-storefront .page-search form:focus-within {
+  outline-color: #79b9a2;
+}
+
+body.verdant-storefront .page-search-results {
+  border-color: var(--line);
+  border-radius: 16px;
+  background: #111914;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.38);
+}
+
+body.verdant-storefront .page-search-results a:hover,
+body.verdant-storefront .page-search-results a:focus,
+body.verdant-storefront .page-search-results a[aria-selected="true"] {
+  background: rgba(31, 79, 67, 0.38);
+  color: #d7efe7;
+}
+
+body.verdant-storefront .page-search-empty {
+  color: var(--muted);
+}
+
+body.verdant-storefront .home-hero {
+  position: relative;
+  isolation: isolate;
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(ellipse at 78% 45%, rgba(45, 107, 93, 0.23), transparent 35%),
+    linear-gradient(130deg, #080d0a 0%, #0c1511 55%, #101a15 100%);
+}
+
+body.verdant-storefront .cake-page-hero {
+  position: relative;
+  isolation: isolate;
+  border-bottom: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(5, 8, 6, 0.48), rgba(5, 8, 6, 0.62)),
+    url("/images/cake-page/bakery-hero.jpg") center 48% / cover no-repeat,
+    #101612;
+}
+
+body.verdant-storefront .home-hero-title,
+body.verdant-storefront .cake-page-title,
+body.verdant-storefront .section-title,
+body.verdant-storefront .section-title-large,
+body.verdant-storefront .section-header-block,
+body.verdant-storefront .home-hero-copy {
+  color: var(--ink);
+}
+
+body.verdant-storefront .home-hero-title,
+body.verdant-storefront .cake-page-title,
+body.verdant-storefront .section-title,
+body.verdant-storefront .section-title-large {
+  letter-spacing: -0.045em;
+}
+
+body.verdant-storefront .home-hero-eyebrow,
+body.verdant-storefront .cake-eyebrow,
+body.verdant-storefront .section-eyebrow,
+body.verdant-storefront .section-badge-pill,
+body.verdant-storefront .services-choice-eyebrow,
+body.verdant-storefront .hiw-eyebrow,
+body.verdant-storefront .wcu-eyebrow {
+  border-color: rgba(126, 196, 174, 0.22);
+  background: rgba(31, 79, 67, 0.18);
+  color: #c4e7d9;
+}
+
+body.verdant-storefront .home-hero-description,
+body.verdant-storefront .cake-page-subtitle,
+body.verdant-storefront .section-subtitle,
+body.verdant-storefront .section-subtitle-text,
+body.verdant-storefront .services-choice-subtitle,
+body.verdant-storefront .hiw-subtitle,
+body.verdant-storefront .wcu-subtitle {
+  color: var(--muted);
+}
+
+body.verdant-storefront .home-hero-art {
+  border-color: rgba(126, 196, 174, 0.2);
+  background:
+    radial-gradient(circle, #14221b 0 42%, #102019 43% 68%, #173b30 69%),
+    #111914;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28), 0 0 80px rgba(31, 79, 67, 0.16);
+  animation: verdant-float 7s ease-in-out infinite;
+}
+
+body.verdant-storefront .home-hero-button-secondary,
+body.verdant-storefront .btn-hero-custom {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--ink);
+}
+
+body.verdant-storefront .home-hero-button-secondary:hover,
+body.verdant-storefront .btn-hero-custom:hover {
+  border-color: rgba(126, 196, 174, 0.4);
+  background: rgba(31, 79, 67, 0.18);
+  color: #d7efe7;
+}
+
+body.verdant-storefront :is(.gallery-section, .services-choice-section, .how-it-works-section, .why-choose-us-section, .custom-builder-section, .birthday-cakes-section) {
+  border-color: var(--line);
+  background: transparent;
+  color: var(--ink);
+}
+
+body.verdant-storefront .custom-builder-section {
+  scroll-margin-top: 76px;
+  background: #080d0a;
+}
+
+body.verdant-storefront .custom-builder-hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: min(760px, calc(100svh - 76px));
+  place-items: center;
+  overflow: hidden;
+  padding: clamp(4rem, 9vh, 7rem) 1.5rem;
+  scroll-margin-top: 76px;
+  background:
+    linear-gradient(180deg, rgba(5, 8, 6, 0.48), rgba(5, 8, 6, 0.64)),
+    url("/images/custom-cake/custom-builder-hero.jpg") center 42% / cover no-repeat,
+    #080d0a;
+  opacity: var(--custom-hero-opacity, 1);
+  transform: translate3d(0, var(--custom-hero-shift, 0px), 0);
+  transform-origin: center top;
+  will-change: opacity, transform;
+}
+
+body.verdant-storefront .custom-builder-hero .section-header-block {
+  position: relative;
+  z-index: 1;
+  width: min(760px, 100%);
+  margin: 0;
+  color: #fff;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+}
+
+body.verdant-storefront .custom-builder-hero .section-title-large {
+  color: #fff;
+  text-shadow: 0 3px 22px rgba(0, 0, 0, 0.55);
+}
+
+body.verdant-storefront .custom-builder-hero .section-subtitle-text {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
+}
+
+body.verdant-storefront .custom-builder-scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  color: #e9f4ed;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+body.verdant-storefront .custom-builder-scroll-cue span:last-child {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+}
+
+body.verdant-storefront.scroll-effects-ready .custom-builder-content {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+body.verdant-storefront.scroll-effects-ready .custom-builder-content.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.verdant-storefront .custom-builder-hero {
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  body.verdant-storefront.scroll-effects-ready .custom-builder-content {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+body.verdant-storefront .section-container {
+  color: var(--ink);
+}
+
+body.verdant-storefront :is(.gallery-card, .service-card, .popular-pick-card, .cake-card, .builder-form-card, .recommendations-panel, .mini-box, .feature-card, .showcase-panel) {
+  border-color: var(--line);
+  background: linear-gradient(155deg, rgba(17, 25, 20, 0.96), rgba(10, 15, 12, 0.98));
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.2);
+  color: var(--ink);
+}
+
+body.verdant-storefront :is(.gallery-card, .cake-card, .popular-pick-card, .feature-card):hover {
+  border-color: rgba(126, 196, 174, 0.38);
+  box-shadow: 0 24px 52px rgba(0, 0, 0, 0.32), 0 0 28px rgba(31, 79, 67, 0.12);
+  transform: translateY(-5px);
+}
+
+body.verdant-storefront :is(.gallery-card-title, .cake-card-name, .popular-pick-card h3, .feature-card h3, .step-title, .rec-panel-title) {
+  color: var(--ink);
+}
+
+body.verdant-storefront :is(.gallery-card-tag, .cake-flavor-tag, .cake-page-hero .cake-eyebrow, .section-eyebrow) {
+  color: #9cd9c1;
+}
+
+body.verdant-storefront :is(.cake-card-desc, .popular-pick-card p, .feature-card p, .cake-portion-hint, .step-hint, .option-sub) {
+  color: var(--muted);
+}
+
+body.verdant-storefront :is(.storefront-filters, .storefront-filter input, .storefront-filter select, .filter-reset-button, .builder-input, .builder-select, .builder-textarea, .pill-toggle-label, .option-select-card) {
+  border-color: var(--line);
+  background: #0c120f;
+  color: var(--ink);
+}
+
+body.verdant-storefront :is(.storefront-filter, .builder-label) {
+  color: #d7ded9;
+}
+
+body.verdant-storefront :is(.storefront-filter input, .storefront-filter select, .builder-input, .builder-select, .builder-textarea):focus {
+  border-color: #79b9a2;
+  background: #111914;
+  box-shadow: 0 0 0 3px rgba(126, 196, 174, 0.13);
+}
+
+body.verdant-storefront .shape-tab-btn {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--muted);
+}
+
+body.verdant-storefront .shape-tab-btn:hover,
+body.verdant-storefront .shape-tab-btn.active {
+  border-color: rgba(126, 196, 174, 0.42);
+  background: rgba(31, 79, 67, 0.34);
+  color: #d7efe7;
+  box-shadow: 0 10px 24px rgba(31, 79, 67, 0.14);
+}
+
+body.verdant-storefront .option-select-card:hover,
+body.verdant-storefront .option-select-card.selected {
+  border-color: #79b9a2;
+  background: rgba(31, 79, 67, 0.3);
+  box-shadow: 0 0 0 2px rgba(126, 196, 174, 0.1);
+}
+
+body.verdant-storefront .option-name,
+body.verdant-storefront .step-title {
+  color: var(--ink);
+}
+
+body.verdant-storefront .step-block {
+  border-color: var(--line);
+}
+
+body.verdant-storefront .step-num-pill,
+body.verdant-storefront .option-select-card .selected-check {
+  background: linear-gradient(135deg, #1f4f43, #2d6b5d);
+  color: #f5f5f3;
+}
+
+body.verdant-storefront .step-num-pill {
+  box-shadow: 0 0 22px rgba(126, 196, 174, 0.17);
+}
+
+body.verdant-storefront .cake-card-badge,
+body.verdant-storefront .section-badge-pill {
+  border-color: rgba(126, 196, 174, 0.24);
+  background: rgba(17, 25, 20, 0.92);
+  color: #c4e7d9;
+}
+
+body.verdant-storefront .cake-availability {
+  border-color: rgba(126, 196, 174, 0.28);
+  background: rgba(31, 79, 67, 0.24);
+  color: #bce6d4;
+}
+
+body.verdant-storefront .cake-availability.unavailable {
+  border-color: rgba(237, 148, 148, 0.3);
+  background: rgba(115, 35, 39, 0.24);
+  color: #f0b5b5;
+}
+
+body.verdant-storefront .qty-stepper-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(121, 185, 162, 0.38);
+  background: #152a21;
+  color: #f5f5f3;
+  box-shadow: none;
+}
+
+body.verdant-storefront .qty-stepper-btn:hover {
+  border-color: #9cd9c1;
+  background: #79b9a2;
+  color: #07110c;
+}
+
+body.verdant-storefront .qty-stepper {
+  gap: 3px;
+  padding: 4px;
+  border-color: rgba(121, 185, 162, 0.32);
+  background: rgba(5, 12, 8, 0.72);
+}
+
+body.verdant-storefront .qty-stepper-input {
+  width: 30px;
+  color: #f5f5f3;
+}
+
+body.verdant-storefront .btn-cake-add {
+  min-height: 44px;
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(156, 217, 193, 0.58);
+  background: linear-gradient(135deg, #276b55, #1f4f43);
+  color: #fff;
+  box-shadow: 0 5px 16px rgba(31, 79, 67, 0.3);
+}
+
+body.verdant-storefront .btn-cake-add:hover {
+  border-color: #bce6d4;
+  background: linear-gradient(135deg, #347e64, #276b55);
+  box-shadow: 0 8px 20px rgba(31, 79, 67, 0.42);
+}
+
+body.verdant-storefront .btn-cake-add:disabled,
+body.verdant-storefront .qty-stepper-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+body.verdant-storefront .rec-cake-card {
+  --color-dark-roast: #26352e;
+  --color-dark-muted: #52635a;
+  --color-strawberry: #276b55;
+  --color-border: #d7e1da;
+  color: #26352e;
+}
+
+body.verdant-storefront .rec-cake-card .rec-card-title {
+  color: #26352e;
+}
+
+body.verdant-storefront .rec-cake-card .rec-attr-tag {
+  background: #e8eee9;
+  color: #405248;
+}
+
+body.verdant-storefront .rec-cake-card .rec-card-footer {
+  border-color: #d7e1da;
+}
+
+body.verdant-storefront .rec-cake-card .btn-card-details {
+  border-color: #b7c8bd;
+  background: #f4f7f4;
+  color: #26352e;
+}
+
+body.verdant-storefront .rec-cake-card .btn-card-details:hover {
+  border-color: #276b55;
+  background: #276b55;
+  color: #fff;
+}
+
+body.verdant-storefront .site-footer,
+body.verdant-storefront footer {
+  border-color: var(--line);
+  background: rgba(5, 8, 6, 0.45);
+  color: var(--muted);
+}
+
+body.verdant-storefront .cart-drawer-panel {
+  border-color: var(--line);
+  background: #fdfcf9;
+  color: #17211b;
+}
+
+body.verdant-storefront .cart-drawer-panel .cart-drawer-header,
+body.verdant-storefront .cart-drawer-panel .cart-drawer-footer {
+  border-color: #dedfd8;
+  background: #f2f4ef;
+}
+
+body.verdant-storefront .cart-drawer-panel .cart-drawer-title,
+body.verdant-storefront .cart-drawer-panel .cart-item-title,
+body.verdant-storefront .cart-drawer-panel .cart-total-label,
+body.verdant-storefront .cart-drawer-panel .cart-empty-message,
+body.verdant-storefront .cart-drawer-panel .cart-empty-message h4,
+body.verdant-storefront .cart-drawer-panel .checkout-drawer-form h4 {
+  color: #17211b;
+}
+
+body.verdant-storefront .cart-drawer-panel .cart-item-card {
+  border-color: #dedfd8;
+  background: #fff;
+}
+
+body.verdant-storefront .cart-drawer-panel .cart-item-card-custom {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  align-items: start;
+  gap: 0.85rem;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+body.verdant-storefront .cart-drawer-panel .cart-item-card-custom .cart-item-thumb {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+body.verdant-storefront .cart-drawer-panel .cart-item-card-custom .cart-item-details {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+body.verdant-storefront .cart-drawer-panel .cart-item-card-custom .cart-item-title {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+body.verdant-storefront .cart-drawer-panel .cart-item-card-custom .cart-item-controls {
+  margin-top: 0.25rem;
+}
+
+body.verdant-storefront .cart-drawer-panel .cart-item-unit-price,
+body.verdant-storefront .cart-drawer-panel .cart-item-spec span,
+body.verdant-storefront .cart-drawer-panel .cart-empty-message p {
+  color: #566158;
+}
+
+body.verdant-storefront .cart-drawer-panel .cart-item-custom-specs {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem 1rem;
+  border-top: 1px solid #e6e8e2;
+  padding: 0.8rem 0 0.35rem;
+}
+
+body.verdant-storefront .cart-drawer-panel .cart-item-spec {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  overflow-wrap: anywhere;
+  font-size: 0.78rem;
+}
+
+body.verdant-storefront .cart-drawer-panel .cart-item-spec strong {
+  color: #17211b;
+  font-size: 0.83rem;
+  font-weight: 650;
+}
+
+body.verdant-storefront .cart-drawer-panel .cart-item-booking-status {
+  display: inline-block;
+  margin: 0.2rem 0;
+  color: #176345;
+  font-size: 0.75rem;
+  font-weight: 750;
+}
+
+body.verdant-storefront .cart-drawer-panel .cart-item-card-custom .cart-item-total {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-top: 1px solid #e6e8e2;
+  padding-top: 0.7rem;
+  text-align: left;
+  white-space: normal;
+}
+
+body.verdant-storefront .cart-drawer-panel .cart-total-value.cart-total-status {
+  color: #176345;
+  font-size: 0.95rem;
+}
+
+body.verdant-storefront .cart-drawer-panel .cart-drawer-scroll-wrap {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.verdant-storefront .cart-drawer-panel .payment-handoff-note {
+  margin: 0.75rem 0;
+  padding: 0.75rem;
+  border-radius: 0.6rem;
+  background: #eef4ef;
+  color: #405247;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  body.verdant-storefront .cart-drawer-panel .cart-item-custom-specs {
+    grid-template-columns: 1fr;
+  }
+
+  body.verdant-storefront .cart-drawer-panel .cart-item-card-custom {
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+}
+
+body.verdant-storefront .verdant-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 650ms ease, transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.verdant-storefront .verdant-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes verdant-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@media (max-width: 1180px) {
+  body.verdant-storefront .navbar {
+    height: auto;
+  }
+
+  body.verdant-storefront .navbar-container {
+    grid-template-columns: minmax(0, 1fr) max-content;
+    height: auto;
+    padding-block: 0.8rem;
+  }
+
+  body.verdant-storefront .brand-logo {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  body.verdant-storefront .nav-actions {
+    grid-column: 2;
+    grid-row: 1;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    white-space: normal;
+  }
+
+  body.verdant-storefront .nav-links {
+    grid-column: 1;
+    grid-row: 2;
+    justify-content: flex-start;
+  }
+
+  body.verdant-storefront .page-search--in-navbar {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+    width: min(32vw, 300px);
+  }
+}
+
+@media (max-width: 760px) {
+  body.verdant-storefront .navbar {
+    min-height: 72px;
+  }
+
+  body.verdant-storefront .navbar-container {
+    grid-template-columns: minmax(0, 1fr) max-content;
+    min-height: 72px;
+    column-gap: 0.75rem;
+    row-gap: 0.45rem;
+    padding: 0.55rem 1rem;
+  }
+
+  body.verdant-storefront .nav-links {
+    grid-column: 1;
+    grid-row: 2;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: clamp(0.65rem, 2vw, 1.1rem);
+  }
+
+  body.verdant-storefront .nav-link {
+    min-height: 36px;
+    font-size: 20px;
+  }
+
+  body.verdant-storefront .page-search--in-navbar {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: stretch;
+    width: min(40vw, 260px);
+    min-width: 190px;
+  }
+
+  body.verdant-storefront .page-search form {
+    gap: 0.35rem;
+    padding: 0.3rem;
+  }
+
+  body.verdant-storefront .page-search input {
+    padding: 0.4rem;
+    font-size: 0.82rem;
+  }
+
+  body.verdant-storefront .page-search button {
+    padding: 0.45rem 0.6rem;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body.verdant-storefront .navbar-container {
+    padding-inline: 0.75rem;
+  }
+
+  body.verdant-storefront .nav-links {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem 0.85rem;
+  }
+
+  body.verdant-storefront .nav-link {
+    min-height: 32px;
+    font-size: 20px;
+  }
+
+  body.verdant-storefront .page-search--in-navbar {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    justify-self: stretch;
+    width: 100%;
+    min-width: 0;
+  }
+
+  body.verdant-storefront .nav-actions {
+    gap: 0.4rem;
+  }
+
+  body.verdant-storefront .nav-actions .btn-pill {
+    display: none;
+  }
+
+  body.verdant-storefront .profile-nav-name {
+    display: none;
+  }
+
+  body.verdant-storefront .nav-actions .btn-profile-nav {
+    min-width: 42px;
+    min-height: 42px;
+    padding: 0.45rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.verdant-storefront *,
+  body.verdant-storefront *::before,
+  body.verdant-storefront *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  body.verdant-storefront .verdant-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

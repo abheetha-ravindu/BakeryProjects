@@ -1,7 +1,7 @@
 package com.example.bakeryshop.billing;
 
-import com.bakery.bakeryplatform.exception.ResourceNotFoundException;
-import com.bakery.bakeryplatform.service.payment.PaymentService;
+import com.example.bakeryshop.exception.ResourceNotFoundException;
+import com.example.bakeryshop.services.payment.PaymentService;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import org.springframework.http.HttpStatus;

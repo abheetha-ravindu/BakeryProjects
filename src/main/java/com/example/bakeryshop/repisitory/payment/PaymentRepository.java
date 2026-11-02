@@ -1,7 +1,7 @@
-package com.bakery.bakeryplatform.repository.payment;
+package com.example.bakeryshop.repisitory.payment;
 
-import com.bakery.bakeryplatform.model.payment.Payment;
-import com.bakery.bakeryplatform.model.payment.PaymentStatus;
+import com.example.bakeryshop.model.payment.Payment;
+import com.example.bakeryshop.model.payment.PaymentStatus;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

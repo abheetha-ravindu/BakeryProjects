@@ -1,8 +1,8 @@
 package com.example.bakeryshop.billing;
 
-import com.bakery.bakeryplatform.exception.ResourceNotFoundException;
-import com.bakery.bakeryplatform.model.order.Order;
-import com.bakery.bakeryplatform.repository.order.OrderRepository;
+import com.example.bakeryshop.exception.ResourceNotFoundException;
+import com.example.bakeryshop.model.order.Order;
+import com.example.bakeryshop.repisitory.order.OrderRepository;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

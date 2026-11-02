@@ -2,7 +2,6 @@ package com.example.bakeryshop.controller;
 
 import com.example.bakeryshop.model.CakeOption;
 import com.example.bakeryshop.services.CakeOptionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +10,11 @@ import java.util.Map;
 @RequestMapping("/api/cake-options")
 public class CakeOptionController {
 
-    @Autowired
-    private CakeOptionService cakeOptionService;
+    private final CakeOptionService cakeOptionService;
+
+    public CakeOptionController(CakeOptionService cakeOptionService) {
+        this.cakeOptionService = cakeOptionService;
+    }
 
     // Read: Admin views all cake options
     @GetMapping

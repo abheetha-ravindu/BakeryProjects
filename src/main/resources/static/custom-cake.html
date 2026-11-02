@@ -20,23 +20,21 @@
         }
 
         .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 20;
-            background: rgba(255, 255, 255, 0.98);
+            position: relative;
+            z-index: 1;
+            background: #fff;
             border-bottom: 1px solid #eee4da;
-            box-shadow: 0 1px 0 rgba(60, 31, 15, 0.02);
         }
 
         .navbar-container {
             display: flex;
+            max-width: 1200px;
+            min-height: 72px;
             align-items: center;
             justify-content: space-between;
-            max-width: 1220px;
-            min-height: 76px;
+            gap: 1.5rem;
             margin: 0 auto;
             padding: 0 1.5rem;
-            gap: 1.5rem;
         }
 
         .brand-logo,
@@ -52,7 +50,7 @@
             align-items: center;
             gap: 0.5rem;
             color: #2f221d;
-            font-size: clamp(1.5rem, 2vw, 2rem);
+            font-size: 20px;
             font-weight: 700;
             letter-spacing: -0.02em;
             white-space: nowrap;
@@ -84,8 +82,8 @@
 
         .nav-link {
             color: #4a382f;
-            font-size: 1rem;
-            font-weight: 500;
+            font-size: 20px;
+            font-weight: 700;
             transition: color 0.2s ease;
         }
 
@@ -140,6 +138,7 @@
             border-radius: 999px;
             background: #fff;
             color: #2f221d;
+            font-size: 20px;
             font-weight: 700;
         }
 
@@ -156,7 +155,7 @@
             padding: 0.8rem 1.45rem;
             border-radius: 999px;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 20px;
             border: 1px solid transparent;
         }
 
@@ -175,11 +174,17 @@
         }
 
         @media (max-width: 760px) {
+            .navbar {
+                height: auto;
+                min-height: 72px;
+            }
+
             .navbar-container {
                 flex-wrap: wrap;
                 justify-content: center;
                 gap: 0.75rem 1.25rem;
                 padding: 1rem;
+                min-height: 72px;
             }
 
             .nav-links,
@@ -1985,8 +1990,9 @@
         }
 
     </style>
+    <link rel="stylesheet" href="/css/verdant-storefront.css">
 </head>
-<body>
+<body class="verdant-storefront">
 
     <!-- ======================================================================
          TOP NAVIGATION BAR
@@ -1994,31 +2000,31 @@
     <nav class="navbar" id="mainNavbar">
         <div class="navbar-container">
             <a href="index.html" class="brand-logo" id="navBrand">
-                <span class="brand-icon">🎂</span>
+                <span class="brand-icon" aria-hidden="true">K</span>
                 <span>kamuda.com</span>
             </a>
 
             <ul class="nav-links">
                 <li><a href="index.html" class="nav-link" id="navHome">Home</a></li>
                 <li><a href="item.html" class="nav-link" id="navBakery">Shop Cakes</a></li>
-                <li><a href="custom-cake.html" class="nav-link active" id="navCustomCake">Book Cake</a></li>
+                <li><a href="#customBuilderHero" class="nav-link active" id="navCustomCake">Book Cake</a></li>
             </ul>
 
             <div class="nav-actions">
                 <button type="button" class="cart-icon-btn" id="navCartBtn" onclick="toggleCartDrawer(true)" title="View Order Basket">
-                    🛒
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
                     <span class="cart-badge" id="navCartBadge" style="display:none;">0</span>
                 </button>
 
                 <div class="nav-profile-wrapper" id="navProfileWrapper">
-                    <a href="/profile" class="btn-profile-nav" id="navProfileBtn" title="Customer Login / Sign Up">
-                        <span class="profile-nav-icon">👤</span>
-                        <span class="profile-nav-name">Profile</span>
+                    <a href="/profileupdate" class="btn-profile-nav" id="navProfileBtn" title="Customer Login / Sign Up">
+                        <span class="profile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span>
+                        <span class="profile-nav-name">Account</span>
                     </a>
                 </div>
 
-                <a href="#custom-cake-builder" class="btn-pill btn-strawberry" id="navBookBtn">
-                    ✨ Book Custom Cake
+                <a href="#customBuilderHero" class="btn-pill btn-strawberry" id="navBookBtn">
+                    Start an order
                 </a>
             </div>
         </div>
@@ -2031,15 +2037,21 @@
          "Choose your shape, flavor, filling, decoration and event details."
          ====================================================================== -->
     <section class="custom-builder-section" id="custom-cake-builder">
-        <div class="section-container">
+        <div class="custom-builder-hero" id="customBuilderHero">
             <div class="section-header-block">
                 <span class="section-badge-pill" style="background:#FFF5E6; border-color:#F5DEB3; color:#B8860B;">✨ Bespoke Studio</span>
                 <h2 class="section-title-large">Create Your Custom Cake</h2>
                 <p class="section-subtitle-text">
                     Choose your shape, flavor, filling, decoration and event details. Our pastry artists will bring your vision to life.
                 </p>
+                <a class="custom-builder-scroll-cue" href="#builderStep1">
+                    <span>Scroll to start designing</span>
+                    <span aria-hidden="true">↓</span>
+                </a>
             </div>
+        </div>
 
+        <div class="section-container custom-builder-content">
             <div class="builder-layout-grid">
                 
                 <!-- Left Column: Interactive Multi-Step Builder Form -->
@@ -2470,7 +2482,7 @@
 
             <div class="cart-drawer-footer" id="cartDrawerFooter">
                 <!-- Promo Code Box -->
-                <div class="promo-box" style="margin: 0.5rem 0 0.85rem 0; padding: 0.75rem; background: #FFF5F6; border: 1px dashed #C92C3D; border-radius: 8px;">
+                <div class="promo-box" id="customCartPromoBox" style="margin: 0.5rem 0 0.85rem 0; padding: 0.75rem; background: #FFF5F6; border: 1px dashed #C92C3D; border-radius: 8px;">
                     <label for="promoCodeInput" style="display:block; font-size:0.8rem; font-weight:700; color:var(--color-dark-roast); margin-bottom:0.35rem;">Promo Code</label>
                     <div style="display:flex; gap:0.5rem;">
                         <input type="text" id="promoCodeInput" class="drawer-form-input" placeholder="" style="flex:1; height:38px; padding:0 0.6rem; font-size:0.85rem;">
@@ -2496,13 +2508,9 @@
                     <span>Show Checkout Details</span>
                     <span>→</span>
                 </button>
-
-                <!-- Order Checkout Form (Submits to /order servlet / server.js) -->
-                <form action="order" method="POST" id="checkoutOrderForm" class="checkout-drawer-form" onsubmit="return handleOrderCheckout(event)">
-                    <input type="hidden" name="action" value="create">
+                <form id="checkoutOrderForm" class="checkout-drawer-form" onsubmit="return handleOrderCheckout(event)">
                     <input type="hidden" name="cartPayload" id="hiddenCartPayload">
                     <input type="hidden" name="promoCode" id="hiddenPromoCode" value="">
-                    <input type="hidden" name="paymentMethod" id="hiddenPaymentMethod" value="Card Payment">
 
                     <h4 style="font-family:var(--font-heading); margin-bottom:0.75rem; color:var(--color-dark-roast);">Customer Details</h4>
                     
@@ -2521,61 +2529,7 @@
                         <input type="text" id="custAddress" name="deliveryAddress" class="drawer-form-input" placeholder="e.g. Colombo 07 or Pickup at Flagship Store">
                     </div>
 
-                    <!-- Payment Method Option -->
-                    <div class="drawer-form-group" style="margin-top:0.85rem; margin-bottom:0.75rem;">
-                        <label class="drawer-form-label" style="font-weight:700; color:var(--color-dark-roast); margin-bottom:0.4rem; display:block;">Payment Method</label>
-                        <div style="display:flex; flex-direction:column; gap:0.5rem;">
-                            <label id="payMethodCardLabel" style="display:flex; align-items:center; gap:0.6rem; background:#FFF5F6; border:1.5px solid var(--color-strawberry, #C92C3D); border-radius:8px; padding:0.65rem 0.9rem; font-weight:700; font-size:0.88rem; color:var(--color-dark-roast); cursor:pointer;">
-                                <input type="radio" name="paymentMethodChoice" id="payMethodCard" value="Card Payment" checked onchange="handlePaymentMethodChange()" style="accent-color:var(--color-strawberry, #C92C3D);">
-                                <span>💳 Card Payment (Credit / Debit)</span>
-                            </label>
-                            <label id="payMethodDeliveryLabel" style="display:flex; align-items:center; gap:0.6rem; background:#FFFDFB; border:1.5px solid #EADBCE; border-radius:8px; padding:0.65rem 0.9rem; font-weight:700; font-size:0.88rem; color:var(--color-dark-roast); cursor:pointer;">
-                                <input type="radio" name="paymentMethodChoice" id="payMethodDelivery" value="PAY_AFTER_DELIVERY" onchange="handlePaymentMethodChange()" style="accent-color:var(--color-strawberry, #C92C3D);">
-                                <span>💵 Pay After Delivery</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Clean, Professional Card Payment Box -->
-                    <div id="cardPaymentBox" style="background:#FFFDFB; border:1px solid #E8DFD8; border-radius:10px; padding:1rem; margin-bottom:1rem; box-shadow:0 2px 8px rgba(44,30,22,0.04);">
-                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.85rem; border-bottom:1px solid #F0E6DE; padding-bottom:0.5rem;">
-                            <span style="font-weight:700; font-size:0.88rem; color:var(--color-dark-roast);">💳 Card Payment Details</span>
-                            <span style="font-size:0.75rem; color:#78665B; background:#F4EDE7; padding:2px 8px; border-radius:4px; font-weight:600;">🔒 Demo-Safe SSL</span>
-                        </div>
-
-                        <div class="drawer-form-group" style="margin-bottom:0.75rem;">
-                            <label class="drawer-form-label" for="cardholderName" style="font-size:0.82rem; font-weight:600; display:block; margin-bottom:0.25rem;">Cardholder Name *</label>
-                            <input type="text" id="cardholderName" class="drawer-form-input" placeholder="e.g. Priyantha Silva" style="width:100%; box-sizing:border-box;">
-                        </div>
-
-                        <div class="drawer-form-group" style="margin-bottom:0.75rem;">
-                            <label class="drawer-form-label" for="cardNumber" style="font-size:0.82rem; font-weight:600; display:block; margin-bottom:0.25rem;">Card Number *</label>
-                            <input type="text" id="cardNumber" class="drawer-form-input" placeholder="•••• •••• •••• ••••" maxlength="19" style="width:100%; box-sizing:border-box; letter-spacing:1px; font-family:monospace;" oninput="formatCardNumberInput(this)">
-                        </div>
-
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem;">
-                            <div class="drawer-form-group" style="margin-bottom:0;">
-                                <label class="drawer-form-label" for="cardExpiry" style="font-size:0.82rem; font-weight:600; display:block; margin-bottom:0.25rem;">Expiry Date *</label>
-                                <input type="text" id="cardExpiry" class="drawer-form-input" placeholder="MM/YY" maxlength="5" style="width:100%; box-sizing:border-box; text-align:center;" oninput="formatCardExpiryInput(this)">
-                            </div>
-                            <div class="drawer-form-group" style="margin-bottom:0;">
-                                <label class="drawer-form-label" for="cardCvv" style="font-size:0.82rem; font-weight:600; display:block; margin-bottom:0.25rem;">CVV *</label>
-                                <input type="password" id="cardCvv" class="drawer-form-input" placeholder="•••" maxlength="4" style="width:100%; box-sizing:border-box; text-align:center; letter-spacing:2px;" oninput="formatCardCvvInput(this)">
-                            </div>
-                        </div>
-
-                        <div style="background:#FAF3EE; border-radius:6px; padding:0.6rem 0.8rem; display:flex; justify-content:space-between; align-items:center; margin-top:0.5rem;">
-                            <span style="font-size:0.82rem; font-weight:600; color:var(--color-dark-roast);">Payable Amount:</span>
-                            <span id="cardPayableAmountDisplay" style="font-size:1.05rem; font-weight:800; color:var(--color-strawberry, #C92C3D);">Rs. 0</span>
-                        </div>
-
-                        <div id="cardValidationMsg" style="color:#DC2626; font-size:0.8rem; font-weight:600; margin-top:0.5rem; display:none;"></div>
-                    </div>
-
-                    <!-- Promo Zero Notice (shown when promo reduces amount to Rs. 0) -->
-                    <div id="promoZeroNotice" style="display:none; background:#E8F5E9; border:1px solid #A5D6A7; border-radius:8px; padding:0.75rem 0.9rem; margin-bottom:0.85rem; font-size:0.85rem; color:#1B5E20;">
-                        🎉 <strong>100% Promo Discount Applied!</strong> Final payable amount is <strong>Rs. 0</strong>. Card payment is skipped. Click below to place your order directly.
-                    </div>
+                    <p class="payment-handoff-note">After you place your order, you’ll continue to the payment page to choose a payment method.</p>
 
                     <button type="submit" class="btn-checkout-proceed" style="margin-top:0.5rem;" id="submitOrderBtn">
                         <span>Pay &amp; Place Order</span>
@@ -3017,6 +2971,7 @@
         // Cart state persisted locally while the application has no cart API.
         const CART_KEY = 'sweetbloom_cart';
         let cartItems = [];
+        let pendingCustomCakeOrder = null;
 
         function loadCart() {
             try {
@@ -3032,6 +2987,44 @@
             try {
                 localStorage.setItem(CART_KEY, JSON.stringify(cartItems));
             } catch (e) {}
+        }
+
+        async function createBakeryOrder(orderItems, note) {
+            const userId = Number(window.BakeryApp.getUserId());
+            if (!Number.isSafeInteger(userId) || userId < 1) {
+                throw new Error('Unable to identify your account. Please sign in and try again.');
+            }
+
+            await window.BakeryApp.request(`/api/cart/user/${encodeURIComponent(userId)}`, {
+                method: 'DELETE'
+            });
+
+            for (const item of orderItems) {
+                const productId = item.productId || String(item.id).replace(/^ADMIN-/, '');
+                const unitPrice = Number(item.price);
+                if (!productId) throw new Error(`Missing product ID for ${item.name}.`);
+                if (!Number.isFinite(unitPrice) || unitPrice <= 0) {
+                    throw new Error(`The price for ${item.name} is invalid.`);
+                }
+                if (String(item.orderName || item.name).length > 100) {
+                    throw new Error(`The name for ${item.name} is too long to place in an order.`);
+                }
+                await window.BakeryApp.request('/api/cart', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        userId,
+                        productId,
+                        productName: item.orderName || item.name,
+                        quantity: item.qty,
+                        unitPrice
+                    })
+                });
+            }
+
+            return window.BakeryApp.request('/api/orders', {
+                method: 'POST',
+                body: JSON.stringify({ userId, note })
+            });
         }
 
         function updateCartBadges() {
@@ -4311,26 +4304,82 @@
             }
 
             try {
-                const response = await fetch('/api/bookings', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                let result = {};
-                try {
-                    result = await response.json();
-                } catch (parseError) {
-                    if (response.ok) throw parseError;
+                if (!pendingCustomCakeOrder) {
+                    const response = await fetch('/api/bookings', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    let result = {};
+                    try {
+                        result = await response.json();
+                    } catch (parseError) {
+                        if (response.ok) throw parseError;
+                    }
+
+                    if (!response.ok) {
+                        throw new Error(result.message || `Booking failed (${response.status}).`);
+                    }
+
+                    const bookingId = result.bookingId;
+                    const ticketImage = document.getElementById('ticketPreviewImg');
+                    const imageSource = ticketImage ? ticketImage.getAttribute('src') : '';
+                    const cartImage = imageSource && !/^(data:|blob:)/i.test(imageSource)
+                        ? imageSource
+                        : '/images/Customise%20cake/Round strawberry cake.png';
+                    const cartId = `CUSTOM-BOOKING-${bookingId || Date.now()}`;
+                    const bookingItem = {
+                        id: cartId,
+                        cartKey: cartId,
+                        name: `${payload.shape} ${payload.flavor} Custom Cake`,
+                        orderName: `Custom cake ${payload.shape} ${payload.flavor} (${payload.cakeSize})`,
+                        selectedSize: payload.cakeSize,
+                        unitPrice: estimatedPrice,
+                        price: estimatedPrice,
+                        image: cartImage,
+                        qty: 1,
+                        isCustomCakeBooking: true,
+                        bookingSubmitted: true,
+                        bookingId: bookingId || '',
+                        customCakeDetails: {
+                            shape: payload.shape,
+                            flavor: payload.flavor,
+                            decoration: payload.decoration,
+                            filling: payload.filling,
+                            size: payload.cakeSize,
+                            occasion: payload.occasion,
+                            requiredDate: payload.requiredDate,
+                            preferredTime: payload.preferredTime,
+                            pickupOrDelivery: payload.pickupOrDelivery,
+                            cakeMessage: payload.cakeMessage,
+                            estimatedPrice
+                        }
+                    };
+                    pendingCustomCakeOrder = { bookingId, bookingItem };
                 }
 
-                if (!response.ok) {
-                    throw new Error(result.message || `Booking failed (${response.status}).`);
-                }
-
-                showToast(`Cake booking submitted successfully${result.bookingId ? ` (#${result.bookingId})` : ''}.`);
+                const regularItems = cartItems.filter(item => !(item.isCustomCakeBooking && item.bookingSubmitted));
+                cartItems = [...regularItems, pendingCustomCakeOrder.bookingItem];
+                saveCart();
+                updateCartBadges();
+                const orderItems = [
+                    ...regularItems,
+                    { ...pendingCustomCakeOrder.bookingItem, productId: pendingCustomCakeOrder.bookingItem.id }
+                ];
+                const orderNote = `Custom cake booking #${pendingCustomCakeOrder.bookingId || 'pending'}`;
+                const order = await createBakeryOrder(orderItems, orderNote);
+                cartItems = [];
+                saveCart();
+                updateCartBadges();
+                pendingCustomCakeOrder = null;
+                window.location.assign(`/payment.html?orderId=${encodeURIComponent(order.id)}`);
             } catch (error) {
                 console.error('Could not submit cake booking:', error);
-                showToast(error.message || 'Could not submit your booking. Please try again.');
+                const message = pendingCustomCakeOrder
+                    ? `Booking #${pendingCustomCakeOrder.bookingId || 'saved'} is saved, but payment could not be started: ${error.message}`
+                    : error.message || 'Could not submit your booking. Please try again.';
+                showToast(message);
+                if (pendingCustomCakeOrder) toggleCartDrawer(true);
             } finally {
                 if (submitButton) {
                     submitButton.disabled = false;
@@ -4433,9 +4482,12 @@
                     </div>
                 `;
                 if (totalEl) totalEl.textContent = 'Rs. 0';
+                if (totalEl) totalEl.classList.remove('cart-total-status');
                 if (footer) {
                     const chkBtn = document.getElementById('checkoutToggleBtn');
                     if (chkBtn) chkBtn.style.display = 'none';
+                    const promoBox = document.getElementById('customCartPromoBox');
+                    if (promoBox) promoBox.style.display = '';
                     const form = document.getElementById('checkoutOrderForm');
                     if (form) form.classList.remove('active');
                 }
@@ -4443,34 +4495,57 @@
             }
 
             const chkBtn = document.getElementById('checkoutToggleBtn');
-            if (chkBtn) chkBtn.style.display = 'flex';
+            const orderItems = cartItems.filter(it => !(it.isCustomCakeBooking && it.bookingSubmitted));
+            if (chkBtn) chkBtn.style.display = orderItems.length ? 'flex' : 'none';
+            const promoBox = document.getElementById('customCartPromoBox');
+            if (promoBox) promoBox.style.display = orderItems.length ? '' : 'none';
+            if (!orderItems.length) {
+                const form = document.getElementById('checkoutOrderForm');
+                if (form) form.classList.remove('active');
+            }
 
             let grandTotal = 0;
 
             body.innerHTML = cartItems.map((it, idx) => {
                 const itemTotal = it.price * it.qty;
-                grandTotal += itemTotal;
-                const sizeTag = it.selectedSize ? `<div class="cart-item-size-tag" style="font-size:0.75rem; font-weight:700; color:#8A6D56; background:#F8EFEA; display:inline-block; padding:1px 6px; border-radius:4px; margin:2px 0;">Size: ${it.selectedSize}</div>` : '';
+                const isBooking = it.isCustomCakeBooking && it.bookingSubmitted;
+                if (!isBooking) grandTotal += itemTotal;
+                const sizeTag = it.selectedSize && !isBooking ? `<div class="cart-item-size-tag" style="font-size:0.75rem; font-weight:700; color:#8A6D56; background:#F8EFEA; display:inline-block; padding:1px 6px; border-radius:4px; margin:2px 0;">Size: ${escapeCakeHtml(it.selectedSize)}</div>` : '';
+                const details = it.customCakeDetails;
+                const detailRows = isBooking && details ? [
+                    ['Shape', details.shape],
+                    ['Flavor', details.flavor],
+                    ['Decoration', details.decoration],
+                    ['Filling', details.filling],
+                    ['Size', details.size],
+                    ['Occasion', details.occasion],
+                    ['Required date', details.requiredDate],
+                    ['Preferred time', details.preferredTime],
+                    ['Fulfillment', details.pickupOrDelivery],
+                    ['Cake message', details.cakeMessage]
+                ].filter(([, value]) => value).map(([label, value]) => `<div class="cart-item-spec"><span>${label}</span><strong>${escapeCakeHtml(value)}</strong></div>`).join('') : '';
                 return `
-                    <div class="cart-item-card">
+                    <div class="cart-item-card${isBooking ? ' cart-item-card-custom' : ''}">
                         <div class="cart-item-thumb">
-                            <img src="${it.image}" alt="${it.name}">
+                            <img src="${escapeCakeHtml(it.image)}" alt="${escapeCakeHtml(it.name)}">
                         </div>
                         <div class="cart-item-details">
-                            <div class="cart-item-title">${it.name}</div>
+                            <div class="cart-item-title">${escapeCakeHtml(it.name)}</div>
+                            ${isBooking ? `<span class="cart-item-booking-status">Booking submitted${it.bookingId ? ` · #${escapeCakeHtml(it.bookingId)}` : ''}</span>` : ''}
                             ${sizeTag}
-                            <div class="cart-item-unit-price">Rs. ${it.price.toLocaleString()} each</div>
+                            <div class="cart-item-unit-price">${isBooking ? 'Estimated price' : `Rs. ${it.price.toLocaleString()} each`}</div>
                             <div class="cart-item-controls">
-                                <div class="qty-stepper" style="transform:scale(0.88); transform-origin:left center;">
+                                ${isBooking ? '' : `<div class="qty-stepper" style="transform:scale(0.88); transform-origin:left center;">
                                     <button type="button" class="qty-stepper-btn" onclick="updateCartItemQty(${idx}, -1)">-</button>
                                     <span class="qty-stepper-input" style="line-height:28px;">${it.qty}</span>
                                     <button type="button" class="qty-stepper-btn" onclick="updateCartItemQty(${idx}, 1)">+</button>
-                                </div>
+                                </div>`}
                                 <button type="button" class="cart-item-remove-btn" onclick="removeCartItem(${idx})" title="Remove item">🗑️</button>
                             </div>
                         </div>
+                        ${detailRows ? `<div class="cart-item-custom-specs">${detailRows}</div>` : ''}
                         <div class="cart-item-total">
-                            <div style="font-size:0.72rem; color:#888;">Subtotal</div>
+                            ${isBooking ? '<div class="cart-item-booking-status">Already booked</div>' : '<div style="font-size:0.72rem; color:#888;">Subtotal</div>'}
                             Rs. ${itemTotal.toLocaleString()}
                         </div>
                     </div>
@@ -4479,89 +4554,20 @@
 
             let payableTotal = grandTotal;
             const promoRow = document.getElementById('promoDiscountRow');
-            const promoDiscEl = document.getElementById('cartDrawerPromoDiscount');
             const submitBtn = document.getElementById('submitOrderBtn');
-            const cardBox = document.getElementById('cardPaymentBox');
-            const promoNotice = document.getElementById('promoZeroNotice');
-            const cardAmountDisp = document.getElementById('cardPayableAmountDisplay');
-            const hiddenPayMethod = document.getElementById('hiddenPaymentMethod');
-
-            if (appliedPromo === '12345678' && grandTotal > 0) {
-                payableTotal = 0;
-                if (promoRow) promoRow.style.display = 'flex';
-                if (promoDiscEl) promoDiscEl.textContent = `- Rs. ${grandTotal.toLocaleString()}`;
-                if (cardBox) cardBox.style.display = 'none';
-                if (promoNotice) promoNotice.style.display = 'block';
-                if (hiddenPayMethod) hiddenPayMethod.value = 'PROMO_CODE';
-                if (submitBtn) {
-                    submitBtn.innerHTML = '<span>Place Bakery &amp; Cake Order Now (Rs. 0)</span>';
-                }
-            } else {
-                if (promoRow) promoRow.style.display = 'none';
-                if (promoNotice) promoNotice.style.display = 'none';
-                const isDelivery = document.getElementById('payMethodDelivery') && document.getElementById('payMethodDelivery').checked;
-                if (isDelivery) {
-                    if (cardBox) cardBox.style.display = 'none';
-                    if (hiddenPayMethod) hiddenPayMethod.value = 'PAY_AFTER_DELIVERY';
-                    if (submitBtn) {
-                        submitBtn.innerHTML = `<span>Place Order (Pay After Delivery - Rs. ${payableTotal.toLocaleString()})</span>`;
-                    }
-                } else {
-                    if (cardBox) cardBox.style.display = 'block';
-                    if (hiddenPayMethod) hiddenPayMethod.value = 'Card Payment';
-                    if (cardAmountDisp) cardAmountDisp.textContent = `Rs. ${payableTotal.toLocaleString()}`;
-                    if (submitBtn) {
-                        submitBtn.innerHTML = `<span>Pay &amp; Place Order (Rs. ${payableTotal.toLocaleString()})</span>`;
-                    }
-                }
-            }
+            if (promoRow) promoRow.style.display = 'none';
+            if (submitBtn) submitBtn.innerHTML = '<span>Place Order &amp; Continue to Payment</span>';
 
             if (totalEl) {
-                totalEl.textContent = `Rs. ${payableTotal.toLocaleString()}`;
+                totalEl.textContent = orderItems.length ? `Rs. ${payableTotal.toLocaleString()}` : 'Booking already submitted';
+                totalEl.classList.toggle('cart-total-status', !orderItems.length);
             }
 
             const payloadInput = document.getElementById('hiddenCartPayload');
             if (payloadInput) {
-                payloadInput.value = cartItems.map(it => `${it.id}:${it.name}:${it.qty}:${it.price}:${it.selectedSize || '1 kg'}`).join(';');
+                payloadInput.value = orderItems.map(it => `${it.id}:${it.name}:${it.qty}:${it.price}:${it.selectedSize || '1 kg'}`).join(';');
             }
         }
-
-        function handlePaymentMethodChange() {
-            const isDelivery = document.getElementById('payMethodDelivery') && document.getElementById('payMethodDelivery').checked;
-            const cardBox = document.getElementById('cardPaymentBox');
-            const hiddenPayMethod = document.getElementById('hiddenPaymentMethod');
-            const submitBtn = document.getElementById('submitOrderBtn');
-            const cardLabel = document.getElementById('payMethodCardLabel');
-            const deliveryLabel = document.getElementById('payMethodDeliveryLabel');
-
-            if (isDelivery) {
-                if (hiddenPayMethod) hiddenPayMethod.value = 'PAY_AFTER_DELIVERY';
-                if (cardBox) cardBox.style.display = 'none';
-                if (submitBtn) submitBtn.innerHTML = '<span>Place Order (Pay After Delivery)</span>';
-                if (deliveryLabel) {
-                    deliveryLabel.style.borderColor = 'var(--color-strawberry, #C92C3D)';
-                    deliveryLabel.style.background = '#FFF5F6';
-                }
-                if (cardLabel) {
-                    cardLabel.style.borderColor = '#EADBCE';
-                    cardLabel.style.background = '#FFFDFB';
-                }
-            } else {
-                if (hiddenPayMethod) hiddenPayMethod.value = 'Card Payment';
-                if (cardBox) cardBox.style.display = 'block';
-                if (submitBtn) submitBtn.innerHTML = '<span>Pay &amp; Place Order</span>';
-                if (cardLabel) {
-                    cardLabel.style.borderColor = 'var(--color-strawberry, #C92C3D)';
-                    cardLabel.style.background = '#FFF5F6';
-                }
-                if (deliveryLabel) {
-                    deliveryLabel.style.borderColor = '#EADBCE';
-                    deliveryLabel.style.background = '#FFFDFB';
-                }
-            }
-        }
-
-        let appliedPromo = null;
 
         async function handleApplyPromoCode() {
             const input = document.getElementById('promoCodeInput');
@@ -4611,110 +4617,38 @@
             renderCartDrawer();
         }
 
-        function formatCardNumberInput(input) {
-            let val = input.value.replace(/\D/g, '').substring(0, 16);
-            input.value = val.replace(/(.{4})/g, '$1 ').trim();
-        }
-
-        function formatCardExpiryInput(input) {
-            let val = input.value.replace(/\D/g, '').substring(0, 4);
-            if (val.length >= 2) {
-                input.value = val.substring(0, 2) + '/' + val.substring(2);
-            } else {
-                input.value = val;
-            }
-        }
-
-        function formatCardCvvInput(input) {
-            input.value = input.value.replace(/\D/g, '').substring(0, 4);
-        }
-
-        function handleOrderCheckout(event) {
-            if (cartItems.length === 0) {
-                alert('Your basket is empty. Please add items to proceed.');
-                event.preventDefault();
+        async function handleOrderCheckout(event) {
+            event.preventDefault();
+            const form = event.currentTarget;
+            const orderItems = cartItems.filter(item => !(item.isCustomCakeBooking && item.bookingSubmitted));
+            if (!form.reportValidity() || orderItems.length === 0) {
+                if (orderItems.length === 0) showToast('Add bakery items to your basket before checkout.');
                 return false;
             }
 
-            // If promo code 100% discount applied or Pay After Delivery selected, skip card validation
-            const isZeroPromo = (appliedPromo === '12345678');
-            const hiddenPayMethod = document.getElementById('hiddenPaymentMethod');
-            const isPayAfterDelivery = (hiddenPayMethod && hiddenPayMethod.value === 'PAY_AFTER_DELIVERY') || 
-                                       (document.getElementById('payMethodDelivery') && document.getElementById('payMethodDelivery').checked);
+            const submitButton = document.getElementById('submitOrderBtn');
+            if (submitButton) submitButton.disabled = true;
+            try {
+                const name = document.getElementById('custName').value.trim();
+                const phone = document.getElementById('custPhone').value.trim();
+                const address = document.getElementById('custAddress').value.trim();
+                const note = [`Name: ${name}`, `Phone: ${phone}`, address ? `Address: ${address}` : 'Pickup'].join(' | ');
+                if (note.length > 200) {
+                    throw new Error('Please shorten your customer details so they fit in the order note.');
+                }
 
-            if (isPayAfterDelivery && hiddenPayMethod) {
-                hiddenPayMethod.value = 'PAY_AFTER_DELIVERY';
+                const order = await createBakeryOrder(orderItems, note);
+                cartItems = [];
+                saveCart();
+                updateCartBadges();
+                window.location.assign(`/payment.html?orderId=${encodeURIComponent(order.id)}`);
+                return true;
+            } catch (error) {
+                showToast(error.message || 'Unable to place your order.');
+                return false;
+            } finally {
+                if (submitButton) submitButton.disabled = false;
             }
-
-            if (!isZeroPromo && !isPayAfterDelivery) {
-                const cardName = document.getElementById('cardholderName');
-                const cardNum = document.getElementById('cardNumber');
-                const cardExp = document.getElementById('cardExpiry');
-                const cardCvv = document.getElementById('cardCvv');
-                const cardMsg = document.getElementById('cardValidationMsg');
-
-                if (cardMsg) {
-                    cardMsg.style.display = 'none';
-                    cardMsg.textContent = '';
-                }
-
-                if (!cardName || !cardName.value.trim()) {
-                    if (cardMsg) {
-                        cardMsg.textContent = 'Please enter the Cardholder Name.';
-                        cardMsg.style.display = 'block';
-                    }
-                    if (cardName) cardName.focus();
-                    event.preventDefault();
-                    return false;
-                }
-
-                const rawNum = cardNum ? cardNum.value.replace(/\s+/g, '') : '';
-                if (rawNum.length < 13 || rawNum.length > 19 || !/^\d+$/.test(rawNum)) {
-                    if (cardMsg) {
-                        cardMsg.textContent = 'Please enter a valid Card Number (13-19 digits).';
-                        cardMsg.style.display = 'block';
-                    }
-                    if (cardNum) cardNum.focus();
-                    event.preventDefault();
-                    return false;
-                }
-
-                const rawExp = cardExp ? cardExp.value.trim() : '';
-                const expMatch = rawExp.match(/^(\d{2})\/(\d{2})$/);
-                if (!expMatch) {
-                    if (cardMsg) {
-                        cardMsg.textContent = 'Please enter a valid Expiry Date in MM/YY format.';
-                        cardMsg.style.display = 'block';
-                    }
-                    if (cardExp) cardExp.focus();
-                    event.preventDefault();
-                    return false;
-                }
-                const expMonth = parseInt(expMatch[1], 10);
-                if (expMonth < 1 || expMonth > 12) {
-                    if (cardMsg) {
-                        cardMsg.textContent = 'Invalid expiry month. Month must be 01 to 12.';
-                        cardMsg.style.display = 'block';
-                    }
-                    if (cardExp) cardExp.focus();
-                    event.preventDefault();
-                    return false;
-                }
-
-                const rawCvv = cardCvv ? cardCvv.value.trim() : '';
-                if (rawCvv.length < 3 || rawCvv.length > 4 || !/^\d+$/.test(rawCvv)) {
-                    if (cardMsg) {
-                        cardMsg.textContent = 'Please enter a valid 3 or 4 digit CVV security code.';
-                        cardMsg.style.display = 'block';
-                    }
-                    if (cardCvv) cardCvv.focus();
-                    event.preventDefault();
-                    return false;
-                }
-            }
-
-            clearCart();
-            return true;
         }
 
         function toggleCheckoutForm() {
@@ -4995,11 +4929,11 @@
                         rSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 }, 200);
-            } else if (window.location.hash === '#custom-cake-builder' || window.location.hash === '#custom-builder') {
+            } else if (window.location.hash === '#custom-cake-builder' || window.location.hash === '#custom-builder' || window.location.hash === '#customBuilderHero') {
                 setTimeout(() => {
-                    const cBuilder = document.getElementById('custom-cake-builder');
-                    if (cBuilder) {
-                        cBuilder.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const builderHero = document.getElementById('customBuilderHero');
+                    if (builderHero) {
+                        builderHero.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 }, 200);
             } else if (window.location.hash === '#birthday-cakes' || window.location.hash === '#birthday-cakes-section') {
@@ -5016,8 +4950,11 @@
             if (navCustomCakeLink) {
                 navCustomCakeLink.addEventListener('click', (e) => {
                     e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    history.replaceState(null, null, 'custom-cake.html');
+                    const builderHero = document.getElementById('customBuilderHero');
+                    if (builderHero) {
+                        builderHero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        history.replaceState(null, null, '#customBuilderHero');
+                    }
                 });
             }
 
@@ -5025,11 +4962,11 @@
             const navBookBtn = document.getElementById('navBookBtn');
             if (navBookBtn) {
                 navBookBtn.addEventListener('click', (e) => {
-                    const cBuilder = document.getElementById('custom-cake-builder');
-                    if (cBuilder) {
+                    const builderHero = document.getElementById('customBuilderHero');
+                    if (builderHero) {
                         e.preventDefault();
-                        cBuilder.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        history.replaceState(null, null, '#custom-cake-builder');
+                        builderHero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        history.replaceState(null, null, '#customBuilderHero');
                     }
                 });
             }
@@ -5047,5 +4984,50 @@
         });
     </script>
     <!-- Main JS -->
+    <script src="/js/storefront-effects.js"></script>
+  <script src="/js/page-search.js"></script>
+    <script>
+        (() => {
+            const hero = document.getElementById("customBuilderHero");
+            const builder = document.querySelector(".custom-builder-content");
+            const navbar = document.querySelector(".navbar");
+            const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+            if (!hero || !builder || reducedMotion.matches || !("IntersectionObserver" in window)) return;
+
+            document.body.classList.add("scroll-effects-ready");
+
+            const revealObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        builder.classList.add("is-visible");
+                        revealObserver.unobserve(builder);
+                    }
+                });
+            }, { threshold: 0.08 });
+
+            revealObserver.observe(builder);
+
+            let frame = 0;
+            const updateHeroOnScroll = () => {
+                frame = 0;
+                const heroBounds = hero.getBoundingClientRect();
+                const navBottom = navbar ? navbar.getBoundingClientRect().bottom : 0;
+                const distance = Math.max(0, navBottom - heroBounds.top);
+                const progress = Math.min(1, distance / (hero.offsetHeight * 0.72));
+
+                hero.style.setProperty("--custom-hero-opacity", String(1 - progress));
+                hero.style.setProperty("--custom-hero-shift", `${-progress * 36}px`);
+            };
+
+            const scheduleHeroUpdate = () => {
+                if (!frame) frame = window.requestAnimationFrame(updateHeroOnScroll);
+            };
+
+            window.addEventListener("scroll", scheduleHeroUpdate, { passive: true });
+            window.addEventListener("resize", scheduleHeroUpdate);
+            updateHeroOnScroll();
+        })();
+    </script>
 </body>
 </html>

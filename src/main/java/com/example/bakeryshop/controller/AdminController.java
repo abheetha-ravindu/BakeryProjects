@@ -1,8 +1,8 @@
-package com.example.bakeryprojects.controller;
+package com.example.bakeryshop.controller;
 
-import com.example.bakeryprojects.model.AdminUser;
-import com.example.bakeryprojects.services.DeliveryService;
-import com.example.bakeryprojects.services.UserService;
+import com.example.bakeryshop.model.AdminUser;
+import com.example.bakeryshop.services.DeliveryService;
+import com.example.bakeryshop.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

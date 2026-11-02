@@ -3,21 +3,29 @@ package com.example.bakeryshop.services;
 import com.example.bakeryshop.model.BookingStatus;
 import com.example.bakeryshop.model.CustomCakeBooking;
 import com.example.bakeryshop.repisitory.CustomCakeBookingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class CustomCakeBookingServiceImpl implements BookingService {
 
-    @Autowired
-    private CustomCakeBookingRepository repository;
+    private final CustomCakeBookingRepository repository;
+    private final EmailService emailService;
+
+    public CustomCakeBookingServiceImpl(CustomCakeBookingRepository repository, EmailService emailService) {
+        this.repository = repository;
+        this.emailService = emailService;
+    }
 
     @Override
+    @Transactional
     public CustomCakeBooking createBooking(CustomCakeBooking booking) {
         booking.setStatus(BookingStatus.PENDING);
-        return repository.save(booking);
+        CustomCakeBooking savedBooking = repository.save(booking);
+        emailService.sendCustomCakeBookingConfirmation(savedBooking);
+        return savedBooking;
     }
 
     @Override

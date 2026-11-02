@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="View delivery totals and delivery statuses for the bakery.">
+  <title>Delivery count | Cake Studio Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin-panel.css">
+  <style>
+    body { min-height: 100vh; background: #fffdf9; }
+    .count-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 24px 0; }
+    .count-card { padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: var(--shadow); }
+    .count-card span { display: block; color: var(--muted); font-size: .86rem; }
+    .count-card strong { display: block; margin-top: 8px; font-size: 1.8rem; }
+    .count-card.pending strong { color: #a76e21; }
+    .count-card.out strong { color: #397b91; }
+    .count-card.delivered strong { color: #23845b; }
+    .delivery-panel { padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: var(--shadow); }
+    .panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+    .panel-heading h2 { margin: 0; font-family: "Playfair Display", Georgia, serif; font-size: 1.35rem; }
+    .panel-heading label { color: var(--muted); font-size: .85rem; }
+    .search { min-width: 230px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 9px; font: inherit; }
+    .state { padding: 24px 12px; color: var(--muted); text-align: center; }
+    .state.error { color: #a92132; }
+    .status { display: inline-block; padding: 4px 10px; border-radius: 999px; background: #fff3cd; color: #856404; font-size: .8rem; font-weight: 600; }
+    .status.out { background: #edf5f8; color: #397b91; }
+    .status.delivered { background: #edf7f1; color: #23845b; }
+    @media (max-width: 800px) { .count-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 520px) {
+      .count-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+      .count-card { padding: 15px; }
+      .delivery-panel { padding: 14px; }
+      .panel-heading { align-items: stretch; flex-direction: column; }
+      .search { width: 100%; }
+    }
+  </style>
+    <link rel="stylesheet" href="/css/site-theme.css">
+  <link rel="stylesheet" href="/css/admin-navigation.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <a class="brand" href="/adminDashboard">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Cake Studio</span>
+      </a>
+      <nav class="nav-section" aria-label="Admin pages">
+        <div class="nav-title">Admin</div>
+        <a class="nav-item" href="/adminDashboard"><span class="icon" aria-hidden="true">⌂</span>Dashboard</a>
+        <a class="nav-item" href="/customOrders"><span class="icon" aria-hidden="true">◇</span>Custom Orders</a>
+        <a class="nav-item" href="/bakeryOrders"><span class="icon" aria-hidden="true">▣</span>Bakery Orders</a>
+        <a class="nav-item" href="/delivery-count" aria-current="page"><span class="icon" aria-hidden="true">↗</span>Delivery Count</a>
+        <a class="nav-item" href="/adminPayments"><span class="icon" aria-hidden="true">▣</span>Payments</a>
+        <a class="nav-item" href="/adminInvoices"><span class="icon" aria-hidden="true">▤</span>Invoices</a>
+        <a class="nav-item" href="/adminRefunds"><span class="icon" aria-hidden="true">↩</span>Refunds</a>
+        <a class="nav-item" href="/adminItems"><span class="icon" aria-hidden="true">▤</span>Items</a>
+        <a class="nav-item" href="/userManagement"><span class="icon" aria-hidden="true">♙</span>User Management</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="intro compact">
+      <h1>Delivery overview</h1>
+      <p>Track standalone deliveries, bakery orders, and custom cake bookings by their current status. Bakery orders marked Delivered and custom bookings marked Completed count as delivered; Ready orders count as out for delivery.</p>
+    </section>
+
+    <section class="count-grid" aria-label="Delivery totals">
+      <article class="count-card">
+        <span>Total deliveries</span>
+        <strong id="totalCount" aria-live="polite">—</strong>
+      </article>
+      <article class="count-card pending">
+        <span>Pending</span>
+        <strong id="pendingCount">—</strong>
+      </article>
+      <article class="count-card out">
+        <span>Out for delivery</span>
+        <strong id="outCount">—</strong>
+      </article>
+      <article class="count-card delivered">
+        <span>Delivered</span>
+        <strong id="deliveredCount">—</strong>
+      </article>
+    </section>
+
+    <section class="delivery-panel" aria-labelledby="deliveryHeading">
+      <div class="panel-heading">
+        <h2 id="deliveryHeading">Delivery and order records</h2>
+        <label for="deliverySearch">Search deliveries
+          <input class="search" id="deliverySearch" type="search" placeholder="Recipient, address, or status" autocomplete="off">
+        </label>
+      </div>
+      <p class="state" id="deliveryState" role="status" aria-live="polite">Loading delivery records…</p>
+      <div class="table-wrap" id="deliveryTableWrap" hidden>
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th scope="col">Delivery</th>
+              <th scope="col">Source</th>
+              <th scope="col">Customer</th>
+              <th scope="col">Recipient</th>
+              <th scope="col">Address</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody id="deliveryRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">Sweet Bloom Bakery. SE1020 group project.</div>
+  </footer>
+
+  <script>
+    (() => {
+      const state = document.getElementById('deliveryState');
+      const tableWrap = document.getElementById('deliveryTableWrap');
+      const rows = document.getElementById('deliveryRows');
+      const search = document.getElementById('deliverySearch');
+      let deliveries = [];
+
+      function normalizedStatus(delivery) {
+        return String(delivery.status || 'PENDING').trim().toUpperCase().replace(/[\s-]+/g, '_');
+      }
+
+      function deliveryStatus(delivery) {
+        const status = normalizedStatus(delivery);
+        if (status === 'COMPLETED' || status === 'DELIVERED') return 'Delivered';
+        if (status === 'READY' || status === 'OUT_FOR_DELIVERY') return 'Out for delivery';
+        if (status === 'CANCELLED' || status === 'CANCELED') return 'Cancelled';
+        if (status === 'CONFIRMED') return 'Confirmed';
+        if (status === 'PREPARING') return 'Preparing';
+        return 'Pending';
+      }
+
+      function addCell(row, value) {
+        const cell = document.createElement('td');
+        cell.textContent = value || '—';
+        row.appendChild(cell);
+        return cell;
+      }
+
+      function bakeryAddress(note) {
+        const address = String(note || '').match(/(?:^|\s)Address:\s*([^|]+)/i);
+        return address ? address[1].trim() : (/Pickup/i.test(note || '') ? 'Pickup' : '');
+      }
+
+      function normalizeRecords(standalone, bakeryOrders, customBookings) {
+        const deliveryRecords = standalone.map((delivery) => ({
+          id: delivery.id == null ? '—' : `#${delivery.id}`,
+          source: 'Delivery',
+          customerName: delivery.customerName,
+          recipientName: delivery.recipientName,
+          address: delivery.address,
+          status: delivery.status || 'Pending'
+        }));
+        const bakeryRecords = bakeryOrders.map((order) => ({
+          id: order.id == null ? '—' : `#${order.id}`,
+          source: 'Bakery order',
+          customerName: order.customerName || (order.userId ? `Customer ${order.userId}` : ''),
+          recipientName: order.customerName,
+          address: bakeryAddress(order.note),
+          status: deliveryStatus(order)
+        }));
+        const customRecords = customBookings.map((booking) => ({
+          id: booking.bookingId == null ? '—' : `#${booking.bookingId}`,
+          source: 'Custom cake',
+          customerName: booking.customerName,
+          recipientName: booking.customerName,
+          address: booking.deliveryAddress || booking.pickupOrDelivery,
+          status: deliveryStatus(booking)
+        }));
+        return [...deliveryRecords, ...bakeryRecords, ...customRecords];
+      }
+
+      function render() {
+        const query = search.value.trim().toLocaleLowerCase();
+        const visible = deliveries.filter((delivery) =>
+          [delivery.id, delivery.source, delivery.customerName, delivery.recipientName, delivery.address, delivery.status]
+            .some((value) => String(value || '').toLocaleLowerCase().includes(query)));
+
+        rows.replaceChildren();
+        visible.forEach((delivery) => {
+          const row = document.createElement('tr');
+          addCell(row, delivery.id);
+          addCell(row, delivery.source);
+          addCell(row, delivery.customerName);
+          addCell(row, delivery.recipientName);
+          addCell(row, delivery.address);
+          const label = delivery.status || 'Pending';
+          const statusCell = addCell(row, label);
+          const status = label.trim().toLowerCase();
+          statusCell.replaceChildren();
+          const badge = document.createElement('span');
+          badge.className = 'status';
+          if (status === 'out for delivery' || status === 'ready') badge.classList.add('out');
+          if (status === 'delivered') badge.classList.add('delivered');
+          badge.textContent = label;
+          statusCell.appendChild(badge);
+          rows.appendChild(row);
+        });
+
+        tableWrap.hidden = visible.length === 0;
+        state.hidden = visible.length !== 0;
+        state.classList.remove('error');
+        state.textContent = deliveries.length === 0
+          ? 'No delivery, bakery order, or custom booking records were found.'
+          : 'No delivery or order records match your search.';
+      }
+
+      async function loadDeliveries() {
+        try {
+          async function fetchList(url, label) {
+            const response = await fetch(url, {
+              headers: { Accept: 'application/json' },
+              cache: 'no-store'
+            });
+            if (!response.ok) throw new Error(`${label} could not be loaded (HTTP ${response.status}).`);
+            const result = await response.json();
+            if (!Array.isArray(result)) throw new Error(`${label} returned an invalid response.`);
+            return result;
+          }
+
+          const [standalone, bakeryOrders, customBookings] = await Promise.all([
+            fetchList('/api/admin/deliveries', 'Delivery records'),
+            fetchList('/api/orders', 'Bakery orders'),
+            fetchList('/api/cakeBookings', 'Custom cake bookings')
+          ]);
+          deliveries = normalizeRecords(standalone, bakeryOrders, customBookings);
+          const counts = deliveries.reduce((summary, delivery) => {
+            const status = delivery.status.toLowerCase();
+            if (status === 'cancelled') return summary;
+            summary.total += 1;
+            if (status === 'pending' || status === 'confirmed' || status === 'preparing') summary.pending += 1;
+            if (status === 'out for delivery') summary.out += 1;
+            if (status === 'delivered') summary.delivered += 1;
+            return summary;
+          }, { total: 0, pending: 0, out: 0, delivered: 0 });
+
+          document.getElementById('totalCount').textContent = String(counts.total);
+          document.getElementById('pendingCount').textContent = String(counts.pending);
+          document.getElementById('outCount').textContent = String(counts.out);
+          document.getElementById('deliveredCount').textContent = String(counts.delivered);
+          render();
+        } catch (error) {
+          state.classList.add('error');
+          state.textContent = error instanceof Error ? error.message : 'Delivery records could not be loaded.';
+          tableWrap.hidden = true;
+        }
+      }
+
+      search.addEventListener('input', render);
+      loadDeliveries();
+    })();
+  </script>
+</body>
+</html>

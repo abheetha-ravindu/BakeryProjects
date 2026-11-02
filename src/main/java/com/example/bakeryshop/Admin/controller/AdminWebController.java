@@ -1,8 +1,9 @@
 package com.example.bakeryshop.Admin.controller;
 
-import com.example.bakeryprojects.model.Customer;
-import com.example.bakeryprojects.model.User;
-import com.example.bakeryprojects.services.UserService;
+import com.example.bakeryshop.model.Customer;
+import com.example.bakeryshop.model.User;
+import com.example.bakeryshop.services.DeliveryService;
+import com.example.bakeryshop.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,9 +17,11 @@ import java.util.List;
 @Controller
 public class AdminWebController {
     private final UserService userService;
+    private final DeliveryService deliveryService;
 
-    public AdminWebController(UserService userService) {
+    public AdminWebController(UserService userService, DeliveryService deliveryService) {
         this.userService = userService;
+        this.deliveryService = deliveryService;
     }
 
     @GetMapping({"/addItem", "/adminItems"})
@@ -78,6 +81,19 @@ public class AdminWebController {
                 .toList();
     }
 
+    @GetMapping("/api/admin/deliveries")
+    @ResponseBody
+    public List<DeliverySummary> getDeliveries() {
+        return deliveryService.findAll().stream()
+                .map(delivery -> new DeliverySummary(
+                        delivery.getId(),
+                        delivery.getCustomer() == null ? null : delivery.getCustomer().getUsername(),
+                        delivery.getRecipientName(),
+                        delivery.getAddress(),
+                        delivery.getStatus()))
+                .toList();
+    }
+
     @DeleteMapping("/api/admin/users/{id}")
     @ResponseBody
     public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
@@ -90,5 +106,8 @@ public class AdminWebController {
     }
 
     public record CustomerSummary(Long id, String username, String email, String phoneNumber) {
+    }
+
+    public record DeliverySummary(Long id, String customerName, String recipientName, String address, String status) {
     }
 }

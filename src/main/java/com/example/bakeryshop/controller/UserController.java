@@ -1,9 +1,9 @@
-package com.example.bakeryprojects.controller;
+package com.example.bakeryshop.controller;
 
-import com.example.bakeryprojects.model.AdminUser;
-import com.example.bakeryprojects.model.Customer;
-import com.example.bakeryprojects.model.User;
-import com.example.bakeryprojects.services.UserService;
+import com.example.bakeryshop.model.AdminUser;
+import com.example.bakeryshop.model.Customer;
+import com.example.bakeryshop.model.User;
+import com.example.bakeryshop.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,0 +1,248 @@
+body:not(.verdant-storefront) {
+  --page-bg: #050806;
+  --surface: #111914;
+  --surface-raised: #17211b;
+  --ink: #f5f5f3;
+  --muted: #b5b9b5;
+  --line: rgba(255, 255, 255, 0.12);
+  --accent: #79b9a2;
+  --accent-strong: #315d48;
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+  color-scheme: dark;
+  background:
+    radial-gradient(ellipse at 12% 2%, rgba(31, 79, 67, 0.24), transparent 34rem),
+    radial-gradient(ellipse at 92% 38%, rgba(255, 255, 255, 0.045), transparent 27rem),
+    linear-gradient(180deg, #050806 0%, #0b110f 58%, #070a08 100%);
+  color: var(--ink);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+body:not(.verdant-storefront)::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 64px 64px;
+  content: "";
+  pointer-events: none;
+}
+
+body:not(.verdant-storefront) :is(header, nav, main, section, article, aside, footer, form, .container, .card, .panel, .content, .box, .table-container, .form-container, .profile-card, .payment-card, .order-card, .item-card) {
+  border-color: var(--line);
+}
+
+body:not(.verdant-storefront) :is(.container, .card, .panel, .content, .box, .table-container, .form-container, .profile-card, .payment-card, .order-card, .item-card, .right-side, form) {
+  background-color: var(--surface);
+  color: var(--ink);
+}
+
+body:not(.verdant-storefront) :is(nav, .nav, .navbar, .sidebar, .header, header) {
+  border-color: var(--line);
+  background-color: #0b110f;
+  color: var(--ink);
+}
+
+body:not(.verdant-storefront) :is(.nav-item, .nav-link, .sidebar a, .navbar a, nav a) {
+  color: #c5ccc6;
+}
+
+body:not(.verdant-storefront) :is(.nav-item:hover, .nav-item.active, .nav-link:hover, .nav-link.active) {
+  background-color: rgba(121, 185, 162, 0.14);
+  color: var(--accent);
+}
+
+body:not(.verdant-storefront) :is(h1, h2, h3, h4, h5, h6, label, th, strong, b) {
+  color: var(--ink);
+}
+
+body:not(.verdant-storefront) :is(p, small, .muted, .subtitle, .description, .text-muted) {
+  color: var(--muted);
+}
+
+body:not(.verdant-storefront) a {
+  color: var(--accent);
+}
+
+body:not(.verdant-storefront) :is(input, select, textarea) {
+  border-color: var(--line);
+  background-color: #0b110f;
+  color: var(--ink);
+}
+
+body:not(.verdant-storefront) :is(input, select, textarea)::placeholder {
+  color: #858e88;
+}
+
+body:not(.verdant-storefront) :is(input, select, textarea, button, a):focus-visible {
+  outline: 2px solid #9cd9c1;
+  outline-offset: 3px;
+}
+
+body:not(.verdant-storefront) :is(button, input[type="submit"], input[type="button"], .btn, .button) {
+  border-color: #477961;
+  background-color: var(--accent-strong);
+  color: #f6f5ef;
+}
+
+body:not(.verdant-storefront) :is(.back-home, .btn-secondary, .secondary-button) {
+  border-color: var(--line);
+  background-color: var(--surface-raised);
+  color: var(--ink);
+}
+
+body:not(.verdant-storefront) :is(.error-msg, .alert-danger, .error, .error-message) {
+  border-color: rgba(239, 112, 112, 0.35);
+  background-color: rgba(112, 38, 38, 0.24);
+  color: #ffb7b7;
+}
+
+body:not(.verdant-storefront) :is(table, th, td) {
+  border-color: var(--line);
+}
+
+body:not(.verdant-storefront) th {
+  background-color: #17211b;
+}
+
+body:not(.verdant-storefront) tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.025);
+}
+
+body:not(.verdant-storefront) hr {
+  border-color: var(--line);
+}
+
+body:not(.verdant-storefront) :is(.account-link-card, .summary-card, .details-card) {
+  border-color: var(--line);
+  background-color: var(--surface);
+  color: var(--ink);
+}
+
+body:not(.verdant-storefront) .account-link-card:hover {
+  border-color: rgba(121, 185, 162, 0.55);
+}
+
+body:not(.verdant-storefront) .account-link-icon {
+  background-color: rgba(121, 185, 162, 0.14);
+  color: var(--accent);
+}
+
+body:not(.verdant-storefront) .summary-divider {
+  background-color: var(--line);
+}
+
+body:not(.verdant-storefront).auth-page {
+  --page-bg: #050806;
+  --surface: #111914;
+  --surface-raised: #17211b;
+  --ink: #f5f5f3;
+  --muted: #b5b9b5;
+  --line: rgba(255, 255, 255, 0.12);
+  --accent: #79b9a2;
+  --accent-strong: #315d48;
+  color-scheme: dark;
+  background:
+    radial-gradient(ellipse at 12% 2%, rgba(31, 79, 67, 0.24), transparent 34rem),
+    radial-gradient(ellipse at 92% 38%, rgba(255, 255, 255, 0.045), transparent 27rem),
+    linear-gradient(180deg, #050806 0%, #0b110f 58%, #070a08 100%);
+  color: var(--ink);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+body:not(.verdant-storefront).auth-page :is(.auth-visual-col, .left-side) {
+  color: #fff;
+}
+
+body:not(.verdant-storefront).auth-page :is(.auth-visual-col, .left-side) :is(h1, h2, h3, p, a, strong, small) {
+  color: #fff;
+}
+
+body:not(.verdant-storefront).auth-page :is(.right-side, .auth-form-col, .form-container, .auth-card, form) {
+  border-color: var(--line);
+  background-color: var(--surface);
+  color: var(--ink);
+}
+
+body:not(.verdant-storefront).auth-page :is(.auth-title, .auth-header-logo, .logo, .form-container h2, .form-label, .input-group label, label) {
+  color: var(--ink);
+}
+
+body:not(.verdant-storefront).auth-page :is(.auth-subtitle, .auth-switch-prompt, .signup-text, .login-text, .remember-label, .form-options label, .auth-footer, .footer) {
+  color: var(--muted);
+}
+
+body:not(.verdant-storefront).auth-page :is(.form-input, .input-group input, input:not([type="checkbox"]):not([type="radio"])) {
+  border: 1.5px solid var(--line);
+  background: #0b110f;
+  color: var(--ink);
+}
+
+body:not(.verdant-storefront).auth-page :is(.form-input, .input-group input)::placeholder {
+  color: #858e88;
+  opacity: 1;
+}
+
+body:not(.verdant-storefront).auth-page :is(.form-input, .input-group input):focus {
+  border-color: #79b9a2;
+  outline: 3px solid rgba(121, 185, 162, 0.16);
+}
+
+body:not(.verdant-storefront).auth-page :is(.btn-auth-primary, .login-btn) {
+  border: 1px solid #477961;
+  background: #315d48;
+  color: #f6f5ef;
+}
+
+body:not(.verdant-storefront).auth-page :is(.btn-auth-primary, .login-btn):hover {
+  border-color: #79b9a2;
+  background: #3a7056;
+}
+
+body:not(.verdant-storefront).auth-page .btn-google {
+  border: 1.5px solid var(--line);
+  background: var(--surface-raised);
+  color: var(--ink);
+}
+
+body:not(.verdant-storefront).auth-page .password-toggle-btn {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+}
+
+body:not(.verdant-storefront).auth-page :is(.auth-back-link, .back-home) {
+  border-color: var(--line);
+  background: var(--surface-raised);
+  color: var(--ink);
+}
+
+body:not(.verdant-storefront).auth-page :is(.auth-back-link, .back-home):hover {
+  border-color: var(--accent);
+  background: rgba(121, 185, 162, 0.14);
+  color: var(--accent);
+}
+
+body:not(.verdant-storefront).auth-page :is(.auth-switch-prompt a, .signup-text a, .login-text a, .forgot-link) {
+  color: var(--accent);
+}
+
+body:not(.verdant-storefront).auth-page input[type="checkbox"] {
+  accent-color: var(--accent);
+}
+
+body:not(.verdant-storefront).auth-page .auth-alert.is-error,
+body:not(.verdant-storefront).auth-page .error-msg {
+  border-color: rgba(239, 112, 112, 0.35);
+  background: rgba(112, 38, 38, 0.24);
+  color: #ffb7b7;
+}
+
+body:not(.verdant-storefront).auth-page .auth-alert.is-success {
+  border-color: rgba(121, 185, 162, 0.35);
+  background: rgba(38, 112, 90, 0.2);
+  color: #a9dec9;
+}

@@ -1,4 +1,4 @@
-package com.bakery.bakeryplatform.exception;
+package com.example.bakeryshop.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

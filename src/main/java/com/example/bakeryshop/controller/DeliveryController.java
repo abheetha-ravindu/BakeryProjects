@@ -1,10 +1,10 @@
-package com.example.bakeryprojects.controller;
+package com.example.bakeryshop.controller;
 
-import com.example.bakeryprojects.model.Customer;
-import com.example.bakeryprojects.model.Delivery;
-import com.example.bakeryprojects.model.User;
-import com.example.bakeryprojects.services.DeliveryService;
-import com.example.bakeryprojects.services.UserService;
+import com.example.bakeryshop.model.Customer;
+import com.example.bakeryshop.model.Delivery;
+import com.example.bakeryshop.model.User;
+import com.example.bakeryshop.services.DeliveryService;
+import com.example.bakeryshop.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

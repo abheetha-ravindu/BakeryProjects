@@ -1,10 +1,10 @@
-package com.bakery.bakeryplatform.service;
+package com.example.bakeryshop.services;
 
-import com.bakery.bakeryplatform.dto.CartResponse;
-import com.bakery.bakeryplatform.exception.BusinessRuleException;
-import com.bakery.bakeryplatform.exception.ResourceNotFoundException;
-import com.bakery.bakeryplatform.model.CartItem;
-import com.bakery.bakeryplatform.repository.CartItemRepository;
+import com.example.bakeryshop.dto.CartResponse;
+import com.example.bakeryshop.exception.BusinessRuleException;
+import com.example.bakeryshop.exception.ResourceNotFoundException;
+import com.example.bakeryshop.model.CartItem;
+import com.example.bakeryshop.repisitory.CartItemRepository;
 import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.stereotype.Service;

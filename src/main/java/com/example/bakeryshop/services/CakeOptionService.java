@@ -5,7 +5,6 @@ import com.example.bakeryshop.model.Flavour;
 import com.example.bakeryshop.model.Size;
 import com.example.bakeryshop.model.Topping;
 import com.example.bakeryshop.repisitory.CakeOptionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +13,11 @@ import java.util.Map;
 @Service
 public class CakeOptionService {
 
-    @Autowired
-    private CakeOptionRepository repository;
+    private final CakeOptionRepository repository;
+
+    public CakeOptionService(CakeOptionRepository repository) {
+        this.repository = repository;
+    }
 
     public List<CakeOption> getAllOptions() {
         return repository.findAll();

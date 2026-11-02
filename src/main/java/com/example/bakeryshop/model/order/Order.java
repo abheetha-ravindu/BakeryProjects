@@ -1,6 +1,6 @@
-package com.bakery.bakeryplatform.model.order;
+package com.example.bakeryshop.model.order;
 
-import com.bakery.bakeryplatform.model.BaseEntity;
+import com.example.bakeryshop.model.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

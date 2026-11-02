@@ -1,16 +1,19 @@
-package com.bakery.bakeryplatform.service.payment;
+package com.example.bakeryshop.services.payment;
 
 import com.example.bakeryshop.billing.InvoiceService;
-import com.bakery.bakeryplatform.dto.payment.PaymentRequest;
-import com.bakery.bakeryplatform.exception.BusinessRuleException;
-import com.bakery.bakeryplatform.exception.ResourceNotFoundException;
-import com.bakery.bakeryplatform.model.order.Order;
-import com.bakery.bakeryplatform.model.payment.CardPayment;
-import com.bakery.bakeryplatform.model.payment.CashOnDelivery;
-import com.bakery.bakeryplatform.model.payment.Payment;
-import com.bakery.bakeryplatform.model.payment.PaymentStatus;
-import com.bakery.bakeryplatform.repository.order.OrderRepository;
-import com.bakery.bakeryplatform.repository.payment.PaymentRepository;
+import com.example.bakeryshop.dto.payment.PaymentRequest;
+import com.example.bakeryshop.exception.BusinessRuleException;
+import com.example.bakeryshop.exception.ResourceNotFoundException;
+import com.example.bakeryshop.model.order.Order;
+import com.example.bakeryshop.model.payment.CardPayment;
+import com.example.bakeryshop.model.payment.CashOnDelivery;
+import com.example.bakeryshop.model.payment.Payment;
+import com.example.bakeryshop.model.payment.PaymentStatus;
+import com.example.bakeryshop.model.User;
+import com.example.bakeryshop.repisitory.order.OrderRepository;
+import com.example.bakeryshop.repisitory.payment.PaymentRepository;
+import com.example.bakeryshop.repisitory.UserRepository;
+import com.example.bakeryshop.services.EmailService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -22,14 +25,20 @@ public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final OrderRepository orderRepository;
     private final InvoiceService invoiceService;
+    private final UserRepository userRepository;
+    private final EmailService emailService;
 
     public PaymentService(
             PaymentRepository paymentRepository,
             OrderRepository orderRepository,
-            InvoiceService invoiceService) {
+            InvoiceService invoiceService,
+            UserRepository userRepository,
+            EmailService emailService) {
         this.paymentRepository = paymentRepository;
         this.orderRepository = orderRepository;
         this.invoiceService = invoiceService;
+        this.userRepository = userRepository;
+        this.emailService = emailService;
     }
 
     // Create record  payment for an order
@@ -54,7 +63,9 @@ public class PaymentService {
         payment.setReceiptNote(payment.processPayment());    // polymo: each type has its own message
         Payment savedPayment = paymentRepository.save(payment);
         if (savedPayment.getStatus() == PaymentStatus.PAID) {
-            invoiceService.generateInvoice(savedPayment, order.getUserId());
+            var invoice = invoiceService.generateInvoice(savedPayment, order.getUserId());
+            User user = userRepository.findById(order.getUserId()).orElse(null);
+            emailService.sendInvoice(user == null ? null : user.getEmail(), invoice);
         }
         return savedPayment;
     }
