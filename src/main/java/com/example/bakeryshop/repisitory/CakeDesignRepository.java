@@ -1,0 +1,6 @@
+package com.example.bakeryshop.repisitory;
+
+import com.example.bakeryshop.model.CakeDesign;
+import org.springframework.data.jpa.repository.JpaRepository;
+public interface CakeDesignRepository extends JpaRepository<CakeDesign, Long> {
+}
