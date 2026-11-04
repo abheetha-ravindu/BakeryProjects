@@ -1,6 +1,6 @@
 package com.example.bakeryshop.repository.cart;
 
-import com.bakery.bakeryplatform.model.CartItem;
+import com.example.bakeryshop.model.cart.CartItem;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

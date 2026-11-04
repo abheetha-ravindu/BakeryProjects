@@ -1,4 +1,4 @@
-package com.example.bakeryshop.execption;
+package com.example.bakeryshop.exception;
 
 public class BusinessRuleException extends BakeryException {
 
