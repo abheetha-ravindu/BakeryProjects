@@ -39,14 +39,6 @@
       color: #30221d;
       font: 14px/1.4 Arial, sans-serif;
     }
-    .page-search--in-navbar {
-      position: relative;
-      inset: auto;
-      z-index: 21;
-      flex: 0 1 270px;
-      width: min(270px, 100%);
-      min-width: 190px;
-    }
     .page-search form {
       display: flex;
       gap: 8px;
@@ -66,7 +58,7 @@
       font: inherit;
     }
     .page-search form:focus-within {
-      outline: 2px solid #79b9a2;
+      outline: 2px solid #c92c3d;
       outline-offset: 2px;
     }
     .page-search button {
@@ -74,7 +66,7 @@
       padding: 0 12px;
       border: 0;
       border-radius: 8px;
-      background: linear-gradient(135deg, #1f4f43, #2d6b5d);
+      background: #c92c3d;
       color: #fff;
       font: inherit;
       font-weight: 700;
@@ -82,13 +74,9 @@
     }
     .page-search-results {
       display: none;
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      left: 0;
       max-height: min(45vh, 360px);
       overflow-y: auto;
-      margin: 0;
+      margin: 0 0 8px;
       padding: 6px;
       border: 1px solid #eadbce;
       border-radius: 12px;
@@ -109,24 +97,12 @@
     .page-search-results a:focus,
     .page-search-results a[aria-selected="true"] {
       outline: none;
-      background: rgba(31, 79, 67, .38);
-      color: #d7efe7;
+      background: #fff0f3;
+      color: #a51f30;
     }
     .page-search-empty { color: #715f55; }
-    @media (max-width: 760px) {
-      .page-search--in-navbar {
-        order: 4;
-        flex-basis: min(100%, 360px);
-        width: min(100%, 360px);
-        min-width: 0;
-      }
-    }
     @media (max-width: 520px) {
-      .page-search:not(.page-search--in-navbar) {
-        right: 12px;
-        bottom: 12px;
-        width: calc(100vw - 24px);
-      }
+      .page-search { right: 12px; bottom: 12px; width: calc(100vw - 24px); }
     }
   `;
   document.head.append(style);
@@ -142,14 +118,7 @@
       <button type="submit">Search</button>
     </form>
   `;
-  const navbar = document.querySelector('.navbar-container');
-  const navActions = navbar?.querySelector('.nav-actions');
-  if (navbar) {
-    container.classList.add('page-search--in-navbar');
-    navbar.insertBefore(container, navActions || null);
-  } else {
-    document.body.append(container);
-  }
+  document.body.append(container);
 
   const input = container.querySelector('#pageSearchInput');
   const results = container.querySelector('#pageSearchResults');

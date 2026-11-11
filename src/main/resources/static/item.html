@@ -21,25 +21,27 @@
         }
 
         .navbar {
-            position: relative;
-            z-index: 1;
-            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.98);
             border-bottom: 1px solid #eee4da;
+            box-shadow: 0 1px 0 rgba(60, 31, 15, 0.02);
         }
 
         .navbar-container {
             display: flex;
-            max-width: 1200px;
-            min-height: 72px;
             align-items: center;
             justify-content: space-between;
-            gap: 1.5rem;
+            max-width: 1220px;
+            min-height: 76px;
             margin: 0 auto;
             padding: 0 1.5rem;
+            gap: 1.5rem;
         }
 
         .brand-logo,
-        .nav-links,
+        .nav-link,
         .cart-icon-btn,
         .btn-profile-nav,
         .btn-pill {
@@ -72,13 +74,12 @@
         .nav-actions {
             display: flex;
             align-items: center;
-            gap: 1.25rem;
+            list-style: none;
             margin: 0;
             padding: 0;
-            list-style: none;
         }
 
-        .nav-link {
+        .nav-links {
             gap: 1.75rem;
         }
 
@@ -191,32 +192,14 @@
            Page Header
            -------------------------------------------------------------------------- */
         .cake-page-hero {
-            isolation: isolate;
-            overflow: hidden;
-            min-height: 390px;
-            display: grid;
-            place-items: center;
             padding: calc(var(--navbar-height, 76px) + 2.5rem) 1.5rem 3rem 1.5rem;
-            background:
-                linear-gradient(180deg, rgba(5, 8, 6, 0.62), rgba(5, 8, 6, 0.72)),
-                url("/images/cake-page/bakery-hero.jpg") center 48% / cover no-repeat,
-                #101612;
+            background: linear-gradient(180deg, #FDECEF 0%, #FDF7F0 60%, var(--color-cream-subtle, #FDF8F2) 100%);
             border-bottom: 1px solid var(--color-border, #EADBCE);
             text-align: center;
             position: relative;
         }
 
-        .cake-page-hero::before {
-            position: absolute;
-            inset: 0;
-            z-index: -1;
-            background: linear-gradient(90deg, rgba(5, 8, 6, 0.3), transparent 50%, rgba(5, 8, 6, 0.3));
-            content: "";
-        }
-
         .hero-inner-wrap {
-            position: relative;
-            z-index: 1;
             max-width: 860px;
             margin: 0 auto;
         }
@@ -229,33 +212,29 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.12em;
-            color: #d3f0e2;
-            background: rgba(15, 35, 27, 0.66);
+            color: var(--color-strawberry, #C92C3D);
+            background: var(--color-strawberry-light, #FEECEF);
             padding: 0.35rem 1rem;
             border-radius: var(--radius-pill, 9999px);
             margin-bottom: 0.85rem;
-            border: 1px solid rgba(211, 240, 226, 0.38);
-            -webkit-backdrop-filter: blur(8px);
-            backdrop-filter: blur(8px);
+            border: 1px solid rgba(201, 44, 61, 0.15);
         }
 
         .cake-page-title {
             font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
             font-size: clamp(2.2rem, 4vw, 3.2rem);
             font-weight: 700;
-            color: #fff;
+            color: var(--color-dark-roast, #2C1E16);
             line-height: 1.15;
             margin-bottom: 0.85rem;
-            text-shadow: 0 3px 20px rgba(0, 0, 0, 0.55);
         }
 
         .cake-page-subtitle {
             font-size: clamp(1rem, 1.3vw, 1.15rem);
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--color-dark-muted, #5E4D43);
             max-width: 660px;
             margin: 0 auto 1.75rem auto;
             line-height: 1.6;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
         }
 
         .hero-action-buttons {
@@ -505,101 +484,6 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1.75rem;
-        }
-
-        .moving-items-section {
-            overflow: hidden;
-            padding: 2rem 0 3rem;
-        }
-
-        .moving-items-header {
-            margin: 0 auto 1.5rem;
-            padding: 0 1.25rem;
-            text-align: center;
-        }
-
-        .moving-items-header h2,
-        .moving-items-header p {
-            margin: 0;
-        }
-
-        .moving-items-header p {
-            margin-top: 0.5rem;
-            color: var(--color-dark-muted, #5E4D43);
-        }
-
-        .moving-items-viewport {
-            overflow: hidden;
-            padding: 0.5rem 0;
-            mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
-        }
-
-        .moving-items-track {
-            display: flex;
-            width: max-content;
-            gap: 0;
-            animation: moving-items-scroll 40s linear infinite;
-        }
-
-        .moving-items-group {
-            display: flex;
-            flex-shrink: 0;
-            gap: 1rem;
-            padding-right: 1rem;
-        }
-
-        .moving-items-viewport:hover .moving-items-track,
-        .moving-items-viewport:focus-within .moving-items-track {
-            animation-play-state: paused;
-        }
-
-        .moving-item-card {
-            width: clamp(210px, 24vw, 290px);
-            overflow: hidden;
-            border: 1px solid var(--color-border, #EADBCE);
-            border-radius: 16px;
-            background: #111914;
-            color: #f5f5f3;
-            box-shadow: 0 8px 24px rgba(78, 48, 25, 0.08);
-        }
-
-        .moving-item-image {
-            display: block;
-            width: 100%;
-            aspect-ratio: 4 / 3;
-            object-fit: cover;
-            background: #FAF4ED;
-        }
-
-        .moving-item-name {
-            margin: 0;
-            padding: 0.9rem 1rem 1rem;
-            color: #f5f5f3;
-            font-family: Georgia, serif;
-            font-size: 1.05rem;
-            line-height: 1.35;
-        }
-
-        @keyframes moving-items-scroll {
-            to {
-                transform: translateX(-50%);
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .moving-items-track {
-                animation: none;
-            }
-
-            .moving-items-group[aria-hidden="true"] {
-                display: none;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .moving-item-card {
-                width: min(76vw, 260px);
-            }
         }
 
         @media (max-width: 1120px) {
@@ -1224,190 +1108,9 @@
             justify-content: center;
             padding: 0 5px;
         }
-
-        body.verdant-storefront footer.item-site-footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            background: #070a08;
-            color: #c6c3bd;
-        }
-
-        .item-footer-grid {
-            display: grid;
-            width: min(1700px, calc(100% - 4rem));
-            grid-template-columns: 1.4fr 0.9fr 0.9fr 1.2fr;
-            gap: clamp(2rem, 5vw, 6rem);
-            margin: 0 auto;
-            padding: 4rem 0 4.5rem;
-        }
-
-        .item-footer-brand,
-        .item-footer-column {
-            min-width: 0;
-        }
-
-        body.verdant-storefront .item-footer-logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
-            color: #d3d2ce;
-            font-family: Georgia, serif;
-            font-size: clamp(1.7rem, 2vw, 2.2rem);
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        .item-footer-logo-icon {
-            font-family: sans-serif;
-            font-size: 2rem;
-        }
-
-        .item-footer-description {
-            max-width: 460px;
-            margin: 1rem 0 1.5rem;
-            color: #c6c3bd;
-            font-size: 1.1rem;
-            line-height: 1.65;
-        }
-
-        .item-footer-tagline {
-            display: block;
-            margin-bottom: 2rem;
-            color: #ffc879;
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        .item-footer-socials {
-            display: flex;
-            gap: 0.85rem;
-        }
-
-        body.verdant-storefront .item-footer-social {
-            display: grid;
-            width: 3.7rem;
-            height: 3.7rem;
-            place-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            color: #c6c3bd;
-            transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-        }
-
-        body.verdant-storefront .item-footer-social:hover {
-            border-color: #ffc879;
-            background: rgba(255, 200, 121, 0.1);
-            color: #ffc879;
-        }
-
-        .item-footer-social svg {
-            width: 1.4rem;
-            height: 1.4rem;
-        }
-
-        .item-footer-heading {
-            margin: 0 0 1.25rem;
-            color: #f4f1eb;
-            font-family: Georgia, serif;
-            font-size: 1.55rem;
-        }
-
-        .item-footer-links,
-        .item-footer-contact {
-            display: grid;
-            gap: 0.8rem;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        body.verdant-storefront .item-footer-links a,
-        body.verdant-storefront .item-footer-contact a {
-            color: #bdbdb9;
-            font-size: 1.1rem;
-            line-height: 1.5;
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        body.verdant-storefront .item-footer-links a:hover,
-        body.verdant-storefront .item-footer-contact a:hover {
-            color: #ffc879;
-        }
-
-        .item-footer-contact address {
-            display: grid;
-            gap: 1.15rem;
-            font-size: 1.1rem;
-            font-style: normal;
-        }
-
-        .item-footer-contact-row {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            color: #c6c3bd;
-        }
-
-        .item-footer-contact-icon {
-            flex: 0 0 1.7rem;
-            text-align: center;
-        }
-
-        .item-footer-hours-label {
-            display: block;
-            color: #fff;
-            font-weight: 700;
-        }
-
-        .item-footer-fresh-batches {
-            margin-top: 0.5rem;
-            color: #ffc879;
-            font-size: 0.95rem;
-        }
-
-        .item-footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.12);
-        }
-
-        .item-footer-bottom-inner {
-            display: flex;
-            width: min(1700px, calc(100% - 4rem));
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 0.6rem 1.5rem;
-            margin: 0 auto;
-            padding: 1.4rem 0;
-            color: #bdb8b1;
-            font-size: 1rem;
-        }
-
-        .item-footer-bottom-inner p {
-            margin: 0;
-        }
-
-        @media (max-width: 900px) {
-            .item-footer-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 2.5rem;
-                padding: 3rem 0;
-            }
-        }
-
-        @media (max-width: 560px) {
-            .item-footer-grid,
-            .item-footer-bottom-inner {
-                width: min(100% - 2rem, 420px);
-            }
-
-            .item-footer-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
     </style>
-    <link rel="stylesheet" href="/css/verdant-storefront.css?v=2">
 </head>
-<body class="verdant-storefront">
+<body>
 
     <!-- ======================================================================
          TOP NAVIGATION BAR
@@ -1415,33 +1118,33 @@
     <nav class="navbar" id="mainNavbar">
         <div class="navbar-container">
             <a href="/main" class="brand-logo" id="navBrand">
-                <span class="brand-icon" aria-hidden="true">K</span>
+                <span class="brand-icon">🧁</span>
                 <span>kamuda.com</span>
             </a>
 
             <ul class="nav-links">
-                <li><a href="/main" class="nav-link" id="navHome">Home</a></li>
-                <li><a href="/items" class="nav-link active" id="navBakery" >Shop Cakes</a></li>
-                <li><a href="/custom-cake.html#customBuilderHero" class="nav-link" id="navCustomCake">Book Cake</a></li>
+                <li><a href="/main" class="nav-link active" id="navHome">Home</a></li>
+                <li><a href="/items" class="nav-link" id="navBakery">Shop Cakes</a></li>
+                <li><a href="/custom-cake" class="nav-link" id="navCustomCake">Book Cake</a></li>
                 
             </ul>
 
             <div class="nav-actions">
                 <a href="/items" class="cart-icon-btn" id="navCartBtn" title="View cart" aria-label="View cart" onclick="toggleCartDrawer(true); return false;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+                    🛒
                     <span class="cart-badge" style="display:none;">0</span>
                 </a>
                 
                 <!-- Profile Button / Dropdown -->
                 <div class="nav-profile-wrapper" id="navProfileWrapper">
-                    <a href="/profileupdate" class="btn-profile-nav" id="navProfileBtn" title="Account">
-                        <span class="profile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span>
-                        <span class="profile-nav-name">Account</span>
+                    <a href="/profile" class="btn-profile-nav" id="navProfileBtn" title="Account">
+                        <span class="profile-nav-icon">👤</span>
+                        <span class="profile-nav-name">Profile</span>
                     </a>
                 </div>
 
-                <a href="custom-cake.html#customBuilderHero" class="btn-pill btn-strawberry" id="navBookBtn">
-                    Start an order
+                <a href="custom-cake.html#custom-cake-builder" class="btn-pill btn-strawberry" id="navBookBtn">
+                    ✨ Book Custom Cake
                 </a>
             </div>
         </div>
@@ -1463,25 +1166,13 @@
                     <span>🎂</span>
                     <span>Shop Ready-Made Cakes</span>
                 </a>
-                <a href="custom-cake.html#customBuilderHero" class="btn-hero-nav btn-hero-custom" id="heroCreateCustomBtn">
+                <a href="custom-cake.html#custom-cake-builder" class="btn-hero-nav btn-hero-custom" id="heroCreateCustomBtn">
                     <span>✨</span>
                     <span>Create Custom Cake</span>
                 </a>
             </div>
         </div>
     </header>
-
-    <section class="moving-items-section" aria-labelledby="moving-items-heading">
-        <div class="moving-items-header">
-            <h2 id="moving-items-heading">Explore Our Bakery Favorites</h2>
-            <p>Freshly baked favorites from our current item collection.</p>
-        </div>
-        <div class="moving-items-viewport">
-            <div class="moving-items-track" id="movingItemsTrack" aria-live="off">
-                <p class="empty-state">Loading bakery favorites...</p>
-            </div>
-        </div>
-    </section>
 
     <!-- ======================================================================
          SECTION 1 — READY-MADE CAKES
@@ -1570,9 +1261,9 @@
     <!-- ======================================================================
          SECTION 2 — BIRTHDAY CAKES (Completely Separate Section Below Ready-Made)
          "Celebrate with a cake made for the moment."
-         Birthday products from the storefront item catalog
+         6 Products from "customize cake/Birthday cakes"
          ====================================================================== -->
-    <section class="birthday-cakes-section" id="birthday-cakes">
+    <section class="birthday-cakes-section" id="birthday-cakes" hidden>
         <a id="birthday-cakes-section" style="display:none;" aria-hidden="true"></a>
         <div class="section-container">
             <div class="section-header-block">
@@ -1585,9 +1276,9 @@
                 </p>
             </div>
 
-            <!-- Birthday cakes are loaded from the storefront item catalog -->
+            <!-- 6 Birthday Cakes Grid -->
             <div class="cake-products-grid" id="birthdayCakesGrid">
-                <p class="empty-state">Loading birthday cakes...</p>
+                <!-- Dynamically populated via JavaScript from Birthday cakes folder -->
             </div>
         </div>
     </section>
@@ -1623,6 +1314,7 @@
                         <span>Proceed to Checkout</span>
                         <span>→</span>
                     </button>
+
                     <form id="checkoutOrderForm" class="checkout-drawer-form">
 
                         <h4 style="font-family:var(--font-heading); margin-bottom:0.75rem; color:var(--color-dark-roast);">Customer Details</h4>
@@ -1660,83 +1352,31 @@
     <!-- ======================================================================
          SITE FOOTER
          ====================================================================== -->
-    <footer class="item-site-footer">
-        <div class="item-footer-grid">
-            <div class="item-footer-brand">
-                <a href="/main" class="item-footer-logo">
-                    <span class="item-footer-logo-icon" aria-hidden="true">🧁</span>
-                    <span>kamuda.com</span>
-                </a>
-                <p class="item-footer-description">Fresh bakery favorites and beautifully crafted cakes for every special moment.</p>
-                <span class="item-footer-tagline">Freshly Baked. Beautifully Made.</span>
-                <div class="item-footer-socials" aria-label="Social media">
-                    <a href="https://facebook.com" class="item-footer-social" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                    </a>
-                    <a href="https://instagram.com" class="item-footer-social" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".7" fill="currentColor"/></svg>
-                    </a>
-                    <a href="https://whatsapp.com" class="item-footer-social" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20l1.2-5.3A8.4 8.4 0 1 1 21 11.5Z"/><path d="M9 9c.5 2 2 3.5 4 4l1-1 2 1c-.4 1.5-1.6 2-3 1.6-3-.8-5.7-3.5-6.3-6.3C6.5 6.9 7 5.7 8.5 5.3l1 2z"/></svg>
-                    </a>
-                </div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3> kamuda.com</h3>
+                <p>Artisanal bakery and bespoke custom cake atelier in Colombo. Handcrafted daily with pure Ceylon dairy and Belgian chocolates.</p>
+                <div style="font-size:0.8rem; color:#DACBC2; margin-top:0.75rem;">University Assignment: Bakery Order &amp; Custom Cake Booking Platform (MVC / Java)</div>
             </div>
 
-            <nav class="item-footer-column" aria-label="Quick Links">
-                <h2 class="item-footer-heading">Quick Links</h2>
-                <ul class="item-footer-links">
-                    <li><a href="/main">Home</a></li>
-                    <li><a href="/items">Shop Cakes</a></li>
-                    <li><a href="/orders">My Orders</a></li>
-                    <li><a href="/payments">My Payments</a></li>
-                    <li><a href="/custom-cake.html#customBuilderHero">Custom Cakes</a></li>
-                    <li><a href="/main#howItWorksSection">How It Works</a></li>
-                    <li><a href="/main#specialOffersSection">Special Offers</a></li>
+            <div>
+                <h4 class="footer-title">Explore</h4>
+                <ul class="footer-links">
+                    <li><a href="/main">Home Page</a></li>
+                    <li><a href="#ready-made-cakes">Ready-Made Cakes</a></li>
+                    <li><a href="custom-cake.html#custom-cake-builder">Custom Cake Booking</a></li>
+                    <li><a href="#birthday-cakes">Birthday Cakes</a></li>
                 </ul>
-            </nav>
+            </div>
 
-            <nav class="item-footer-column" aria-label="Our Services">
-                <h2 class="item-footer-heading">Our Services</h2>
-                <ul class="item-footer-links">
-                    <li><a href="/items">Order Bakery Items</a></li>
-                    <li><a href="/custom-cake#ready-made-cakes">Ready-Made Cakes</a></li>
-                    <li><a href="/custom-cake#birthday-cakes">Birthday Cakes</a></li>
-                    <li><a href="/custom-cake.html#customBuilderHero">Customize Your Cake</a></li>
-                    <li><a href="/main#howItWorksSection">Pickup &amp; Delivery</a></li>
-                </ul>
-            </nav>
-
-            <div class="item-footer-column item-footer-contact">
-                <h2 class="item-footer-heading">Contact Us</h2>
-                <address>
-                    <div class="item-footer-contact-row">
-                        <span class="item-footer-contact-icon" aria-hidden="true">📍</span>
-                        <span>Colombo, Sri Lanka</span>
-                    </div>
-                    <div class="item-footer-contact-row">
-                        <span class="item-footer-contact-icon" aria-hidden="true">📞</span>
-                        <a href="tel:+94112345678">+94 11 234 5678</a>
-                    </div>
-                    <div class="item-footer-contact-row">
-                        <span class="item-footer-contact-icon" aria-hidden="true">✉️</span>
-                        <a href="mailto:hello@sweetbloom.lk">hello@sweetbloom.lk</a>
-                    </div>
-                    <div class="item-footer-contact-row">
-                        <span class="item-footer-contact-icon" aria-hidden="true">🕒</span>
-                        <div>
-                            <span class="item-footer-hours-label">Opening Hours:</span>
-                            <span>Mon – Sun: 8:00 AM – 8:00 PM</span>
-                            <div class="item-footer-fresh-batches">Fresh Batches: 07:00 &bull; 14:00</div>
-                        </div>
-                    </div>
-                </address>
+            <div>
+                <h4 class="footer-title">Bespoke Concierge</h4>
+                <p style="font-size:0.88rem; color:#DACBC2; line-height:1.5;">Our master pastry chef reviews all custom cake inquiries within 2 hours. Tiered orders are confirmed with custom sketch consultations.</p>
             </div>
         </div>
-        <div class="item-footer-bottom">
-            <div class="item-footer-bottom-inner">
-                <p>&copy; 2026 kamuda.com. All rights reserved.</p>
-                <p>Made with care for every sweet moment.</p>
-            </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 kamuda.com. All rights reserved.</p>
         </div>
     </footer>
 
@@ -2008,28 +1648,14 @@
                         return;
                     }
 
-                    const cake = toStorefrontCake(item);
-                    if (cake.category.toLowerCase().includes('birthday')) {
-                        BIRTHDAY_CAKES.push({
-                            ...cake,
-                            badge: cake.offerLabel || 'Birthday Special'
-                        });
-                    } else {
-                        READY_MADE_CAKES.push(cake);
-                    }
+                    READY_MADE_CAKES.push(toStorefrontCake(item));
                 });
                 populateCategoryFilter();
                 renderReadyMadeCakes();
-                renderBirthdayCakes();
-                renderMovingItems();
                 loadPopularPicks();
             } catch (error) {
                 console.error('Unable to load available bakery items.', error);
                 if (grid) grid.innerHTML = '<p class="empty-state">Available items could not be loaded. Please try again later.</p>';
-                const birthdayGrid = document.getElementById('birthdayCakesGrid');
-                if (birthdayGrid) birthdayGrid.innerHTML = '<p class="empty-state">Birthday cakes could not be loaded. Please try again later.</p>';
-                const movingItemsTrack = document.getElementById('movingItemsTrack');
-                if (movingItemsTrack) movingItemsTrack.innerHTML = '<p class="empty-state">Bakery favorites could not be loaded. Please try again later.</p>';
             }
         }
 
@@ -2094,29 +1720,6 @@
                     </div>
                 </article>
             `).join('') : '<p class="empty-state">No items match these search and filter settings.</p>';
-        }
-
-        function renderMovingItems() {
-            const track = document.getElementById('movingItemsTrack');
-            if (!track) return;
-
-            if (!READY_MADE_CAKES.length) {
-                track.innerHTML = '<p class="empty-state">No bakery favorites are available right now.</p>';
-                return;
-            }
-
-            const cards = READY_MADE_CAKES.map(cake => `
-                <article class="moving-item-card">
-                    <img class="moving-item-image"
-                         src="${escapeHtml(cakeImageUrl(cake.image))}"
-                         alt="${escapeHtml(cake.name)}"
-                         loading="lazy"
-                         onerror="this.onerror=null;this.src=getCakeImageUrl(CAKE_IMAGE_FALLBACK)">
-                    <h3 class="moving-item-name">${escapeHtml(cake.name)}</h3>
-                </article>
-            `).join('');
-            track.innerHTML = `<div class="moving-items-group">${cards}</div>
-                <div class="moving-items-group" aria-hidden="true">${cards}</div>`;
         }
 
         async function loadPopularPicks() {
@@ -2201,39 +1804,39 @@
             const grid = document.getElementById('birthdayCakesGrid');
             if (!grid) return;
 
-            grid.innerHTML = BIRTHDAY_CAKES.length ? BIRTHDAY_CAKES.map(cake => `
-                <article class="cake-card" id="card-${escapeHtml(cake.id)}">
+            grid.innerHTML = BIRTHDAY_CAKES.map(cake => `
+                <article class="cake-card" id="card-${cake.id}">
                     <div class="cake-img-wrap">
-                        <span class="cake-card-badge birthday-badge">${escapeHtml(cake.badge)}</span>
-                        <img src="${escapeHtml(cakeImageUrl(cake.image))}" alt="${escapeHtml(cake.name)}" class="cake-card-img" loading="lazy" onerror="this.onerror=null;this.src=getCakeImageUrl(CAKE_IMAGE_FALLBACK)">
+                        <span class="cake-card-badge birthday-badge">${cake.badge}</span>
+                        <img src="${cakeImageUrl(cake.image)}" alt="${cake.name}" class="cake-card-img" loading="lazy" onerror="this.onerror=null;this.src=getCakeImageUrl(CAKE_IMAGE_FALLBACK)">
                     </div>
                     <div class="cake-card-body">
-                        <span class="cake-flavor-tag">Shape: ${escapeHtml(cake.shape)} &bull; ${escapeHtml(cake.flavor)}</span>
-                        <h3 class="cake-card-name">${escapeHtml(cake.name)}</h3>
-                        <p class="cake-card-desc">${escapeHtml(cake.desc)}</p>
+                        <span class="cake-flavor-tag">Shape: ${cake.shape} &bull; ${cake.flavor}</span>
+                        <h3 class="cake-card-name">${cake.name}</h3>
+                        <p class="cake-card-desc">${cake.desc}</p>
 
                         <div class="cake-card-price-row">
                             <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px;">
-                                <span class="cake-original-price">Rs. ${Number(cake.originalPrice).toLocaleString()}</span>
+                                <span class="cake-original-price">Rs. ${cake.originalPrice.toLocaleString()}</span>
                                 <span class="cake-price-text">Rs. ${cake.price.toLocaleString()}</span>
                             </div>
-                            <span class="cake-discount-pill">${escapeHtml(cake.offerLabel)}</span>
+                            <span class="cake-discount-pill">15% OFF</span>
                         </div>
 
                         <div class="cake-card-actions">
                             <div class="qty-stepper">
-                                <button type="button" class="qty-stepper-btn" onclick="adjustQty('${escapeHtml(cake.id)}', -1)" aria-label="Decrease quantity" ${cake.available ? '' : 'disabled'}>-</button>
-                                <input type="text" class="qty-stepper-input" id="qty-${escapeHtml(cake.id)}" value="1" readonly>
-                                <button type="button" class="qty-stepper-btn" onclick="adjustQty('${escapeHtml(cake.id)}', 1)" aria-label="Increase quantity" ${cake.available ? '' : 'disabled'}>+</button>
+                                <button type="button" class="qty-stepper-btn" onclick="adjustQty('${cake.id}', -1)" aria-label="Decrease quantity">-</button>
+                                <input type="text" class="qty-stepper-input" id="qty-${cake.id}" value="1" readonly>
+                                <button type="button" class="qty-stepper-btn" onclick="adjustQty('${cake.id}', 1)" aria-label="Increase quantity">+</button>
                             </div>
-                            <button type="button" class="btn-cake-add" onclick="addCakeToCart('${escapeHtml(cake.id)}', 'birthday')" id="btn-add-${escapeHtml(cake.id)}" ${cake.available ? '' : 'disabled'}>
+                            <button type="button" class="btn-cake-add" onclick="addCakeToCart('${cake.id}', 'birthday')" id="btn-add-${cake.id}">
                                 <span>🛒</span>
-                                <span>${cake.available ? 'Add to Cart' : 'Unavailable'}</span>
+                                <span>Add to Cart</span>
                             </button>
                         </div>
                     </div>
                 </article>
-            `).join('') : '<p class="empty-state">No birthday cakes are available right now. Please check back soon.</p>';
+            `).join('');
         }
 
         function filterShapeGroup(group, btnEl) {
@@ -2335,7 +1938,6 @@
                     </div>
                 `;
                 if (totalEl) totalEl.textContent = 'Rs. 0';
-                if (totalEl) totalEl.classList.remove('cart-total-status');
                 if (footer) {
                     const chkBtn = document.getElementById('checkoutToggleBtn');
                     if (chkBtn) chkBtn.style.display = 'none';
@@ -2346,53 +1948,31 @@
             }
 
             const chkBtn = document.getElementById('checkoutToggleBtn');
-            const orderItems = cartItems.filter(it => !(it.isCustomCakeBooking && it.bookingSubmitted));
-            if (chkBtn) chkBtn.style.display = orderItems.length ? 'flex' : 'none';
-            if (!orderItems.length) {
-                const form = document.getElementById('checkoutOrderForm');
-                if (form) form.classList.remove('active');
-            }
+            if (chkBtn) chkBtn.style.display = 'flex';
 
             let grandTotal = 0;
 
             body.innerHTML = cartItems.map((it, idx) => {
                 const itemTotal = it.price * it.qty;
-                const isBooking = it.isCustomCakeBooking && it.bookingSubmitted;
-                if (!isBooking) grandTotal += itemTotal;
-                const details = it.customCakeDetails;
-                const detailRows = isBooking && details ? [
-                    ['Shape', details.shape],
-                    ['Flavor', details.flavor],
-                    ['Decoration', details.decoration],
-                    ['Filling', details.filling],
-                    ['Size', details.size],
-                    ['Occasion', details.occasion],
-                    ['Required date', details.requiredDate],
-                    ['Preferred time', details.preferredTime],
-                    ['Fulfillment', details.pickupOrDelivery],
-                    ['Cake message', details.cakeMessage]
-                ].filter(([, value]) => value).map(([label, value]) => `<div class="cart-item-spec"><span>${label}</span><strong>${escapeHtml(value)}</strong></div>`).join('') : '';
+                grandTotal += itemTotal;
                 return `
-                    <div class="cart-item-card${isBooking ? ' cart-item-card-custom' : ''}">
+                    <div class="cart-item-card">
                         <div class="cart-item-thumb">
                             <img src="${escapeHtml(cakeImageUrl(it.image))}" alt="${escapeHtml(it.name)}" onerror="this.onerror=null;this.src=getCakeImageUrl(CAKE_IMAGE_FALLBACK)">
                         </div>
                         <div class="cart-item-details">
                             <div class="cart-item-title">${escapeHtml(it.name)}</div>
-                            ${isBooking ? `<span class="cart-item-booking-status">Booking submitted${it.bookingId ? ` · #${escapeHtml(it.bookingId)}` : ''}</span>` : ''}
-                            <div class="cart-item-unit-price">${isBooking ? 'Estimated price' : `Rs. ${it.price.toLocaleString()} each`}</div>
+                            <div class="cart-item-unit-price">Rs. ${it.price.toLocaleString()} each</div>
                             <div class="cart-item-controls">
-                                ${isBooking ? '' : `<div class="qty-stepper" style="transform:scale(0.88); transform-origin:left center;">
+                                <div class="qty-stepper" style="transform:scale(0.88); transform-origin:left center;">
                                     <button type="button" class="qty-stepper-btn" onclick="updateCartItemQty(${idx}, -1)">-</button>
                                     <span class="qty-stepper-input" style="line-height:28px;">${it.qty}</span>
                                     <button type="button" class="qty-stepper-btn" onclick="updateCartItemQty(${idx}, 1)">+</button>
-                                </div>`}
+                                </div>
                                 <button type="button" class="cart-item-remove-btn" onclick="removeCartItem(${idx})" title="Remove item">🗑️</button>
                             </div>
                         </div>
-                        ${detailRows ? `<div class="cart-item-custom-specs">${detailRows}</div>` : ''}
                         <div class="cart-item-total">
-                            ${isBooking ? '<div class="cart-item-booking-status">Already booked</div>' : ''}
                             Rs. ${itemTotal.toLocaleString()}
                         </div>
                     </div>
@@ -2400,13 +1980,12 @@
             }).join('');
 
             if (totalEl) {
-                totalEl.textContent = orderItems.length ? `Rs. ${grandTotal.toLocaleString()}` : 'Booking already submitted';
-                totalEl.classList.toggle('cart-total-status', !orderItems.length);
+                totalEl.textContent = `Rs. ${grandTotal.toLocaleString()}`;
             }
 
             const payloadInput = document.getElementById('hiddenCartPayload');
             if (payloadInput) {
-                payloadInput.value = JSON.stringify(orderItems.map(it => ({
+                payloadInput.value = JSON.stringify(cartItems.map(it => ({
                     id: it.id,
                     name: it.name,
                     quantity: it.qty,
@@ -2484,8 +2063,6 @@
             bindStorefrontFilters();
             READY_MADE_CAKES.length = 0;
             BIRTHDAY_CAKES.length = 0;
-            const birthdayGrid = document.getElementById('birthdayCakesGrid');
-            if (birthdayGrid) birthdayGrid.innerHTML = '<p class="empty-state">Loading birthday cakes...</p>';
             loadStorefrontItems();
 
             const urlParams = new URLSearchParams(window.location.search);
@@ -2525,8 +2102,7 @@
         async function submitBakeryOrder(event) {
             event.preventDefault();
             const form = event.currentTarget;
-            const orderItems = cartItems.filter(item => !(item.isCustomCakeBooking && item.bookingSubmitted));
-            if (!form.reportValidity() || orderItems.length === 0) return;
+            if (!form.reportValidity() || cartItems.length === 0) return;
 
             const submitButton = document.getElementById('submitOrderBtn');
             if (submitButton) submitButton.disabled = true;
@@ -2536,7 +2112,7 @@
                     method: 'DELETE'
                 });
 
-                for (const item of orderItems) {
+                for (const item of cartItems) {
                     const productId = item.productId || String(item.id).replace(/^ADMIN-/, '');
                     if (!productId) throw new Error(`Missing product ID for ${item.name}.`);
                     await window.BakeryApp.request('/api/cart', {
@@ -2566,7 +2142,7 @@
                 cartItems = [];
                 saveCart();
                 updateCartBadges();
-                window.location.assign(`/payment.html?orderId=${encodeURIComponent(order.id)}`);
+                window.location.assign(`orders.html?orderId=${encodeURIComponent(order.id)}`);
             } catch (error) {
                 showToast(error.message || 'Unable to place your order.');
             } finally {
@@ -2575,7 +2151,6 @@
         }
     </script>
     <script src="js/common.js"></script>
-    <script src="/js/storefront-effects.js"></script>
   <script src="/js/page-search.js"></script>
 </body>
 </html>

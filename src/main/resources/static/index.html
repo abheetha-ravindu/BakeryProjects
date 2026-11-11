@@ -52,24 +52,11 @@
         }
 
         .brand-logo {
-           display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #2f221d;
-            font-size: clamp(1.5rem, 2vw, 2rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            white-space: nowrap;
-        }
-        .brand-icon {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            width: 2rem;
-            height: 2rem;
-            border-radius: 50%;
-            background: #fff3e8;
+            gap: 0.5rem;
             font-size: 1.2rem;
+            font-weight: 700;
         }
 
         .nav-links,
@@ -315,204 +302,40 @@
 
         .home-hero {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-            gap: 2rem;
-            align-items: stretch;
-            min-height: 400px;
-            padding: 2.5rem max(1.5rem, calc((100% - 1180px) / 2)) 2.8rem;
-            background: linear-gradient(180deg, rgba(7, 18, 22, 0.92), rgba(9, 24, 27, 0.96));
-        }
-
-        .home-hero-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 420px;
-            padding: 2.1rem 2.1rem 1.6rem;
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 1.4rem;
-            background: linear-gradient(180deg, rgba(29, 22, 18, 0.88), rgba(19, 12, 9, 0.94));
-            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.18);
-            color: #f4efe7;
-        }
-
-        .home-hero-card h2,
-        .home-hero-card h3,
-        .home-hero-card p,
-        .home-hero-card li,
-        .home-hero-card span {
-            margin: 0;
-        }
-
-        .home-hero-card-eyebrow {
-            color: #f1c57e;
-            font-size: 0.72rem;
-            letter-spacing: 0.18em;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-
-        .home-hero-card-title {
-            margin: 0 0 1rem;
-            font-size: clamp(2.3rem, 3.1vw, 4rem);
-            line-height: 0.95;
-            letter-spacing: -0.04em;
-            font-weight: 800;
-            color: #f7f4ef;
-        }
-
-        .home-hero-card-description {
-            max-width: 540px;
-            margin: 0 0 1.5rem;
-            color: rgba(245, 238, 232, 0.72);
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        .home-hero-benefits {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.7rem 1.2rem;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            color: #f5efe9;
-        }
-
-        .home-hero-benefits li {
-            display: flex;
+            min-height: 480px;
+            grid-template-columns: minmax(0, 1fr) minmax(250px, 0.8fr);
             align-items: center;
-            gap: 0.6rem;
-            color: rgba(255,255,255,0.9);
-            font-size: 1rem;
-            line-height: 1.4;
-        }
-
-        .home-hero-check {
-            color: #f0c26a;
-            font-weight: 900;
-            font-size: 1.2rem;
-        }
-
-        .home-hero-cta {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 52px;
-            margin-top: 1.5rem;
-            border: 1px solid rgba(255,255,255,0.7);
-            border-radius: 999px;
-            background: #f4efe7;
-            color: #1c1a18;
-            font-size: 1.05rem;
-            font-weight: 700;
-            text-decoration: none;
-            transition: transform 0.2s ease;
-        }
-
-        .home-hero-cta:hover {
-            transform: translateY(-1px);
-        }
-
-        .home-hero-card--secondary {
-            background: linear-gradient(180deg, rgba(28, 21, 18, 0.9), rgba(23, 15, 12, 0.96));
-        }
-
-        .home-hero-card--secondary .home-hero-card-title {
-            max-width: 460px;
-            font-size: clamp(2.1rem, 2.6vw, 3.4rem);
-        }
-
-        .home-hero-card--secondary .home-hero-benefits {
-            margin-top: 0.2rem;
-        }
-
-        .home-hero-card--secondary .home-hero-cta {
-            justify-content: space-between;
-            padding: 0 1.2rem;
-        }
-
-        .home-hero-card--secondary .home-hero-cta .cta-arrow {
-            font-size: 1.6rem;
-            line-height: 1;
-        }
-
-        @media (max-width: 760px) {
-            .home-hero {
-                min-height: min(720px, calc(100svh - 110px));
-                padding: 5rem 1.5rem 6rem;
-            }
-        }
-
-        .home-hero {
-            position: relative;
-            isolation: isolate;
-            display: flex;
-            min-height: min(760px, calc(100svh - 76px));
-            align-items: center;
+            gap: 3rem;
             overflow: hidden;
-            padding: clamp(4rem, 10vw, 8rem) max(1.5rem, calc((100% - 1180px) / 2));
-            background: #101612;
-            color: #fff;
-        }
-
-        .home-hero-video {
-            position: absolute;
-            inset: -8% 0;
-            z-index: -2;
-            width: 100%;
-            height: 116%;
-            object-fit: cover;
-            transform: translate3d(0, var(--hero-video-shift, 0px), 0) scale(1.08);
-            will-change: transform;
-        }
-
-        .home-hero::before {
-            position: absolute;
-            inset: 0;
-            z-index: -1;
-            background:
-                linear-gradient(90deg, rgba(8, 15, 12, 0.88) 0%, rgba(8, 15, 12, 0.62) 45%, rgba(8, 15, 12, 0.12) 100%),
-                linear-gradient(0deg, rgba(8, 15, 12, 0.5), transparent 45%);
-            content: "";
+            padding: clamp(3rem, 8vw, 6.5rem) max(1.5rem, calc((100% - 1100px) / 2));
+            background: linear-gradient(120deg, #fff4e8 0%, #fffaf3 55%, #f9e3dd 100%);
         }
 
         .home-hero-copy {
-            max-width: 700px;
-            opacity: var(--hero-copy-opacity, 1);
-            transform: translate3d(0, var(--hero-copy-shift, 0px), 0);
-            will-change: transform, opacity;
+            max-width: 620px;
         }
 
         .home-hero-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin: 0 0 1.1rem;
-            color: #f1c57e;
+            margin: 0 0 1rem;
+            color: var(--home-berry);
             font-size: 0.82rem;
             font-weight: 700;
-            letter-spacing: 0.14em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
         }
 
         .home-hero-title {
-            max-width: 680px;
             margin: 0;
-            color: #fff;
             font-family: Georgia, serif;
-            font-size: clamp(3rem, 7vw, 6.2rem);
-            line-height: 0.98;
-            letter-spacing: -0.045em;
-            text-wrap: balance;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.08;
         }
 
         .home-hero-description {
-            max-width: 560px;
-            margin: 1.4rem 0 1.8rem;
-            color: rgba(255, 255, 255, 0.86);
-            font-size: clamp(1rem, 1.6vw, 1.2rem);
+            max-width: 500px;
+            margin: 1.25rem 0 1.75rem;
+            color: var(--home-muted);
+            font-size: 1.1rem;
             line-height: 1.7;
         }
 
@@ -524,273 +347,33 @@
 
         .home-hero-button {
             display: inline-flex;
-            min-height: 50px;
+            min-height: 48px;
             align-items: center;
             justify-content: center;
-            padding: 0.8rem 1.35rem;
-            border: 1px solid #2d6b5d;
+            padding: 0.75rem 1.3rem;
+            border: 1px solid var(--home-berry);
             border-radius: 999px;
-            background: #2d6b5d;
+            background: var(--home-berry);
             color: #fff;
             font-weight: 700;
             text-decoration: none;
-            transition: transform 0.2s ease, background 0.2s ease;
-        }
-
-        .home-hero-button:hover {
-            transform: translateY(-2px);
-            background: #39836f;
         }
 
         .home-hero-button-secondary {
-            border-color: rgba(255, 255, 255, 0.65);
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            backdrop-filter: blur(8px);
+            background: transparent;
+            color: var(--home-berry);
         }
 
-        .home-hero-button-secondary:hover {
-            background: rgba(255, 255, 255, 0.18);
-        }
-
-        .home-hero-scroll {
-            position: absolute;
-            right: max(1.5rem, calc((100% - 1180px) / 2));
-            bottom: 2rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.7rem;
-            color: rgba(255, 255, 255, 0.82);
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .home-hero-scroll-icon {
+        .home-hero-art {
             display: grid;
-            width: 2.4rem;
-            height: 2.4rem;
+            width: min(100%, 360px);
+            aspect-ratio: 1;
             place-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.55);
+            justify-self: center;
+            border: 1px solid rgba(189, 59, 75, 0.12);
             border-radius: 50%;
-            animation: hero-scroll-bob 1.8s ease-in-out infinite;
-        }
-
-        @keyframes hero-scroll-bob {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(5px); }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .home-hero-video {
-                transform: none !important;
-                will-change: auto;
-            }
-
-            .home-hero-copy {
-                opacity: 1 !important;
-                transform: none !important;
-                will-change: auto;
-            }
-
-            .home-hero-scroll-icon {
-                animation: none;
-            }
-        }
-
-        @media (max-width: 760px) {
-            .home-hero {
-                min-height: min(720px, calc(100svh - 110px));
-                padding: 5rem 1.5rem 6rem;
-            }
-
-            .home-hero-scroll {
-                right: 1.5rem;
-                bottom: 1.25rem;
-            }
-        }
-
-        .how-it-works-section {
-            background: linear-gradient(180deg, #07151d 0%, #081c22 100%);
-            padding: 4.5rem 1.25rem 5rem;
-        }
-
-        .hiw-container {
-            width: min(1180px, 100%);
-            margin: 0 auto;
-        }
-
-        .hiw-header {
-            max-width: 680px;
-            margin: 0 auto 2.5rem;
-            text-align: center;
-        }
-
-        .hiw-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-            color: #74d8bd;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-        }
-
-        .hiw-title {
-            margin: 0;
-            color: #edf6f1;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            font-size: clamp(2.2rem, 3vw, 3rem);
-            line-height: 1.15;
-            font-weight: 800;
-        }
-
-        .hiw-subtitle {
-            margin: 0.85rem auto 0;
-            color: rgba(226, 236, 236, 0.78);
-            font-size: 1.02rem;
-            line-height: 1.7;
-        }
-
-        .hiw-flow-container {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 1.8rem;
-            align-items: stretch;
-        }
-
-        .hiw-arrow-separator {
-            display: none;
-        }
-
-        .hiw-card {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            min-height: 470px;
-            border: 1px solid rgba(231, 255, 246, 0.28);
-            border-radius: 1.6rem;
-            background: rgba(210, 239, 230, 0.12);
-            box-shadow:
-                0 24px 55px rgba(0, 0, 0, 0.28),
-                inset 0 1px 0 rgba(255, 255, 255, 0.52),
-                inset 0 -1px 0 rgba(255, 255, 255, 0.08);
-            -webkit-backdrop-filter: blur(20px) saturate(155%);
-            backdrop-filter: blur(20px) saturate(155%);
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .hiw-card:hover {
-            transform: translateY(-7px);
-            border-color: rgba(184, 255, 231, 0.58);
-            box-shadow:
-                0 30px 65px rgba(0, 0, 0, 0.34),
-                0 0 28px rgba(93, 211, 176, 0.12),
-                inset 0 1px 0 rgba(255, 255, 255, 0.62);
-        }
-
-        .hiw-card::after {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            border-radius: inherit;
-            background: linear-gradient(140deg, rgba(255,255,255,0.12), transparent 34%, transparent 72%, rgba(166,255,224,0.07));
-            content: "";
-            pointer-events: none;
-        }
-
-        .hiw-card-img-wrap {
-            position: relative;
-            height: 250px;
-            overflow: hidden;
-            border-bottom: 1px solid rgba(25, 55, 49, 0.08);
-            background: linear-gradient(180deg, #eadfcf 0%, #f4e9df 100%);
-        }
-
-        .hiw-card-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .hiw-step-badge {
-            position: absolute;
-            z-index: 2;
-            right: 1.4rem;
-            bottom: 1.2rem;
-            display: grid;
-            place-items: center;
-            width: 58px;
-            height: 58px;
-            border: 2px solid rgba(255,255,255,0.8);
-            border-radius: 50%;
-            background: linear-gradient(180deg, #50c6af 0%, #2aa586 100%);
-            color: #fff;
-            font-size: 1.1rem;
-            font-weight: 800;
-            box-shadow: 0 8px 18px rgba(25, 152, 118, 0.35);
-        }
-
-        .hiw-card-body {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex: 1;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 1.5rem 1.35rem 1.6rem;
-            background: linear-gradient(145deg, rgba(225, 246, 238, 0.19), rgba(151, 199, 183, 0.09));
-        }
-
-        .hiw-card-title {
-            margin: 0;
-            color: #f3fbf7;
-            font-size: clamp(1.15rem, 2vw, 1.7rem);
-            line-height: 1.3;
-            font-weight: 700;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.22);
-        }
-
-        .hiw-card-desc {
-            margin: 0.9rem 0 1rem;
-            color: rgba(231, 243, 237, 0.82);
-            font-size: 0.96rem;
-            line-height: 1.6;
-        }
-
-        .hiw-card-tagline {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.35rem;
-            color: #9ce8cf;
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
-
-        .hiw-tag-dot {
-            color: rgba(198, 244, 224, 0.58);
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .hiw-card {
-                transition: none;
-            }
-
-            .hiw-card:hover {
-                transform: none;
-            }
-        }
-
-        @media (max-width: 980px) {
-            .hiw-flow-container {
-                grid-template-columns: 1fr;
-            }
+            background: radial-gradient(circle, #fff 0 42%, #f9e3dd 43% 68%, #f4d0c8 69%);
+            font-size: clamp(7rem, 18vw, 12rem);
         }
 
         @media (max-width: 760px) {
@@ -806,6 +389,26 @@
                 gap: 0.8rem;
             }
 
+            .home-hero {
+                min-height: auto;
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 3.5rem 1.5rem;
+                text-align: center;
+            }
+
+            .home-hero-description {
+                margin-right: auto;
+                margin-left: auto;
+            }
+
+            .home-hero-actions {
+                justify-content: center;
+            }
+
+            .home-hero-art {
+                width: min(68vw, 280px);
+            }
         }
 
         @media (max-width: 480px) {
@@ -824,9 +427,8 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="/css/verdant-storefront.css">
 </head>
-<body class="verdant-storefront">
+<body>
 
     <!-- ====================================================================
          NAVIGATION BAR
@@ -834,42 +436,40 @@
     <nav class="navbar" id="mainNavbar">
         <div class="navbar-container">
             <a href="/main" class="brand-logo" id="navBrand">
-                <span class="brand-icon" aria-hidden="true">K</span>
+                <span class="brand-icon">🧁</span>
                 <span>kamuda.com</span>
             </a>
 
             <ul class="nav-links">
                 <li><a href="/main" class="nav-link active" id="navHome">Home</a></li>
                 <li><a href="/items" class="nav-link" id="navBakery">Shop Cakes</a></li>
-                <li><a href="/custom-cake.html#customBuilderHero" class="nav-link" id="navCustomCake">Book Cake</a></li>
+                <li><a href="/custom-cake" class="nav-link" id="navCustomCake">Book Cake</a></li>
                 
             </ul>
 
             <div class="nav-actions">
                 <a href="/items" class="cart-icon-btn" id="navCartBtn" title="View cart" aria-label="View cart" onclick="toggleHomeCartDrawer(event)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+                    🛒
                     <span class="cart-badge" style="display:none;">0</span>
                 </a>
                 
                 <!-- Profile Button / Dropdown -->
                 <div class="nav-profile-wrapper" id="navProfileWrapper">
-                    <a href="/profileupdate" class="btn-profile-nav" id="navProfileBtn" title="Account">
-                        <span class="profile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span>
-                        <span class="profile-nav-name">Account</span>
+                    <a href="/profile" class="btn-profile-nav" id="navProfileBtn" title="Account">
+                        <span class="profile-nav-icon">👤</span>
+                        <span class="profile-nav-name">Profile</span>
                     </a>
                 </div>
 
-                <a href="custom-cake.html#customBuilderHero" class="btn-pill btn-strawberry" id="navBookBtn">
-                    Start an order
+                <a href="custom-cake.html#custom-cake-builder" class="btn-pill btn-strawberry" id="navBookBtn">
+                    ✨ Book Custom Cake
                 </a>
             </div>
         </div>
     </nav>
 
+    <!-- SECTION 1 — SIMPLE HERO -->
     <section class="home-hero" id="homeHero">
-        <video class="home-hero-video" id="homeHeroVideo" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1">
-            <source src="/videos/bakery-hero.mp4" type="video/mp4">
-        </video>
         <div class="home-hero-copy">
             <p class="home-hero-eyebrow">Fresh from our kitchen</p>
             <h1 class="home-hero-title">A little sweetness for every moment.</h1>
@@ -878,13 +478,10 @@
             </p>
             <div class="home-hero-actions">
                 <a href="/items" class="home-hero-button">Explore the Bakery</a>
-                <a href="/custom-cake.html#customBuilderHero" class="home-hero-button home-hero-button-secondary">Order a Custom Cake</a>
+                <a href="/custom-cake" class="home-hero-button home-hero-button-secondary">Order a Custom Cake</a>
             </div>
         </div>
-        <a class="home-hero-scroll" href="#gallerySection" aria-label="Scroll to explore our bakery">
-            <span>Scroll to explore</span>
-            <span class="home-hero-scroll-icon" aria-hidden="true">↓</span>
-        </a>
+        <div class="home-hero-art" aria-hidden="true">🧁</div>
     </section>
 
     <div class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="handleHomeCartOverlayClick(event)" aria-hidden="true">
@@ -921,7 +518,7 @@
             </p>
         </div>
 
-        <div class="gallery-tracks-wrapper" hidden>
+        <div class="gallery-tracks-wrapper">
             <!-- ROW 1: Right-to-Left Motion (Folder: 2-Bakery Gallery/Section 2) -->
             <div class="gallery-track-outer">
                 <div class="gallery-track-inner" id="galleryRow1">
@@ -1109,10 +706,11 @@
             
             <!-- LEFT CARD: BAKERY ITEMS -->
             <div class="service-card" id="cardBakery">
-                <img src="/images/service-cards/bakery-shop.jpg"
-                     alt="Warmly lit artisan bakery filled with freshly baked goods"
+                <img src="/images/common/bakery.png" 
+                     alt="Fresh Bakery Items - Croissants, Pastries and Artisan Breads" 
                      class="service-card-bg-img"
-                     loading="lazy">
+                     loading="lazy"
+                     onerror="if(this.src.indexOf('bakery-card.png')===-1)this.src='/images/common/bakery.png';">
                 
                 <div class="service-card-overlay">
                     <div class="service-card-content">
@@ -1154,10 +752,11 @@
 
             <!-- RIGHT CARD: CUSTOM CAKES -->
             <div class="service-card" id="cardCustomCake">
-                <img src="/images/service-cards/custom-cakes.jpg"
-                     alt="Elegant chocolate cakes decorated with burgundy frosting roses"
+                <img src="/images/common/cakes.png" 
+                     alt="Celebration & Custom Designer Cakes" 
                      class="service-card-bg-img"
-                     loading="lazy">
+                     loading="lazy"
+                     onerror="if(this.src.indexOf('cake-card.png')===-1)this.src='/images/common/cakes.png';">
                 
                 <div class="service-card-overlay">
                     <div class="service-card-content">
@@ -1191,7 +790,7 @@
                                 <span>Explore Ready-Made Cakes</span>
                                 <span class="btn-arrow">&rarr;</span>
                             </a>
-                            <a href="custom-cake.html#customBuilderHero" class="btn-service-cta btn-service-secondary" id="customizeYourCakeBtn">
+                            <a href="custom-cake.html#custom-cake-builder" class="btn-service-cta btn-service-secondary" id="customizeYourCakeBtn">
                                 <span>Customize Your Cake</span>
                                 <span class="btn-arrow">&rsaquo;</span>
                             </a>
@@ -1223,7 +822,7 @@
                 <!-- CARD 1 -->
                 <div class="hiw-card hiw-step-1" id="hiwStep1">
                     <div class="hiw-card-img-wrap">
-                        <img src="/images/how-it-works/1.jpg" alt="Choose Your Favorite - Step 1" class="hiw-card-img" loading="lazy">
+                        <img src="/images/how-it-works/1.png" alt="Choose Your Favorite - Step 1" class="hiw-card-img" loading="lazy">
                         <span class="hiw-step-badge">01</span>
                     </div>
                     <div class="hiw-card-body">
@@ -1252,7 +851,7 @@
                 <!-- CARD 2 -->
                 <div class="hiw-card hiw-step-2" id="hiwStep2">
                     <div class="hiw-card-img-wrap">
-                        <img src="/images/how-it-works/2.jpg" alt="Customize Your Order - Step 2" class="hiw-card-img" loading="lazy">
+                        <img src="/images/how-it-works/2.png" alt="Customize Your Order - Step 2" class="hiw-card-img" loading="lazy">
                         <span class="hiw-step-badge">02</span>
                     </div>
                     <div class="hiw-card-body">
@@ -1283,7 +882,7 @@
                 <!-- CARD 3 -->
                 <div class="hiw-card hiw-step-3" id="hiwStep3">
                     <div class="hiw-card-img-wrap">
-                        <img src="/images/how-it-works/3.jpg" alt="Order & Receive - Step 3" class="hiw-card-img" loading="lazy">
+                        <img src="/images/how-it-works/3.png" alt="Order & Receive - Step 3" class="hiw-card-img" loading="lazy">
                         <span class="hiw-step-badge">03</span>
                     </div>
                     <div class="hiw-card-body">
@@ -1435,7 +1034,7 @@
                             <li><a href="/items" class="footer-link">Shop Cakes</a></li>
                             <li><a href="/orders" class="footer-link">My Orders</a></li>
                             <li><a href="/payments" class="footer-link">My Payments</a></li>
-                            <li><a href="/custom-cake.html#customBuilderHero" class="footer-link">Custom Cakes</a></li>
+                            <li><a href="/custom-cake" class="footer-link">Custom Cakes</a></li>
                             <li><a href="#howItWorksSection" class="footer-link">How It Works</a></li>
                             <li><a href="#specialOffersSection" class="footer-link">Special Offers</a></li>
                         </ul>
@@ -1450,7 +1049,7 @@
                             <li><a href="/items" class="footer-link">Order Bakery Items</a></li>
                             <li><a href="custom-cake.html#ready-made-cakes" class="footer-link">Ready-Made Cakes</a></li>
                             <li><a href="custom-cake.html#birthday-cakes" class="footer-link">Birthday Cakes</a></li>
-                            <li><a href="custom-cake.html#customBuilderHero" class="footer-link">Customize Your Cake</a></li>
+                            <li><a href="custom-cake.html#custom-cake-builder" class="footer-link">Customize Your Cake</a></li>
                             <li><a href="#howItWorksSection" class="footer-link">Pickup &amp; Delivery</a></li>
                         </ul>
                     </nav>
@@ -1497,47 +1096,6 @@
     <!-- Scripts -->
     <script src="js/main.js"></script>
     <script src="js/home-cart.js"></script>
-    <script src="/js/home-gallery.js"></script>
-    <script src="/js/storefront-effects.js"></script>
   <script src="/js/page-search.js"></script>
-    <script>
-        (() => {
-            const hero = document.getElementById("homeHero");
-            const video = document.getElementById("homeHeroVideo");
-            const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-            if (!hero || !video) return;
-
-            let animationFrame = 0;
-            const updateScrollAnimation = () => {
-                animationFrame = 0;
-
-                if (reducedMotion.matches) {
-                    hero.style.removeProperty("--hero-video-shift");
-                    hero.style.removeProperty("--hero-copy-shift");
-                    hero.style.removeProperty("--hero-copy-opacity");
-                    video.pause();
-                    return;
-                }
-
-                const bounds = hero.getBoundingClientRect();
-                const progress = Math.min(1, Math.max(0, -bounds.top / hero.offsetHeight));
-                hero.style.setProperty("--hero-video-shift", `${-progress * 70}px`);
-                hero.style.setProperty("--hero-copy-shift", `${-progress * 34}px`);
-                hero.style.setProperty("--hero-copy-opacity", `${1 - progress * 0.65}`);
-            };
-
-            const scheduleUpdate = () => {
-                if (!animationFrame) {
-                    animationFrame = window.requestAnimationFrame(updateScrollAnimation);
-                }
-            };
-
-            window.addEventListener("scroll", scheduleUpdate, { passive: true });
-            window.addEventListener("resize", scheduleUpdate);
-            reducedMotion.addEventListener("change", scheduleUpdate);
-            updateScrollAnimation();
-        })();
-    </script>
 </body>
 </html>
