@@ -12,10 +12,10 @@
   overflow-y: auto;
   flex-direction: column;
   padding: 18px 16px 24px;
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.08);
   background:
-    radial-gradient(ellipse at 12% 0%, rgba(31, 79, 67, 0.2), transparent 22rem),
-    linear-gradient(180deg, #0b110f 0%, #080d0a 100%);
+    radial-gradient(ellipse at 12% 0%, rgba(31, 79, 67, 0.22), transparent 22rem),
+    linear-gradient(180deg, #0b110f 0%, #040604 100%);
   box-shadow: 8px 0 28px rgba(0, 0, 0, 0.18);
   color: #f5f5f3;
 }
@@ -26,7 +26,7 @@
   align-items: center;
   gap: 10px;
   padding: 6px 8px 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   color: #f5f5f3;
   font-family: Inter, "Segoe UI", Arial, sans-serif;
   font-size: 1.4rem;
@@ -41,12 +41,13 @@
   height: 36px;
   flex: 0 0 36px;
   border-radius: 10px;
-  background: linear-gradient(135deg, #79b9a2, #315d48);
-  box-shadow: 0 0 20px rgba(121, 185, 162, 0.2);
+  background: linear-gradient(135deg, #f0f5f2, #7ec4ae, #1f4f43);
+  box-shadow: 0 0 20px rgba(126, 196, 174, 0.8);
 }
 
 :is(.sidebar, header.nav) .nav-section {
   display: flex;
+  flex: 1 1 auto;
   align-items: stretch;
   flex-direction: column;
   gap: 8px;
@@ -54,9 +55,15 @@
   padding: 0;
 }
 
+body:has(nav[aria-label="Admin pages"]) :is(.sidebar, header.nav) .logout-nav-item {
+  margin-top: auto;
+  border-top-color: rgba(255, 255, 255, 0.12);
+  color: #ffb7b7;
+}
+
 :is(.sidebar, header.nav) .nav-title {
   margin: 14px 10px 4px;
-  color: #86948b;
+  color: #b5b9b5;
   font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -100,15 +107,15 @@
 
 :is(.sidebar, header.nav) .nav-item:hover {
   transform: translateX(3px);
-  border-color: rgba(121, 185, 162, 0.16);
-  background: rgba(121, 185, 162, 0.08);
+  border-color: rgba(126, 196, 174, 0.16);
+  background: rgba(31, 79, 67, 0.12);
   color: #d7efe7;
 }
 
 :is(.sidebar, header.nav) .nav-item.active,
 :is(.sidebar, header.nav) .nav-item[aria-current="page"] {
-  border-color: rgba(121, 185, 162, 0.2);
-  background: linear-gradient(90deg, rgba(49, 93, 72, 0.58), rgba(31, 79, 67, 0.18));
+  border-color: rgba(126, 196, 174, 0.2);
+  background: linear-gradient(90deg, rgba(31, 79, 67, 0.58), rgba(31, 79, 67, 0.18));
   color: #bce6d4;
   font-weight: 700;
 }
@@ -119,7 +126,7 @@
   inset: 8px auto 8px 0;
   width: 3px;
   border-radius: 0 3px 3px 0;
-  background: #79b9a2;
+  background: #9cd9c1;
   content: "";
 }
 
@@ -145,9 +152,9 @@
 body:has(nav[aria-label="Admin pages"]) {
   min-height: 100vh;
   background:
-    radial-gradient(ellipse at 12% 2%, rgba(31, 79, 67, 0.24), transparent 34rem),
-    radial-gradient(ellipse at 92% 38%, rgba(255, 255, 255, 0.045), transparent 27rem),
-    linear-gradient(180deg, #050806 0%, #0b110f 58%, #070a08 100%);
+    radial-gradient(circle at top left, rgba(31, 79, 67, 0.22), transparent 33%),
+    radial-gradient(circle at right center, rgba(255, 255, 255, 0.06), transparent 25%),
+    linear-gradient(180deg, #040604 0%, #0b110f 100%);
   color: #f5f5f3;
   color-scheme: dark;
 }
@@ -190,11 +197,11 @@ body:has(nav[aria-label="Admin pages"]) main :is(h1, h2, h3, h4, h5, h6, label, 
 }
 
 body:has(nav[aria-label="Admin pages"]) main :is(p, small, .muted, .subtitle, .description) {
-  color: #b5c3ba;
+  color: #b5b9b5;
 }
 
 body:has(nav[aria-label="Admin pages"]) :is(.welcome-header, .page-header) {
-  border-color: rgba(121, 185, 162, 0.18);
+  border-color: rgba(126, 196, 174, 0.2);
   background: linear-gradient(125deg, rgba(31, 79, 67, 0.62), rgba(17, 25, 20, 0.96) 72%);
   color: #f5f5f3;
 }
@@ -386,6 +393,45 @@ body:has(nav[aria-label="Admin pages"]) .message.error {
   color: #ffb7b7;
 }
 
+body:has(nav[aria-label="Admin pages"]) :is(.sidebar, header.nav) {
+  border-color: rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(31, 79, 67, 0.22), transparent 22rem),
+    linear-gradient(180deg, #0b110f 0%, #040604 100%);
+  color: #f5f5f3;
+}
+
+body:has(nav[aria-label="Admin pages"]) :is(.sidebar, header.nav) nav[aria-label="Admin pages"] {
+  border-color: transparent;
+  background: transparent;
+  color: #f5f5f3;
+}
+
+body:has(nav[aria-label="Admin pages"]) :is(.sidebar, header.nav) :is(.brand, .admin-brand) {
+  color: #f5f5f3;
+}
+
+body:has(nav[aria-label="Admin pages"]) :is(.sidebar, header.nav) .nav-item {
+  color: #c5ccc6;
+}
+
+body:has(nav[aria-label="Admin pages"]) :is(.sidebar, header.nav) .nav-item:hover {
+  border-color: rgba(126, 196, 174, 0.16);
+  background: rgba(31, 79, 67, 0.22);
+  color: #d7efe7;
+}
+
+body:has(nav[aria-label="Admin pages"]) :is(.sidebar, header.nav) .nav-item.active,
+body:has(nav[aria-label="Admin pages"]) :is(.sidebar, header.nav) .nav-item[aria-current="page"] {
+  border-color: rgba(126, 196, 174, 0.2);
+  background: linear-gradient(90deg, rgba(31, 79, 67, 0.58), rgba(31, 79, 67, 0.18));
+  color: #bce6d4;
+}
+
+body:has(nav[aria-label="Admin pages"]) :is(.sidebar, header.nav) .nav-item .icon {
+  color: #9cd9c1;
+}
+
 body:has(nav[aria-label="Admin pages"]) .page-search {
   display: none !important;
 }
@@ -465,6 +511,7 @@ body:has(nav[aria-label="Admin pages"]) .page-search {
 
     header.nav > .wrap {
       display: flex;
+      flex: 1 1 auto;
       width: 100%;
       min-height: 0;
       align-items: stretch;

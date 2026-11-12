@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 
+// Represents the delivery domain object.
 public class Delivery {
 
     @Id

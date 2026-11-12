@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
 @Configuration
+// Represents the data initializer domain object.
 public class DataInitializer {
 
     @Bean

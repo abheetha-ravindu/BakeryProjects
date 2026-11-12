@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 @Entity
 @Table(name = "cart_items")
+// Represents the cart item domain object.
 public class CartItem extends BaseEntity {
     @NotNull(message = "User id is required")
     private Long userId;

@@ -106,8 +106,8 @@
       </circle>`).join('');
 
     svg.innerHTML = `<defs><linearGradient id="ordersAreaFill" x1="0" x2="0" y1="0" y2="1">
-        <stop offset="0%" stop-color="#c92c3d" stop-opacity=".2"></stop>
-        <stop offset="100%" stop-color="#c92c3d" stop-opacity="0"></stop>
+        <stop offset="0%" stop-color="#1f4f43" stop-opacity=".2"></stop>
+        <stop offset="100%" stop-color="#1f4f43" stop-opacity="0"></stop>
       </linearGradient></defs>
       ${gridLines}
       <path class="chart-area" d="${areaPath}"></path>

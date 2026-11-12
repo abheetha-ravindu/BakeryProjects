@@ -1,5 +1,6 @@
 package com.example.bakeryshop.model.order;
 
+// Represents the order status domain object.
 public enum OrderStatus {
     PENDING,
     PREPARING,

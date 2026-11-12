@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "option_type")
+// Represents the cake option domain object.
 public abstract class CakeOption {
 
     @Id

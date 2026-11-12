@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "orders")   // "order" is a reserved word in SQL, so we use "orders"
+// Represents the order domain object.
 public class Order extends BaseEntity {
 
     private Long userId;

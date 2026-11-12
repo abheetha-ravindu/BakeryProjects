@@ -26,6 +26,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 @Controller
+// Represents the item controler domain object.
 public class ItemControler {
     private final ItemService itemService;
     private final ItemPopularityService itemPopularityService;

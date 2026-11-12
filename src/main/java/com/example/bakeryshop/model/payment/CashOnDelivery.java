@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 
 @Entity
 @DiscriminatorValue("CASH_ON_DELIVERY")
+// Represents the cash on delivery domain object.
 public class CashOnDelivery extends Payment {
 
     public CashOnDelivery() {

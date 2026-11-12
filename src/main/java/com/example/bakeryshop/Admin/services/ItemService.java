@@ -24,6 +24,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Service
+// Provides Item service logic.
 public class ItemService {
     //Encapsulation
     private static final long MAX_IMAGE_SIZE = 5L * 1024 * 1024;

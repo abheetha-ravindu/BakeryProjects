@@ -3,33 +3,33 @@ body.verdant-storefront {
   --surface: #111914;
   --ink: #f5f5f3;
   --muted: #b5b9b5;
-  --line: rgba(255, 255, 255, 0.1);
-  --berry: #6cae99;
-  --berry-soft: rgba(38, 112, 90, 0.2);
+  --line: rgba(255, 255, 255, 0.08);
+  --berry: #1f4f43;
+  --berry-soft: rgba(38, 112, 90, 0.18);
   --home-cream: #050806;
   --home-ink: #f5f5f3;
   --home-muted: #b5b9b5;
-  --home-berry: #79b9a2;
+  --home-berry: #7ec4ae;
   --home-surface: #111914;
-  --home-line: rgba(255, 255, 255, 0.1);
-  --color-cream-subtle: #0b110f;
+  --home-line: rgba(255, 255, 255, 0.08);
+  --color-cream-subtle: #0d1512;
   --color-dark-roast: #f5f5f3;
   --color-dark-muted: #b5b9b5;
-  --color-border: rgba(255, 255, 255, 0.12);
-  --color-strawberry: #79b9a2;
-  --color-strawberry-light: rgba(38, 112, 90, 0.2);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-strawberry: #1f4f43;
+  --color-strawberry-light: rgba(38, 112, 90, 0.18);
   --cake-gold: #9cd9c1;
-  --cake-gold-light: rgba(38, 112, 90, 0.2);
+  --cake-gold-light: rgba(38, 112, 90, 0.18);
   --cake-pink-glow: rgba(38, 112, 90, 0.12);
-  --cake-pink-border: rgba(126, 196, 174, 0.24);
+  --cake-pink-border: rgba(126, 196, 174, 0.2);
   position: relative;
   isolation: isolate;
   overflow-x: clip;
   color-scheme: dark;
   background:
-    radial-gradient(ellipse at 12% 2%, rgba(31, 79, 67, 0.24), transparent 34rem),
-    radial-gradient(ellipse at 92% 38%, rgba(255, 255, 255, 0.045), transparent 27rem),
-    linear-gradient(180deg, #050806 0%, #0b110f 58%, #070a08 100%);
+    radial-gradient(circle at top left, rgba(31, 79, 67, 0.22), transparent 33%),
+    radial-gradient(circle at right center, rgba(255, 255, 255, 0.06), transparent 25%),
+    linear-gradient(180deg, #040604 0%, #0b110f 100%);
   color: var(--ink);
   font-family: Inter, "Segoe UI", Arial, sans-serif;
 }
@@ -39,9 +39,10 @@ body.verdant-storefront::before {
   inset: 0;
   z-index: -1;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
-  background-size: 64px 64px;
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    radial-gradient(circle at 20% 20%, rgba(126, 196, 174, 0.06), transparent 28%);
+  background-size: 26px 26px, 26px 26px, 100% 100%;
   content: "";
   pointer-events: none;
 }
@@ -59,7 +60,7 @@ body.verdant-storefront .service-card a.btn-service-primary {
 body.verdant-storefront .service-card a.btn-service-primary:hover {
   border-color: #fff;
   background: #fff;
-  color: #111914;
+  color: #2f1f1a;
 }
 
 body.verdant-storefront .service-card a.btn-service-secondary {
@@ -178,9 +179,9 @@ body.verdant-storefront .nav-actions .btn-profile-nav {
 body.verdant-storefront .nav-actions .btn-pill {
   min-height: 40px;
   padding: 0.55rem 0.9rem;
-  border: 1px solid #477961;
+  border: 1px solid #315d48;
   border-radius: 7px;
-  background: #315d48;
+  background: linear-gradient(135deg, #315d48, #1f4f43);
   color: #f6f5ef;
   box-shadow: none;
   font-size: 20px;
@@ -220,7 +221,7 @@ body.verdant-storefront .nav-link::after {
   bottom: 0;
   left: 0;
   height: 2px;
-  background: #bda36d;
+  background: #9cd9c1;
   content: "";
   transform: scaleX(0);
   transform-origin: center;
@@ -268,8 +269,8 @@ body.verdant-storefront .cart-icon-btn svg {
 }
 
 body.verdant-storefront .navbar .btn-strawberry:hover {
-  border-color: #628a70;
-  background: #3b6b53;
+  border-color: rgba(255, 255, 255, 0.16);
+  background: linear-gradient(135deg, #1f4f43 0%, #2d6b5d 100%);
   box-shadow: none;
   transform: none;
 }
@@ -278,20 +279,18 @@ body.verdant-storefront .btn-strawberry,
 body.verdant-storefront .btn-hero-ready,
 body.verdant-storefront .btn-book-submit,
 body.verdant-storefront .home-hero-button:not(.home-hero-button-secondary) {
-  border-color: #2d6b5d;
-  background: linear-gradient(135deg, #1f4f43, #2d6b5d);
-  color: #f5f5f3;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 12px 28px rgba(31, 79, 67, 0.22);
+  border-color: rgba(255, 255, 255, 0.12);
+  background: linear-gradient(135deg, #f3f5f3 0%, #d5e0dc 100%);
+  color: #101712;
+  box-shadow: 0 18px 34px rgba(255, 255, 255, 0.08);
 }
 
 body.verdant-storefront .btn-strawberry:hover,
 body.verdant-storefront .btn-hero-ready:hover,
 body.verdant-storefront .btn-book-submit:hover,
 body.verdant-storefront .home-hero-button:hover {
-  border-color: #79b9a2;
-  background: linear-gradient(135deg, #286354, #347a69);
-  box-shadow: 0 16px 34px rgba(31, 79, 67, 0.32);
   transform: translateY(-2px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38);
 }
 
 body.verdant-storefront .page-search form {
@@ -312,11 +311,11 @@ body.verdant-storefront .page-search input::placeholder {
 
 body.verdant-storefront .page-search button {
   border-radius: 5px;
-  background: #315d48;
+  background: linear-gradient(135deg, #1f4f43 0%, #2d6b5d 100%);
 }
 
 body.verdant-storefront .page-search form:focus-within {
-  outline-color: #79b9a2;
+  outline-color: #9cd9c1;
 }
 
 body.verdant-storefront .page-search-results {
@@ -329,7 +328,7 @@ body.verdant-storefront .page-search-results {
 body.verdant-storefront .page-search-results a:hover,
 body.verdant-storefront .page-search-results a:focus,
 body.verdant-storefront .page-search-results a[aria-selected="true"] {
-  background: rgba(31, 79, 67, 0.38);
+  background: rgba(38, 112, 90, 0.18);
   color: #d7efe7;
 }
 
@@ -395,26 +394,26 @@ body.verdant-storefront .wcu-subtitle {
 }
 
 body.verdant-storefront .home-hero-art {
-  border-color: rgba(126, 196, 174, 0.2);
+  border-color: rgba(201, 75, 91, 0.18);
   background:
-    radial-gradient(circle, #14221b 0 42%, #102019 43% 68%, #173b30 69%),
-    #111914;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28), 0 0 80px rgba(31, 79, 67, 0.16);
+    radial-gradient(circle, #fff2ef 0 42%, #f9d9db 43% 68%, #f3b0bb 69%),
+    #fffaf5;
+  box-shadow: 0 30px 80px rgba(122, 63, 54, 0.12), 0 0 80px rgba(201, 75, 91, 0.08);
   animation: verdant-float 7s ease-in-out infinite;
 }
 
 body.verdant-storefront .home-hero-button-secondary,
 body.verdant-storefront .btn-hero-custom {
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.025);
+  background: rgba(255, 255, 255, 0.5);
   color: var(--ink);
 }
 
 body.verdant-storefront .home-hero-button-secondary:hover,
 body.verdant-storefront .btn-hero-custom:hover {
-  border-color: rgba(126, 196, 174, 0.4);
-  background: rgba(31, 79, 67, 0.18);
-  color: #d7efe7;
+  border-color: rgba(201, 75, 91, 0.3);
+  background: rgba(201, 75, 91, 0.08);
+  color: #7c2b39;
 }
 
 body.verdant-storefront :is(.gallery-section, .services-choice-section, .how-it-works-section, .why-choose-us-section, .custom-builder-section, .birthday-cakes-section) {
@@ -519,13 +518,13 @@ body.verdant-storefront .section-container {
 
 body.verdant-storefront :is(.gallery-card, .service-card, .popular-pick-card, .cake-card, .builder-form-card, .recommendations-panel, .mini-box, .feature-card, .showcase-panel) {
   border-color: var(--line);
-  background: linear-gradient(155deg, rgba(17, 25, 20, 0.96), rgba(10, 15, 12, 0.98));
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(180deg, rgba(19, 27, 23, 0.9), rgba(10, 13, 12, 0.96));
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38);
   color: var(--ink);
 }
 
 body.verdant-storefront :is(.gallery-card, .cake-card, .popular-pick-card, .feature-card):hover {
-  border-color: rgba(126, 196, 174, 0.38);
+  border-color: rgba(126, 196, 174, 0.35);
   box-shadow: 0 24px 52px rgba(0, 0, 0, 0.32), 0 0 28px rgba(31, 79, 67, 0.12);
   transform: translateY(-5px);
 }
@@ -535,7 +534,7 @@ body.verdant-storefront :is(.gallery-card-title, .cake-card-name, .popular-pick-
 }
 
 body.verdant-storefront :is(.gallery-card-tag, .cake-flavor-tag, .cake-page-hero .cake-eyebrow, .section-eyebrow) {
-  color: #9cd9c1;
+  color: #d7efe7;
 }
 
 body.verdant-storefront :is(.cake-card-desc, .popular-pick-card p, .feature-card p, .cake-portion-hint, .step-hint, .option-sub) {
@@ -544,7 +543,7 @@ body.verdant-storefront :is(.cake-card-desc, .popular-pick-card p, .feature-card
 
 body.verdant-storefront :is(.storefront-filters, .storefront-filter input, .storefront-filter select, .filter-reset-button, .builder-input, .builder-select, .builder-textarea, .pill-toggle-label, .option-select-card) {
   border-color: var(--line);
-  background: #0c120f;
+  background: rgba(255, 255, 255, 0.02);
   color: var(--ink);
 }
 
@@ -553,29 +552,29 @@ body.verdant-storefront :is(.storefront-filter, .builder-label) {
 }
 
 body.verdant-storefront :is(.storefront-filter input, .storefront-filter select, .builder-input, .builder-select, .builder-textarea):focus {
-  border-color: #79b9a2;
+  border-color: #9cd9c1;
   background: #111914;
   box-shadow: 0 0 0 3px rgba(126, 196, 174, 0.13);
 }
 
 body.verdant-storefront .shape-tab-btn {
   border-color: var(--line);
-  background: rgba(255, 255, 255, 0.025);
+  background: rgba(255, 255, 255, 0.02);
   color: var(--muted);
 }
 
 body.verdant-storefront .shape-tab-btn:hover,
 body.verdant-storefront .shape-tab-btn.active {
-  border-color: rgba(126, 196, 174, 0.42);
-  background: rgba(31, 79, 67, 0.34);
+  border-color: rgba(126, 196, 174, 0.2);
+  background: rgba(31, 79, 67, 0.12);
   color: #d7efe7;
   box-shadow: 0 10px 24px rgba(31, 79, 67, 0.14);
 }
 
 body.verdant-storefront .option-select-card:hover,
 body.verdant-storefront .option-select-card.selected {
-  border-color: #79b9a2;
-  background: rgba(31, 79, 67, 0.3);
+  border-color: rgba(126, 196, 174, 0.35);
+  background: rgba(31, 79, 67, 0.12);
   box-shadow: 0 0 0 2px rgba(126, 196, 174, 0.1);
 }
 
@@ -600,15 +599,15 @@ body.verdant-storefront .step-num-pill {
 
 body.verdant-storefront .cake-card-badge,
 body.verdant-storefront .section-badge-pill {
-  border-color: rgba(126, 196, 174, 0.24);
-  background: rgba(17, 25, 20, 0.92);
-  color: #c4e7d9;
+  border-color: rgba(126, 196, 174, 0.2);
+  background: rgba(31, 79, 67, 0.12);
+  color: #d7efe7;
 }
 
 body.verdant-storefront .cake-availability {
-  border-color: rgba(126, 196, 174, 0.28);
-  background: rgba(31, 79, 67, 0.24);
-  color: #bce6d4;
+  border-color: rgba(126, 196, 174, 0.2);
+  background: rgba(31, 79, 67, 0.12);
+  color: #d7efe7;
 }
 
 body.verdant-storefront .cake-availability.unavailable {
@@ -620,7 +619,7 @@ body.verdant-storefront .cake-availability.unavailable {
 body.verdant-storefront .qty-stepper-btn {
   width: 32px;
   height: 32px;
-  border: 1px solid rgba(121, 185, 162, 0.38);
+  border: 1px solid rgba(126, 196, 174, 0.38);
   background: #152a21;
   color: #f5f5f3;
   box-shadow: none;
@@ -628,14 +627,14 @@ body.verdant-storefront .qty-stepper-btn {
 
 body.verdant-storefront .qty-stepper-btn:hover {
   border-color: #9cd9c1;
-  background: #79b9a2;
-  color: #07110c;
+  background: #1f4f43;
+  color: #f5f5f3;
 }
 
 body.verdant-storefront .qty-stepper {
   gap: 3px;
   padding: 4px;
-  border-color: rgba(121, 185, 162, 0.32);
+  border-color: rgba(126, 196, 174, 0.32);
   background: rgba(5, 12, 8, 0.72);
 }
 
@@ -647,16 +646,15 @@ body.verdant-storefront .qty-stepper-input {
 body.verdant-storefront .btn-cake-add {
   min-height: 44px;
   padding: 0.6rem 1rem;
-  border: 1px solid rgba(156, 217, 193, 0.58);
-  background: linear-gradient(135deg, #276b55, #1f4f43);
-  color: #fff;
-  box-shadow: 0 5px 16px rgba(31, 79, 67, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(135deg, #f3f5f3 0%, #d5e0dc 100%);
+  color: #101712;
+  box-shadow: 0 18px 34px rgba(255, 255, 255, 0.08);
 }
 
 body.verdant-storefront .btn-cake-add:hover {
-  border-color: #bce6d4;
-  background: linear-gradient(135deg, #347e64, #276b55);
-  box-shadow: 0 8px 20px rgba(31, 79, 67, 0.42);
+  transform: translateY(-2px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38);
 }
 
 body.verdant-storefront .btn-cake-add:disabled,
@@ -701,20 +699,20 @@ body.verdant-storefront .rec-cake-card .btn-card-details:hover {
 body.verdant-storefront .site-footer,
 body.verdant-storefront footer {
   border-color: var(--line);
-  background: rgba(5, 8, 6, 0.45);
+  background: rgba(255, 247, 244, 0.86);
   color: var(--muted);
 }
 
 body.verdant-storefront .cart-drawer-panel {
   border-color: var(--line);
-  background: #fdfcf9;
-  color: #17211b;
+  background: #fffdfb;
+  color: #2f1f1a;
 }
 
 body.verdant-storefront .cart-drawer-panel .cart-drawer-header,
 body.verdant-storefront .cart-drawer-panel .cart-drawer-footer {
-  border-color: #dedfd8;
-  background: #f2f4ef;
+  border-color: #eeded4;
+  background: #fff5f1;
 }
 
 body.verdant-storefront .cart-drawer-panel .cart-drawer-title,
@@ -723,7 +721,7 @@ body.verdant-storefront .cart-drawer-panel .cart-total-label,
 body.verdant-storefront .cart-drawer-panel .cart-empty-message,
 body.verdant-storefront .cart-drawer-panel .cart-empty-message h4,
 body.verdant-storefront .cart-drawer-panel .checkout-drawer-form h4 {
-  color: #17211b;
+  color: #2f1f1a;
 }
 
 body.verdant-storefront .cart-drawer-panel .cart-item-card {
@@ -785,7 +783,7 @@ body.verdant-storefront .cart-drawer-panel .cart-item-spec {
 }
 
 body.verdant-storefront .cart-drawer-panel .cart-item-spec strong {
-  color: #17211b;
+  color: #2f1f1a;
   font-size: 0.83rem;
   font-weight: 650;
 }
@@ -793,7 +791,7 @@ body.verdant-storefront .cart-drawer-panel .cart-item-spec strong {
 body.verdant-storefront .cart-drawer-panel .cart-item-booking-status {
   display: inline-block;
   margin: 0.2rem 0;
-  color: #176345;
+  color: #9cd9c1;
   font-size: 0.75rem;
   font-weight: 750;
 }
@@ -811,7 +809,7 @@ body.verdant-storefront .cart-drawer-panel .cart-item-card-custom .cart-item-tot
 }
 
 body.verdant-storefront .cart-drawer-panel .cart-total-value.cart-total-status {
-  color: #176345;
+  color: #9cd9c1;
   font-size: 0.95rem;
 }
 
@@ -826,8 +824,8 @@ body.verdant-storefront .cart-drawer-panel .payment-handoff-note {
   margin: 0.75rem 0;
   padding: 0.75rem;
   border-radius: 0.6rem;
-  background: #eef4ef;
-  color: #405247;
+  background: #fff3f3;
+  color: #67494c;
   font-size: 0.85rem;
   line-height: 1.5;
 }

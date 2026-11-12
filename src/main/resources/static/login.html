@@ -44,6 +44,7 @@
 
         .footer { text-align: center; font-size: 12px; color: #888; padding-top: 10px; }
         .error-msg { color: #e53935; font-size: 13.5px; margin-bottom: 15px; background: #ffebee; padding: 10px; border-radius: 6px; text-align: center; border: 1px solid #ffcdd2; }
+        .success-msg { color: #24653a; font-size: 13.5px; margin-bottom: 15px; background: #edf7ee; padding: 10px; border-radius: 6px; text-align: center; border: 1px solid #c8e6c9; }
     </style>
     <link rel="stylesheet" href="/css/site-theme.css">
 </head>
@@ -76,6 +77,7 @@
 
 
         <div id="loginError" class="error-msg" hidden>Invalid email or password. Please try again.</div>
+        <div id="loginSuccess" class="success-msg" role="status" hidden>Your account has been deleted.</div>
 
         <form action="/login" method="post">
             <div class="input-group">
@@ -105,8 +107,12 @@
     </div>
 </div>
 <script>
-    if (new URLSearchParams(window.location.search).has('error')) {
+    const loginParams = new URLSearchParams(window.location.search);
+    if (loginParams.has('error')) {
         document.getElementById('loginError').hidden = false;
+    }
+    if (loginParams.get('accountDeleted') === 'true') {
+        document.getElementById('loginSuccess').hidden = false;
     }
 </script>
   <script src="/js/page-search.js"></script>

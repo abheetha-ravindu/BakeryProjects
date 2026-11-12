@@ -8,6 +8,7 @@ import jakarta.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
+// Represents the base entity domain model.
 public abstract class BaseEntity {
 
     @Id

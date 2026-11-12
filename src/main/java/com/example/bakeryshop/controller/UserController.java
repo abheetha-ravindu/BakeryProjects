@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
+// Handles User controller logic.
 public class UserController {
 
     private final UserService userService;
@@ -41,6 +42,7 @@ public class UserController {
                             @RequestParam String password,
                             @RequestParam(required = false) String returnUrl,
                             HttpSession session, Model model) {
+        // First check whether the user is an admin before trying the normal customer login flow.
         Optional<AdminUser> admin = userService.authenticateAdmin(username, password);
         if (admin.isPresent()) {
             session.removeAttribute("loggedInUserId");
@@ -48,6 +50,7 @@ public class UserController {
             return "redirect:/adminitem";
         }
 
+        // If the credentials are for a regular customer, store the user session and return to the safe page.
         Optional<User> user = userService.authenticate(username, password);
         if (user.isPresent()) {
             session.removeAttribute("loggedInAdminId");
@@ -130,14 +133,22 @@ public class UserController {
         return "redirect:/profile";
     }
 
-    @GetMapping("/profile/delete")
-    public String deleteMyProfile(HttpSession session) {
+    @DeleteMapping("/api/profile")
+    @ResponseBody
+    public ResponseEntity<Void> deleteMyProfile(HttpSession session) {
         Long userId = (Long) session.getAttribute("loggedInUserId");
-        if (userId != null) {
-            userService.deleteById(userId);
-            session.invalidate();
+        if (userId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        return "redirect:/singup.html";
+
+        User user = userService.findById(userId);
+        if (!(user instanceof Customer)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        userService.deleteById(userId);
+        session.invalidate();
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/admin/users")
@@ -170,6 +181,7 @@ public class UserController {
     }
 
     private static String safeReturnUrl(String requested) {
+        // Only allow a clean internal path to avoid open redirects or malformed URLs.
         if (requested == null || requested.isBlank()) return "/index.html";
         String value = requested.trim();
         return value.startsWith("/") && !value.startsWith("//")

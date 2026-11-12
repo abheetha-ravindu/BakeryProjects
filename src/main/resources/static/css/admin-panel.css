@@ -6,8 +6,8 @@
   overflow-y: auto;
   border-right: 1px solid var(--line);
   border-bottom: 0;
-  background: linear-gradient(180deg, #fffaf4 0%, #fff0f3 100%);
-  box-shadow: 0 4px 20px rgba(78, 48, 25, 0.08);
+  background: linear-gradient(180deg, rgba(12, 17, 15, 0.98), rgba(17, 25, 20, 0.98));
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
 }
 
 .nav .wrap {
@@ -34,7 +34,7 @@
   height: 24px;
   flex: 0 0 auto;
   border-radius: 8px;
-  background: linear-gradient(135deg, #c92c3d, #a92132);
+  background: linear-gradient(135deg, #1f4f43, #2d6b5d);
 }
 
 .nav-section {
@@ -65,8 +65,8 @@
 
 .nav-item:hover,
 .nav-item.active {
-  background: rgba(201, 44, 61, 0.1);
-  color: #c92c3d;
+  background: rgba(38, 112, 90, 0.18);
+  color: #9cd9c1;
 }
 
 .nav-item.active {

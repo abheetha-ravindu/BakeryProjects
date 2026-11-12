@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+// Provides Cake Option service logic.
 public class CakeOptionService {
 
     private final CakeOptionRepository repository;

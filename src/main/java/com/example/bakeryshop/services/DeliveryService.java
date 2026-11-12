@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+// Provides Delivery service logic.
 public class DeliveryService {
 
     private final DeliveryRepository deliveryRepository;

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/cart")
+// Handles Cart controller logic.
 public class CartController {
     private final CartService cartService;
     public CartController(CartService cartService) {

@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 @Table(name = "payments")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)   // card and cash payment share ONE table
 @DiscriminatorColumn(name = "payment_type", discriminatorType = DiscriminatorType.STRING)
+// Represents the payment domain object.
 public abstract class Payment extends BaseEntity {
 
     private Long orderId;

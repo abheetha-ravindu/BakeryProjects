@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.LongAdder;
 
 @Service
+// Provides Item Popularity service logic.
 public class ItemPopularityService {
     private final ConcurrentMap<String, LongAdder> addToCartCounts = new ConcurrentHashMap<>();
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,14 +6,14 @@
     <title>Sign Up | kamuda.com</title>
     <meta name="description" content="Create a kamuda.com account to order bakery items and book custom celebration cakes.">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧁</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%A7%81</text></svg>">
     <style>
         :root {
             --auth-cream: #FFFDF9;
             --auth-roast: #2C1E16;
             --auth-muted: #5E4D43;
             --auth-border: #EADBCE;
-            --auth-strawberry: #C92C3D;
+            --auth-strawberry: #1f4f43;
         }
 
         * {
@@ -160,7 +160,7 @@
             display: flex;
             border: 1px solid #F8B4B4;
             background: #FDE8E8;
-            color: #C81E1E;
+            color: #9cd9c1;
         }
 
         .auth-alert.is-success {
@@ -205,7 +205,7 @@
         }
 
         .form-input.is-invalid {
-            border-color: #E53935;
+            border-color: #9cd9c1;
             background: #FFF8F8;
         }
 
@@ -244,7 +244,7 @@
             gap: 0.5rem;
             border: 0;
             border-radius: 9999px;
-            background: linear-gradient(135deg, #DF384A, var(--auth-strawberry));
+            background: linear-gradient(135deg, #315d48, var(--auth-strawberry));
             box-shadow: 0 8px 24px rgba(201, 44, 61, 0.28);
             color: #fff;
             cursor: pointer;
@@ -340,7 +340,7 @@
     <div class="auth-wrapper">
         <aside class="auth-visual-col">
             <div class="auth-visual-content">
-                <div class="auth-brand-badge">🧁 kamuda.com</div>
+                <div class="auth-brand-badge">&#129473; kamuda.com</div>
                 <h1 class="auth-visual-title">Freshly Baked.<br>Beautifully Made.</h1>
                 <p class="auth-visual-tagline">Create an account to order fresh bakery favorites and book custom cakes for your celebrations.</p>
             </div>
@@ -348,14 +348,14 @@
 
         <main class="auth-form-col">
             <header class="auth-header-bar">
-                <a href="index.html" class="auth-header-logo">🧁 kamuda.com</a>
+                <a href="index.html" class="auth-header-logo">&#129473; kamuda.com</a>
                 <a href="index.html" class="auth-back-link">&larr; Back to Home</a>
             </header>
 
             <div class="auth-center-container">
                 <section class="auth-card" aria-labelledby="signupTitle">
                     <div class="auth-alert" id="authAlertBanner" role="alert">
-                        <span id="alertIcon">⚠️</span>
+                        <span id="alertIcon">&#9888;&#65039;</span>
                         <span id="alertMessage"></span>
                     </div>
 
@@ -394,7 +394,7 @@
                             <label for="signupPassword" class="form-label">Password</label>
                             <div class="input-wrapper">
                                 <input type="password" id="signupPassword" name="password" class="form-input has-password-toggle" placeholder="Minimum 6 characters" required autocomplete="new-password">
-                                <button type="button" class="password-toggle-btn" id="toggleSignupPasswordBtn" aria-label="Show or hide password">👁️</button>
+                                <button type="button" class="password-toggle-btn" id="toggleSignupPasswordBtn" aria-label="Show or hide password">&#128065;&#65039;</button>
                             </div>
                             <span class="field-error-msg" id="signupPasswordError"></span>
                         </div>
@@ -403,7 +403,7 @@
                             <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
                             <div class="input-wrapper">
                                 <input type="password" id="signupConfirmPassword" name="confirmPassword" class="form-input has-password-toggle" placeholder="Re-enter your password" required autocomplete="new-password">
-                                <button type="button" class="password-toggle-btn" id="toggleConfirmPasswordBtn" aria-label="Show or hide confirm password">👁️</button>
+                                <button type="button" class="password-toggle-btn" id="toggleConfirmPasswordBtn" aria-label="Show or hide confirm password">&#128065;&#65039;</button>
                             </div>
                             <span class="field-error-msg" id="signupConfirmError"></span>
                         </div>
@@ -442,7 +442,7 @@
 
             function showAlert(message, type = 'error') {
                 alertMessage.textContent = message;
-                alertIcon.textContent = type === 'error' ? '⚠️' : '✅';
+                alertIcon.textContent = type === 'error' ? '\u26A0\uFE0F' : '\u2705';
                 authAlertBanner.className = `auth-alert is-${type}`;
             }
 
@@ -462,7 +462,7 @@
                 button.addEventListener('click', () => {
                     const showingPassword = input.type === 'password';
                     input.type = showingPassword ? 'text' : 'password';
-                    button.textContent = showingPassword ? '🙈' : '👁️';
+                    button.textContent = showingPassword ? '\uD83D\uDE48' : '\uD83D\uDC41\uFE0F';
                 });
             }
 

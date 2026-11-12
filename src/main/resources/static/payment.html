@@ -39,19 +39,28 @@
     }
   </style>
 </head>
-<body class="payment-page">
-  <header class="nav">
-    <div class="wrap">
-      <a class="brand" href="/main">kamuda.com</a>
-      <nav class="nav-links" aria-label="Main">
-        <a class="nav-link" href="/main">Home</a>
-        <a class="nav-link" href="/items">Shop cakes</a>
-        <a class="nav-link" href="/orders">My orders</a>
-        <a class="nav-link" href="/payments" aria-current="page">My payments</a>
-        <a class="nav-link" href="/profile">Profile</a>
-        <a class="nav-link" href="/main#cart">Cart</a>
-      </nav>
-    </div>
+<body class="customer-theme payment-page">
+  <header class="customer-navbar">
+    <nav class="customer-navbar-container" aria-label="Main navigation">
+      <a class="customer-brand" href="/main">
+        <span class="customer-brand-icon" aria-hidden="true">🧁</span>
+        <span>kamuda.com</span>
+      </a>
+
+      <ul class="customer-nav-links">
+        <li><a class="customer-nav-link" href="/main">Home</a></li>
+        <li><a class="customer-nav-link" href="/items">Shop Cakes</a></li>
+        <li><a class="customer-nav-link" href="/profileupdate">Profile</a></li>
+        <li><a class="customer-nav-link" href="/billing/refund-request-form.html">Request refund</a></li>
+        <li><a class="customer-nav-link" href="/payments" aria-current="page">My Payment</a></li>
+        <li><a class="customer-nav-link" href="/orders">My Orders</a></li>
+      </ul>
+
+      <div class="customer-nav-actions">
+        <a class="customer-cart-link" href="/main#cart" aria-label="View cart" title="View cart">🛒</a>
+        <a class="customer-book-link" href="/custom-cake.html#customBuilderHero">✨ Book Custom Cake</a>
+      </div>
+    </nav>
   </header>
 
   <div class="banner" id="demoBanner" hidden>

@@ -1,6 +1,7 @@
 package com.example.bakeryshop.model.payment;
 
 
+// Represents the payment status domain object.
 public enum PaymentStatus {
     PAID,
     REFUNDED;

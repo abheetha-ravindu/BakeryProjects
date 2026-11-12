@@ -7,6 +7,7 @@ import java.math.RoundingMode;
 
 @Entity
 @DiscriminatorValue("CARD")
+// Represents the card payment domain object.
 public class CardPayment extends Payment {
 
     private String cardHolderName;

@@ -66,14 +66,23 @@
       const itemTotal = quantity * price;
       subtotal += itemTotal;
       return `<article class="cart-item-card">
+        <div class="cart-item-thumb">
+          <img src="${escapeHtml(cartImageUrl(item.image))}" alt="${escapeHtml(item.name || 'Bakery item')}" onerror="this.onerror=null;this.src='${CART_IMAGE_FALLBACK}'">
+        </div>
         <div class="cart-item-details">
           <div class="cart-item-title">${escapeHtml(item.name || 'Bakery item')}</div>
           <div class="cart-item-unit-price">Rs. ${price.toLocaleString()} each</div>
           <div class="cart-item-controls" aria-label="Quantity controls for ${escapeHtml(item.name || 'item')}">
-            <button type="button" onclick="updateHomeCartItem(${index}, -1)" aria-label="Decrease quantity">−</button>
-            <span>${quantity}</span>
-            <button type="button" onclick="updateHomeCartItem(${index}, 1)" aria-label="Increase quantity">+</button>
-            <button type="button" onclick="removeHomeCartItem(${index})" aria-label="Remove item">Remove</button>
+            <div class="qty-stepper">
+              <button type="button" class="qty-stepper-btn" onclick="updateHomeCartItem(${index}, -1)" aria-label="Decrease quantity">−</button>
+              <span class="qty-stepper-input">${quantity}</span>
+              <button type="button" class="qty-stepper-btn" onclick="updateHomeCartItem(${index}, 1)" aria-label="Increase quantity">+</button>
+            </div>
+            <button type="button" class="cart-item-remove-btn" onclick="removeHomeCartItem(${index})" aria-label="Remove ${escapeHtml(item.name || 'item')} from cart">
+              <svg class="cart-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 6h18M8 6V4h8v2m3 0-1 14H6L5 6m4 4v6m6-6v6"></path>
+              </svg>
+            </button>
           </div>
         </div>
         <div class="cart-item-total">Rs. ${itemTotal.toLocaleString()}</div>
@@ -90,6 +99,15 @@
       '"': '&quot;',
       "'": '&#39;'
     })[character]);
+  }
+
+  const CART_IMAGE_FALLBACK = '/images/3-orader%20bakery%20items%20or%20custom%20cake%20booking/base.png';
+
+  function cartImageUrl(imagePath) {
+    const path = typeof imagePath === 'string' ? imagePath.trim() : '';
+    if (!path) return CART_IMAGE_FALLBACK;
+    if (/^(https?:|data:|\/)/i.test(path)) return path;
+    return `/images/${path.split('/').map(encodeURIComponent).join('/')}`;
   }
 
   window.toggleHomeCartDrawer = event => {

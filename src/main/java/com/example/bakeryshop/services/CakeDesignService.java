@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+// Provides Cake Design service logic.
 public class CakeDesignService {
 
     private final CakeDesignRepository repository;

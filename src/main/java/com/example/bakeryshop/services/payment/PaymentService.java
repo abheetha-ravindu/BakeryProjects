@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+// Provides Payment service logic.
 public class PaymentService {
 
     private final PaymentRepository paymentRepository;

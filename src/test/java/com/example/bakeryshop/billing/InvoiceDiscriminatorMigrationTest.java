@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
+// Exercises invoice discriminator migration test behavior.
 class InvoiceDiscriminatorMigrationTest {
 
     @Test

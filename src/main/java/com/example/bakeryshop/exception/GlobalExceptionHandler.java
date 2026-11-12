@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
+// Handles global exception handler exceptions.
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)

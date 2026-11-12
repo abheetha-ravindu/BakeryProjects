@@ -1,0 +1,67 @@
+body:has(nav[aria-label="Admin pages"]) .toolbar .select {
+  background-color: #fffaf7;
+  color: #1b2921;
+}
+
+body:has(nav[aria-label="Admin pages"]) .toolbar select option {
+  background-color: #fffaf7;
+  color: #1b2921;
+}
+
+@media (max-width: 760px) {
+  .payments-table {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+  }
+
+  .payments-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .payments-table tbody tr {
+    display: block;
+    padding: 8px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .payments-table tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .payments-table tbody td {
+    display: flex;
+    min-width: 0;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    text-align: right;
+    overflow-wrap: anywhere;
+  }
+
+  .payments-table tbody td::before {
+    flex: 0 0 32%;
+    color: #b5c3ba;
+    content: attr(data-label);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  .payments-table tbody td:last-child {
+    padding-bottom: 4px;
+    border-bottom: 0;
+  }
+
+  .payments-table tbody td .btn {
+    margin-left: auto;
+  }
+}

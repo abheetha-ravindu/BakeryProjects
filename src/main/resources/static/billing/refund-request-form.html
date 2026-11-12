@@ -8,24 +8,27 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #fdf9f5;
+            background:
+                radial-gradient(circle at top left, rgba(31, 79, 67, 0.22), transparent 33%),
+                radial-gradient(circle at right center, rgba(255,255,255,0.06), transparent 25%),
+                linear-gradient(180deg, #040604 0%, #0b110f 100%);
             margin: 0;
             padding: 0;
-            color: #2f221d;
+            color: #f5f5f3;
         }
         .form-container {
             max-width: 550px;
             margin: 3rem auto;
-            background: #ffffff;
+            background: rgba(17, 25, 20, 0.9);
             padding: 30px;
-            border: 1px solid #f0e5dc;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
-            box-shadow: 0 12px 32px rgba(68, 42, 26, 0.05);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38);
         }
         h2 {
-            color: #2f221d;
+            color: #f5f5f3;
             margin-top: 0;
-            border-bottom: 1px solid #f1d4d7;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             padding-bottom: 10px;
             font-family: Georgia, serif;
         }
@@ -51,23 +54,23 @@
             height: 120px;
         }
         input:focus, textarea:focus {
-            border-color: #c73749;
-            outline: 3px solid rgba(199, 55, 73, 0.12);
+            border-color: #79b9a2;
+            outline: 3px solid rgba(121, 185, 162, 0.16);
         }
         .btn-submit {
             width: 100%;
             padding: 12px;
-            background-color: #c73749;
+            background: linear-gradient(135deg, #315d48, #1f4f43);
             color: white;
             border: none;
             border-radius: 10px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background 0.2s;
         }
         .btn-submit:hover {
-            background-color: #ad293a;
+            background: linear-gradient(135deg, #2d6b5d, #1a3c34);
         }
         @media (max-width: 600px) {
             .form-container {
@@ -78,7 +81,7 @@
     </style>
     <link rel="stylesheet" href="/css/site-theme.css">
 </head>
-<body>
+<body class="customer-theme">
 
 <header class="customer-navbar">
     <nav class="customer-navbar-container" aria-label="Main navigation">
@@ -103,7 +106,7 @@
 
 <div class="form-container">
     <h2>Apply for a Refund</h2>
-    <p style="color: #76665d; font-size: 14px;">Please fill out the form below to submit your refund request.</p>
+    <p class="form-intro">Please fill out the form below to submit your refund request.</p>
 
 
     <form id="refundForm" onsubmit="submitForm(event)">
@@ -121,7 +124,7 @@
         </div>
 
 
-        <p id="refundStatus" role="status" aria-live="polite" style="margin:0 0 16px; color:#76665d;"></p>
+        <p id="refundStatus" class="form-status" role="status" aria-live="polite"></p>
         <button type="submit" class="btn-submit" id="submitButton">Submit Refund Request</button>
     </form>
 </div>

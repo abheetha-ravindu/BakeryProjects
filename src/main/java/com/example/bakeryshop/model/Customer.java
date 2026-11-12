@@ -3,6 +3,7 @@ package com.example.bakeryshop.model;
 import jakarta.persistence.Entity;
 
 @Entity
+// Represents the customer domain object.
 public class Customer extends User {
     private String phoneNumber;
     private String address;

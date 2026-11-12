@@ -1,4 +1,7 @@
 (() => {
+  const mount = document.getElementById('pageSearchMount');
+  if (!mount) return;
+
   const pages = [
     { title: 'Home', url: '/index.html', keywords: 'bakery shop products cakes' },
     { title: 'Items and Cakes', url: '/item.html', keywords: 'products catalog bakery items' },
@@ -58,7 +61,7 @@
       font: inherit;
     }
     .page-search form:focus-within {
-      outline: 2px solid #c92c3d;
+      outline: 2px solid #79b9a2;
       outline-offset: 2px;
     }
     .page-search button {
@@ -66,7 +69,7 @@
       padding: 0 12px;
       border: 0;
       border-radius: 8px;
-      background: #c92c3d;
+      background: linear-gradient(135deg, #315d48, #1f4f43);
       color: #fff;
       font: inherit;
       font-weight: 700;
@@ -97,10 +100,56 @@
     .page-search-results a:focus,
     .page-search-results a[aria-selected="true"] {
       outline: none;
-      background: #fff0f3;
-      color: #a51f30;
+      background: rgba(38, 112, 90, 0.12);
+      color: #1f4f43;
     }
     .page-search-empty { color: #715f55; }
+    .page-search--navbar {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      z-index: 35;
+      width: 100%;
+      color: #d7dcd7;
+      font-size: 12px;
+    }
+    .page-search--navbar form {
+      gap: 6px;
+      padding: 4px;
+      border-color: rgba(255, 255, 255, .09);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .03);
+      box-shadow: none;
+    }
+    .page-search--navbar input {
+      padding: 6px 8px;
+      background: transparent;
+      color: #f5f5f3;
+    }
+    .page-search--navbar input::placeholder { color: #9da69f; }
+    .page-search--navbar button {
+      padding: 0 11px;
+      border-radius: 6px;
+    }
+    .page-search--navbar .page-search-results {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      left: 0;
+      z-index: 1;
+      margin: 0;
+      border-color: rgba(255, 255, 255, .1);
+      background: #101712;
+      color: #f5f5f3;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .35);
+    }
+    .page-search--navbar .page-search-results a:hover,
+    .page-search--navbar .page-search-results a:focus,
+    .page-search--navbar .page-search-results a[aria-selected="true"] {
+      background: rgba(38, 112, 90, .28);
+      color: #d7efe7;
+    }
+    .page-search--navbar .page-search-empty { color: #b5b9b5; }
     @media (max-width: 520px) {
       .page-search { right: 12px; bottom: 12px; width: calc(100vw - 24px); }
     }
@@ -108,7 +157,7 @@
   document.head.append(style);
 
   const container = document.createElement('section');
-  container.className = 'page-search';
+  container.className = 'page-search page-search--navbar';
   container.setAttribute('aria-label', 'Search website pages');
   container.innerHTML = `
     <ul class="page-search-results" id="pageSearchResults" role="listbox" aria-label="Pages"></ul>
@@ -118,7 +167,7 @@
       <button type="submit">Search</button>
     </form>
   `;
-  document.body.append(container);
+  (mount || document.body).append(container);
 
   const input = container.querySelector('#pageSearchInput');
   const results = container.querySelector('#pageSearchResults');

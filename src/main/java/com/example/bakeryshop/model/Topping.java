@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("DECORATION")
+// Represents the topping domain object.
 public class Topping extends CakeOption {
 
     @Override

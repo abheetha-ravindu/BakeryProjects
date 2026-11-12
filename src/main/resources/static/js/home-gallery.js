@@ -67,7 +67,7 @@
         throw new Error('The item request returned an invalid response.');
       }
 
-      const availableItems = items.filter((item) => item && item.name);
+      const availableItems = items.filter((item) => item && item.id && item.name);
       if (availableItems.length === 0) {
         tracks.forEach((track) => showMessage(track, 'No bakery items are available right now.'));
         if (wrapper) wrapper.hidden = false;

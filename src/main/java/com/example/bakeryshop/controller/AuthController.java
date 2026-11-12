@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/auth")
+// Handles Auth controller logic.
 public class AuthController {
     private final UserService userService;
 

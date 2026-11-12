@@ -8,6 +8,7 @@ import java.util.Locale;
 import org.springframework.stereotype.Service;
 
 @Service
+// Provides Refund service logic.
 public class RefundService {
     private final RefundRepository refundRepository;
 

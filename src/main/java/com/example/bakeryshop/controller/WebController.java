@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
+// Handles Web controller logic.
 public class WebController {
 
     @GetMapping({"/", "/main"})

@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/invoices")
+// Handles Invoice controller logic.
 public class InvoiceController {
     private final InvoiceService invoiceService;
     private final PaymentService paymentService;

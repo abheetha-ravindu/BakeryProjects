@@ -15,6 +15,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
+// Represents the user domain object.
 public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

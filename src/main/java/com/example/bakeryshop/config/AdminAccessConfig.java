@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+// Configures admin access config settings.
 public class AdminAccessConfig implements WebMvcConfigurer {
     private final AdminUserRepository adminUserRepository;
 

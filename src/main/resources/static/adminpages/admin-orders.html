@@ -11,6 +11,17 @@
   <link rel="stylesheet" href="/css/admin-panel.css">
     <link rel="stylesheet" href="/css/site-theme.css">
   <link rel="stylesheet" href="/css/admin-navigation.css">
+  <style>
+    body:not(.verdant-storefront) main .toolbar select {
+      color: #1b2921;
+      color-scheme: light;
+    }
+
+    body:not(.verdant-storefront) main .toolbar select option {
+      background: #fffaf7;
+      color: #1b2921;
+    }
+  </style>
 </head>
 <body>
   <header class="nav">
@@ -30,6 +41,7 @@
         <a class="nav-item" href="/adminRefunds"><span class="icon">↩</span>Refunds</a>
         <a class="nav-item" href="/adminItems"><span class="icon">▤</span>Items</a>
         <a class="nav-item" href="/userManagement"><span class="icon">♙</span>User Management</a>
+        <a class="nav-item logout-nav-item" href="/logout"><span class="icon" aria-hidden="true">↪</span>Log out</a>
       </nav>
     </div>
   </header>

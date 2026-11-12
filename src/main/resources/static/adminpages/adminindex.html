@@ -12,15 +12,18 @@
   <link rel="stylesheet" href="/css/admin-panel.css">
   <style>
     :root {
-      --dashboard-rose: #c92c3d;
-      --dashboard-gold: #c88d44;
-      --dashboard-green: #23845b;
-      --dashboard-blue: #5478bd;
+      --dashboard-rose: #1f4f43;
+      --dashboard-gold: #9cd9c1;
+      --dashboard-green: #2d6b5d;
+      --dashboard-blue: #7aa8d7;
     }
 
     body {
       min-height: 100vh;
-      background: #fffdf9;
+      background:
+        radial-gradient(circle at top left, rgba(31, 79, 67, 0.22), transparent 33%),
+        radial-gradient(circle at right center, rgba(255,255,255,0.06), transparent 25%),
+        linear-gradient(180deg, #040604 0%, #0b110f 100%);
     }
 
     .admin-layout {
@@ -54,7 +57,7 @@
       padding: clamp(24px, 4vw, 38px);
       border: 1px solid var(--line);
       border-radius: 20px;
-      background: linear-gradient(120deg, #fff1f2, #fffaf1 75%);
+      background: linear-gradient(120deg, rgba(31, 79, 67, 0.26), rgba(255,255,255,0.02) 75%);
       box-shadow: var(--shadow);
     }
 
@@ -111,7 +114,7 @@
       flex: 0 0 auto;
       place-items: center;
       border-radius: 14px;
-      background: #fff0f3;
+      background: rgba(38, 112, 90, 0.18);
       color: var(--dashboard-rose);
       font-size: 1.25rem;
     }
@@ -452,6 +455,7 @@
         <a class="nav-item" href="/adminRefunds"><span class="icon">↩</span>Refunds</a>
         <a class="nav-item" href="/adminItems"><span class="icon">▤</span>Items</a>
         <a class="nav-item" href="/userManagement"><span class="icon">♙</span>User Management</a>
+        <a class="nav-item logout-nav-item" href="/logout"><span class="icon" aria-hidden="true">↪</span>Log out</a>
       </nav>
     </aside>
 

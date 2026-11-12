@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/refund")
+// Handles Refund controller logic.
 public class RefundController {
     private final RefundService refundService;
     private final OrderRepository orderRepository;
@@ -26,11 +27,13 @@ public class RefundController {
     @PostMapping
     public ResponseEntity<RefundRequest> applyForRefund(
             @Valid @RequestBody RefundRequest request, HttpSession session) {
+        // A logged-in customer must exist before a refund can be submitted.
         Long userId = (Long) session.getAttribute("loggedInUserId");
         if (userId == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Customer login required.");
         }
 
+        // Check that the order exists and belongs to the same customer requesting the refund.
         Order order = orderRepository.findById(request.getOrderId())
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found with id " + request.getOrderId()));
         if (!userId.equals(order.getUserId())) {

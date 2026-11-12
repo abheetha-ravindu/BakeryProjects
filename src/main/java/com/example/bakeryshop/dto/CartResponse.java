@@ -3,5 +3,6 @@ import com.example.bakeryshop.model.CartItem;
 import java.math.BigDecimal;
 import java.util.List;
 
+// Represents a cart response payload.
 public record CartResponse(Long userId, List<CartItem> items, BigDecimal total) {
 }

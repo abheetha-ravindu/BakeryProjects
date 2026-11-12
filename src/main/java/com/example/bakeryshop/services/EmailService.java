@@ -14,6 +14,7 @@ import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 @Service
+// Provides Email service logic.
 public class EmailService {
     private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/delivery")
+// Handles Delivery controller logic.
 public class DeliveryController {
 
     private final DeliveryService deliveryService;

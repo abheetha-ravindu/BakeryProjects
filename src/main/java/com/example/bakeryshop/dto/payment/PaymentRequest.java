@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+// Represents a payment request payload.
 public record PaymentRequest(
         @NotNull(message = "Order id is required")
         Long orderId,

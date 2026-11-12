@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/payments")
+// Handles Payment controller logic.
 public class PaymentController {
 
     private final PaymentService paymentService;

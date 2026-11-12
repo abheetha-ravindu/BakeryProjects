@@ -25,6 +25,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/cake-designs")
+// Handles Cake Design controller logic.
 public class CakeDesignController {
 
     private static final long MAX_REFERENCE_IMAGE_SIZE = 5L * 1024 * 1024;

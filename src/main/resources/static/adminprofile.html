@@ -55,13 +55,13 @@
     </style>
     <link rel="stylesheet" href="/css/site-theme.css">
 </head>
-<body>
+<body class="admin-page">
 
 <div class="navbar">
     <div class="logo">🧁 Sweet Bloom <span>Patisserie</span></div>
     <div class="nav-right">
         <span class="admin-pill">Admin: <span th:text="${admin.username}">admin</span></span>
-        <a th:href="@{/logout}" class="signout">Sign out</a>
+        <a href="/logout" class="signout">Log out</a>
     </div>
 </div>
 

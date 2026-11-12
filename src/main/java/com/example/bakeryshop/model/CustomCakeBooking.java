@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "custom_bookings")
+// Represents the custom cake booking domain object.
 public class CustomCakeBooking {
 
     @Id

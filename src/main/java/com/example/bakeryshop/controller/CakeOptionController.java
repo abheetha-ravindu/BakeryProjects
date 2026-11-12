@@ -8,6 +8,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/cake-options")
+// Handles Cake Option controller logic.
 public class CakeOptionController {
 
     private final CakeOptionService cakeOptionService;

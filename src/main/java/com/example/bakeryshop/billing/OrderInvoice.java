@@ -1,5 +1,6 @@
 package com.example.bakeryshop.billing;
 
+// Represents the order invoice domain object.
 public class OrderInvoice extends Invoice{
 
     private double orderAmount;

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+// Provides Custom Cake Booking  Impl service logic.
 public class CustomCakeBookingServiceImpl implements BookingService {
 
     private final CustomCakeBookingRepository repository;

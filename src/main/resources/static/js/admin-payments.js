@@ -30,25 +30,28 @@
       if (filter.value && payment.status !== filter.value) return;
       const row = document.createElement('tr');
       const values = [
-        `#${payment.id}`,
-        window.BakeryPayment.date(payment.createdAt),
-        `#${payment.orderId}`,
-        payment.paymentType || '—',
-        app.money(payment.amount),
-        app.money(payment.fee),
-        app.money(payment.totalCharged)
+        ['Payment', `#${payment.id}`],
+        ['Date', window.BakeryPayment.date(payment.createdAt)],
+        ['Order', `#${payment.orderId}`],
+        ['Method', payment.paymentType || '—'],
+        ['Amount', app.money(payment.amount)],
+        ['Fee', app.money(payment.fee)],
+        ['Total', app.money(payment.totalCharged)]
       ];
-      values.forEach((value, index) => {
+      values.forEach(([label, value], index) => {
         const cell = document.createElement('td');
         cell.textContent = value;
+        cell.dataset.label = label;
         if (index >= 4) cell.className = 'num';
         row.appendChild(cell);
       });
       const statusCell = document.createElement('td');
+      statusCell.dataset.label = 'Status';
       const badge = document.createElement('span');
       window.BakeryPayment.setStatus(badge, payment.status);
       statusCell.appendChild(badge);
       const actionCell = document.createElement('td');
+      actionCell.dataset.label = 'Action';
       if (payment.status === 'PAID') {
         const refund = document.createElement('button');
         refund.className = 'btn';

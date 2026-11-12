@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="/css/style.css">
     <style>
         :root {
-            color-scheme: light;
-            --ink: #2f221d;
-            --muted: #76665d;
-            --line: #eadbce;
-            --berry: #c73749;
-            --berry-dark: #ad293a;
-            --soft-pink: #fff1f3;
-            --cream: #fdf9f5;
+            color-scheme: dark;
+            --ink: #f5f5f3;
+            --muted: #b5b9b5;
+            --line: rgba(255, 255, 255, 0.08);
+            --berry: #1f4f43;
+            --berry-dark: #2d6b5d;
+            --soft-pink: rgba(38, 112, 90, 0.18);
+            --cream: #050806;
         }
 
         * {
@@ -26,7 +26,10 @@
             min-width: 320px;
             min-height: 100vh;
             margin: 0;
-            background: var(--cream);
+            background:
+                radial-gradient(circle at top left, rgba(31, 79, 67, 0.22), transparent 33%),
+                radial-gradient(circle at right center, rgba(255,255,255,0.06), transparent 25%),
+                linear-gradient(180deg, #040604 0%, #0b110f 100%);
             color: var(--ink);
             font-family: Arial, sans-serif;
         }
@@ -95,17 +98,17 @@
             align-items: center;
             gap: 1rem;
             padding: 1.15rem 1.25rem;
-            border: 1px solid #f0e5dc;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
-            background: #fff;
-            box-shadow: 0 8px 24px rgba(68, 42, 26, 0.04);
+            background: rgba(17, 25, 20, 0.9);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38);
             text-decoration: none;
             transition: border-color 160ms ease, transform 160ms ease;
         }
 
         .account-link-card:hover {
             transform: translateY(-2px);
-            border-color: #e7b9bf;
+            border-color: rgba(126, 196, 174, 0.36);
         }
 
         .account-link-icon {
@@ -304,6 +307,24 @@
             color: #a32132;
         }
 
+        .delete-account-card {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(232, 112, 121, 0.3);
+            border-radius: 16px;
+            background: rgba(67, 20, 25, 0.2);
+        }
+
+        .delete-account-card h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .delete-account-card p {
+            margin-bottom: 1rem;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
         @media (max-width: 900px) {
             .profile-layout {
                 grid-template-columns: 220px minmax(0, 1fr);
@@ -342,8 +363,65 @@
         }
     </style>
     <link rel="stylesheet" href="/css/site-theme.css">
+    <style>
+        body.customer-theme .delete-account-card {
+            border-color: rgba(232, 112, 121, 0.3);
+        }
+
+        body.customer-theme .delete-account-button {
+            min-height: 44px;
+            padding: 0.7rem 1rem;
+            border: 1px solid rgba(255, 160, 160, 0.35);
+            border-radius: 10px;
+            background: #8f2932;
+            color: #fff;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        body.customer-theme .delete-account-button:hover {
+            background: #a8333d;
+        }
+
+        body.customer-theme .delete-account-button:disabled {
+            cursor: wait;
+            opacity: 0.7;
+        }
+
+        body.customer-theme .delete-account-status {
+            margin: 0.75rem 0 0;
+            color: #ffb1b1;
+            font-size: 0.88rem;
+            line-height: 1.45;
+        }
+
+        body.customer-theme .delete-account-status:empty {
+            display: none;
+        }
+
+        body.customer-theme .customer-nav-actions .customer-logout-link {
+            display: inline-flex;
+            min-height: 42px;
+            align-items: center;
+            justify-content: center;
+            padding: 0.55rem 0.85rem;
+            border: 1px solid rgba(156, 217, 193, 0.4);
+            border-radius: 8px;
+            color: var(--ink);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        body.customer-theme .customer-nav-actions .customer-logout-link:hover {
+            border-color: #9cd9c1;
+            background: rgba(31, 79, 67, 0.35);
+        }
+    </style>
 </head>
-<body>
+<body class="customer-theme">
     <header class="customer-navbar">
         <nav class="customer-navbar-container" aria-label="Main navigation">
             <a class="customer-brand" href="/main">
@@ -363,6 +441,7 @@
             <div class="customer-nav-actions">
                 <a class="customer-cart-link" href="/items" aria-label="View cakes" title="View cakes">🛒</a>
                 <a class="customer-book-link" href="/custom-cake.html#customBuilderHero">✨ Book Custom Cake</a>
+                <a class="customer-logout-link" href="/logout">Log out</a>
             </div>
         </nav>
     </header>
@@ -441,12 +520,22 @@
                 </form>
             </section>
         </div>
+
+        <section class="delete-account-card" aria-labelledby="deleteAccountTitle">
+            <h2 id="deleteAccountTitle">Delete account</h2>
+            <p>Deleting your account permanently removes your profile and saved delivery details. Existing order and billing records are retained. This action cannot be undone.</p>
+            <button class="delete-account-button" id="deleteAccountButton" type="button">Delete account</button>
+            <p class="delete-account-status" id="deleteAccountStatus" role="status" aria-live="polite"></p>
+        </section>
     </main>
 
     <script>
         const profileForm = document.getElementById('profileForm');
         const formStatus = document.getElementById('formStatus');
         const saveButton = document.getElementById('saveButton');
+        const deleteAccountButton = document.getElementById('deleteAccountButton');
+        const deleteAccountStatus = document.getElementById('deleteAccountStatus');
+
         function setStatus(message, isError = false) {
             formStatus.textContent = message;
             formStatus.classList.toggle('error', isError);
@@ -528,6 +617,39 @@
             } finally {
                 saveButton.disabled = false;
                 saveButton.textContent = 'Save changes';
+            }
+        });
+
+        deleteAccountButton.addEventListener('click', async () => {
+            const confirmed = window.confirm(
+                'Permanently delete your account? Your past order and billing records will be retained. This cannot be undone.'
+            );
+            if (!confirmed) return;
+
+            deleteAccountButton.disabled = true;
+            deleteAccountButton.textContent = 'Deleting account...';
+            deleteAccountStatus.textContent = '';
+
+            try {
+                const response = await fetch('/api/profile', {
+                    method: 'DELETE',
+                    headers: { 'Accept': 'application/json' },
+                    credentials: 'same-origin'
+                });
+
+                if (response.status === 401) {
+                    window.location.replace('/login?returnUrl=%2Fprofile');
+                    return;
+                }
+                if (!response.ok) {
+                    throw new Error(`Account deletion failed (${response.status}).`);
+                }
+
+                window.location.replace('/login.html?accountDeleted=true');
+            } catch (error) {
+                deleteAccountStatus.textContent = error.message || 'We could not delete your account. Please try again.';
+                deleteAccountButton.disabled = false;
+                deleteAccountButton.textContent = 'Delete account';
             }
         });
 

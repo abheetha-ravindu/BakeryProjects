@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+// Provides Cart service logic.
 public class CartService {
 
     private final CartItemRepository cartItemRepository;

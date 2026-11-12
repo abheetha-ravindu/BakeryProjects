@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <meta name="description" content="Sign in to your kamuda.com account to order bakery items and book custom celebration cakes.">
     <!-- Google Fonts & Master Styles -->
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧁</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%A7%81</text></svg>">
     <style>
         /* ==========================================================================
            AUTHENTICATION PAGE STYLES (Split-Screen Modern Layout)
@@ -163,7 +163,7 @@
         .auth-header-logo span em {
             font-family: var(--font-heading, 'Playfair Display', serif);
             font-style: italic;
-            color: var(--color-strawberry, #C92C3D);
+            color: var(--color-strawberry, #1f4f43);
         }
 
         .auth-back-link {
@@ -182,9 +182,9 @@
         }
 
         .auth-back-link:hover {
-            color: var(--color-strawberry, #C92C3D);
-            border-color: var(--color-strawberry, #C92C3D);
-            background: var(--color-pink-card, #FFF0F3);
+            color: var(--color-strawberry, #1f4f43);
+            border-color: var(--color-strawberry, #1f4f43);
+            background: var(--color-pink-card, rgba(38, 112, 90, 0.18));
             transform: translateX(-2px);
         }
 
@@ -256,12 +256,12 @@
         }
 
         .form-input:focus {
-            border-color: var(--color-strawberry, #C92C3D);
+            border-color: var(--color-strawberry, #1f4f43);
             box-shadow: 0 0 0 4px rgba(201, 44, 61, 0.12);
         }
 
         .form-input.is-invalid {
-            border-color: #E53935;
+            border-color: #9cd9c1;
             background: #FFF8F8;
         }
 
@@ -285,7 +285,7 @@
         }
 
         .password-toggle-btn:hover {
-            color: var(--color-strawberry, #C92C3D);
+            color: var(--color-strawberry, #1f4f43);
         }
 
         .field-error-msg {
@@ -316,21 +316,21 @@
         }
 
         .remember-checkbox {
-            accent-color: var(--color-strawberry, #C92C3D);
+            accent-color: var(--color-strawberry, #1f4f43);
             width: 16px;
             height: 16px;
             cursor: pointer;
         }
 
         .forgot-link {
-            color: var(--color-strawberry, #C92C3D);
+            color: var(--color-strawberry, #1f4f43);
             text-decoration: none;
             font-weight: 600;
             transition: color 0.2s ease;
         }
 
         .forgot-link:hover {
-            color: var(--color-strawberry-hover, #AB1F2E);
+            color: var(--color-strawberry-hover, #183f35);
             text-decoration: underline;
         }
 
@@ -338,7 +338,7 @@
         .btn-auth-primary {
             width: 100%;
             height: 50px;
-            background: linear-gradient(135deg, #DF384A 0%, var(--color-strawberry, #C92C3D) 100%);
+            background: linear-gradient(135deg, #315d48 0%, var(--color-strawberry, #1f4f43) 100%);
             color: #FFFFFF;
             border: none;
             border-radius: var(--radius-pill, 9999px);
@@ -355,7 +355,7 @@
         }
 
         .btn-auth-primary:hover {
-            background: linear-gradient(135deg, #C92C3D 0%, #AB1F2E 100%);
+            background: linear-gradient(135deg, #1f4f43 0%, #183f35 100%);
             transform: translateY(-2px);
             box-shadow: 0 12px 28px rgba(201, 44, 61, 0.38);
         }
@@ -431,7 +431,7 @@
         .auth-switch-btn {
             background: none;
             border: none;
-            color: var(--color-strawberry, #C92C3D);
+            color: var(--color-strawberry, #1f4f43);
             font-family: inherit;
             font-size: inherit;
             font-weight: 700;
@@ -442,7 +442,7 @@
         }
 
         .auth-switch-btn:hover {
-            color: var(--color-strawberry-hover, #AB1F2E);
+            color: var(--color-strawberry-hover, #183f35);
         }
 
         /* Notifications & Error banner */
@@ -461,7 +461,7 @@
         .auth-alert.is-error {
             display: flex;
             background: #FDE8E8;
-            color: #C81E1E;
+            color: #9cd9c1;
             border: 1px solid #F8B4B4;
         }
 
@@ -559,7 +559,7 @@
 
             <div class="auth-visual-content">
                 <div class="auth-brand-badge">
-                    <span>🧁</span>
+                    <span>&#129473;</span>
                     <span>kamuda.com</span>
                 </div>
                 <h1 class="auth-visual-title">Freshly Baked.<br>Beautifully Made.</h1>
@@ -567,9 +567,9 @@
                     Experience handcrafted artisanal pastries, daily fresh oven bakes and bespoke celebration cakes created for your unforgettable moments.
                 </p>
                 <div class="auth-feature-pills">
-                    <span class="auth-feature-pill">✓ Same-day Fresh Bakes</span>
-                    <span class="auth-feature-pill">✓ Custom Celebration Cakes</span>
-                    <span class="auth-feature-pill">✓ Instant Order Tracking</span>
+                    <span class="auth-feature-pill">&#10003; Same-day Fresh Bakes</span>
+                    <span class="auth-feature-pill">&#10003; Custom Celebration Cakes</span>
+                    <span class="auth-feature-pill">&#10003; Instant Order Tracking</span>
                 </div>
             </div>
         </div>
@@ -583,7 +583,7 @@
             <!-- Header Bar -->
             <header class="auth-header-bar">
                 <a href="index.html" class="auth-header-logo" title="kamuda.com">
-                    <span class="brand-icon">🧁</span>
+                    <span class="brand-icon" aria-hidden="true">&#129473;</span>
                     <span>kamuda.com</span>
                 </a>
                 <a href="index.html" class="auth-back-link">
@@ -598,7 +598,7 @@
 
                     <!-- Global Alert Banner -->
                     <div class="auth-alert" id="authAlertBanner" role="alert">
-                        <span id="alertIcon">⚠️</span>
+                        <span id="alertIcon">&#9888;&#65039;</span>
                         <span id="alertMessage">Invalid email or password.</span>
                     </div>
 
@@ -645,7 +645,7 @@
                                             class="password-toggle-btn" 
                                             id="toggleLoginPasswordBtn" 
                                             aria-label="Show or hide password">
-                                        👁️
+                                        &#128065;&#65039;
                                     </button>
                                 </div>
                                 <span class="field-error-msg" id="loginPasswordError"></span>
@@ -725,7 +725,7 @@
 
             function showAlert(msg, type = 'error') {
                 alertMessage.textContent = msg;
-                alertIcon.textContent = (type === 'error') ? '⚠️' : '✅';
+                alertIcon.textContent = (type === 'error') ? '\u26A0\uFE0F' : '\u2705';
                 authAlertBanner.className = `auth-alert is-${type}`;
                 authAlertBanner.style.display = 'flex';
             }
@@ -740,7 +740,7 @@
                 btn.addEventListener('click', () => {
                     const isPassword = input.type === 'password';
                     input.type = isPassword ? 'text' : 'password';
-                    btn.textContent = isPassword ? '🙈' : '👁️';
+                    btn.textContent = isPassword ? '\uD83D\uDE48' : '\uD83D\uDC41\uFE0F';
                 });
             }
 

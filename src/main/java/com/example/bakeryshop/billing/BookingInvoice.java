@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("BOOKING")
+// Represents the booking invoice domain object.
 public class BookingInvoice extends Invoice{
 
     private double bookingAmount;

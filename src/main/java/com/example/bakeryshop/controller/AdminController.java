@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin")
+// Handles Admin controller logic.
 public class AdminController {
 
     private final UserService userService;

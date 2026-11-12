@@ -5,6 +5,8 @@ import com.example.bakeryshop.model.payment.PaymentStatus;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+// Accesses Payment persistence logic.
+// Accesses Payment persistence logic.
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
 
     List<Payment> findByStatus(PaymentStatus status);

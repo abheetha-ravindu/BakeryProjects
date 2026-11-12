@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
+// Provides Invoice service logic.
 public class InvoiceService {
     private final InvoiceRepository invoiceRepository;
 

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/admin/invoices")
+// Handles Admin Invoice controller logic.
 public class AdminInvoiceController {
     private final InvoiceService invoiceService;
     private final PaymentService paymentService;

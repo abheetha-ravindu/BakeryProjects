@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "refund_requests")
+// Represents a refund request payload.
 public class RefundRequest {
 
     @Id

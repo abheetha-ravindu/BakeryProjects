@@ -20,6 +20,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 @Service
+// Provides User service logic.
 public class UserService {
     private static final int PASSWORD_ITERATIONS = 210_000;
     private static final int PASSWORD_KEY_LENGTH = 256;

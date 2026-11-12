@@ -1,11 +1,11 @@
 [ {
   "id" : "95b0d237-4bbd-4166-9d22-b394f6001667",
-  "name" : "i dont know",
-  "description" : "werty",
-  "flavor" : "Chocolat",
-  "size" : "1 kg",
+  "name" : "Stobery Mix Chease Cake",
+  "description" : "Stoberry,Chease",
+  "flavor" : "Chease,Stoberry",
+  "size" : "150g",
   "price" : 12342.0,
-  "shape" : 0,
+  "shape" : 3,
   "category" : "cake",
   "availability" : "Available",
   "imageUrl" : "/item-images/ddf95e6b-6f85-4b30-84a8-e91561733d81.jpg"
@@ -22,7 +22,7 @@
   "imageUrl" : "/item-images/a7a65b20-9e47-487f-8481-89c085fb7d68.jpg"
 }, {
   "id" : "c62dc93f-db32-4dd0-bafe-5a91d999c577",
-  "name" : "Generic H2 (Embedded)",
+  "name" : "Egg Cake",
   "description" : "vvvvvv",
   "flavor" : "dfghj",
   "size" : "1 kg",
@@ -42,4 +42,103 @@
   "category" : "cake",
   "availability" : "Available",
   "imageUrl" : "/item-images/214db112-40e0-4989-b6cb-c5222bd2930c.jpg"
+}, {
+  "id" : "67637b61-950c-4cdd-bbf5-7375ba092d4c",
+  "name" : "Triangel bun",
+  "description" : "Kamu kamu",
+  "flavor" : "Stobery",
+  "size" : "400g",
+  "price" : 120.0,
+  "shape" : 0,
+  "category" : "bun",
+  "availability" : "Available",
+  "imageUrl" : "/item-images/5b80d7bc-869a-41ec-a520-773e8af15f25.jpg"
+}, {
+  "id" : "b7856f17-3e9b-49da-9528-9693ad8b8301",
+  "name" : "Double layear Pudim Cake",
+  "description" : "Pudin made by some one",
+  "flavor" : "vanila",
+  "size" : "1 kg",
+  "price" : 2000.0,
+  "shape" : 0,
+  "category" : "Pudim",
+  "availability" : "Available",
+  "imageUrl" : "/item-images/7e6eb53a-5529-4e6e-9432-71a5157e26b5.jpg"
+}, {
+  "id" : "362c0ce1-3043-4bd4-9455-41b1204095aa",
+  "name" : "Choco Cup Cake",
+  "description" : "Cup Cake",
+  "flavor" : "Chocolat",
+  "size" : "150g",
+  "price" : 250.0,
+  "shape" : 0,
+  "category" : "Cake",
+  "availability" : "Available",
+  "imageUrl" : "/item-images/2d25bf7a-2161-41fd-adb6-135ec869b80b.jpg"
+}, {
+  "id" : "147172df-4c6d-449d-8ca7-0aba07406d3f",
+  "name" : "Birthday Singal Cake",
+  "description" : "For your birthday",
+  "flavor" : "Vanila",
+  "size" : "1 kg",
+  "price" : 2500.12,
+  "shape" : 0,
+  "category" : "Birthday Cake",
+  "availability" : "Available",
+  "imageUrl" : "/item-images/1bf18a23-7d93-4b52-a70a-050d5bf46a22.jpg"
+}, {
+  "id" : "d953e890-ed9d-4e03-82ff-7530ddd2aa08",
+  "name" : "Chease Cookie",
+  "description" : "Eat",
+  "flavor" : "Chease",
+  "size" : "120g",
+  "price" : 150.0,
+  "shape" : 1,
+  "category" : "Cookie",
+  "availability" : "Available",
+  "imageUrl" : "/item-images/615b519b-c00f-4788-8127-af626a6cb051.jpg"
+}, {
+  "id" : "7383b7cd-4bc6-4b79-beb2-75c14101126a",
+  "name" : "Stoberry Double Layear Cake",
+  "description" : "GG",
+  "flavor" : "Stoberry",
+  "size" : "1 kg",
+  "price" : 3500.0,
+  "shape" : 1,
+  "category" : "Cake",
+  "availability" : "Available",
+  "imageUrl" : "/item-images/3cada04b-a2a4-4796-a193-27ad0e1b5e31.jpg"
+}, {
+  "id" : "d5fc8112-0293-4a5a-bfb8-ebb53c7db3c5",
+  "name" : "kamuda.com special Chease",
+  "description" : "Chease",
+  "flavor" : "Chease",
+  "size" : "2 kg",
+  "price" : 30000.0,
+  "shape" : 0,
+  "category" : "Chease",
+  "availability" : "Available",
+  "imageUrl" : "/item-images/1192d3c3-0c51-45fc-a33a-c0734e3d11e0.jpg"
+}, {
+  "id" : "a4063367-5a4d-42eb-9249-d367bd9901b8",
+  "name" : "Birthday",
+  "description" : "Birthday",
+  "flavor" : "Vanila",
+  "size" : "1 kg",
+  "price" : 3000.12,
+  "shape" : 0,
+  "category" : "Birthday",
+  "availability" : "Available",
+  "imageUrl" : "/item-images/8dd94313-3f42-458f-945e-060451f2e48b.jpg"
+}, {
+  "id" : "6ea0273d-4468-4f34-83c4-d9b672a5ff0c",
+  "name" : "Berry Combo Pak Cake",
+  "description" : "All Berrys",
+  "flavor" : "Stoberry,BlueBerry,Cherry,BlackBerry",
+  "size" : "1 kg",
+  "price" : 5000.0,
+  "shape" : 1,
+  "category" : "Cake",
+  "availability" : "Available",
+  "imageUrl" : "/item-images/a2af8a8e-32f2-4bd0-b0da-d655a71585ee.jpg"
 } ]

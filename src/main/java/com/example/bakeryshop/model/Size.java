@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("SIZE")
+// Represents the size domain object.
 public class Size extends CakeOption {
 
     @Override

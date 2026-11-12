@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Table(name = "invoices")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "invoice_type", discriminatorType = DiscriminatorType.STRING)
+// Represents the invoice domain object.
 public abstract class Invoice{
 
     @Id

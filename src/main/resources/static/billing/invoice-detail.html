@@ -11,8 +11,11 @@
             min-height: 100vh;
             margin: 0;
             padding: 0;
-            background: #fdf9f5;
-            color: #2f221d;
+            background:
+                radial-gradient(circle at top left, rgba(31, 79, 67, 0.22), transparent 33%),
+                radial-gradient(circle at right center, rgba(255,255,255,0.06), transparent 25%),
+                linear-gradient(180deg, #040604 0%, #0b110f 100%);
+            color: #f5f5f3;
         }
         main {
             padding: 1px 0 2rem;
@@ -21,16 +24,16 @@
             width: min(680px, calc(100% - 2rem));
             margin: 3rem auto;
             padding: clamp(1.25rem, 4vw, 2rem);
-            border: 1px solid #f0e5dc;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
-            background: #fff;
-            box-shadow: 0 12px 32px rgba(68, 42, 26, 0.05);
+            background: rgba(17, 25, 20, 0.9);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38);
         }
         .title {
             margin-bottom: 1.5rem;
             padding-bottom: 0.85rem;
-            border-bottom: 1px solid #f1d4d7;
-            color: #2f221d;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            color: #f5f5f3;
             font-family: Georgia, serif;
             font-size: clamp(1.4rem, 4vw, 1.75rem);
             font-weight: 700;
@@ -58,8 +61,8 @@
             font-size: 1.05rem;
             font-weight: 800;
         }
-        .total-row .label { color: #2f221d; }
-        .total-row .value { color: #c73749; }
+        .total-row .label { color: #f5f5f3; }
+        .total-row .value { color: #9cd9c1; }
         .invoice-status {
             min-height: 1.25rem;
             color: #76665d;
@@ -86,13 +89,13 @@
             text-decoration: none;
             cursor: pointer;
         }
-        .btn-print { background: #c73749; color: white; }
-        .btn-print:hover { background: #ad293a; }
+        .btn-print { background: linear-gradient(135deg, #315d48, #1f4f43); color: white; }
+        .btn-print:hover { background: linear-gradient(135deg, #2d6b5d, #1a3c34); }
         .btn-print:disabled {
             background: #b7aaa3;
             cursor: not-allowed;
         }
-        .btn-back { border: 1px solid #eadbce; background: #fff; color: #2f221d; }
+        .btn-back { border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.02); color: #f5f5f3; }
 
         @media (max-width: 520px) {
             .invoice-box { margin: 1.5rem auto; }

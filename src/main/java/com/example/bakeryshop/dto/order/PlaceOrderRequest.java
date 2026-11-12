@@ -3,6 +3,7 @@ package com.example.bakeryshop.dto.order;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+// Represents a place order request payload.
 public record PlaceOrderRequest(
         @NotNull(message = "User id is required")
         Long userId,

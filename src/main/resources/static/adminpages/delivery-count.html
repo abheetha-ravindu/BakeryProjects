@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="View delivery totals and delivery statuses for the bakery.">
+  <meta name="description" content="View bakery and custom orders grouped by delivery status.">
   <title>Delivery count | Cake Studio Admin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/admin-panel.css">
+  <link rel="stylesheet" href="/css/site-theme.css">
+  <link rel="stylesheet" href="/css/admin-navigation.css">
   <style>
     body { min-height: 100vh; background: #fffdf9; }
     .count-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 24px 0; }
@@ -57,6 +59,7 @@
         <a class="nav-item" href="/adminRefunds"><span class="icon" aria-hidden="true">↩</span>Refunds</a>
         <a class="nav-item" href="/adminItems"><span class="icon" aria-hidden="true">▤</span>Items</a>
         <a class="nav-item" href="/userManagement"><span class="icon" aria-hidden="true">♙</span>User Management</a>
+        <a class="nav-item logout-nav-item" href="/logout"><span class="icon" aria-hidden="true">↪</span>Log out</a>
       </nav>
     </div>
   </header>
@@ -64,12 +67,12 @@
   <main class="wrap">
     <section class="intro compact">
       <h1>Delivery overview</h1>
-      <p>Track every delivery by its current status.</p>
+      <p>Track active bakery and custom orders as they move through delivery stages.</p>
     </section>
 
     <section class="count-grid" aria-label="Delivery totals">
       <article class="count-card">
-        <span>Total deliveries</span>
+        <span>Total orders &amp; deliveries</span>
         <strong id="totalCount" aria-live="polite">—</strong>
       </article>
       <article class="count-card pending">
@@ -88,17 +91,17 @@
 
     <section class="delivery-panel" aria-labelledby="deliveryHeading">
       <div class="panel-heading">
-        <h2 id="deliveryHeading">Delivery records</h2>
-        <label for="deliverySearch">Search deliveries
-          <input class="search" id="deliverySearch" type="search" placeholder="Recipient, address, or status" autocomplete="off">
+        <h2 id="deliveryHeading">Orders and delivery records</h2>
+        <label for="deliverySearch">Search orders and deliveries
+          <input class="search" id="deliverySearch" type="search" placeholder="Order, recipient, address, or status" autocomplete="off">
         </label>
       </div>
-      <p class="state" id="deliveryState" role="status" aria-live="polite">Loading delivery records…</p>
+      <p class="state" id="deliveryState" role="status" aria-live="polite">Loading orders and delivery records…</p>
       <div class="table-wrap" id="deliveryTableWrap" hidden>
         <table class="orders-table">
           <thead>
             <tr>
-              <th scope="col">Delivery</th>
+              <th scope="col">Order / delivery</th>
               <th scope="col">Customer</th>
               <th scope="col">Recipient</th>
               <th scope="col">Address</th>
@@ -137,13 +140,13 @@
       function render() {
         const query = search.value.trim().toLocaleLowerCase();
         const visible = deliveries.filter((delivery) =>
-          [delivery.customerName, delivery.recipientName, delivery.address, delivery.status]
+          [delivery.id, delivery.customerName, delivery.recipientName, delivery.address, delivery.status]
             .some((value) => String(value || '').toLocaleLowerCase().includes(query)));
 
         rows.replaceChildren();
         visible.forEach((delivery) => {
           const row = document.createElement('tr');
-          addCell(row, delivery.id == null ? '—' : `#${delivery.id}`);
+          addCell(row, delivery.id);
           addCell(row, delivery.customerName);
           addCell(row, delivery.recipientName);
           addCell(row, delivery.address);
@@ -163,17 +166,18 @@
         state.hidden = visible.length !== 0;
         state.classList.remove('error');
         state.textContent = deliveries.length === 0
-          ? 'No delivery records have been created yet.'
-          : 'No deliveries match your search.';
+          ? 'No active orders or delivery records were found.'
+          : 'No orders or deliveries match your search.';
       }
 
       async function loadDeliveries() {
         try {
           const response = await fetch('/api/admin/deliveries', {
-            headers: { Accept: 'application/json' }
+            headers: { Accept: 'application/json' },
+            cache: 'no-store'
           });
           if (!response.ok) {
-            throw new Error(`Delivery records could not be loaded (HTTP ${response.status}).`);
+            throw new Error(`Orders and delivery records could not be loaded (HTTP ${response.status}).`);
           }
           const result = await response.json();
           if (!Array.isArray(result)) {
@@ -195,13 +199,15 @@
           render();
         } catch (error) {
           state.classList.add('error');
-          state.textContent = error instanceof Error ? error.message : 'Delivery records could not be loaded.';
+          state.textContent = error instanceof Error ? error.message : 'Orders and delivery records could not be loaded.';
+          state.hidden = false;
           tableWrap.hidden = true;
         }
       }
 
       search.addEventListener('input', render);
       loadDeliveries();
+      window.addEventListener('focus', loadDeliveries);
     })();
   </script>
   <script src="/js/page-search.js"></script>

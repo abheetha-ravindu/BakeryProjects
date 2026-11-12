@@ -1,6 +1,7 @@
 package com.example.bakeryshop.Admin.model;
 
 
+// Represents the item domain object.
 public class item {
     // Encapsulation
     private String id;

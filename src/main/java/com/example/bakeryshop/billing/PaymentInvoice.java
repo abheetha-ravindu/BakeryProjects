@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("PAYMENT")
+// Represents the payment invoice domain object.
 public class PaymentInvoice extends Invoice {
     @Override
     public double calculateTotal() {

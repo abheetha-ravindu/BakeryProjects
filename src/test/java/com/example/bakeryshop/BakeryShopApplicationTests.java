@@ -33,6 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -50,6 +51,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         "app.admin.password=test-admin-password"
 })
 @AutoConfigureMockMvc
+// Exercises bakery shop application tests behavior.
 class BakeryShopApplicationTests {
     @Autowired
     private MockMvc mockMvc;
@@ -153,7 +155,29 @@ class BakeryShopApplicationTests {
 
         mockMvc.perform(get("/profileupdate.html"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("/billing/my-invoices.html")));
+                .andExpect(content().string(containsString("/billing/my-invoices.html")))
+                .andExpect(content().string(containsString("Delete account")));
+    }
+
+    @Test
+    void customerCanDeleteTheirOwnAccountFromProfile() throws Exception {
+        Customer customer = new Customer();
+        customer.setUsername("delete-profile-customer");
+        customer.setEmail("delete-profile-" + System.nanoTime() + "@example.com");
+        customer.setPassword("test-password");
+        customer = userRepository.save(customer);
+
+        MockHttpSession customerSession = new MockHttpSession();
+        customerSession.setAttribute("loggedInUserId", customer.getId());
+
+        mockMvc.perform(delete("/api/profile"))
+                .andExpect(status().isUnauthorized());
+
+        mockMvc.perform(delete("/api/profile").session(customerSession))
+                .andExpect(status().isNoContent());
+
+        assertFalse(userRepository.existsById(customer.getId()));
+        assertTrue(customerSession.isInvalid());
     }
 
     @Test

@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
+// Represents the invoice discriminator migration domain object.
 public class InvoiceDiscriminatorMigration implements ApplicationRunner {
     private static final String INVOICE_TABLE = "INVOICES";
     private static final String PAYMENT_CONSTRAINT = "CHK_INVOICES_PAYMENT_TYPE";

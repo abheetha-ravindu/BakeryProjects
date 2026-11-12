@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 /** Admin accounts live in their own H2 table: admin_user (separate from customers). */
 @Entity
 @Table(name = "admin_user")
+// Represents the admin user domain object.
 public class AdminUser {
 
     @Id

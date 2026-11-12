@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,19 +14,19 @@
            Aesthetics: Warm cream, soft pink, strawberry red, elegant chocolate roast & gold accents
            ========================================================================== */
         :root {
-            --cake-gold: #C59A3F;
-            --cake-gold-light: #F9F3E5;
-            --cake-pink-glow: #FFF0F4;
-            --cake-pink-border: #F8D3DC;
+            --cake-gold: #9cd9c1;
+            --cake-gold-light: rgba(38, 112, 90, 0.18);
+            --cake-pink-glow: rgba(38, 112, 90, 0.12);
+            --cake-pink-border: rgba(126, 196, 174, 0.2);
         }
 
         .navbar {
             position: sticky;
             top: 0;
             z-index: 20;
-            background: rgba(255, 255, 255, 0.98);
-            border-bottom: 1px solid #eee4da;
-            box-shadow: 0 1px 0 rgba(60, 31, 15, 0.02);
+            background: rgba(9, 15, 12, 0.97);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
         }
 
         .navbar-container {
@@ -52,7 +52,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            color: #2f221d;
+            color: #f5f5f3;
             font-size: clamp(1.5rem, 2vw, 2rem);
             font-weight: 700;
             letter-spacing: -0.02em;
@@ -84,7 +84,7 @@
         }
 
         .nav-link {
-            color: #4a382f;
+            color: #c5ccc6;
             font-size: 1rem;
             font-weight: 500;
             transition: color 0.2s ease;
@@ -92,7 +92,7 @@
 
         .nav-link:hover,
         .nav-link.active {
-            color: #c92c3d;
+            color: #9cd9c1;
         }
 
         .nav-actions {
@@ -107,9 +107,9 @@
             width: 3rem;
             height: 3rem;
             border-radius: 50%;
-            background: #fff;
-            border: 1px solid #eadbce;
-            color: #2f221d;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #f5f5f3;
             font-size: 1.4rem;
         }
 
@@ -123,7 +123,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background: #c92c3d;
+            background: linear-gradient(135deg, #315d48, #1f4f43);
             color: #fff;
             font-size: 0.62rem;
             font-weight: 700;
@@ -136,10 +136,10 @@
             gap: 0.45rem;
             min-height: 3rem;
             padding: 0.55rem 1.1rem;
-            border: 1px solid #e9d9cf;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 999px;
-            background: #fff;
-            color: #2f221d;
+            background: rgba(255, 255, 255, 0.02);
+            color: #f5f5f3;
             font-weight: 700;
         }
 
@@ -161,14 +161,17 @@
         }
 
         .btn-strawberry {
-            background: #c92c3d;
+            background: linear-gradient(135deg, #315d48, #1f4f43);
             color: #fff;
-            box-shadow: 0 8px 18px rgba(201, 44, 61, 0.18);
+            box-shadow: 0 8px 18px rgba(31, 79, 67, 0.25);
         }
 
         body {
-            background-color: var(--color-cream-subtle, #FDF8F2);
-            color: var(--color-dark-roast, #2C1E16);
+            background:
+                radial-gradient(circle at top left, rgba(31, 79, 67, 0.22), transparent 33%),
+                radial-gradient(circle at right center, rgba(255,255,255,0.06), transparent 25%),
+                linear-gradient(180deg, #040604 0%, #0b110f 100%);
+            color: #f5f5f3;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -193,8 +196,8 @@
            -------------------------------------------------------------------------- */
         .cake-page-hero {
             padding: calc(var(--navbar-height, 76px) + 2.5rem) 1.5rem 3rem 1.5rem;
-            background: linear-gradient(180deg, #FDECEF 0%, #FDF7F0 60%, var(--color-cream-subtle, #FDF8F2) 100%);
-            border-bottom: 1px solid var(--color-border, #EADBCE);
+            background: linear-gradient(180deg, rgba(31, 79, 67, 0.22), rgba(17, 25, 20, 0.9) 60%, rgba(5, 8, 6, 1) 100%);
+            border-bottom: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
             text-align: center;
             position: relative;
         }
@@ -212,26 +215,26 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.12em;
-            color: var(--color-strawberry, #C92C3D);
-            background: var(--color-strawberry-light, #FEECEF);
+            color: #d7efe7;
+            background: rgba(31, 79, 67, 0.2);
             padding: 0.35rem 1rem;
             border-radius: var(--radius-pill, 9999px);
             margin-bottom: 0.85rem;
-            border: 1px solid rgba(201, 44, 61, 0.15);
+            border: 1px solid rgba(126, 196, 174, 0.2);
         }
 
         .cake-page-title {
             font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
             font-size: clamp(2.2rem, 4vw, 3.2rem);
             font-weight: 700;
-            color: var(--color-dark-roast, #2C1E16);
+            color: #f5f5f3;
             line-height: 1.15;
             margin-bottom: 0.85rem;
         }
 
         .cake-page-subtitle {
             font-size: clamp(1rem, 1.3vw, 1.15rem);
-            color: var(--color-dark-muted, #5E4D43);
+            color: #b5b9b5;
             max-width: 660px;
             margin: 0 auto 1.75rem auto;
             line-height: 1.6;
@@ -259,14 +262,14 @@
         }
 
         .btn-hero-ready {
-            background: var(--color-strawberry, #C92C3D);
+            background: var(--color-strawberry, #1f4f43);
             color: #FFFFFF;
-            border: 1.5px solid var(--color-strawberry, #C92C3D);
+            border: 1.5px solid var(--color-strawberry, #1f4f43);
             box-shadow: 0 4px 16px rgba(201, 44, 61, 0.25);
         }
 
         .btn-hero-ready:hover {
-            background: #B02332;
+            background: #183f35;
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(201, 44, 61, 0.35);
         }
@@ -309,8 +312,8 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--color-strawberry, #C92C3D);
-            background: #FFF0F3;
+            color: var(--color-strawberry, #1f4f43);
+            background: rgba(38, 112, 90, 0.18);
             padding: 0.3rem 0.85rem;
             border-radius: var(--radius-pill);
             margin-bottom: 0.6rem;
@@ -363,9 +366,9 @@
         }
 
         .shape-tab-btn.active {
-            background: var(--color-strawberry, #C92C3D);
+            background: var(--color-strawberry, #1f4f43);
             color: #FFFFFF;
-            border-color: var(--color-strawberry, #C92C3D);
+            border-color: var(--color-strawberry, #1f4f43);
             box-shadow: 0 4px 14px rgba(201, 44, 61, 0.22);
         }
 
@@ -422,7 +425,7 @@
             width: 18px;
             min-height: 18px;
             margin: 0;
-            accent-color: var(--color-strawberry, #C92C3D);
+            accent-color: var(--color-strawberry, #1f4f43);
         }
 
         .filter-reset-button {
@@ -440,12 +443,12 @@
         }
 
         .filter-reset-button:hover {
-            border-color: var(--color-strawberry, #C92C3D);
-            color: var(--color-strawberry, #C92C3D);
+            border-color: var(--color-strawberry, #1f4f43);
+            color: var(--color-strawberry, #1f4f43);
         }
 
         .popular-picks-section {
-            margin-top: 3rem;
+            margin-top: 0;
         }
 
         .popular-picks-grid {
@@ -564,7 +567,7 @@
             border-radius: var(--radius-pill);
             font-size: 0.74rem;
             font-weight: 700;
-            color: var(--color-strawberry, #C92C3D);
+            color: var(--color-strawberry, #1f4f43);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.8);
             z-index: 2;
@@ -572,7 +575,7 @@
 
         .cake-card-badge.birthday-badge {
             background: linear-gradient(135deg, #FFE8EC 0%, #FFF5E6 100%);
-            color: #C92C3D;
+            color: #1f4f43;
             border: 1px solid rgba(201, 44, 61, 0.25);
             font-weight: 800;
         }
@@ -594,7 +597,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: var(--cake-gold, #C59A3F);
+            color: var(--cake-gold, #9cd9c1);
             margin-bottom: 0.35rem;
         }
 
@@ -648,7 +651,7 @@
             font-family: var(--font-body);
             font-size: 1.28rem;
             font-weight: 800;
-            color: var(--color-strawberry, #C92C3D);
+            color: var(--color-strawberry, #1f4f43);
         }
 
         .cake-portion-hint {
@@ -667,7 +670,7 @@
 
         .cake-discount-pill {
             background: #FFE8EC;
-            color: #C92C3D;
+            color: #1f4f43;
             font-size: 0.72rem;
             font-weight: 800;
             padding: 0.22rem 0.6rem;
@@ -729,7 +732,7 @@
         .btn-cake-add {
             flex-grow: 1;
             padding: 0.65rem 0.85rem;
-            background: var(--color-strawberry, #C92C3D);
+            background: linear-gradient(135deg, #315d48, #1f4f43);
             color: #FFFFFF;
             border: none;
             border-radius: var(--radius-pill);
@@ -741,27 +744,27 @@
             gap: 0.4rem;
             cursor: pointer;
             transition: var(--transition-fast);
-            box-shadow: 0 3px 12px rgba(201, 44, 61, 0.2);
+            box-shadow: 0 3px 12px rgba(31, 79, 67, 0.26);
         }
 
         .btn-cake-add:hover {
-            background: #B02332;
+            background: linear-gradient(135deg, #2d6b5d, #183f35);
             transform: translateY(-1.5px);
-            box-shadow: 0 5px 16px rgba(201, 44, 61, 0.32);
+            box-shadow: 0 5px 16px rgba(31, 79, 67, 0.32);
         }
 
         /* --------------------------------------------------------------------------
            SECTION 2: BIRTHDAY CAKES (Celebratory Separate Section)
            -------------------------------------------------------------------------- */
         .birthday-cakes-section {
-            background: linear-gradient(180deg, #FFF1F4 0%, #FFF9F7 40%, var(--color-cream-subtle, #FDF8F2) 100%);
+            background: linear-gradient(180deg, rgba(31, 79, 67, 0.12), rgba(17, 25, 20, 0.9) 40%, #050806 100%);
             border-top: 1px solid var(--cake-pink-border);
             border-bottom: 1px solid var(--color-border);
             position: relative;
         }
 
         .birthday-decor-banner {
-            background: linear-gradient(90deg, #F9D7DE 0%, #FEECEF 50%, #F9D7DE 100%);
+            background: linear-gradient(90deg, rgba(31, 79, 67, 0.28), rgba(38, 112, 90, 0.18), rgba(31, 79, 67, 0.28));
             padding: 0.5rem 1rem;
             border-radius: var(--radius-pill);
             display: inline-flex;
@@ -769,9 +772,9 @@
             gap: 0.5rem;
             font-size: 0.85rem;
             font-weight: 700;
-            color: var(--color-strawberry);
+            color: #d7efe7;
             margin-bottom: 1rem;
-            border: 1px dashed rgba(201, 44, 61, 0.3);
+            border: 1px dashed rgba(126, 196, 174, 0.25);
         }
 
         /* --------------------------------------------------------------------------
@@ -803,8 +806,8 @@
             width: 100%;
             max-width: 440px;
             height: 100%;
-            background: #FFFFFF;
-            box-shadow: -8px 0 32px rgba(0, 0, 0, 0.2);
+            background: #101712;
+            box-shadow: -8px 0 32px rgba(0, 0, 0, 0.4);
             transform: translateX(100%);
             transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
@@ -827,7 +830,7 @@
 
         .cart-drawer-header {
             padding: 1.25rem 1.5rem;
-            background: #FDF8F2;
+            background: rgba(17, 25, 20, 0.9);
             border-bottom: 1px solid var(--color-border);
             display: flex;
             align-items: center;
@@ -838,17 +841,16 @@
             font-family: var(--font-heading);
             font-size: 1.35rem;
             font-weight: 700;
-            color: var(--color-dark-roast);
+            color: #f5f5f3;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
         .cart-close-btn {
-            background: none;
+            background: rgba(255,255,255,0.02);
             border: none;
-            font-size: 1.4rem;
-            color: var(--color-dark-muted);
+            color: #b5b9b5;
             cursor: pointer;
             width: 36px;
             height: 36px;
@@ -859,9 +861,16 @@
             transition: var(--transition-fast);
         }
 
+        .cart-symbol {
+            display: block;
+            width: 1.1rem;
+            height: 1.1rem;
+            flex-shrink: 0;
+        }
+
         .cart-close-btn:hover {
-            background: #FEECEF;
-            color: var(--color-strawberry);
+            background: rgba(38, 112, 90, 0.18);
+            color: #9cd9c1;
         }
 
         .cart-drawer-body {
@@ -938,17 +947,42 @@
         }
 
         .cart-item-remove-btn {
-            background: none;
-            border: none;
-            color: #A69186;
+            display: inline-flex;
+            width: 34px;
+            height: 34px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: transparent;
+            color: #b5b9b5;
             cursor: pointer;
-            font-size: 0.95rem;
-            padding: 2px;
+            padding: 0;
             transition: var(--transition-fast);
         }
 
         .cart-item-remove-btn:hover {
-            color: var(--color-strawberry);
+            border-color: rgba(156, 217, 193, 0.4);
+            background: rgba(31, 79, 67, 0.25);
+            color: #d7efe7;
+        }
+
+        .cart-clear-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            border: 0;
+            background: transparent;
+            color: #9cd9c1;
+            cursor: pointer;
+            font: inherit;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .cart-clear-btn:hover {
+            color: #d7efe7;
         }
 
         .cart-item-total {
@@ -1003,7 +1037,7 @@
         }
 
         .btn-checkout-proceed:hover {
-            background: #B02332;
+            background: #183f35;
             transform: translateY(-1.5px);
         }
 
@@ -1108,7 +1142,459 @@
             justify-content: center;
             padding: 0 5px;
         }
+
+        :root {
+            --color-dark-roast: #f5f5f3;
+            --color-dark-muted: #b5b9b5;
+            --color-cream-subtle: #111914;
+            --color-border: rgba(255, 255, 255, 0.1);
+            --color-strawberry: #1f4f43;
+            --color-strawberry-light: rgba(126, 196, 174, 0.3);
+        }
+
+        .cake-page-hero,
+        #ready-made-cakes,
+        .birthday-cakes-section {
+            position: relative;
+            isolation: isolate;
+            background:
+                radial-gradient(circle at 50% 30%, rgba(31, 79, 67, 0.14), transparent 48%),
+                linear-gradient(180deg, #0b110f 0%, #050806 100%);
+        }
+
+        .cake-page-hero {
+            overflow: hidden;
+            background:
+                linear-gradient(180deg, rgba(5, 8, 6, 0.48), rgba(5, 8, 6, 0.62)),
+                url("/images/cake-page/bakery-hero.jpg") center 48% / cover no-repeat,
+                #101612;
+        }
+
+        .cake-page-hero::before,
+        #ready-made-cakes::before,
+        .birthday-cakes-section::before {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+            background-size: 32px 32px;
+            content: "";
+            pointer-events: none;
+        }
+
+        .cake-eyebrow,
+        .section-badge-pill {
+            color: #b8e4d7;
+            background: rgba(31, 79, 67, 0.18);
+            border-color: rgba(126, 196, 174, 0.22);
+        }
+
+        .section-title-large {
+            color: #f5f5f3;
+        }
+
+        .section-subtitle-text {
+            color: #b5b9b5;
+        }
+
+        .btn-hero-custom {
+            background: #111914;
+            border-color: rgba(255, 255, 255, 0.16);
+            color: #f5f5f3;
+        }
+
+        .btn-hero-custom:hover {
+            background: #1d2b25;
+            border-color: #9cd9c1;
+            color: #d7efe7;
+        }
+
+        .btn-hero-ready {
+            box-shadow: 0 8px 18px rgba(31, 79, 67, 0.25);
+        }
+
+        .btn-hero-ready:hover {
+            box-shadow: 0 6px 20px rgba(31, 79, 67, 0.35);
+        }
+
+        .shape-tab-btn,
+        .filter-reset-button {
+            border-color: rgba(255, 255, 255, 0.12);
+            background: #111914;
+            color: #c5ccc6;
+        }
+
+        .shape-tab-btn:hover,
+        .filter-reset-button:hover {
+            border-color: rgba(156, 217, 193, 0.5);
+            background: #1d2b25;
+            color: #d7efe7;
+        }
+
+        .shape-tab-btn.active {
+            border-color: #2d6b5d;
+            background: linear-gradient(135deg, #315d48, #1f4f43);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(31, 79, 67, 0.32);
+        }
+
+        .storefront-filters {
+            border-color: rgba(255, 255, 255, 0.1);
+            background: rgba(17, 25, 20, 0.92);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(12px);
+        }
+
+        .storefront-filter {
+            color: #c5ccc6;
+        }
+
+        .storefront-filter input,
+        .storefront-filter select,
+        .drawer-form-input {
+            border-color: rgba(255, 255, 255, 0.12);
+            background: #0d1512;
+            color: #f5f5f3;
+        }
+
+        .storefront-filter input::placeholder,
+        .drawer-form-input::placeholder {
+            color: #858e88;
+        }
+
+        .storefront-filter input:focus,
+        .storefront-filter select:focus,
+        .drawer-form-input:focus {
+            border-color: #9cd9c1;
+            outline: 2px solid rgba(156, 217, 193, 0.22);
+            outline-offset: 1px;
+        }
+
+        .popular-pick-card,
+        .cake-card {
+            border-color: rgba(126, 196, 174, 0.2);
+            background: linear-gradient(180deg, #263630 0%, #111914 100%);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+        }
+
+        .popular-pick-card h3,
+        .cake-card-name {
+            color: #f5f5f3;
+        }
+
+        .popular-pick-card p,
+        .cake-card-desc,
+        .cake-portion-hint {
+            color: #c5ccc6;
+        }
+
+        .popular-pick-card .btn-cake-add {
+            color: #fff;
+        }
+
+        .cake-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(156, 217, 193, 0.45);
+            box-shadow: 0 18px 38px rgba(0, 0, 0, 0.36);
+        }
+
+        .cake-img-wrap {
+            background: #101712;
+        }
+
+        .cake-card-badge,
+        .cake-card-badge.birthday-badge {
+            border-color: rgba(126, 196, 174, 0.28);
+            background: rgba(9, 15, 12, 0.9);
+            color: #d7efe7;
+        }
+
+        .cake-flavor-tag,
+        .cake-price-text {
+            color: #9cd9c1;
+        }
+
+        .cake-availability {
+            border-color: rgba(126, 196, 174, 0.35);
+            background: rgba(31, 79, 67, 0.32);
+            color: #d7efe7;
+        }
+
+        .cake-availability.unavailable {
+            border-color: rgba(240, 125, 125, 0.4);
+            background: rgba(112, 42, 42, 0.28);
+            color: #ffc2c2;
+        }
+
+        .cake-card-price-row {
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .cake-original-price {
+            color: #a4aaa5;
+        }
+
+        .cake-discount-pill {
+            border-color: rgba(156, 217, 193, 0.32);
+            background: rgba(31, 79, 67, 0.32);
+            color: #d7efe7;
+        }
+
+        .qty-stepper {
+            border-color: rgba(255, 255, 255, 0.12);
+            background: #111914;
+        }
+
+        .qty-stepper-btn {
+            background: #263630;
+            color: #f5f5f3;
+        }
+
+        .qty-stepper-input {
+            color: #f5f5f3;
+        }
+
+        .cake-card .qty-stepper-btn:hover {
+            background: #2d6b5d;
+            color: #fff;
+        }
+
+        .birthday-decor-banner {
+            border-color: rgba(126, 196, 174, 0.3);
+            background: rgba(31, 79, 67, 0.2);
+            color: #d7efe7;
+        }
+
+        .site-footer {
+            background: linear-gradient(180deg, #0b110f 0%, #050806 100%);
+            color: #c5ccc6;
+        }
+
+        .footer-container {
+            display: grid;
+            width: min(1120px, calc(100% - 2.5rem));
+            grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+            gap: 2.25rem;
+            margin-inline: auto;
+            padding-block: 3.5rem;
+        }
+
+        .footer-brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: #f5f5f3;
+            font-family: Georgia, serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .footer-brand-icon {
+            font-size: 1.5rem;
+        }
+
+        .footer-brand-desc,
+        .footer-tagline {
+            display: block;
+            max-width: 290px;
+            margin: 0.9rem 0 0;
+            color: #c5ccc6;
+            font-size: 0.9rem;
+            line-height: 1.65;
+        }
+
+        .footer-tagline {
+            color: #ffd08a;
+            font-weight: 700;
+        }
+
+        .footer-social-links {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: 1.25rem;
+        }
+
+        .social-icon-btn {
+            display: grid;
+            width: 2.5rem;
+            height: 2.5rem;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: #fff;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .social-icon-btn:hover {
+            border-color: #ffd08a;
+            background: rgba(255, 208, 138, 0.14);
+        }
+
+        .social-svg {
+            width: 1.1rem;
+            height: 1.1rem;
+        }
+
+        .footer-heading {
+            margin: 0 0 1rem;
+            color: #fff;
+            font-family: Georgia, serif;
+            font-size: 1.1rem;
+        }
+
+        .footer-nav-list {
+            display: grid;
+            gap: 0.65rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .footer-link {
+            color: #c5ccc6;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: #ffd08a;
+        }
+
+        .footer-address {
+            display: grid;
+            gap: 0.9rem;
+            font-size: 0.9rem;
+            font-style: normal;
+        }
+
+        .footer-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.65rem;
+            color: #c5ccc6;
+        }
+
+        .hours-label,
+        .hours-val {
+            display: block;
+        }
+
+        .hours-label {
+            margin-bottom: 0.25rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .batch-hint {
+            margin-top: 0.35rem;
+            color: #ffd08a;
+            font-size: 0.8rem;
+        }
+
+        .footer-bottom-bar {
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .footer-bottom-container {
+            display: flex;
+            width: min(1120px, calc(100% - 2.5rem));
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0.5rem 1rem;
+            margin-inline: auto;
+            padding-block: 1rem;
+            color: #9da59f;
+            font-size: 0.8rem;
+        }
+
+        .footer-copy-text,
+        .footer-made-text {
+            margin: 0;
+        }
+
+        @media (max-width: 900px) {
+            .footer-container {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 1.75rem;
+                padding-block: 2.75rem;
+            }
+        }
+
+        .cart-drawer-panel,
+        .cart-drawer-header,
+        .cart-drawer-footer {
+            background: #111914;
+        }
+
+        .cart-item-card,
+        .cart-item-thumb {
+            border-color: rgba(255, 255, 255, 0.1);
+            background: #0d1512;
+        }
+
+        .cart-item-title,
+        .cart-total-label,
+        .drawer-form-label {
+            color: #f5f5f3;
+        }
+
+        .cart-item-unit-price {
+            color: #b5b9b5;
+        }
+
+        .cart-drawer-overlay {
+            background: rgba(0, 0, 0, 0.68);
+        }
+
+        .toast-notify {
+            background: #1d2b25;
+            color: #f5f5f3;
+        }
+
+        .btn-checkout-proceed {
+            box-shadow: 0 4px 14px rgba(31, 79, 67, 0.28);
+        }
+
+        .nav-cart-btn {
+            border-color: rgba(255, 255, 255, 0.12);
+            background: #111914;
+            color: #f5f5f3;
+        }
+
+        html.has-scroll-reveal .scroll-reveal {
+            opacity: 0;
+            translate: 0 22px;
+            transition:
+                opacity 650ms ease,
+                translate 650ms cubic-bezier(0.16, 1, 0.3, 1);
+            transition-delay: var(--scroll-reveal-delay, 0ms);
+        }
+
+        html.has-scroll-reveal .scroll-reveal.is-visible {
+            opacity: 1;
+            translate: 0 0;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html.has-scroll-reveal .scroll-reveal {
+                opacity: 1;
+                translate: 0 0;
+                transition: none;
+            }
+        }
     </style>
+    <link rel="stylesheet" href="/css/site-navigation.css">
 </head>
 <body>
 
@@ -1118,33 +1604,42 @@
     <nav class="navbar" id="mainNavbar">
         <div class="navbar-container">
             <a href="/main" class="brand-logo" id="navBrand">
-                <span class="brand-icon">🧁</span>
+                <span class="brand-icon" aria-hidden="true">K</span>
                 <span>kamuda.com</span>
             </a>
 
             <ul class="nav-links">
-                <li><a href="/main" class="nav-link active" id="navHome">Home</a></li>
-                <li><a href="/items" class="nav-link" id="navBakery">Shop Cakes</a></li>
+                <li><a href="/main" class="nav-link" id="navHome">Home</a></li>
+                <li><a href="/items" class="nav-link active" id="navBakery" aria-current="page">Shop Cakes</a></li>
                 <li><a href="/custom-cake" class="nav-link" id="navCustomCake">Book Cake</a></li>
                 
             </ul>
 
             <div class="nav-actions">
                 <a href="/items" class="cart-icon-btn" id="navCartBtn" title="View cart" aria-label="View cart" onclick="toggleCartDrawer(true); return false;">
-                    🛒
+                    <svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.5L22 8H6"></path>
+                        <circle cx="10" cy="20" r="1"></circle>
+                        <circle cx="18" cy="20" r="1"></circle>
+                    </svg>
                     <span class="cart-badge" style="display:none;">0</span>
                 </a>
                 
                 <!-- Profile Button / Dropdown -->
                 <div class="nav-profile-wrapper" id="navProfileWrapper">
-                    <a href="/profile" class="btn-profile-nav" id="navProfileBtn" title="Account">
-                        <span class="profile-nav-icon">👤</span>
-                        <span class="profile-nav-name">Profile</span>
+                    <a href="/profileupdate.html" class="btn-profile-nav" id="navProfileBtn" title="Account">
+                        <span class="profile-nav-icon" aria-hidden="true">
+                            <svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="8" r="3.25"></circle>
+                                <path d="M5 21v-1.5a7 7 0 0 1 14 0V21"></path>
+                            </svg>
+                        </span>
+                        <span class="profile-nav-name">Account</span>
                     </a>
                 </div>
 
-                <a href="custom-cake.html#custom-cake-builder" class="btn-pill btn-strawberry" id="navBookBtn">
-                    ✨ Book Custom Cake
+                <a href="#ready-made-cakes" class="btn-pill btn-strawberry" id="navBookBtn">
+                    Start an order
                 </a>
             </div>
         </div>
@@ -1156,18 +1651,18 @@
          ====================================================================== -->
     <header class="cake-page-hero">
         <div class="hero-inner-wrap">
-            <span class="cake-eyebrow">✨ Handcrafted Celebrations</span>
+            <span class="cake-eyebrow">Handcrafted Celebrations</span>
             <h1 class="cake-page-title">Find Your Perfect Cake</h1>
             <p class="cake-page-subtitle">
                 Choose a ready-made favorite or create a custom cake for your special moment.
             </p>
             <div class="hero-action-buttons">
                 <a href="#ready-made-cakes" class="btn-hero-nav btn-hero-ready" id="heroShopReadyBtn">
-                    <span>🎂</span>
+                    <span></span>
                     <span>Shop Ready-Made Cakes</span>
                 </a>
                 <a href="custom-cake.html#custom-cake-builder" class="btn-hero-nav btn-hero-custom" id="heroCreateCustomBtn">
-                    <span>✨</span>
+                    <span></span>
                     <span>Create Custom Cake</span>
                 </a>
             </div>
@@ -1175,13 +1670,13 @@
     </header>
 
     <!-- ======================================================================
-         SECTION 1 — READY-MADE CAKES
+         SECTION 1 - READY-MADE CAKES
          "Classic favorites prepared in popular shapes and flavors."
          Three Visual Groups: Round Cakes, Square Cakes, Heart Cakes
          ====================================================================== -->
     <section class="section-container" id="ready-made-cakes">
         <div class="section-header-block">
-            <span class="section-badge-pill">🍰 Artisan Collection</span>
+            <span class="section-badge-pill">Artisan Collection</span>
             <h2 class="section-title-large">Ready-Made Cakes</h2>
             <p class="section-subtitle-text">
                 Classic favorites prepared in popular shapes and flavors. Baked fresh daily by our master patissiers.
@@ -1197,7 +1692,7 @@
                 <span>⭕</span> Round
             </button>
             <button type="button" class="shape-tab-btn" onclick="filterShapeGroup('Square Cake', this)" id="tabSquareShapes">
-                <span>⬛</span> Square
+                <span>⬜</span> Square
             </button>
             <button type="button" class="shape-tab-btn" onclick="filterShapeGroup('Heart Cake', this)" id="tabHeartShapes">
                 <span>💖</span> Heart
@@ -1245,30 +1740,18 @@
         <div class="cake-products-grid" id="readyMadeCakesGrid">
             <!-- Dynamically populated via JavaScript for clean maintenance and instant cart integration -->
         </div>
-
-        <section class="popular-picks-section" aria-labelledby="popular-picks-heading">
-            <div class="section-header-block">
-                <span class="section-badge-pill">⭐ Customer favorites</span>
-                <h2 class="section-title-large" id="popular-picks-heading">Popular Picks</h2>
-                <p class="section-subtitle-text">Items customers have added to their baskets most often.</p>
-            </div>
-            <div class="popular-picks-grid" id="popular-picks-grid" aria-live="polite">
-                <p class="empty-state">Popular picks will appear as customers add items to their baskets.</p>
-            </div>
-        </section>
     </section>
 
     <!-- ======================================================================
-         SECTION 2 — BIRTHDAY CAKES (Completely Separate Section Below Ready-Made)
+         SECTION 2 - BIRTHDAY CAKES
          "Celebrate with a cake made for the moment."
-         6 Products from "customize cake/Birthday cakes"
          ====================================================================== -->
     <section class="birthday-cakes-section" id="birthday-cakes" hidden>
         <a id="birthday-cakes-section" style="display:none;" aria-hidden="true"></a>
         <div class="section-container">
             <div class="section-header-block">
                 <div class="birthday-decor-banner">
-                    <span>🎈</span> Festive Celebration Line &bull; Birthday Specials <span>🎉</span>
+                    <span></span> Festive Celebration Line &bull; Birthday Specials <span>🎉</span>
                 </div>
                 <h2 class="section-title-large">Birthday Cakes</h2>
                 <p class="section-subtitle-text">
@@ -1283,6 +1766,17 @@
         </div>
     </section>
 
+    <section class="section-container popular-picks-section" aria-labelledby="popular-picks-heading">
+        <div class="section-header-block">
+            <span class="section-badge-pill">⭐ Customer favorites</span>
+            <h2 class="section-title-large" id="popular-picks-heading">Popular Picks</h2>
+            <p class="section-subtitle-text">Items customers have added to their baskets most often.</p>
+        </div>
+        <div class="popular-picks-grid" id="popular-picks-grid" aria-live="polite">
+            <p class="empty-state">Popular picks will appear as customers add items to their baskets.</p>
+        </div>
+    </section>
+
     <!-- ======================================================================
          SHARED CART SLIDE-OVER DRAWER
          ====================================================================== -->
@@ -1290,10 +1784,18 @@
         <div class="cart-drawer-panel" id="cartDrawerPanel" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle">
             <div class="cart-drawer-header">
                 <div class="cart-drawer-title" id="cartDrawerTitle">
-                    <span>🛒</span>
+                    <svg class="cart-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.5L22 8H6"></path>
+                        <circle cx="10" cy="20" r="1"></circle>
+                        <circle cx="18" cy="20" r="1"></circle>
+                    </svg>
                     <span>Your Order Basket</span>
                 </div>
-                <button type="button" class="cart-close-btn" onclick="toggleCartDrawer(false)" aria-label="Close cart">✕</button>
+                <button type="button" class="cart-close-btn" onclick="toggleCartDrawer(false)" aria-label="Close cart">
+                    <svg class="cart-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                        <path d="M18 6 6 18M6 6l12 12"></path>
+                    </svg>
+                </button>
             </div>
 
             <div class="cart-drawer-scroll-wrap" id="cartDrawerScrollWrap">
@@ -1307,12 +1809,17 @@
                         <span class="cart-total-value" id="cartDrawerTotal">Rs. 0</span>
                     </div>
                     <div style="display:flex; justify-content:flex-end; margin:-0.2rem 0 0.8rem 0;">
-                        <button type="button" onclick="clearCart()" style="background:none; border:none; color:var(--color-strawberry, #C92C3D); font-size:0.8rem; font-weight:600; cursor:pointer; text-decoration:underline; font-family:inherit;">🗑️ Clear Basket</button>
+                        <button type="button" class="cart-clear-btn" onclick="clearCart()">
+                            <svg class="cart-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M3 6h18M8 6V4h8v2m3 0-1 14H6L5 6m4 4v6m6-6v6"></path>
+                            </svg>
+                            Clear Basket
+                        </button>
                     </div>
 
                     <button type="button" class="btn-checkout-proceed" id="checkoutToggleBtn" onclick="toggleCheckoutForm()">
                         <span>Proceed to Checkout</span>
-                        <span>→</span>
+                        <span aria-hidden="true">&rarr;</span>
                     </button>
 
                     <form id="checkoutOrderForm" class="checkout-drawer-form">
@@ -1345,38 +1852,97 @@
 
     <!-- Notification Toast -->
     <div class="toast-notify" id="toastNotify">
-        <span id="toastIcon">✨</span>
+        <span id="toastIcon">+</span>
         <span id="toastMsg">Added to cart</span>
     </div>
 
     <!-- ======================================================================
          SITE FOOTER
          ====================================================================== -->
-    <footer class="site-footer">
+    <footer class="site-footer" id="siteFooter">
         <div class="footer-container">
-            <div class="footer-brand">
-                <h3> kamuda.com</h3>
-                <p>Artisanal bakery and bespoke custom cake atelier in Colombo. Handcrafted daily with pure Ceylon dairy and Belgian chocolates.</p>
-                <div style="font-size:0.8rem; color:#DACBC2; margin-top:0.75rem;">University Assignment: Bakery Order &amp; Custom Cake Booking Platform (MVC / Java)</div>
+            <div class="footer-col footer-col-brand">
+                <a href="/main" class="footer-brand-logo" aria-label="kamuda.com Home">
+                    <span class="footer-brand-icon" aria-hidden="true">🧁</span>
+                    <span class="footer-brand-text">kamuda.com</span>
+                </a>
+                <p class="footer-brand-desc">
+                    Fresh bakery favorites and beautifully crafted cakes for every special moment.
+                </p>
+                <span class="footer-tagline">Freshly Baked. Beautifully Made.</span>
+                <div class="footer-social-links" aria-label="Social media channels">
+                    <a href="https://facebook.com" class="social-icon-btn" aria-label="Follow us on Facebook" target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="social-svg" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="https://instagram.com" class="social-icon-btn" aria-label="Follow us on Instagram" target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="social-svg" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="https://whatsapp.com" class="social-icon-btn" aria-label="Contact us on WhatsApp" target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="social-svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                    </a>
+                </div>
             </div>
 
-            <div>
-                <h4 class="footer-title">Explore</h4>
-                <ul class="footer-links">
-                    <li><a href="/main">Home Page</a></li>
-                    <li><a href="#ready-made-cakes">Ready-Made Cakes</a></li>
-                    <li><a href="custom-cake.html#custom-cake-builder">Custom Cake Booking</a></li>
-                    <li><a href="#birthday-cakes">Birthday Cakes</a></li>
-                </ul>
+            <div class="footer-col footer-col-links">
+                <h4 class="footer-heading">Quick Links</h4>
+                <nav aria-label="Footer Quick Links">
+                    <ul class="footer-nav-list">
+                        <li><a href="/main" class="footer-link">Home</a></li>
+                        <li><a href="/items" class="footer-link">Shop Cakes</a></li>
+                        <li><a href="/orders" class="footer-link">My Orders</a></li>
+                        <li><a href="/payments" class="footer-link">My Payments</a></li>
+                        <li><a href="/custom-cake" class="footer-link">Custom Cakes</a></li>
+                        <li><a href="/main#howItWorksSection" class="footer-link">How It Works</a></li>
+                        <li><a href="/main#specialOffersSection" class="footer-link">Special Offers</a></li>
+                    </ul>
+                </nav>
             </div>
 
-            <div>
-                <h4 class="footer-title">Bespoke Concierge</h4>
-                <p style="font-size:0.88rem; color:#DACBC2; line-height:1.5;">Our master pastry chef reviews all custom cake inquiries within 2 hours. Tiered orders are confirmed with custom sketch consultations.</p>
+            <div class="footer-col footer-col-services">
+                <h4 class="footer-heading">Our Services</h4>
+                <nav aria-label="Footer Services Links">
+                    <ul class="footer-nav-list">
+                        <li><a href="/items" class="footer-link">Order Bakery Items</a></li>
+                        <li><a href="#ready-made-cakes" class="footer-link">Ready-Made Cakes</a></li>
+                        <li><a href="#birthday-cakes" class="footer-link">Birthday Cakes</a></li>
+                        <li><a href="/custom-cake#custom-cake-builder" class="footer-link">Customize Your Cake</a></li>
+                        <li><a href="/main#howItWorksSection" class="footer-link">Pickup &amp; Delivery</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="footer-col footer-col-contact">
+                <h4 class="footer-heading">Contact Us</h4>
+                <address class="footer-address">
+                    <div class="footer-info-item">
+                        <span class="info-icon" aria-hidden="true">📍</span>
+                        <span>Colombo, Sri Lanka</span>
+                    </div>
+                    <div class="footer-info-item">
+                        <span class="info-icon" aria-hidden="true">📞</span>
+                        <a href="tel:+94112345678" class="footer-link">+94 11 234 5678</a>
+                    </div>
+                    <div class="footer-info-item">
+                        <span class="info-icon" aria-hidden="true">✉️</span>
+                        <a href="mailto:hello@sweetbloom.lk" class="footer-link">hello@sweetbloom.lk</a>
+                    </div>
+                    <div class="footer-info-item hours-item">
+                        <span class="info-icon" aria-hidden="true">🕒</span>
+                        <div>
+                            <span class="hours-label">Opening Hours:</span>
+                            <span class="hours-val">Mon – Sun: 8:00 AM – 8:00 PM</span>
+                            <div class="batch-hint">Fresh Batches: 07:00 &bull; 14:00</div>
+                        </div>
+                    </div>
+                </address>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 kamuda.com. All rights reserved.</p>
+
+        <div class="footer-bottom-bar">
+            <div class="footer-bottom-container">
+                <p class="footer-copy-text">&copy; 2026 kamuda.com. All rights reserved.</p>
+                <p class="footer-made-text">Made with care for every sweet moment.</p>
+            </div>
         </div>
     </footer>
 
@@ -1530,11 +2096,7 @@
             }
         ];
 
-        /**
-         * Birthday cake catalog. Keep empty until birthday items are configured.
-         * Birthday images are served from the configured cake.image-dir under /images/.
-         * PROMOTION: 15% Off All Birthday Cakes (Limited Time Offer)
-         */
+        // Filled from the admin catalog when items use a birthday category.
         const BIRTHDAY_CAKES = [];
 
 
@@ -1612,7 +2174,9 @@
             if (!categoryFilter) return;
 
             const categories = [...new Set(
-                READY_MADE_CAKES.map(cake => cake.category.trim()).filter(Boolean)
+                [...READY_MADE_CAKES, ...BIRTHDAY_CAKES]
+                    .map(cake => cake.category.trim())
+                    .filter(Boolean)
             )].sort((first, second) => first.localeCompare(second));
             categoryFilter.innerHTML = '<option value="">All categories</option>' + categories
                 .map(category => `<option value="${escapeHtml(category)}">${escapeHtml(category)}</option>`)
@@ -1648,7 +2212,12 @@
                         return;
                     }
 
-                    READY_MADE_CAKES.push(toStorefrontCake(item));
+                    const cake = toStorefrontCake(item);
+                    if (cake.category.toLowerCase().includes('birthday')) {
+                        BIRTHDAY_CAKES.push({ ...cake, badge: 'Birthday Special' });
+                    } else {
+                        READY_MADE_CAKES.push(cake);
+                    }
                 });
                 populateCategoryFilter();
                 renderReadyMadeCakes();
@@ -1659,10 +2228,7 @@
             }
         }
 
-        function renderReadyMadeCakes() {
-            const grid = document.getElementById('readyMadeCakesGrid');
-            if (!grid) return;
-
+        function getFilteredCakes(cakes) {
             const searchQuery = document.getElementById('item-search')?.value.trim().toLowerCase() || '';
             const category = document.getElementById('category-filter')?.value.toLowerCase() || '';
             const availability = document.getElementById('availability-filter')?.value || '';
@@ -1671,7 +2237,7 @@
             const minimumPrice = minimumPriceValue === '' ? null : Number(minimumPriceValue);
             const maximumPrice = maximumPriceValue === '' ? null : Number(maximumPriceValue);
             const offersOnly = document.getElementById('offers-only-filter')?.checked || false;
-            const filtered = READY_MADE_CAKES.filter(cake => {
+            return cakes.filter(cake => {
                 const searchableText = `${cake.name} ${cake.flavor} ${cake.desc} ${cake.category}`.toLowerCase();
                 return (currentShapeFilter === 'all' || cake.shape === currentShapeFilter)
                     && (!searchQuery || searchableText.includes(searchQuery))
@@ -1681,7 +2247,14 @@
                     && (maximumPrice === null || cake.price <= maximumPrice)
                     && (!offersOnly || Boolean(cake.offerLabel));
             });
+        }
 
+        function renderReadyMadeCakes() {
+            const grid = document.getElementById('readyMadeCakesGrid');
+            if (!grid) return;
+
+            const filtered = getFilteredCakes(READY_MADE_CAKES);
+            const birthdayCount = renderBirthdayCakes();
             grid.innerHTML = filtered.length ? filtered.map(cake => `
                 <article class="cake-card" id="card-${cake.id}">
                     <div class="cake-img-wrap">
@@ -1713,13 +2286,15 @@
                                 <button type="button" class="qty-stepper-btn" onclick="adjustQty('${cake.id}', 1)" aria-label="Increase quantity" ${cake.available ? '' : 'disabled'}>+</button>
                             </div>
                             <button type="button" class="btn-cake-add" onclick="addCakeToCart('${cake.id}', 'ready')" id="btn-add-${cake.id}" ${cake.available ? '' : 'disabled'}>
-                                <span>🛒</span>
-                                <span>${cake.available ? 'Add to Cart' : 'Unavailable'}</span>
+                                <span aria-hidden="true">+</span>
+                                <span>${cake.available ? 'Add to cart' : 'Unavailable'}</span>
                             </button>
                         </div>
                     </div>
                 </article>
-            `).join('') : '<p class="empty-state">No items match these search and filter settings.</p>';
+            `).join('') : birthdayCount
+                ? ''
+                : '<p class="empty-state">No items match these search and filter settings.</p>';
         }
 
         async function loadPopularPicks() {
@@ -1743,10 +2318,10 @@
                 grid.innerHTML = recommendations.length ? recommendations.map(cake => `
                     <article class="popular-pick-card">
                         <h3>${escapeHtml(cake.name)}</h3>
-                        <p>${escapeHtml(cake.category || cake.flavor)} · Rs. ${cake.price.toLocaleString()}</p>
+                        <p>${escapeHtml(cake.category || cake.flavor)} &middot; Rs. ${cake.price.toLocaleString()}</p>
                         <button class="primary-button btn-cake-add" type="button"
                                 onclick="addCakeToCart('${escapeHtml(cake.id)}', 'ready')">
-                            Add to basket
+                            + Add to cart
                         </button>
                     </article>
                 `).join('') : '<p class="empty-state">Popular picks will appear as customers add items to their baskets.</p>';
@@ -1801,42 +2376,50 @@
         }
 
         function renderBirthdayCakes() {
+            const section = document.getElementById('birthday-cakes');
             const grid = document.getElementById('birthdayCakesGrid');
-            if (!grid) return;
+            if (!section || !grid) return 0;
 
-            grid.innerHTML = BIRTHDAY_CAKES.map(cake => `
+            const filtered = getFilteredCakes(BIRTHDAY_CAKES);
+            section.hidden = filtered.length === 0;
+            grid.innerHTML = filtered.map(cake => `
                 <article class="cake-card" id="card-${cake.id}">
                     <div class="cake-img-wrap">
-                        <span class="cake-card-badge birthday-badge">${cake.badge}</span>
-                        <img src="${cakeImageUrl(cake.image)}" alt="${cake.name}" class="cake-card-img" loading="lazy" onerror="this.onerror=null;this.src=getCakeImageUrl(CAKE_IMAGE_FALLBACK)">
+                        <span class="cake-card-badge birthday-badge">${escapeHtml(cake.badge)}</span>
+                        ${cake.offerLabel ? `<span class="cake-card-badge birthday-badge offer-badge">${escapeHtml(cake.offerLabel)}</span>` : ''}
+                        <img src="${escapeHtml(cakeImageUrl(cake.image))}" alt="${escapeHtml(cake.name)}" class="cake-card-img" loading="lazy" onerror="this.onerror=null;this.src=getCakeImageUrl(CAKE_IMAGE_FALLBACK)">
                     </div>
                     <div class="cake-card-body">
-                        <span class="cake-flavor-tag">Shape: ${cake.shape} &bull; ${cake.flavor}</span>
-                        <h3 class="cake-card-name">${cake.name}</h3>
-                        <p class="cake-card-desc">${cake.desc}</p>
+                        <span class="cake-flavor-tag">Flavor: ${escapeHtml(cake.flavor)}</span>
+                        ${cake.category ? `<span class="cake-flavor-tag">Category: ${escapeHtml(cake.category)}</span>` : ''}
+                        <span class="cake-availability${cake.available ? '' : ' unavailable'}" role="status">${cake.available ? 'Available' : 'Unavailable'}</span>
+                        <h3 class="cake-card-name">${escapeHtml(cake.name)}</h3>
+                        <p class="cake-card-desc">${escapeHtml(cake.desc)}</p>
 
                         <div class="cake-card-price-row">
-                            <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px;">
-                                <span class="cake-original-price">Rs. ${cake.originalPrice.toLocaleString()}</span>
-                                <span class="cake-price-text">Rs. ${cake.price.toLocaleString()}</span>
-                            </div>
-                            <span class="cake-discount-pill">15% OFF</span>
+                            ${cake.originalPrice !== null
+                                ? `<span class="cake-original-price">Rs. ${cake.originalPrice.toLocaleString()}</span>`
+                                : ''}
+                            <span class="cake-price-text">Rs. ${cake.price.toLocaleString()}</span>
+                            ${cake.offerLabel ? `<span class="cake-discount-pill">${escapeHtml(cake.offerLabel)}</span>` : ''}
+                            <span class="cake-portion-hint">${escapeHtml(cake.servings)}</span>
                         </div>
 
                         <div class="cake-card-actions">
                             <div class="qty-stepper">
-                                <button type="button" class="qty-stepper-btn" onclick="adjustQty('${cake.id}', -1)" aria-label="Decrease quantity">-</button>
+                                <button type="button" class="qty-stepper-btn" onclick="adjustQty('${cake.id}', -1)" aria-label="Decrease quantity" ${cake.available ? '' : 'disabled'}>-</button>
                                 <input type="text" class="qty-stepper-input" id="qty-${cake.id}" value="1" readonly>
-                                <button type="button" class="qty-stepper-btn" onclick="adjustQty('${cake.id}', 1)" aria-label="Increase quantity">+</button>
+                                <button type="button" class="qty-stepper-btn" onclick="adjustQty('${cake.id}', 1)" aria-label="Increase quantity" ${cake.available ? '' : 'disabled'}>+</button>
                             </div>
-                            <button type="button" class="btn-cake-add" onclick="addCakeToCart('${cake.id}', 'birthday')" id="btn-add-${cake.id}">
-                                <span>🛒</span>
-                                <span>Add to Cart</span>
+                            <button type="button" class="btn-cake-add" onclick="addCakeToCart('${cake.id}', 'birthday')" id="btn-add-${cake.id}" ${cake.available ? '' : 'disabled'}>
+                                <span aria-hidden="true">+</span>
+                                <span>${cake.available ? 'Add to cart' : 'Unavailable'}</span>
                             </button>
                         </div>
                     </div>
                 </article>
             `).join('');
+            return filtered.length;
         }
 
         function filterShapeGroup(group, btnEl) {
@@ -1864,7 +2447,7 @@
                 item = BIRTHDAY_CAKES.find(c => c.id === id);
             }
             if (!item) return;
-            if (type === 'ready' && !item.available) {
+            if (!item.available) {
                 showToast(`${item.name} is currently unavailable.`);
                 return;
             }
@@ -1889,9 +2472,7 @@
             saveCart();
             updateCartBadges();
             if (input) input.value = 1;
-            if (type === 'ready') {
-                recordAddToCartClick(item.sourceId || item.id.replace(/^ADMIN-/, ''));
-            }
+            if (item.sourceId) recordAddToCartClick(item.sourceId);
 
             showToast(`Added to cart: ${item.name} (x${count})`);
             renderCartDrawer();
@@ -1932,7 +2513,7 @@
             if (cartItems.length === 0) {
                 body.innerHTML = `
                     <div class="cart-empty-message">
-                        <span>🎂</span>
+                        <span>🧁</span>
                         <h4 style="font-family:var(--font-heading); font-size:1.2rem; color:var(--color-dark-roast); margin-bottom:0.4rem;">Your Basket is Empty</h4>
                         <p style="font-size:0.88rem;">Add your favorite ready-made cakes, birthday specials, or fresh pastries!</p>
                     </div>
@@ -1969,7 +2550,11 @@
                                     <span class="qty-stepper-input" style="line-height:28px;">${it.qty}</span>
                                     <button type="button" class="qty-stepper-btn" onclick="updateCartItemQty(${idx}, 1)">+</button>
                                 </div>
-                                <button type="button" class="cart-item-remove-btn" onclick="removeCartItem(${idx})" title="Remove item">🗑️</button>
+                                <button type="button" class="cart-item-remove-btn" onclick="removeCartItem(${idx})" title="Remove item" aria-label="Remove ${escapeHtml(it.name)} from cart">
+                                    <svg class="cart-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M3 6h18M8 6V4h8v2m3 0-1 14H6L5 6m4 4v6m6-6v6"></path>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
                         <div class="cart-item-total">
@@ -2027,10 +2612,10 @@
             const isCurrentlyActive = form.classList.contains('active');
             if (isCurrentlyActive) {
                 form.classList.remove('active');
-                if (btn) btn.innerHTML = '<span>Proceed to Checkout</span><span>→</span>';
+                if (btn) btn.innerHTML = '<span>Proceed to Checkout</span><span aria-hidden="true">&rarr;</span>';
             } else {
                 form.classList.add('active');
-                if (btn) btn.innerHTML = '<span>▲ Hide Checkout Details</span>';
+                if (btn) btn.innerHTML = '<span>Hide Checkout Details</span>';
                 setTimeout(() => {
                     form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }, 100);
@@ -2142,7 +2727,7 @@
                 cartItems = [];
                 saveCart();
                 updateCartBadges();
-                window.location.assign(`orders.html?orderId=${encodeURIComponent(order.id)}`);
+                window.location.assign(`/payment.html?orderId=${encodeURIComponent(order.id)}`);
             } catch (error) {
                 showToast(error.message || 'Unable to place your order.');
             } finally {
@@ -2150,6 +2735,7 @@
             }
         }
     </script>
+    <script src="/js/home-scroll-reveal.js"></script>
     <script src="js/common.js"></script>
   <script src="/js/page-search.js"></script>
 </body>
